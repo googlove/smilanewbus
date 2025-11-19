@@ -4,7 +4,12 @@ let allBusData = [];
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
     setupTheme();
-    loadData();
+    
+    // Завантаження ОСНОВНИХ ДАНИХ (маршрути)
+    loadBusData(); 
+
+    // Завантаження ДОДАТКОВОЇ ІНФОРМАЦІЇ (попутка, пільги)
+    loadInfoData();
 
     // Пошук
     document.getElementById('search-input').addEventListener('input', (e) => {
@@ -24,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 1. Завантаження даних
-function loadData() {
+// 1. Завантаження даних маршрутів (data.json)
+function loadBusData() {
     fetch('data.json')
         .then(response => response.json())
         .then(data => {
@@ -33,12 +38,90 @@ function loadData() {
             renderBusGrid(data);
         })
         .catch(err => {
-            console.error(err);
-            document.getElementById('bus-grid').innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження даних data.json. Якщо ви відкрили файл локально, використовуйте локальний сервер.</p>';
+            console.error("Помилка завантаження data.json:", err);
+            document.getElementById('bus-grid').innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження розкладу. Перевірте data.json.</p>';
         });
 }
 
-// 2. Малювання кнопок
+// 2. Завантаження додаткової інформації (info.json)
+function loadInfoData() {
+    fetch('info.json')
+        .then(response => response.json())
+        .then(data => {
+            renderInfoData(data);
+        })
+        .catch(err => {
+            console.error("Помилка завантаження info.json:", err);
+            // Відображаємо помилку в контейнері
+            document.getElementById('info-section-container').innerHTML = '<p style="color:orange; text-align:center;">Інформація про попутку та пільги тимчасово недоступна.</p>';
+        });
+}
+
+// 3. Рендер додаткової інформації
+function renderInfoData(data) {
+    const container = document.getElementById('info-section-container');
+    let html = '';
+
+    // --- БЛОК 1: ПОПУТКА ---
+    const p = data.poputka;
+    let routesHtml = p.routes.map(route => `
+        <div class="poputka-route">
+            <span class="route-city">${route.city}:</span>
+            <div class="route-points">
+                Початкова: **${route.start}**<br>
+                Кінцевий: **${route.end}**
+            </div>
+        </div>
+    `).join('');
+    
+    let linksHtml = p.links.map(link => `
+        <a href="${link.url}" target="_blank" class="poputka-link">
+            <span class="link-icon">${link.icon}</span> ${link.name}
+        </a>
+    `).join('');
+
+    html += `
+        <div class="glass-panel info-panel poputka-panel">
+            <strong class="panel-title poputka-title">
+                <span class="title-icon">🚗</span> ${p.title}
+            </strong>
+            <h4 class="poputka-price">Ціна: ${p.price}</h4>
+            <div class="poputka-routes-list">${routesHtml}</div>
+            <div class="poputka-links-list">${linksHtml}</div>
+        </div>
+    `;
+
+
+    // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ / ПІЛЬГИ ---
+    const g = data.generalInfo;
+
+    // Секція пільг та цін (динамічна генерація списку)
+    const renderList = (items) => items.map(item => `
+        <h4><span class="item-icon">${item.icon}</span> ${item.text}</h4>
+    `).join('');
+
+    html += `
+        <div class="glass-panel info-panel general-info-panel">
+            <strong class="panel-title general-title">
+                <span class="title-icon">📜</span> ${g.title}
+            </strong>
+            
+            <div class="info-list">
+                ${renderList(g.busFares)}
+            </div>
+
+            <hr class="info-separator">
+
+            <div class="info-list privileges-list">
+                ${renderList(g.privileges)}
+            </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
+
+// 4. Малювання кнопок
 function renderBusGrid(buses) {
     const container = document.getElementById('bus-grid');
     container.innerHTML = '';
@@ -61,7 +144,7 @@ function renderBusGrid(buses) {
     });
 }
 
-// 3. Відкриття розкладу
+// 5. Відкриття розкладу
 function openSchedule(bus) {
     document.getElementById('main-view').classList.add('hidden');
     document.getElementById('schedule-view').classList.remove('hidden');
@@ -71,7 +154,7 @@ function openSchedule(bus) {
     window.scrollTo(0, 0);
 }
 
-// 4. Генерація часу
+// 6. Генерація часу (Не змінено)
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
     container.innerHTML = '';
@@ -90,19 +173,17 @@ function renderRouteDetails(bus) {
             let foundNext = false;
 
             stop.times.forEach(timeStr => {
-                // Парсинг часу "14:30" або "14:30 (прим)"
                 const cleanTime = timeStr.split(' ')[0]; 
                 const [h, m] = cleanTime.split(':').map(Number);
                 const busMinutes = h * 60 + m;
 
                 let className = 'time-badge';
                 
-                // Логіка підсвітки
                 if (busMinutes < currentMinutes) {
                     className += ' past';
                 } else if (!foundNext && busMinutes >= currentMinutes) {
                     className += ' next';
-                    foundNext = true; // Тільки один "наступний"
+                    foundNext = true; 
                 }
 
                 timesHTML += `<span class="${className}">${timeStr}</span>`;

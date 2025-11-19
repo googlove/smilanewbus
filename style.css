@@ -189,6 +189,50 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     border-radius: 25px;
 }
 
+/* --- SCREEN: ЗАГАЛЬНА ІНФОРМАЦІЯ (New Block) --- */
+.general-info-panel {
+    margin-top: 25px;
+    padding: 25px;
+    /* успадковує glass-panel */
+}
+
+.general-info-panel .info-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 15px;
+}
+
+.general-info-panel .info-title img {
+    margin-right: 10px;
+}
+
+.general-info-panel h4 {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+.general-info-panel h4 img {
+    margin-right: 10px;
+    flex-shrink: 0; /* Щоб картинка не стискалася */
+}
+
+.info-separator {
+    border: none;
+    border-top: 1px solid var(--glass-border);
+    margin: 25px 0;
+}
+/* --- END New Block --- */
+
+
 .route-direction {
     margin-top: 0;
     color: var(--accent);

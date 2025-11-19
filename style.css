@@ -50,6 +50,7 @@ body.dark-mode {
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     border-radius: var(--card-radius);
+    margin-bottom: 20px; /* Додав відступ між панелями */
 }
 
 /* Header (Меню у стилі скла) */
@@ -121,6 +122,7 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 15px;
+    margin-bottom: 20px;
 }
 
 /* Кнопки автобусів (Glass Cards) */
@@ -149,7 +151,121 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .bus-num { font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
-/* --- SCREEN: РОЗКЛАД --- */
+/* --- СТИЛІ ДЛЯ НОВИХ ІНФО-БЛОКІВ --- */
+.info-panel {
+    padding: 25px;
+    /* Успадковує glass-panel */
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 15px;
+}
+
+.panel-title .title-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+/* Загальна інформація */
+.general-info-panel h4 {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 10px 0;
+    line-height: 1.4;
+}
+
+.general-info-panel .item-icon {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    flex-shrink: 0;
+    width: 30px; /* Фіксована ширина для вирівнювання іконок */
+    text-align: center;
+}
+
+.info-separator {
+    border: none;
+    border-top: 1px solid var(--glass-border);
+    margin: 25px 0;
+}
+
+/* Попутка */
+.poputka-panel {
+    border: 2px solid #5d5df5; /* Виділяємо попутку іншим кольором рамки */
+    box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
+}
+
+.poputka-title {
+    color: #5d5df5; 
+}
+
+.poputka-price {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.poputka-route {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-left: 3px solid #5d5df5;
+    background: rgba(93, 93, 245, 0.1);
+    border-radius: 5px;
+}
+
+.route-city {
+    font-weight: 800;
+    color: var(--primary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.route-points {
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.poputka-links-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.poputka-link {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.poputka-link:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.link-icon {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+
+/* --- SCREEN: РОЗКЛАД (Details View) --- */
 .schedule-header {
     display: flex;
     align-items: center;
@@ -188,50 +304,6 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     box-shadow: var(--glass-shadow);
     border-radius: 25px;
 }
-
-/* --- SCREEN: ЗАГАЛЬНА ІНФОРМАЦІЯ (New Block) --- */
-.general-info-panel {
-    margin-top: 25px;
-    padding: 25px;
-    /* успадковує glass-panel */
-}
-
-.general-info-panel .info-title {
-    display: flex;
-    align-items: center;
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: var(--primary);
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--glass-border);
-    padding-bottom: 15px;
-}
-
-.general-info-panel .info-title img {
-    margin-right: 10px;
-}
-
-.general-info-panel h4 {
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 10px 0;
-    line-height: 1.4;
-}
-
-.general-info-panel h4 img {
-    margin-right: 10px;
-    flex-shrink: 0; /* Щоб картинка не стискалася */
-}
-
-.info-separator {
-    border: none;
-    border-top: 1px solid var(--glass-border);
-    margin: 25px 0;
-}
-/* --- END New Block --- */
-
 
 .route-direction {
     margin-top: 0;

@@ -1,0 +1,2622 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <!-- meta character set -->
+	    <meta charset="utf-8">
+	    <title>SmilaBusTime</title>
+	    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+	    <!-- Mobile Specific Meta -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+
+
+	    <!-- bootstrap.min -->
+	    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+	    <!-- demo stylesheet -->
+	    <link rel="stylesheet" href="css/demo.css">
+		<link rel="stylesheet" href="css/text.css">
+		 <link rel="stylesheet" href="css/style.css">
+		<link rel ="stylesheet" href="css/style_toggle.css">
+
+
+	</head>
+	<body id="body">
+	
+	    <!-- Header Start -->
+	    <header>
+
+	    </header>
+	    <!-- Header End -->
+
+	    <!-- Main Start -->
+	    <main class="site-content">
+
+
+			<div class="container container-center">
+				<div class="row">
+				
+					<div class="col-md-8"><a href="https://www.smila-rada.gov.ua/"><img src="img/logo_gs_full.png" width="400" height="100" class="img-responsive center-block"/></a></div>
+					<div class="col-md-4" id="busclock"></div>
+					
+					
+					<h5><strong><marquee behavior="scroll" direction="left"><a href="https://www.instagram.com/dima_rudas_/" style="color: #58D450;">👑Топ донатери: Дмитро Рудас - 100 UAH👑</a></marquee></strong></h5>
+
+					<div style="text-align: right;">
+						<h5>
+							<strong>
+								<marquee behavior="scroll" direction="right">
+									<span style="color: #1bab4b">📰Тут може бути ваша реклама📰</span>
+								</marquee>
+							</strong>
+						</h5>
+					</div>
+
+				<div style="display:flex; align-items:center;">
+					<div style="flex:1;">
+					  <a href="https://googlove.netlify.app/donate/index.html">
+						<img src="img/donate.png" style="width:100%;">
+					  </a>
+					</div>
+					<div style="flex:1;">
+					  <a href="http://surl.li/qfuqj">
+						<img src="img/google_p.png" style="width:75%;">
+					  </a>
+					</div>
+				  </div>
+				
+				  
+				 
+				  <center><h5 class="col-md-12 text-center"><font color="#1bab4b"><strong><img src="emoji/robot.png" height="20" width="20"/>Бот розкладу автобусів: <a href="https://t.me/SmilaBusTime_bot" target="_blank">👉Тисни сюди</a></strong></font></h5></center>
+				  <center>
+				  <p><strong><font color="#1bab4b"><h5><img src="emoji/first-quarter-moon.png" height="20" width="20"/>Світла/Темна:</h5></font></strong></p>
+				  <input type="checkbox" class="checkbox" id="checkbox">
+				  <label for="checkbox" class="label">
+					  <i class="fas fa-moon"></i>
+					  <i class="fas fa-sun"></i>
+					  <div class="ball"></div>
+				  </label>
+				  </center>
+				  
+				  <div class="col-md-12 text-center"><font color="#1bab4b"><h5><strong><img src="emoji/gear.png" height="20" width="20"/>Сайт створений: 20 червня 2022 року.</h5></strong></font></div>
+				  <div class="col-md-12 text-center"><font color="#1bab4b"><h5><strong><img src="emoji/gear.png" height="20" width="20"/>Останнє оновлення сайту: 13 травня 2024 року.</h5></strong></font></div>
+				  
+				  <table align="center" border="1">
+					  <tr>
+						  <td>
+							  <table border="0">
+								  <tr>
+									  <td>
+										  <input type="text" id="busNumberInput" placeholder="Введіть номер автобуса">
+									  </td>
+									  <td>
+										  <button onclick="searchBus()">
+											  <img src="emoji/glass.png" alt="Лупа" id="searchIcon">
+											  Пошук
+										  </button>
+									  </td>
+								  </tr>
+							  </table>
+						  </td>
+					  </tr>
+				  </table>
+				  
+
+&nbsp; &nbsp; &nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+							<div class="col-md-12">
+							<div class="tc-accordion" id="accordion1">
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse1"  class="collapsed"><span class="busname">№3</span>🚍АС-2 — Вул.&nbsp;Волошкова</a>
+								</h4>
+								<div id="collapse1" class="panel-collapse collapse">
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab1">🚍АС-2 — Вул.&nbsp;Волошкова</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab1" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.2em;">📅Рейси виконуються з вівторка до п'ятниці.</strong><br/>
+														<strong class="blinking" style= "color: #b31a50; font-size: 1.2em;">📅В суботу останній рейс об 11:20 до центру.</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.2em;">🚏⏱️Інтервали між зупинками 2-4 хвилин</strong><br/>
+														<strong style="font-size: 1.2em;" class="busstop">🚍АС-2:</strong>
+														<span>06:30</span>
+														<span>08:20</span>
+														<span>10:10</span>
+														<span>14:00<em>&nbsp;(суб-нед)</em></span>
+														<span>16:45<em>&nbsp;(пн-пт)</em></span>
+													</div>
+													
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🏞 Кільцева:</strong>
+														<span>06:50</span>
+														<span>07:45</span>
+														<span>08:40</span>
+														<span>09:40</span>
+														<span>10:35</span>
+														<span>11:25</span>
+														<span>14:20<em>&nbsp;(суб-нед)</em></span>
+														<span>17:05<em>&nbsp;(пн-пт)</em></span>
+														<span>17:50<em>&nbsp;(пн-пт)</em></span>
+													</div>
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🛣️Вул.&nbsp;Волошкова:</strong>
+														<span>07:25</span>
+														<span>09:15</span>
+														<span>11:00</span>
+														<span>17:30<em>&nbsp;(пн-пт)</em></span>
+													</div>
+													
+														<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1qQzimEwoNieCy52Cbl7BiXS5XPKNJ4U&ehbc=2E312F" width="300" height="300"></iframe>
+															</div>
+														
+												</div>
+											</div>
+										</div>	                			
+									</div>
+								</div>
+						
+							</div>
+						</div>
+					</div>
+						</div>	
+					<div class="tc-accordion" id="accordion1">
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse2"  class="collapsed"><span class="busname">№4</span>🏕️Тимурівець — вул.&nbsp;Петра Сагайдачного &nbsp;(Громова)</a>
+								</h4>
+								<div id="collapse2" class="panel-collapse collapse">
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab2">Тимурівець — вул.&nbsp;Петра Сагайдачного (Громова)</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab2" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style= "color: #b31a50; font-size: 1.2em; " >📅⚠️Дні курсування: щоденно, за винятком неділі, та у суботу до 13:00.</strong><br/>
+														<strong style= "color: #b31a50; font-size: 1.2em;">⌚Інтервали між зупинками становлять 2-4 хв.</strong><br/>
+														<strong style="font-size: 1.2em;" class="busstop">🏕️Тимурівець:</strong>
+														<ul>
+															<li><span>06:40</span><em>&nbsp;<strong>(через Гречківку ➡️ Центр ➡️ 🏥КНП "Смілянська міська лікарня" ➡️ Тимурівець)</strong></em></li>
+															<li><span>07:40</span></li>
+															<li><span>08:35</span></li>
+															<li><span>09:36</span><em>&nbsp;<strong>(через КНП "Смілянська міська лікарня" ➡️ Центр ➡️ магазин на вул.&nbsp;Петра Сагайдачного(Громова))</strong></em></li>
+															<li><span>11:25</span></li>
+															<li><span>12:55</span></li>
+															
+														</ul>
+													</div>
+												
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+														<ul>
+															<li><span>16:00</span><em> &nbsp;<strong>(З центру ➡️ &nbsp; магазин по 🌩️Вул.Петра Сагайдачного ➡️ &nbsp;Табір)</strong></em> </em></li>
+															<li><span>17:10</span><em><strong>&nbsp;(через КНП "Смілянська міська лікарня" ➡️ &nbsp;магазин по 🌩️Вул.Петра Сагайдачного)</strong></em></li>
+														</ul>
+													</div>
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🌩️ Вул.&nbsp;Петра Сагайдачного &nbsp;(магазин):</strong>
+														<ul>
+															<li><span>06:55</span><em><strong>&nbsp;(через Центр ➡️ КНП "Смілянська міська лікарня" &nbsp;➡️ Тимурівець&nbsp;➡️&nbsp;)</strong></em></li>
+															<li><span>07:55</span></li>
+															<li><span>08:55</span></li>
+															<li><span>10:45</span></li>
+															<li><span>12:20</span></li>
+															<div class="tracking">
+																<span class="arrows">➡️</span>
+																<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1"  target="_blank">Відстеження автобуса в реальному часі</a></strong>
+																<span class="arrows">⬅️</span>
+															</div>
+														</ul>
+													</div>
+														<div class="col-md-12 timelist">
+															<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1zz64r9m2eFv75kiMI-DC02EGxm1bQfU&ehbc=2E312F" width="300" height="300"></iframe>
+															</div>
+														
+												</div>
+											</div>
+										</div>	                			
+									</div>
+								</div>	
+							</div>
+						
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse29"  class="collapsed"><span class="busname">№5</span>⚙️БК СЕМЗ – вул. Федорова</a>
+								</h4>
+								<div id="collapse29" class="panel-collapse collapse">
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="012345" href="#tab45">БК СЕМЗ</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab46">вул. Федорова</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab45" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.2em;">⚙️Відправлення з БК СЕМЗ:</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.2em;">⏲️Інтервали між зупинками 2-4 хвилини</strong><br/>
+														<strong class="blinking" style="color: #b31a50; font-size: 1.2em;">📣Рейси виконуються: Щоденно!</strong><br/>
+														<strong style="font-size: 1.2em;" class="busstop">⚙️БК СЕМЗ:</strong>
+														
+														<span><strong>07:25</strong></span>
+														<span><strong>08:55</strong></span>
+														<span><strong>10:10</strong></span>
+														<span><strong>11:35</strong></span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+														<span><strong>14:30</strong></span>
+														<span><strong>16:00</strong></span>
+														<span><strong>18:00</strong></span>
+													</div>
+													
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1gvWIthILW36RHZRzQUZO7I51oO5GTBc&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+
+											<div id="tab46" class="tab-pane fade weekend">
+												<div class="row">
+
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.2em;">🌉 №5 - Відправлення з вул. І.Федорова</strong><br/>
+														<strong style="font-size: 1.2em;" class="busstop">🚍вул. І.Федорова:</strong>
+														<span><strong>06:50</strong></span>
+														<span><strong>08:15</strong></span>
+														<span><strong>09:40</strong></span>
+														<span><strong>10:45</strong></span>
+														<span><strong>13:55</strong></span>
+
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+														<span><strong>15:15</strong></span>
+														<span><strong>17:20</strong></span>
+													</div>
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1gvWIthILW36RHZRzQUZO7I51oO5GTBc&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+													
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+								</div>
+							</div>
+
+				
+					<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse3"  class="collapsed"><span class="busname">№17</span>🚉Ст.Шевченка — АС-1</a>
+								</h4>
+								<div id="collapse3" class="panel-collapse collapse">
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="012345" href="#tab3">Ст.Шевченка</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab4">АС-1</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab3" class="tab-pane fade in active">
+												<div class="row">
+
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.2em;">🚍№17 автобус курсує до зупинки «АС-1», коротким шляхом.</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.2em;">⏲️Інтервали між зупинками 2-3-5 хвилин</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.2em;">⌚Стоїть на зупинці Центральна 2-4 хвилини</strong><br/>
+														<strong style="font-size: 1.2em;" class="busstop">🚆ст.Шевченка:</strong>
+														
+														<span><strong>07:20</strong><em>(пн-суб)</em></span>
+														<span><strong>08:57</strong><em>(пн-суб)</em></span>
+														<span><strong>10:08</strong><em>(пн-суб)</em></span>
+														<span><strong>11:28</strong><em>(пн-суб)</em></span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">☀️Обід:</strong>
+														<span><strong>12:30</strong><em>(пн-суб)</em></span>
+													</div>
+
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+														<span><strong>15:45</strong><em>(пн-пт)</em></span>
+														<span><strong>16:52</strong><em>(пн-пт)</em></span>
+							
+													</div>
+													
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1TcLlgwou9oaE0OhXOJ4FklBwydwtgF4&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+
+											<div id="tab4" class="tab-pane fade weekend">
+												<div class="row">
+
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.2em;">🚍№17 автобус курсує до зупинки станції Ст.Шевченка з АС-1</strong><br/>
+														<strong style="font-size: 1.2em;" class="busstop">🚍АС-1:</strong>
+														<span><strong>06:20</strong><em>(пн-суб)</em></span>
+														<span><strong>08:12</strong><em>(пн-суб)</em></span>
+														<span><strong>09:32</strong><em>(пн-суб)</em></span>
+														<span><strong>10:51</strong><em>(пн-суб)</em></span>
+
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">☀️Обід:</strong>
+														<span><strong>11:55</strong><em>(пн-суб)</em></span>
+														<span><strong>13:05</strong><em>(пн-суб)</em></span>
+													</div>
+
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+														<span><strong>16:15</strong><em>(пн-пт)</em></span>
+														<span><strong>17:31</strong><em>(пн-пт)</em></span>
+													</div>
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1TcLlgwou9oaE0OhXOJ4FklBwydwtgF4&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+													
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+								</div>
+							</div>
+							<div class="tc-accordion" id="accordion1">
+								<div class="panel">
+									<h4 class="acdn-title">
+										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse4" class="collapsed"><span class="busname">№30</span>🚉Ст.Шевченка — АС-1</a>
+									</h4>
+									<div id="collapse4" class="panel-collapse collapse">
+							
+										<div class="tc-tabs">
+											<ul class="nav nav-tabs">
+												<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab5">🚉Ст.Шевченка</a></li>
+												<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab6">АС-1</a></li>
+											</ul>
+											<div class="tab-content">
+												<div id="tab5" class="tab-pane fade in active">
+													<div class="row">
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="color: #b31a50; font-size: 1.2em;"><img src="emoji/bus.png" height="20" width="20"/>Автобус було відправлено зі станції Т.Шевченка до АС-1</strong><br/>
+															<strong style="color: #b31a50; font-size: 1.2em;"><img src="emoji/alarm-clock.png" height="20" width="20"/>Інтервали між зупинками 2-3 хвилин.</strong><br/>
+															<strong style="color: #b31a50; font-size: 1.2em;"><img src="emoji/alarm-clock.png" height="20" width="20"/>Автобус стоїть на зупинці Центральна 3-4 хвилини</strong><br/>
+															<strong class="blinking" style="color: #b31a50; font-size: 1.2em;"><img src="emoji/calendar.png" height="20" width="20"/>Дні курсування: щоденно</strong><br/>
+															<strong style="font-size: 1.2em;" class="busstop"><img src="emoji/train.png" height="20" width="20"/>станція Т.Шевченка:</strong>
+															<span><strong>06:45</strong></span>
+															<span>06:55</span>
+															<span><strong>07:12</strong></span>
+															<span>07:21</span>
+															<span>07:28</span>
+															<span>07:36</span>
+															<span>07:45</span>
+															<span>07:53</span>
+															<span>08:01</span>
+															<span>08:11</span>
+															<span>08:19</span>
+															<span>08:30</span>
+															<span>08:39</span>
+															<span>08:49</span>
+															<span>08:57</span>
+															<span>09:06</span>
+															<span>09:15</span>
+															<span>09:24</span>
+															<span>09:32</span>
+															<span>09:41</span>
+															<span>09:50</span>
+															<span>09:59</span>
+															<span>10:08</span>
+															<span>10:17</span>
+															<span>10:26</span>
+															<span>10:35</span>
+															<span>10:44</span>
+															<span>10:52</span>
+															<span>11:05</span>
+															<span>11:20</span>
+															<span>11:28</span>
+															<span>11:37</span>
+															<span>11:46</span>
+														</div>
+							
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="font-size: 1.2em;" class="busstop">☀️Обід:</strong>
+															<span>12:00</span>
+															<span>12:20</span>
+															<span>12:33</span>
+															<span>12:44</span>
+															<span>12:54</span>
+															<span>13:06</span>
+															<span>13:10</span>
+															<span>13:20</span>
+															<span>13:35</span>
+															<span>13:48</span>
+															<span>14:00</span>
+															<span>14:11</span>
+															<span>14:22</span>
+															<span>14:33</span>
+															<span>14:43</span>
+														</div>
+							
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+															<span>14:53</span>
+															<span>15:03</span>
+															<span>15:11</span>
+															<span><strong>15:21</strong><em>(пн-пт)</em></span>
+															<span>15:30</span>
+															<span>15:38</span>
+															<span>15:46</span>
+															<span>15:58</span>
+															<span>16:07</span>
+															<span>16:16</span>
+															<span>16:23</span>
+															<span>16:35</span>
+															<span>16:43</span>
+															<span>16:52</span>
+															<span>17:01</span>
+															<span>17:20</span>
+															<span>17:45</span>
+															<span>18:00</span>
+															<span>18:20</span>
+															<span>18:50</span>
+															<span>19:10</span>
+															<span>19:40</span>
+															<span>20:25</span>
+															<span>21:10</span>
+															<span>22:15</span>
+														</div>
+							
+														<div class="col-md-12 timelist">
+															<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1Axylm3JiDQ-qzY6ZHu-rlRXSiXcqEN4&ehbc=2E312F" width="300" height="300"></iframe>
+														</div>
+							
+													</div>
+												</div>
+							
+												<div id="tab6" class="tab-pane fade weekend">
+													<div class="row">
+							
+							
+														<div class="col-md-12 timelist" style="color:#000000">    
+															<strong style="color: #b31a50; font-size: 1.2em;"><img src="emoji/bus.png" height="20" width="20"/>Автобус було відправлено з Автостанції №1 до Ст.Шевченка</strong><br/>
+															<strong style="font-size: 1.2em;" class="busstop">АС-1 (Район: Машбуд):</strong>
+															<span><strong>06:40</strong></span>
+															<span>06:50</span>
+															<span>07:00</span>
+															<span>07:10</span>
+															<span>07:20</span>
+															<span>07:31</span>
+															<span>07:40</span>
+															<span>07:50</span>
+															<span>08:00</span>
+															<span>08:08</span>
+															<span>08:17</span>
+															<span>08:26</span>
+															<span>08:35</span>
+															<span>08:44</span>
+															<span>08:52</span>
+															<span>09:01</span>
+															<span>09:10</span>
+															<span>09:20</span>
+															<span>09:29</span>
+															<span>09:37</span>
+															<span>09:46</span>
+															<span>09:55</span>
+															<span>10:04</span>
+															<span>10:12</span>
+															<span>10:25</span>
+															<span>10:38</span>
+															<span>10:46</span>
+															<span>10:56</span>
+															<span>11:06</span>
+															<span>11:15</span>
+															<span>11:25</span>
+															<span>11:42</span>
+														</div>
+							
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="font-size: 1.2em;" class="busstop">☀️Обід:</strong>
+															<span>12:00</span>
+															<span>12:09</span>
+															<span>12:18</span>
+															<span>12:26</span>
+															<span>12:34</span>
+															<span>12:42</span>
+															<span>12:50</span>
+															<span>13:00</span>
+															<span>13:13</span>
+															<span>13:22</span>
+															<span>13:32</span>
+															<span>13:43</span>
+															<span>13:55</span>
+															<span>14:05</span>
+															<span>14:15</span>
+															<span>14:25</span>
+															<span>14:36</span>
+														</div>
+							
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="font-size: 1.2em;" class="busstop">🌃Вечір:</strong>
+															<span>14:48</span>
+															<span>15:01</span>
+															<span>15:12</span>
+															<span>15:23</span>
+															<span>15:34</span>
+															<span>15:44</span>
+															<span>15:54</span>
+															<span><strong>16:03</strong><em>(пн-пт)</em></span>
+															<span>16:11</span>
+															<span>16:19</span>
+															<span>16:28</span>
+															<span>16:42</span>
+															<span>16:51</span>
+															<span>17:00</span>
+															<span>17:09</span>
+															<span>17:18</span>
+															<span>17:27</span>
+															<span>17:35</span>
+															<span>17:43</span>
+															<span>18:03</span>
+															<span>18:20</span>
+															<span>18:40</span>
+															<span>19:05</span>
+															<span>19:35</span>
+															<span>19:55</span>
+															<span>20:30</span>
+															<span>21:05</span>
+															<span>21:40</span>
+															<span>22:45</span>
+														</div>
+							
+														<div class="col-md-12 timelist">
+															<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1Axylm3JiDQ-qzY6ZHu-rlRXSiXcqEN4&ehbc=2E312F" width="300" height="300"></iframe>
+														</div>
+							
+													</div>
+												</div>
+											</div>                                    
+										</div>
+									</div>
+								</div>
+							</div>
+
+							
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse5"  class="collapsed"><span class="busname">№32</span>🚉Ст.Шевченко — КНП "Смілянська міська лікарня" </a>
+								</h4>
+								<div id="collapse5" class="panel-collapse collapse">
+							
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab7">🚉Ст.Шевченко</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab8">КНП "Смілянська міська лікарня" </a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab7" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="blinking" style="color: #b31a50;">🚍ДНІ КУРСУВАННЯ: ЩОДЕННО!</strong><br/>
+														<strong style="color: #b31a50;">⏰Години відправлення від ст.Шевченка</strong><br/>
+														<strong style="color: #b31a50;">⏰Інтервали між зупинками 2-4 хвилин</strong><br/>
+														<strong class="busstop">Ст.Шевченко:</strong>
+														<div>06:30<em>&nbsp;(щоденно, через Плоске)</em></div>
+														<div><strong>07:02</strong><em>&nbsp;(пн-пт, через Плоске)</em></div>
+														<div>08:30<em>&nbsp;(щоденно, через Плоске)</em></div>
+														<div><strong>09:10</strong><em>&nbsp;(пн-пт, через Плоске)</em></div>
+														<div>10:30<em>&nbsp;(щоденно)</em></div>
+														<div><strong>11:10</strong><em>&nbsp;(пн-пт)</em></div>
+														<div><strong>13:25</strong><em>&nbsp;(пн-пт, до Плоского)</em></div>
+														<div>14:28<em>&nbsp;(щоденно, через Плоске)</em></div>
+														<div>16:25<em>&nbsp;(щоденно)</em></div>
+														<div><strong>17:10</strong><em>&nbsp;(пн-пт, через Плоске)</em></div>
+														<div><strong>18:15</strong><em>&nbsp;(пн-пт)</em></div>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+													<div class="col-md-12 timelist">
+														<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1CpFX4FecfM9Z015I2kokOMMPXXxK8fg&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+							
+											<div id="tab8" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">⏰Години відправлення від КНП "Смілянська міська лікарня" </strong>
+													</div>
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="blinking" style="color: #b31a50;">🚍ДНІ КУРСУВАННЯ: ЩОДЕННО!</strong><br/>
+														<strong style="color: #b31a50;">⏰Інтервали між зупинками 2-4-6 хвилин</strong><br/>
+														<strong class="busstop">лікарня КНП "Смілянська міська лікарня":</strong>
+														<div>07:30<em>&nbsp;(Щоденно, через Плоске)</em></div>
+														<div><strong>08:12</strong><em>&nbsp;(пн-пт)</em></div>
+														<div>09:30<em>&nbsp;(Щоденно, через Плоске)</em></div>
+														<div><strong>10:05</strong><em>&nbsp;(Пн-пт, через Плоске)</em></div>
+														<div>11:20<em>&nbsp;(Щоденно, через Плоске)</em></div>
+														<div><strong>12:00</strong><em>&nbsp;(Пн-пт, через Плоске)</em></div>
+														<div>15:20<em>&nbsp;(Щоденно, через Плоске)</em></div>
+														<div><strong>15:55</strong><em>&nbsp;(Пн-пт, через Плоске)</em></div>
+														<div>17:15<em>&nbsp;(Щоденно, через Плоске)</em></div>
+														<div><strong>18:00</strong><em>&nbsp;(Пн-пт, через Плоске)</em></div>
+														<div><strong>19:00</strong><em>&nbsp;(щоденно)</em></div>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>	                			
+									</div>
+							
+								</div>
+							</div>
+							
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse6"  class="collapsed"><span class="busname">№40</span>Переїзд 914 (с. Мала Яблунівка) — 🏥КНП "Смілянська міська лікарня"</a>
+								</h4>
+								<div id="collapse6" class="panel-collapse collapse">
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab9">Переїзд 914 (с. Мала Яблунівка)</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab10">КНП "Смілянська міська лікарня" </a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab9" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+													<strong style="color: #b31a50;">⏰Інтервали між зупинками 3-5 хвилин</strong><br/>
+														<strong style="color: #b31a50;">🚍Автобус рухається через район РПЗ</strong><br/>
+														<strong style="color: #b31a50;">🚍Автобус було відправлено з с.М.Яблунівка</strong><br/>
+														<strong class="blinking" style="color: #b31a50;">📅ДНІ КУРСУВАННЯ: ПО БУДНЯХ!</strong><br/>
+														<strong class="busstop">🚧Переїзд 914 (с. Мала Яблунівка): </strong>
+														<strong class="blinking-text">*Курсує не завжди:</strong>
+														<span>06:25<em>(з вет.лікарні)*</em></span>
+														<span>07:25<em>(з вет.лікарні)</em></span>
+														<span>08:28</span>
+														<span>10:10</span>
+													</div>
+
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Вечір:</strong>
+														<span>15:15</span>
+														<span>16:16<em>(з вет.лікарні)</em></span>
+														<span>17:27</span>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1u4T3f9D945xSrdhDyA2jbCyaPTUBxdU&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+
+											<div id="tab10" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">🚍Автобус було відправлено від 🏥КНП "Смілянська міська лікарня": </strong><br/>
+														<strong class="busstop">🏥КНП "Смілянська міська лікарня"(Ранок):</strong>
+														<span>06:58</span>
+														<span>07:58</span>
+														<span>09:35</span>
+														<span>10:40</span>
+														
+													</div>
+
+						
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Вечір:</strong>
+														<span>15:47</span>
+														<span>16:55</span>
+														<span>17:50</span>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse30"  class="collapsed"><span class="busname">№41</span>🏥КНП "Смілянська міська лікарня"(вул. Героїв Холодноярців) — вул. Кармелюка</a>
+								</h4>
+								<div id="collapse30" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab54">🏥КНП "Смілянська міська лікарня"</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab55">🎖️вул. Кармелюка</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab54" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+													<strong style="color: #b31a50;">⏰Інтервали між зупинками 2-4 хвилин</strong><br/>
+														<strong style="color: #b31a50;">🚍Автобус було відправлено з 🏥КНП "Смілянська міська лікарня"</strong><br/>
+														<strong class="blinking" style="color: #b31a50;">📅Щоденно</strong><br/>
+														<strong class="busstop">🏥КНП "Смілянська міська лікарня": </strong>
+														<span>18:55</span>
+														<span>20:15</span>
+														<span>21:20</span>
+													</div>
+
+
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1IlvsuvDVobait8-IvpI9SX-8X5qnUXs&hl=ru&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+
+											<div id="tab55" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">🚍Автобус було відправлено з вул.Кармелюка </strong><br/>
+														<strong class="busstop">🎖️вул. Кармелюка:</strong>
+														<span>19:20</span>
+														<span>20:45</span>
+														<span>---</span>
+													</div>
+
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+
+
+
+
+							
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse8"  class="collapsed"><span class="busname">№302</span>🚉Ст.Шевченка(Сміла) — м.Черкаси(АС-2)</a>
+								</h4>
+								<div id="collapse8" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab13">🚉ст. Шевченка</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab14">м.Черкаси(АС-2)</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab13" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+                                                        <strong style="color: #b31a50; font-size: 1.1em;">💸Вартість проїзду до м.Черкаси: 70 грн.</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.1em;">💸Вартість проїзду по місту: 10 грн.</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.1em;">💸Вартість проїзду по м.Черкаси: 13 грн.</strong><br/>
+														<strong class="blinking" style="color: #b31a50; font-size: 1.1em;">📅Дні курсування: ЩОДЕННО.</strong><br/>
+														<strong style="font-size: 1.1em;" class="busstop">🚉ст.Шевченко:</strong>
+														<span>06:30</span>
+														<span>07:15</span>
+														<span>07:35</span>
+														<span>07:55</span>
+														<span>08:15</span>
+														<span>08:35</span>
+														<span>09:00</span>
+														<span>09:25</span>
+														<span>09:50</span>
+														<span>10:15</span>
+														<span>10:35</span>
+														<span>11:15</span>
+														<span>11:55</span>
+														<span>12:15</span>
+														<span>12:35</span>
+														<span>12:55</span>
+														<span>13:55</span>
+														<span>14:35</span>
+														<span>15:15</span>
+														<span>15:35</span>
+														<span>15:55</span>
+														<span>16:15</span>
+														<span>16:35</span>
+														<span>16:55</span>
+														<span>18:15</span>
+														<span>18:35</span>
+														<span>18:55</span>
+														<span>19:35</span>
+													</div>
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1SqOR3qkr7GEEgsJ-oVSngcTEC7XtSUI&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+
+												</div>
+											</div>
+
+											<div id="tab14" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;" class="busstop">🌅м.Черкаси(АС-2)</strong>
+														<span>06:10</span>
+														<span>06:30</span>
+														<span>06:50</span>
+														<span>07:15</span>
+														<span>07:55</span>
+														<span>08:15</span>
+														<span>08:35</span>
+														<span>08:55</span>
+														<span>09:15</span>
+														<span>09:55</span>
+														<span>10:35</span>
+														<span>10:55</span>
+														<span>11:15</span>
+														<span>11:35</span>
+														<span>12:35</span>
+														<span>13:15</span>
+														<span>13:55</span>
+														<span>14:15</span>
+														<span>14:35</span>
+														<span>14:55</span>
+														<span>15:15</span>
+														<span>15:35</span>
+														<span>15:55</span>
+														<span>16:35</span>
+														<span>16:55</span>
+														<span>17:15</span>
+														<span>17:35</span>
+														<span>18:15</span>
+												</div>
+												<div class="col-md-12 timelist">
+													<b><a href="https://www.eway.in.ua/ua/cities/cherkasy/routes/88">Детальний маршрут тут</a></b>
+													</div>
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse9"  class="collapsed"><span class="busname">№34</span>🏟️Стадіон "Локомотив" — 🏥КНП "Смілянська міська лікарня"</a>
+								</h4>
+								<div id="collapse9" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab15">🏟️Стадіон "Локомотив"</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab16">🏥КНП "Смілянська міська лікарня"</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab15" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;"  class="busstop">🏟️Стадіон «Локоматив»(Ранок):</strong>
+														<span>06:48</span>
+														<span>07:30<em>&nbsp;(пн-пт)</em></span>
+														<span>08:05</span>
+														<span>08:28<em>&nbsp;(пн-пт)</em></span>
+														<span>09:10</span>
+														<span>09:30<em>&nbsp;(пн-пт)</em></span>
+														<span>10:25</span>
+														<span>10:40<em>&nbsp;(пн-пт)</em></span>
+														<span>11:32</span>
+														<span>11:45<em>&nbsp;(пн-пт)</em></span>
+														
+													
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;" class="busstop">☀️Обід:</strong>
+														<span>13:10</span>
+														<span>13:30<em>&nbsp;(пн-пт)</em></span>
+														<span>14:25</span>
+														<span>14:47<em>&nbsp;(пн-пт)</em></span>
+													
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;" class="busstop">🌃Вечір:</strong>
+														<span>15:25</span>
+														<span>16:05<em>&nbsp;(пн-пт)</em></span>
+														<span>16:35</span>
+														
+													</div>
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1u6lpDXHjj2czMdZyBBdlQxyi_zqCQqw&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+
+											<div id="tab16" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;" class="busstop">🏥КНП "Смілянська міська лікарня"(Ранок):</strong>
+														&nbsp;<span>07:35<em>&nbsp;(о 07:30 перехрестя Гречківка, через Підгосп)</em></span>
+														<span>07:50<em>&nbsp;(пн-пт)</em></span>
+														&nbsp;<span>08:38</span>
+														<span>09:00<em>&nbsp;(пн-пт)</em></span>
+														<span>09:40</span>
+														<span>10:10<em>&nbsp;(пн-пт)</em></span>
+														<span>11:00</span>
+														<span>11:15<em>&nbsp;(пн-пт)</em></span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;" class="busstop">☀️Обід:</strong>
+														<span>12:10</span>
+														<span>12:50<em>&nbsp;(пн-пт)</em></span>
+														<span>13:50<em>&nbsp;(о 13:45 перехрестя Гречківка, через Підгосп)</em></span>
+														<span>14:00<em>&nbsp;(пн-пт)</em></span>
+														<span>14:55</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="font-size: 1.1em;" class="busstop">🌃Вечір:</strong>
+														<span>15:10<em>&nbsp;(пн-пт)</em></span>
+														<span>16:05</span>
+														<span>16:35<em>&nbsp;(пн-пт)</em></span>
+														<span>17:08</span>
+													
+													</div>
+											
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse10"  class="collapsed"><span class="busname">№39</span>с.м.Яблунівка — 🏨 Райлікарня ім. С.Бобринської</a>
+								</h4>
+								<div id="collapse10" class="panel-collapse collapse">
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab17">с.м.Яблунівка</a></li>	
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab44">Райлікарня ім. С.Бобринської</a></li>			
+										</ul>
+										<div class="tab-content">
+											<div id="tab17" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.1em;">🚍Рейси виконуються з понеділка по суботу.</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.1em;">🚍Автобус було відправлено від с.М.Яблунівка до ім. С.Бобринської</strong><br/>
+														<strong style="font-size: 1.1em;" class="busstop">🍎с.М.Яблунівка:</strong>
+														<span>06:19</span>
+														<span>07:35</span>
+														<span>09:33</span>
+														<span>10:50</span>
+														<span>12:20</span>
+														<span>14:05</span>
+														<span>15:40</span>
+														<span>17:15</span>
+														<span>18:30<em>(до ст. ім. Т.Г.Шевченка ➡️ в Парк)</em></span>
+													
+													</div>
+													<div class="tracking">
+														<span class="arrows">➡️</span>
+														<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+														<span class="arrows">⬅️</span>
+													</div>
+													
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1pKQ3g4cTDu8STRN02ki4QmL1NCX2A3M&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+											</div>
+											
+
+											<div id="tab44" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">	
+														<strong style="color: #b31a50; font-size: 1.1em;">🚍Рейси виконуються з понеділка по суботу.</strong><br/>
+														<strong style="color: #b31a50;">🚍Автобус було відправлено від лікарні ім. С.Бобринської до с.м.Яблунівка.</strong><br/>
+														<strong style="font-size: 1.1em;" class="busstop">🏥Райлікарня ім. С.Бобринської:</strong>
+														<span>06:52</span>
+														<span>08:22</span>
+														<span>10:15</span>
+														<span>11:30</span>
+														<span>13:00</span>
+														<span>14:50</span>
+														<span>16:20</span>
+														<span>18:00</span>
+													</div>
+													<div class="tracking">
+														<span class="arrows">➡️</span>
+														<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+														<span class="arrows">⬅️</span>
+													</div>
+												</div>
+											</div>	  
+										</div>	              			
+									</div>
+								</div>
+							</div>
+						
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse11"  class="collapsed"><span class="busname">№48</span>Вул.&nbsp;Федорова — 🏥КНП "Смілянська міська лікарня"</a>
+								</h4>
+								<div id="collapse11" class="panel-collapse collapse">
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab18">Вул.&nbsp; Федорова</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="456" href="#tab43">🏥КНП "Смілянська міська лікарня"</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab18" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50; font-size: 1.1em;">🚍Автобус було відправлено від вул.Федорова до КНП "Смілянська міська лікарня"</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.1em;">⌚Інтервали між зупинками 2-3-5 хвилин</strong><br/>
+														<strong style="color: #b31a50; font-size: 1.1em;">🚍**КРІМ СУБОТИ, НЕДІЛІ, СВЯТКОВИХ ДНІВ!</strong><br/>
+														<strong class="busstop">Вул.Федорова:</strong>
+														<span>06:55<em>*</em></span>
+														<span>07:05<em>&nbsp(Вівторок, субота)</em></span>
+														<span>07:23<em>&nbsp(з В.Сосюри)</em></span>
+														<span>07:55<em>*</em></span>
+														<span>08:23</span>
+														<span>08:55<em>*</em></span>
+														<span>09:25</span>
+														<span>09:55<em>*</em></span>
+														<span>10:25</span>
+														<span>10:45<em>&nbsp(Вівторок, субота)</em></span>
+														<span>10:55<em>&nbsp(з В.Сосюри)</em></span>
+														<span>11:25</span>
+														<span>11:55<em>*</em></span>
+														<span>12:25</span>
+														<span>12:55<em>*</em></span>
+														<span>13:25</span>
+														<span>14:55<em>*</em></span>
+														<span>15:25<em>*</em></span>
+														<span>15:55<em>*</em></span>
+														<span>16:25<em>*</em></span>
+														<span>16:55<em>*</em></span>
+														<span>17:25<em>*</em></span>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+
+													
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1IbbSiHUU8VXA1sad4xTbMTcy1YOypRU&ehbc=2E312F" width="300" height="300"></iframe>
+												</div>
+													
+											</div>
+										</div>
+													<div id="tab43" class="tab-pane fade weekend">
+														<div class="row">
+														<div class="col-md-12 timelist" style="color:#000000">	
+														<strong style="color: #b31a50;">🚍Автобус було відправлено від 🏥КНП "Смілянська міська лікарня" до вул. Федорова.</strong><br/>
+														<strong style="color: #b31a50;">🚍**КРІМ СУБОТИ, НЕДІЛІ, СВЯТКОВИХ ДНІВ!</strong><br/>
+														<strong style="color: #b31a50;">⌚Інтервали між зупинками 2-3-5 хвилин</strong><br/>
+														<strong class="busstop">🏥КНП "Смілянська міська лікарня":</strong>
+														<span>07:22<em>&nbsp(Вівторок, субота через Морочковського)</em></span>
+														<span>07:55</span>
+														<span>08:24<em>*</em></span>
+														<span>08:50</span>
+														<span>09:22<em>*</em></span>
+														<span>09:55</span>
+														<span>10:24<em>*</em></span>
+														<span>10:55<em>&nbsp(Вівторок, субота через Морочковського)</em></span>
+														<span>11:25<em>*</em></span>
+														<span>11:55</span>
+														<span>12:25<em>*</em></span>
+														<span>12:55</span>
+														<span>13:15<em>*</em></span>
+														<span>14:55<em>*</em></span>
+														<span>15:22<em>*</em></span>
+														<span>15:55<em>*</em></span>
+														<span>16:25<em>*</em></span>
+														<span>16:55<em>*</em></span>
+														<span>17:25<em>*</em></span>
+														<span>17:55<em>*</em></span>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+												
+												</div>
+											</div>	                			
+									</div>
+								</div>
+								</div>
+							</div>
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse12"  class="collapsed"><span class="busname">№49</span>с.М.Яблунівка — КНП "Смілянська міська лікарня"</a>
+								</h4>
+								<div id="collapse12" class="panel-collapse collapse">
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab19">с.М.Яблунівка</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab20">КНП "Смілянська міська лікарня"</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab19" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+													<strong style="color: #b31a50;">🚍Автобус було відправлено від с.М.Яблунівка до 🏥КНП "Смілянська міська лікарня"</strong><br/>
+														<strong style="color: #b31a50;">🚍*Крім суботи, неділі, святкових днів!</strong><br/>
+														<strong style="color: #b31a50;">⌚Інтервали між зупинками 2-3-5 хвилин</strong><br/>
+														<strong class="busstop">с.М.Яблунівка:</strong>
+														<span>07:00</span>
+														<span>07:20<em>*</em></span>
+														<span>08:25</span>
+														<span>09:05<em>*</em></span>
+														<span>11:00<em>*</em></span>
+														<span>11:45</span>
+														<span>12:40<em>*</em></span>
+														<span>13:20</span>
+														<span>14:50</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Вечір:</strong>
+														<span>16:00<em>*</em></span>
+														<span>17:28<em>*</em></span>
+														<span>17:45</span>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1vNY7jE3T9L9R2yLJdrEV8WwJ12Aqgpk&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+													
+												</div>
+											</div>
+
+											<div id="tab20" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+													<strong style="color: #b31a50;">🚍Автобус було відправлено від 🏥КНП "Смілянська міська лікарня" до с.М.Яблунівка</strong><br/>
+														<strong style="color: #b31a50;">🚍*Крім суботи, неділі, святкових днів!</strong><br/>
+														<strong style="color: #b31a50;">⌚Інтервали між зупинками 2-3-5 хвилин</strong><br/>
+														<strong class="busstop">🏥КНП "Смілянська міська лікарня":</strong>
+														<span>07:45</span>
+														<span>08:20<em>*</em></span>
+														<span>09:15</span>
+														<span>10:00<em>*</em></span>
+														<span>12:03<em>*</em></span>
+														<span>12:35</span>
+														<span>14:10</span>
+														<span>15:20<em>*</em></span>
+														<span>15:35</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Вечір:</strong>
+														<span>16:45<em>*</em></span>
+														<span>18:10<em>*</em></span>
+														<span>18:30</span>
+														<div class="tracking">
+															<span class="arrows">➡️</span>
+															<strong><a href="https://local3.overseer.ua/locator/index.html?t=3cead81973bfacbb94b116c7e6cf0b0d75D21C61C13A082B7F82ABB15E224B7BA33BBF62&map=google_roadmap&directs=1&tails=1" class="blinking" target="_blank">Відстеження автобуса в реальному часі</a></strong>
+															<span class="arrows">⬅️</span>
+														</div>
+													</div>
+
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse18"  class="collapsed"><span class="busname">№123</span>🏨Райлікарня ім.С.Бобринської — с.Ковалиха</a>
+								</h4>
+								<div id="collapse18" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab31">🏨Райлікарня ім. С.Бобринської</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="45" href="#tab32">с.Ковалиха</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab31" class="tab-pane fade in active">
+												<div class="row">
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="color: #b31a50;">З Понеділка по Четвер</strong><br/>
+														<strong class="busstop">🏨Райлікарня ім. С.Бобринської:</strong>
+														<span>06:20</span>
+														<span>12:50</span>
+														<span>17:10</span>
+														</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">с. Ковалиха:</strong>
+														<span>06:45</span>
+														<span>13:45</span>
+														<span>17:45</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=15weHj_XQWeXtR6JRUxtJQwQFCw_YoWs&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+														
+												</div>
+											</div>
+
+											<div id="tab32" class="tab-pane fade weekend">
+												<div class="row">
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">П'ятниця</strong><br/>
+														<strong class="busstop">🏨Райлікарня ім. С.Бобринської:</strong>
+														<span>05:30</span>
+														<span>12:50</span>
+														<span>17:10</span>
+														
+													</div>
+													
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">с.Куцівка:</strong>
+														<span>06:20</span>
+														<span>14:10</span>
+														<span>18:20</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">c.Ковалиха:</strong>
+														<span>06:40</span>
+														<span>14:30</span>
+														<span>18:40</span>
+														
+													</div>
+
+													
+
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse19"  class="collapsed"><span class="busname">№126</span>🚉ст.Шевченка — с.Макіївка</a>
+								</h4>
+								<div id="collapse19" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab33">🚉ст.Шевченка — с.Макіївка</a></li>
+											
+										</ul>
+										<div class="tab-content">
+											<div id="tab33" class="tab-pane fade in active">
+												<div class="row">
+														<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">ст.Шевченка:</strong>
+														<span>05:50</span>
+														<span>12:30</span>
+														
+														</div>
+
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">с.Макіївка:</strong>
+															<span>07:15</span>
+															<span>14:15</span>
+															
+														</div>
+
+													
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1aXceaRlVy-ptzPEzicYsqhZ31J5hVjw&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+														
+												</div>
+											</div>
+
+											</div>
+										</div>	                			
+									</div>
+
+								</div>
+							
+								<div class="panel">
+									<h4 class="acdn-title">
+										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse15"  class="collapsed"><span class="busname">№129</span>🚉ст. Шевченка — с.М.Старосілля</a>
+									</h4>
+									<div id="collapse15" class="panel-collapse collapse">
+	
+										<div class="tc-tabs">
+											<ul class="nav nav-tabs">
+												<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab23">🚉ст. Шевченка</a></li>
+												<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab24">с.М.Старосілля</a></li>
+											</ul>
+											<div class="tab-content">
+												<div id="tab23" class="tab-pane fade in active">
+													<div class="row">
+															<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="color: #b31a50;">🚍Автобус було відправлено з м. Сміла до с.М.Старосілля</strong><br/>
+															<strong class="blinking" style="color: #b31a50; font-size: 1.1em;">🚍Є рейси в середу!</strong><br/>
+															<span>05:45<em>(Центр, магазин "Делікат")</em></span>
+															<span>07:30<em>(Центральна зупинка)</em></span>
+															</div>
+
+															<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">м. Сміла (АС-1):</strong>
+															<span>07:40</span>
+															<span>11:15</span>
+															<span>14:10</span>
+															<span>17:20</span>
+															</div>
+
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">Ст.Шевченка(АС-3):</strong>
+															<span>10:50</span>
+															<span>13:50</span>
+															<span>16:45</span>
+															
+														</div>
+													<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">смт. Балаклея:</strong>
+															<span>06:10</span>
+															<span>08:00</span>
+															<span>11:35</span>
+															<span>14:30</span>
+															<span>17:51</span>
+														</div>
+														
+
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">с. Костянтинівка:</strong>
+															<span>06:00</span>
+															<span>07:50</span>
+															<span>11:25</span>
+															<span>14:20</span>
+															<span>17:40</span>
+														</div>
+
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">смт. Балаклея:</strong>
+															<span>06:10</span>
+															<span>08:00</span>
+															<span>11:35</span>
+															<span>14:30</span>
+															<span>17:51</span>
+														</div>
+
+														<div class="col-md-12 timelist">
+														<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1Q3pKo22L-U-FFU1z7vkuJoWGl_78ImU&ehbc=2E312F" width="300" height="300"></iframe>
+															</div>
+															
+													</div>
+												</div>
+	
+												<div id="tab24" class="tab-pane fade weekend">
+													<div class="row">
+	
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="color: #b31a50;">🚍Автобус було відправлено з с.М.Старосілля до м. Сміла.</strong><br/>
+															<strong class="busstop">с.М.Старосілля:</strong>
+															<span>06:40</span>
+															<span>08:30</span>
+															<span>12:10</span>
+															<span>15:00</span>
+															<span>18:10</span>
+															
+														</div>
+														
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">с.Балаклея:</strong>
+															<span>06:55</span>
+															<span>08:45</span>
+															<span>12:25</span>
+															<span>15:15</span>
+															<span>18:25</span>
+															
+														</div>
+	
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">c.Костянтинівка:</strong>
+															<span>07:05</span>
+															<span>08:55</span>
+															<span>12:35</span>
+															<span>15:25</span>
+															<span>18:35</span>
+															
+														</div>
+	
+													</div>
+												</div>
+											</div>	                			
+										</div>
+
+	
+									</div>
+								</div>
+
+
+
+								<div class="panel">
+									<h4 class="acdn-title">
+										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse27"  class="collapsed"><span class="busname">№135</span>🚌м.Сміла(АС-2) – с.Плескачівка</a>
+									</h4>
+									<div id="collapse27" class="panel-collapse collapse">
+	
+	
+	
+	
+										<div class="tc-tabs">
+											<ul class="nav nav-tabs">
+												<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab50">🚌м.Сміла(АС-2) – с.Залевки</a></li>
+												
+											</ul>
+											<div class="tab-content">
+												<div id="tab50" class="tab-pane fade in active">
+													<div class="row">
+															<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">м.Сміла(АС-2):</strong>
+															<span>6:25(п)</span>
+															<span>12:30</span>
+															<span>14:40</span>
+															<span>17:30</span>
+															</div>
+	
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">с.Залевки:</strong>
+																<span>6:45</span>
+																<span>13:00</span>
+																<span>14:57</span>
+																<span>17:50</span>
+															</div>
+	
+														
+														<div class="col-md-12 timelist">
+															<iframe frameborder="0" style="border: 0; width: 100%; max-width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1yIKEttnFkI7LoKamkpSQvx2b6YI22Zg&ehbc=2E312F&noprof=1" width="500" height="500"></iframe>
+
+														</div>
+															
+													</div>
+												</div>
+	
+											</div>
+											                			
+										</div>
+									</div>
+								
+								</div>
+
+									<div class="panel">
+										<h4 class="acdn-title">
+											<a data-toggle="collapse" data-parent="#accordion1" href="#collapse28"  class="collapsed"><span class="busname">№137</span>🚌Сміла АС-2 – c.Бузуків</a>
+										</h4>
+										<div id="collapse28" class="panel-collapse collapse">
+		
+		
+											<div class="tc-tabs">
+												<ul class="nav nav-tabs">
+													<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab51">🚌Сміла АС-2</a></li>
+													<li class="daytype"><a data-toggle="tab" data-days="012345" href="#tab52">c.Бузуків</a></li>
+												</ul>
+												<div class="tab-content">
+													<div id="tab51" class="tab-pane fade in active">
+														<div class="row">
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong style="color: #b31a50;">На період: постійно</strong></br>
+																<strong style="color: #b31a50;">Режим перевезень: щоденно, крім понеділка!</strong></br>
+																<strong class="busstop">🚏Сміла АС-2:</strong></br>
+																<span>06:00</span>
+																<span>10:00</span>
+																<span>11:20</span>
+																<span>12:30</span></br>
+																<span>⬇️</span></br>
+															</div>
+
+
+
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Залевки:</strong></br>
+																<span>-----</span>
+																<span>11:35</span>
+															</div>
+
+
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏пов.Залевки:</strong></br>
+																<span>-----</span>
+																<span>10:10</span>
+															</div>
+
+
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сунки-центр:</strong></br>
+																<span>06:20</span>
+																<span>10:20</span>
+																<span>11:45</span>
+																<span>⬇️</span></br>
+															</div>
+
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сунки-сауна:</strong></br>
+																<span>06:25</span>
+																<span>11:50</span>
+															</div>
+
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сунки-кінцева:</strong></br>
+																<span>10:25</span>
+																<span>11:20</span>
+																<span>12:35</span>
+															</div>
+
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Голов’ятино:</strong></br>
+																<span>06:35</span>
+																<span>12:00</span>
+															</div>
+
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong style="color: #b31a50;">Прибуття о 6:40!</strong></br>
+																<strong class="busstop">🚏c.Бузуків:</strong>
+																<span>06:40</span>
+																<span>12:10</span>
+																
+																
+																</div>
+															
+															<div class="col-md-12 timelist">
+															<iframe frameborder="0" style="border: 0; width: 100%; max-width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1FQ5wMH1BlC_3fM8vIvXBr-y_PRFxNec&ehbc=2E312F" width="500" height="500"></iframe>
+															</div>
+																
+														</div>
+													</div>
+											
+		
+													<div id="tab52" class="tab-pane fade weekend">
+														<div class="row">
+															<div class="col-md-12 timelist" style="color:#000000">	
+																<strong style="color: #b31a50;">🚍Автобус було відправлено зі Бузуків до АС-2 Сміла:</strong><br/>
+																<strong class="busstop">🏡Бузуків:</strong>
+																<span>06:45</span>
+																<span>12:15</span>
+																<span>⬇️</span></br>
+															</div>
+		
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сунки-сауна:</strong></br>
+																<span>07:05</span>
+																<span>12:35</span>
+																<span>⬇️</span></br>
+															</div>
+		
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сунки-центр:</strong></br>
+																<span>07:10</span>
+																<span>10:40</span>
+																<span>12:40</span>
+																<span>⬇️</span></br>
+															</div>
+		
+
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сунки-кінцева:</strong></br>
+																<span>10:35</span>
+																<span>⬇️</span></br>
+																
+															</div>
+
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Залевки:</strong></br>
+																<span>07:20</span>
+																<span>12:50</span>
+																<span>⬇️</span></br>
+															</div>
+															
+
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">🚏Сміла АС-2:</strong></br>
+																<span>07:35</span>
+																<span>11:00</span>
+																<span>13:05</span>
+															</div>
+
+														</div>
+													</div>
+												</div>	                			
+											</div>
+										</div>
+								
+									</div>
+									
+
+								<div class="panel">
+									<h4 class="acdn-title">
+										<a data-toggle="collapse" data-parent="#accordion1" href="#collapse20"  class="collapsed"><span class="busname">№139</span>🚌Сміла АС-2 — с.Санжариха</a>
+									</h4>
+									<div id="collapse20" class="panel-collapse collapse">
+	
+										<div class="tc-tabs">
+											<ul class="nav nav-tabs">
+												<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab34">🚌Сміла АС-2 — с.Санжариха</a></li>
+												
+											</ul>
+											<div class="tab-content">
+												<div id="tab34" class="tab-pane fade in active">
+													<div class="row">
+															<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="color: #b31a50; font-size: 1.1em;">💸Вартість проїзду до с.Санжариха: 25 грн.</strong><br/>
+															<strong style="color: #b31a50; font-size: 1.1em;">💸Вартість проїзду по місту: 10 грн.</strong><br/>
+															<strong style="color: #b31a50; font-size: 1.1em;">📜Рейс о 05:20 щоденно, крім вихідних та святкових днів!</strong><br/>
+															<strong class="blinking" style="color: #b31a50; font-size: 1.1em;">📅Дні курсування: ЩОДЕННО.</strong><br/>
+															<strong class="busstop">Сміла АС-2:</strong>
+															<span>05:20</span>
+															<span>07:10</span>
+															<span>12:00</span>
+															<span>16:30</span>
+															
+															</div>
+	
+															<div class="col-md-12 timelist" style="color:#000000">
+																<strong class="busstop">с.Санжариха:</strong>
+																<span>06:00</span>
+																<span>08:10</span>
+																<span>13:00</span>
+																<span>17:30</span>
+																
+															</div>
+	
+														
+														<div class="col-md-12 timelist">
+														<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1q6ZjVgWvbiSBuM76kopF3-zxb5yGCOM&ehbc=2E312F" width="300" height="300"></iframe>
+														</div>
+															
+												</div>
+											</div>	                			
+										</div>
+									</div>
+								</div>
+							</div>	
+							
+							
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse13"  class="collapsed"><span class="busname">№140</span>Автостанція №2 — с. Березняки</a>
+								</h4>
+								<div id="collapse13" class="panel-collapse collapse">
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab21">Автостанція №2 — с. Березняки</a></li>		
+										</ul>
+										<div class="tab-content">
+											<div id="tab21" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">💸Ціна в 140 Маршруті — Ціна 20 і 30 грн (До кінцової).</strong><br/>
+														<strong style="color: #b31a50;">📅Дні курсування: Щоденно</strong><br/>
+														<strong style="color: #b31a50;">📅Примітка: не всі рейси їздять у вихідні дні.</strong><br/>
+														<strong style="color: #b31a50;">💸Ціна в 140 Маршруті — по Смілі 10 грн.</strong><br/>
+														<strong class="busstop">Автостанція №2:</strong>
+														<span>06:25</span>
+														<span>07:20</span>
+														<span>10:40</span>
+														<span>14:15</span>
+														<span>17:05</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">с. Березняки:</strong>
+														<span>07:25</span>
+														<span>08:30</span>
+														<span>11:40</span>
+														<span>15:30</span>
+														<span>18:20</span>
+														
+													</div>
+													
+													
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1qhRhrJeRsp02n-9g26-A7UXK72zb2dQ&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+													
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse7"  class="collapsed"><span class="busname">№141</span>с.Будки — Ст.Шевченка</a>
+								</h4>
+								<div id="collapse7" class="panel-collapse collapse">
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab11">с. Будки</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab12">Ст.Шевченка</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab11" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">⛔Увага: останні рейси в графіку у вихідні дні не курсують!</strong><br/>
+														<strong class="busstop">🚆Ст.Шевченка:</strong><br/>
+														<span>06:20</span>
+														<span>08:05</span>
+														<span>11:15</span>
+														<span>15:15</span>
+														<span>17:30</span>
+													
+													</div>
+
+
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1nk-l9rrqywfpVgao7AubXN8oimLRRYU&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+
+												</div>
+											</div>
+
+											<div id="tab12" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">⏰Інтервали між зупинками 3-4-5 хвилин</strong><br/>
+														<strong style="color: #b31a50;">⛔Увага: останні рейси в графіку у вихідні дні не курсують!</strong><br/>
+															<strong class="busstop">🍞с.Будки:</strong>
+															<span>07:05</span>
+															<span>09:10</span>
+															<span>12:10</span>
+															<span>16:10</span>
+															<span>18:25</span>
+															
+															
+														</div>
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse14"  class="collapsed"><span class="busname">№150</span>с. Велика Яблунівка —🏨 Райлікарня ім. С.Бобринської</a>
+								</h4>
+								<div id="collapse14" class="panel-collapse collapse">
+
+										<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab22">с. Велика Яблунівка</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab39">🏨Райлікарня ім. С.Бобринської</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab22" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+													<strong style="color: #b31a50;">💸Ціна в 150 Маршруті — Ціна 20 і 30 грн (До кінцевої).</strong><br/>
+														<strong style="color: #b31a50;">💸Ціна в 150 Маршруті — по Смілі 10 грн.</strong><br/>
+														<strong style="color: #b31a50;">📍Автобус було відправлено із с. Велика Яблунівка до Райлікарні ім. С.Бобринської:</strong><br/>
+														<strong class="busstop">🍏с. Велика Яблунівка(Ранок):</strong>
+														<span>05:40<em>&nbsp(🚌Даний автобус ходить не завжди)</em></span>
+														<span>06:20</span>
+														<span>07:00</span>
+														<span>08:00</span>
+														<span>09:40</span>
+														<span>10:30</span>
+														<span>11:20</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Обід:</strong>
+														<span>12:50</span>
+														<span>13:45</span>
+														<span>14:30</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Вечір:</strong>
+														<span>15:20</span>
+														<span>16:10</span>
+														<span>16:45</span>
+														<span>17:30</span>
+														<span>18:10</span>
+														<span>18:50</span>
+														<span>19:30<em>(У парк)</em></span>
+														
+													</div>
+
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1KnfPme6iFu-QfTLoZ56c3UdL7XnKF4s&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+
+												</div>
+											</div>
+										
+
+											<div id="tab39" class="tab-pane fade weekend">
+												<div class="row">
+
+
+													<div class="col-md-12 timelist" style="color:#000000">	
+														<strong style="color: #b31a50;">🚍Автобус було відправлено з Райлікарні ім. С.Бобринської до 🍏с. Велика Яблунівка:</strong><br/>
+														<strong class="busstop">🏥Райлікарня ім. С.Бобринської:</strong>
+														<span>06:20</span>
+														<span>07:10</span>
+														<span>08:00</span>
+														<span>08:50</span>
+														<span>10:25</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Обід:</strong>
+														<span>12:00</span>
+														<span>12:25</span>
+														<span>13:45</span>
+														<span>14:30</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Вечір:</strong>
+														<span>15:10</span>
+														<span>16:00</span>
+														<span>16:40</span>
+														<span>17:25</span>
+														<span>18:10</span>
+														<span>18:50</span>
+														<span>19:30<em>(У парк)</em></span>
+														
+													</div>
+															
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse21"  class="collapsed"><span class="busname">№151</span>🏨Райлікарня ім. С.Бобринської — с.Тернівка(Попівка)</a>
+								</h4>
+								<div id="collapse21" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab35">🏨Райлікарня ім. С.Бобринської</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab36">с.Тернівка(Попівка)</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab35" class="tab-pane fade in active">
+												<div class="row">
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong style="color: #b31a50;">З Понеділка по Суботу - ПІЛЬГИ!</strong><br/>
+														<strong class="busstop">🏨Райлікарня ім. С.Бобринської:</strong>
+														<span>06:20</span>
+														<span>07:30</span>
+														<span>11:21</span>
+
+														</div>
+
+														<div class="col-md-12 timelist">
+														<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1b-WU_ezmSDqyEmng5DvTanXIObh3viU&ehbc=2E312F" width="300" height="300"></iframe>
+															</div>
+														
+												</div>
+											</div>
+
+											<div id="tab36" class="tab-pane fade weekend">
+												<div class="row">
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Тернівка(Попівка):</strong>
+														<span>06:50</span>
+														<span>08:30</span>
+														<span>12:20</span>
+														
+													</div>
+													
+
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+							
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse24"  class="collapsed"><span class="busname">№152</span>🏨Райлікарня ім. С.Бобринської — с.Теклине</a>
+								</h4>
+								<div id="collapse24" class="panel-collapse collapse">
+
+										<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="0123456" href="#tab40">🏨Райлікарня ім. С.Бобринської</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab41">с.Теклине</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab40" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">💸Ціна в №152 Маршруті — по Смілі 10 грн.</strong><br/>
+														<strong style="color: #b31a50;">📍Автобус було відправлено з Рай.лікарні до с.Теклине:</strong><br/>
+														<strong class="busstop">🏥Райлікарня ім. С.Бобринської:</strong>
+														<span>06:15</span>
+														<span>08:10</span>
+														<span>11:40</span>
+														<span>15:00</span>
+														<span>16:50</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">📍Сміла АС-1:</strong>
+														<span>06:30</span>
+														<span>08:24</span>
+														<span>11:54</span>
+														<span>15:14</span>
+														<span>17:00</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Костянтинівка:</strong>
+														<span>06:40</span>
+														<span>08:28</span>
+														<span>11:59</span>
+														<span>15:19</span>
+														<span>17:05</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">смт.Балаклея:</strong>
+														<span>06:50</span>
+														<span>08:49</span>
+														<span>12:18</span>
+														<span>17:30</span>
+													</div>
+
+													<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/u/0/embed?mid=1808YXBtG69xwjyFMdpYZSD3o0Fs0TSw&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+
+												</div>
+											</div>
+										
+
+											<div id="tab41" class="tab-pane fade weekend">
+												<div class="row">
+
+
+													<div class="col-md-12 timelist" style="color:#000000">	
+														<strong style="color: #b31a50;">🚍Автобус було відправлено з c.Теклине до Райлікарні ім. С.Бобринської:</strong><br/>
+														<strong class="busstop">🏡с.Теклине:</strong>
+														<span>07:00</span>
+														<span>09:00</span>
+														<span>12:20</span>
+														<span>15:45</span>
+														<span>17:50</span>
+														
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">смт.Балаклея:</strong>
+														<span>07:10</span>
+														<span>09:10</span>
+														<span>12:30</span>
+														<span>15:55</span>
+														<span>18:00</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Костянтинівка:</strong>
+														<span>07:20</span>
+														<span>09:20</span>
+														<span>12:40</span>
+														<span>16:05</span>
+														<span>18:10</span>
+													</div>
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">Сміла АС-1:</strong>
+														<span>07:25</span>
+														<span>09:25</span>
+														<span>12:45</span>
+														<span>16:10</span>
+														<span>18:16</span>
+														
+													</div>
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+
+								<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse16"  class="collapsed"><span class="busname">№153</span>🚉ст.Шевченка — ст.Володимирівка</a>
+								</h4>
+								<div id="collapse16" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" data-days="56" href="#tab25">ст.Шевченка</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab42">ст.Володимирівка</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab25" class="tab-pane fade in active">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">🚍Автобус було відправлено з АС-3 Шевченка до ст.Володимирівка:</strong><br/>
+														<strong class="busstop">ст.Шевченка:</strong>
+														<span>05:40</span>
+														<span>08:10</span>
+														<span>10:40</span>
+														<span>13:20</span>
+														<span>17:10</span>
+														
+													</div>
+
+														<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">с.Костянтинівка:</strong>
+																<span>06:10</span>
+																<span>08:40</span>
+																<span>11:10</span>
+																<span>13:50</span>
+																<span>17:40</span>
+														</div>
+
+														<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop">с.Балаклея:</strong>
+															<span>06:20</span>
+															<span>08:50</span>
+															<span>11:21</span>
+															<span>14:00</span>
+															<span>17:50</span>
+													</div>
+
+												<div class="col-md-12 timelist">
+													<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1P46EIGR74fpezKaNmYNfJd5O28fyG0c&ehbc=2E312F" width="300" height="300"></iframe>
+													</div>
+												</div>
+												</div>
+
+												<div id="tab42" class="tab-pane fade weekend">
+													<div class="row">
+	
+	
+														<div class="col-md-12 timelist" style="color:#000000">	
+															<strong style="color: #b31a50;">🚍Автобус було відправлено зі ст.Володимирівка до АС-3 ст.Шевченка:</strong><br/>
+															<strong class="busstop">🏡ст.Володимирівка:</strong>
+															<span>06:40</span>
+															<span>09:25</span>
+															<span>11:50</span>
+															<span>14:40</span>
+															<span>18:00</span>
+															
+														</div>
+	
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">смт.Балаклея:</strong>
+															<span>06:50</span>
+															<span>09:35</span>
+															<span>12:00</span>
+															<span>14:50</span>
+															<span>18:10</span>
+														</div>
+	
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">Костянтинівка:</strong>
+															<span>07:00</span>
+															<span>09:45</span>
+															<span>12:10</span>
+															<span>15:01</span>
+															<span>18:20</span>
+														</div>
+	
+														
+													</div>
+											</div>
+										</div>	                			
+									</div>
+								</div>
+							
+
+						</div>
+							  
+						<div class="panel">
+							<h4 class="acdn-title">
+								<a data-toggle="collapse" data-parent="#accordion1" href="#collapse26"  class="collapsed"><span class="busname">№309</span>🚌АС-2 — с.Орловець</a>
+							</h4>
+							<div id="collapse26" class="panel-collapse collapse">
+
+
+
+
+								<div class="tc-tabs">
+									<ul class="nav nav-tabs">
+										<li class="active daytype"><a data-toggle="tab" data-days="01234" data-days="56" href="#tab48">Ст.Шевченка</a></li>
+										<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab49">с.Орловець</a></li>
+										<li class="daytype"><a data-toggle="tab" data-days="12356" href="#tab50">АС-1/АС-2</a></li>
+									</ul>
+									<div class="tab-content">
+										<div id="tab48" class="tab-pane fade in active">
+											<div class="row">
+												<div class="col-md-12 timelist" style="color:#000000">
+													<strong style="color: #b31a50; font-size: 1.0em;">🚍Автобус було відправлено зі ст.Шевченка до с.Орловець:</strong><br/>
+													<strong style="color: #b31a50; font-size: 1.0em;">🚍📅 Дні курсування: Щоденно, крім понеділка</strong><br/>
+													<strong class="busstop"><img src="emoji/train.png" height="20" width="20"/>Ст.Шевченка:</strong>
+													<span>05:15</span>
+													<span>12:25</span>
+													<span>15:45</span>
+													
+												</div>
+
+											<div class="col-md-12 timelist">
+												<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=18WTkDF8PcJju6Im6cK6rnelYsBE5ZVM&ehbc=2E312F" width="300" height="300"></iframe>
+												</div>
+											</div>
+											</div>
+
+											<div id="tab49" class="tab-pane fade weekend">
+												<div class="row">
+													<div class="col-md-12 timelist" style="color:#000000">	
+														<strong style="color: #b31a50; font-size: 1.0em;">🚍Автобус було відправлено з с.Орловець до ст.Шевченка:</strong><br/>
+														<strong class="busstop">🏡с.Орловець:</strong>
+														<span>06:20</span>
+														<span>13:50</span>
+														<span>17:10</span>
+
+														<div class="col-md-12 timelist">
+															<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=18WTkDF8PcJju6Im6cK6rnelYsBE5ZVM&ehbc=2E312F" width="300" height="300"></iframe>
+															</div>
+													</div>
+												</div>
+										</div>
+
+
+										<div id="tab50" class="tab-pane fade weekend">
+											<div class="row">
+												<div class="col-md-12 timelist" style="color:#000000">	
+													<strong style="color: #b31a50; font-size: 1.0em;">🚍Автобус було відправлено з 🚍АС-2 ➡️ 🚍АС-1 до Орловець:</strong><br/>
+													<strong class="busstop">🚍АС-2/АС-1:</strong>
+													<ul>
+														<li><span>🚍АС-2:</span></li>
+														<li><span>--</span></li>
+														<li><span>12:45</span></li>
+														<li><span>16:05</span></li>
+														<li><span>🚍АС-1:</span></li>
+														<li><span>05:35</span></li>
+														<li><span>13:10</span></li>
+														<li><span>16:20</span></li>
+													  </ul>
+													<div class="col-md-12 timelist">
+														<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=18WTkDF8PcJju6Im6cK6rnelYsBE5ZVM&ehbc=2E312F" width="300" height="300"></iframe>
+														</div>
+												</div>
+											</div>
+									</div>
+									</div>	                			
+								</div>
+							</div>
+						
+
+					</div>
+
+
+
+
+
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse22"  class="collapsed"><span class="busname">№154</span>с. Сердюківка — 🏨Райлікарня ім. С.Бобринської</a>
+								</h4>
+								<div id="collapse22" class="panel-collapse collapse">
+
+
+
+
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab37">🏨Райлікарня ім. С.Бобринської — с.Сердюківка</a></li>
+											
+										</ul>
+										<div class="tab-content">
+											<div id="tab37" class="tab-pane fade in active">
+												<div class="row">
+														<div class="col-md-12 timelist" style="color:#000000">
+														<strong style="color: #b31a50;">З Понеділка по П'ятницю - ПІЛЬГИ!</strong><br/>
+														<strong class="busstop">🏨Райлікарня ім. С.Бобринської:</strong>
+														<span>13:40</span>
+														<span>17:00</span>
+														
+														</div>
+
+														<div class="col-md-12 timelist" style="color:#000000">
+															<strong class="busstop">с.Сердюківка:</strong>
+															<span>15:00</span>
+															<span>18:00</span>
+														</div>
+
+														<div class="col-md-12 timelist">
+														<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1WpJc0-cVC_6F1Dn1pi7bJLy4cdkS31c&ehbc=2E312F" width="300" height="300"></iframe>
+															</div>
+														
+												</div>
+											</div>
+
+											
+													
+
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+									<div class="panel">
+										<h4 class="acdn-title">
+											<a data-toggle="collapse" data-parent="#accordion1" href="#collapse23"  class="collapsed"><span class="busname">№155</span>с.Ротмистрівка — 🏨Райлікарня ім. С.Бобринської</a>
+										</h4>
+										<div id="collapse23" class="panel-collapse collapse">
+		
+		
+		
+		
+											<div class="tc-tabs">
+												<ul class="nav nav-tabs">
+													<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab38">с.Ротмистрівка — 🏨Райлікарня ім. С.Бобринської</a></li>
+													
+												</ul>
+												<div class="tab-content">
+													<div id="tab38" class="tab-pane fade in active">
+														<div class="row">
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong style="color: #b31a50;">📖З понеділка по п'ятницю - ПІЛЬГИ!</strong><br/>
+																<strong style="color: #b31a50;"><img src="emoji/round-pushpin.png" height="30" width="30"/>Автобус було відправлено із Райлікарні ім. С.Бобринської до с.Ротмистрівки:</strong><br/>
+																<strong class="busstop">🏨Райлікарня ім. С.Бобринської:</strong>
+																<span>05:55</span>
+																<span>07:55</span>
+																<span>13:20</span>
+																<span>17:00</span>
+																<span>***Субота***</span>
+																<span>07:55</span>
+																<span>11:00</span>
+																</div>
+		
+																<div class="col-md-12 timelist" style="color:#000000">
+																<strong style="color: #b31a50;"><img src="emoji/round-pushpin.png" height="30" width="30"/>Автобус було відправлено із с.Ротмистрівки до Райлікарні ім. С.Бобринської:</strong><br/>
+																<strong class="busstop">с.Ротмистрівка:</strong>
+																<span>06:50</span>
+																<span>08:50</span>
+																<span>14:30</span>
+																<span>18:10</span>
+																<span>***Субота***</span>
+																<span>08:50</span>
+																<span>12:15</span>	
+																</div>
+															
+																
+		
+																<div class="col-md-12 timelist">
+																<iframe frameborder="0" style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" src="https://www.google.com/maps/d/embed?mid=1k3aEP47nIHOoYwKOw0S6a8CMqWc6nNo&ehbc=2E312F" width="300" height="300"></iframe>
+																	</div>
+																
+														</div>
+													</div>
+		
+													
+															
+		
+														</div>
+													</div>
+												</div>	                			
+											</div>
+								
+							
+								
+							<div class="panel">
+								<h4 class="acdn-title">
+									<a data-toggle="collapse" data-parent="#accordion1" href="#collapse17" class="collapsed"><span class="busname">Інфо</span>Попутка та загальна інформація</a>
+								</h4>
+								<div id="collapse17" class="panel-collapse collapse">
+									<div class="tc-tabs">
+										<ul class="nav nav-tabs">
+											<li class="active daytype"><a data-toggle="tab" data-days="01234" href="#tab29">Попутка</a></li>
+											<li class="daytype"><a data-toggle="tab" data-days="56" href="#tab30">Загальна інформація</a></li>
+										</ul>
+										<div class="tab-content">
+											<div id="tab29" class="tab-pane fade in active">
+												<div class="row">
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop"><img src="emoji/oncoming-automobile.png" height="30" width="30"/>Попутка:</strong>
+														<strong><h4><img src="emoji/banknote-with-dollar.png" height="30" width="30"/>Ціна: від 50 до 55 грн</h4></strong>
+														<h4><img src="emoji/round-pushpin.png" height="30" width="30"/>Сміла: Початкова точка (Школа №3 , Пушка) <img src="emoji/black-rightwards-arrow.png" height="20" width="20"/> Кінцевий пункт (По вимозі, Літак)</h4>
+														<h4><img src="emoji/round-pushpin.png" height="30" width="30"/>Черкаси: Початкова точка (Літак) <img src="emoji/black-rightwards-arrow.png" height="20" width="20"/> Кінцевий пункт  (По вимозі, центр - МБК)</h4>
+														
+														<h4 style="font-weight: bold;"> <span class="fa-brands--viber"></span> <a href="https://bit.ly/3BmTmMM">Попутка.Сміла(Viber)</a></h4>
+														<h4 style="font-weight: bold;"><span class="ic--baseline-telegram"></span></i></i><a href="https://t.me/PopytkaSmila">Попутка.Сміла</a></h4>
+														<h4 style="font-weight: bold;"><span class="ic--baseline-telegram"></span></i><a href="https://t.me/telecar_cherkassy_geo">Попутка.Черкаси</a></h4>
+
+													</div>
+
+												</div>
+											</div>
+											
+
+											<div id="tab30" class="tab-pane fade weekend">
+												<div class="row">
+
+													<div class="col-md-12 timelist" style="color:#000000">
+														<strong class="busstop"><img src="emoji/page-with-curl.png" height="30" width="30"/>Загальна інформація:</strong>
+														<strong><h4><img src="emoji/money-with-wings.png" height="30" width="30"/>Ціна за проїзд в автобусі — 10 грн!</h4></strong>
+														<h4><img src="emoji/school-satchel.png" height="30" width="30"/>Діти до 7 років — безкоштовно;</a></h4>
+														<h4><img src="emoji/saluting-face.png" height="25" width="25"/>&nbsp;Інваліди війни;</h4>
+														<h4><img src="emoji/military-helmet_1.png" height="30" width="30"/>Учасники бойових дій;</h4>
+														<h4><img src="emoji/person_in_manual_wheelchair.png" height="30" width="30"/>Інваліди 1 категорії;</h4>
+														<h4><img src="emoji/child-apple.png" height="30" width="30"/>Діти-інваліди;</h4>
+														<h4><img src="emoji/child-apple.png" height="30" width="30"/>Діти-сироти;</h4>
+														<h4><img src="emoji/military-medal.png" height="30" width="30"/>Ветерани АТО,ООС,Повномасштабної війни,Афганці;</h4>
+														<h4><img src="emoji/police-officer.png" height="30" width="30"/>Прокуратура, поліція — по посвідченню (безкоштовно);</h4>
+														<h4><img src="emoji/fire-extinguisher.png" height="30" width="30"/>Ліквідатори на ЧАЕС 1 категорії — безкоштовно.</h4>
+														<b><h4><img src="emoji/money-with-wings.png" height="30" width="30"/>Ціна проїзду в 302 маршруті по Смілі — 10 грн. До м.Черкаси — 70 грн.</h4></b>
+														<b><h4><img src="emoji/money-with-wings.png" height="30" width="30"/>Ціна проїзду в 302 маршруті по Черкасам — 13 грн. </h4></b>
+														
+													</div>
+												</div>
+											</div>
+										</div>	                			
+									</div>
+
+
+
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+	    </main>
+	    <!-- Main End -->
+
+	     <footer>
+        <div class="container text-center">
+                <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can check out other license options via our website: themes.3rdwavemedia.com */-->
+				<h5 class="copyright"><b> <font color="#FF4500"><img src="emoji/copyright.png" height="20" width="20"/>2022. All rights reserved, Developed:&nbsp;<a href="https://www.instagram.com/googlove_official/ " target="_blank"><img src="emoji/man-technologist.png" height="15" width="15"/>&nbsp;Yaroslav Hohulov</a></i>
+		 <div class="container text-center">
+		 
+		 </div><!--//container-->
+        </div><!--//container-->
+		<div class="container text-center">
+		<h5 class="copyright"><b><font color="#FF4500"><img src="emoji/rocket.png" height="20" width="20"/>Зворотній зв'язок </i> з розробником: <a href="https://t.me/flame4ost" target="_blank">писати сюди</a><img src="emoji/writing-hand.png" height="20" width="20"/></h5></b></font>
+		 </div><!--//container-->
+		 <div class="container text-center">
+			<h5 class="copyright">
+				<strong>
+					<font color="#FF4500">
+						<img src="emoji/briefcase.png" height="15" width="15"/>
+						Канал Сергій Ананко:
+						<a href="https://t.me/serhii_ananko" target="_blank">підписатись</a>
+						<img src="emoji/official.png" height="15" width="15">
+					</font>
+				</strong>
+			</h5>
+		 
+	    </div><!--//container-->
+	   </footer>
+
+	    <!-- jQuery library -->
+	    <script src="js/jquery.min.js"></script>
+		<script src = "js/script.js"></script>
+		<script src="js/main.js"></script>
+	    <!-- bootstrap.min.js -->
+	    <script src="js/bootstrap.min.js"></script>
+		<script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+	    <script>
+		
+		    
+var daysArray = {
+	0 : 'ПН',
+	1 : 'ВТ',
+	2 : 'СР',
+	3 : 'ЧТ',
+	4 : 'ПТ',
+	5 : 'СБ',
+	6 : 'НД'
+};
+
+// функция затемнения времени ушедшего транспорта
+var grayTimer = null;
+function makeGrayTimes() {
+	clearTimeout(grayTimer);
+	grayTimer = null;	
+	var date = new Date();
+	(date.getHours() < 4) ? date.setFullYear(1970, 0, 2) : date.setFullYear(1970, 0, 1);
+
+	$('.timelist > span').each(function(ind, elem) {
+		if (elem.getAttribute('date-time') < date) elem.classList.add('gray');
+	});	
+	grayTimer = setTimeout(makeGrayTimes, 30*1000); // через 30 сек запустим снова
+}
+
+
+// функция проставляет метки времени
+function setATRTimes() {
+	grayTimer = null;	
+	var date = new Date();
+	var startYear = '01 Jan 1970';
+	(date.getHours() < 4) ? startYear = '02 Jan 1970' : startYear = '01 Jan 1970';
+
+	$('.timelist > span').each(function(ind, elem) {
+		elem.setAttribute('date-time', Math.floor(new Date(startYear+' '+$(elem).text())));
+	});
+}
+
+function two(num) { return ('0' + num).slice(-2) }; // insert 0 before
+
+// модные часы
+function digitalWatch() {
+	var date = new Date();
+	var hours   = two(date.getHours());
+	var minutes = two(date.getMinutes());
+	var myDay = (date.getDay()+'').replace(0, 7) -1;
+	var dayClass = ([5, 6].indexOf(myDay) !== -1) ? 'weekend' : 'weekday'; 
+	document.getElementById('busclock').innerHTML =  '<span class="clockDW '+dayClass+'">' + daysArray[myDay] + '</span> ' + hours + ':' + minutes;
+	setTimeout(digitalWatch, 30*1000); // через 30 сек запустим снова
+}
+
+// открывает вкладку подходящего на сегодня дня недели
+function activateTab() {
+	var date = new Date();
+	var day = null;
+	if (day === null)                        day = (date.getDay()+'').replace(0, 7) -1;
+	$('.daytype a[data-days*="'+day+'"]').trigger('click'); // кликаем по нужной нам вкладке
+}
+
+
+digitalWatch();
+setATRTimes();
+makeGrayTimes();
+activateTab();
+
+function searchBus() {
+            // Отримати введений номер автобуса
+            var busNumber = document.getElementById("busNumberInput").value;
+
+            // Отримати всі елементи з класом "busname"
+            var busElements = document.querySelectorAll(".busname");
+
+            // Перевірити кожний елемент з класом "busname" на відповідність введеному номеру
+            busElements.forEach(function(busElement) {
+                var elementBusNumber = busElement.textContent;
+                var parentPanel = busElement.closest(".panel");
+
+                if (elementBusNumber === "№" + busNumber || busNumber === "") {
+                    // Якщо номер автобуса збігається або поле порожнє, показати батьківську панель
+                    if (parentPanel) {
+                        parentPanel.style.display = "block";
+                    }
+                } else {
+                    // Якщо номер автобуса не збігається, приховати батьківську панель
+                    if (parentPanel) {
+                        parentPanel.style.display = "none";
+                    }
+                }
+            });
+        }
+
+	    </script>
+	</body>
+</html>

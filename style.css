@@ -1,0 +1,250 @@
+:root {
+    --text-color: #1e293b;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    --primary: #007DD6;
+    --accent: #b31a50;
+    --card-radius: 20px;
+}
+
+/* Темна тема (Smoked Glass) */
+body.dark-mode {
+    --text-color: #f1f5f9;
+    --glass-bg: rgba(30, 30, 30, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+    --highlight-bg: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    margin: 0;
+    padding-bottom: 60px;
+    min-height: 100vh;
+    
+    /* LIQUID BACKGROUND: Живий градієнт */
+    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff, #a1c4fd, #c2e9fb);
+    background-size: 400% 400%;
+    animation: liquidAnimation 15s ease infinite;
+}
+
+body.dark-mode {
+    background: linear-gradient(45deg, #232526, #414345, #2c3e50, #000000);
+    background-size: 400% 400%;
+}
+
+/* Анімація "Рідкого" фону */
+@keyframes liquidAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* --- GLASSMOPHISM BASE --- */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Для Safari */
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--card-radius);
+}
+
+/* Header (Меню у стилі скла) */
+header {
+    position: sticky;
+    top: 15px;
+    z-index: 100;
+    margin: 0 15px;
+    padding: 10px 20px;
+    
+    /* Застосовуємо ефект скла */
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 50px; /* Округле меню-капсула */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-area a { text-decoration: none; display: flex; align-items: center; }
+.logo-img { height: 35px; width: auto; }
+.clock { font-weight: 800; font-size: 1.1rem; font-family: monospace; margin-right: 15px; color: var(--text-color); }
+.theme-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.3s; }
+.theme-btn:hover { transform: rotate(20deg) scale(1.1); }
+
+/* Main Layout */
+main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
+.hidden { display: none !important; }
+
+/* Banners */
+.banners { 
+    text-align: center; 
+    margin-bottom: 20px; 
+    padding: 15px;
+    /* Легке скло для банерів */
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.donate-banner a { color: #008f39; font-weight: bold; text-decoration: none; }
+
+/* Search Input (Glassy) */
+.search-container input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    
+    /* Glass Input */
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 30px;
+    color: var(--text-color);
+    outline: none;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s;
+}
+
+.search-container input::placeholder { color: var(--text-color); opacity: 0.6; }
+.search-container input:focus { box-shadow: 0 0 15px rgba(255,255,255,0.5); transform: scale(1.01); }
+
+/* Grid Layout */
+.bus-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 15px;
+}
+
+/* Кнопки автобусів (Glass Cards) */
+.bus-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+    
+    /* Glass properties */
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 20px;
+}
+
+.bus-card:active { transform: scale(0.95); }
+.bus-card:hover { background: rgba(255, 255, 255, 0.4); border-color: #fff; }
+
+.bus-num { font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
+
+/* --- SCREEN: РОЗКЛАД --- */
+.schedule-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#back-btn {
+    background: var(--glass-bg);
+    color: var(--text-color);
+    border: 1px solid var(--glass-border);
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+}
+
+#route-title-display {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--primary);
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+}
+
+/* Блок з часом */
+.route-block {
+    padding: 25px;
+    margin-bottom: 20px;
+    
+    /* Glass properties */
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 25px;
+}
+
+.route-direction {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.stop-item { margin-bottom: 20px; }
+.stop-name { font-weight: 800; margin-bottom: 10px; display: block; opacity: 0.8; }
+
+.times-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.time-badge {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: monospace;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Найближчий рейс */
+.time-badge.next {
+    background: var(--primary);
+    color: white;
+    border: 1px solid var(--primary);
+    transform: scale(1.15);
+    box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4);
+    z-index: 2;
+}
+
+.time-badge.past {
+    opacity: 0.4;
+    text-decoration: line-through;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* Footer */
+.info-links { margin-top: 30px; text-align: center; }
+.bot-link {
+    display: inline-block;
+    background: rgba(40, 167, 69, 0.2);
+    color: #0f5132;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    backdrop-filter: blur(5px);
+}
+body.dark-mode .bot-link { color: #86efac; background: rgba(40, 167, 69, 0.3); }
+footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }

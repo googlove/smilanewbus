@@ -482,7 +482,7 @@ body.dark-mode .donor-item {
 
 /* Ім'я донатера */
 .donor-name {
-    color: green; /* Виділяємо синім */
+    color: #833AB4; /* Виділяємо синім */
 }
 
 /* Сума донату */

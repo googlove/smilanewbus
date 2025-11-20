@@ -52,8 +52,8 @@ function loadInfoData() {
         })
         .catch(err => {
             console.error("Помилка завантаження info.json:", err);
-            // Відображаємо помилку в контейнері
-            document.getElementById('info-section-container').innerHTML = '<p style="color:orange; text-align:center;">Інформація про попутку та пільги тимчасово недоступна.</p>';
+            // ВИПРАВЛЕНО: Використовуємо новий ID 'accordion'
+            document.getElementById('accordion').innerHTML = '<p style="color:orange; text-align:center;">Інформація про попутку та пільги тимчасово недоступна.</p>';
         });
 }
 
@@ -86,8 +86,8 @@ function renderInfoData(data) {
         <div class="poputka-route">
             <span class="route-city">${route.city}:</span>
             <div class="route-points">
-                Початкова: ${route.start}
-                Кінцевий: ${route.end}
+                Початкова: <strong>${route.start}</strong><br>
+                Кінцевий: <strong>${route.end}</strong>
             </div>
         </div>
     `).join('');

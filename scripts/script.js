@@ -57,19 +57,37 @@ function loadInfoData() {
         });
 }
 
-// 3. Рендер додаткової інформації (Не змінено, використовує info.json)
+// 3. Рендер додаткової інформації як акордеон (Використовує info.json)
 function renderInfoData(data) {
-    const container = document.getElementById('info-section-container');
+    const container = document.getElementById('accordion'); // Контейнер-аккордеон
     let html = '';
 
-    // --- БЛОК 1: ПОПУТКА ---
+    // Функція-шаблон для створення заголовка акордеона
+    const renderHeader = (id, title, icon, isCollapsed = true) => `
+        <div class="panel-heading glass-panel-header" role="tab" id="heading${id}">
+            <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse${id}" aria-expanded="${isCollapsed ? 'false' : 'true'}" aria-controls="collapse${id}" class="${isCollapsed ? 'collapsed' : ''}">
+                    <span class="title-icon">${icon}</span> ${title}
+                </a>
+            </h4>
+        </div>
+    `;
+
+    // Функція-шаблон для створення тіла акордеона
+    const renderBody = (id, content, isCollapsed = true) => `
+        <div id="collapse${id}" class="panel-collapse collapse ${isCollapsed ? '' : 'in'}" role="tabpanel" aria-labelledby="heading${id}">
+            <div class="glass-panel info-panel panel-body">${content}</div>
+        </div>
+    `;
+
+    // --- БЛОК 1: ПОПУТКА (ID: One) ---
     const p = data.poputka;
     let routesHtml = p.routes.map(route => `
         <div class="poputka-route">
             <span class="route-city">${route.city}:</span>
             <div class="route-points">
-                Початкова: **${route.start}**<br>
-                Кінцевий: **${route.end}**
+                Початкова: ${route.start}
+                Кінцевий: ${route.end}
             </div>
         </div>
     `).join('');
@@ -80,46 +98,49 @@ function renderInfoData(data) {
         </a>
     `).join('');
 
+    const poputkaContent = `
+        <h4 class="poputka-price">Ціна: ${p.price}</h4>
+        <div class="poputka-routes-list">${routesHtml}</div>
+        <div class="poputka-links-list">${linksHtml}</div>
+    `;
+
     html += `
-        <div class="glass-panel info-panel poputka-panel">
-            <strong class="panel-title poputka-title">
-                <span class="title-icon">🚗</span> ${p.title}
-            </strong>
-            <h4 class="poputka-price">Ціна: ${p.price}</h4>
-            <div class="poputka-routes-list">${routesHtml}</div>
-            <div class="poputka-links-list">${linksHtml}</div>
+        <div class="panel panel-default poputka-panel-wrapper">
+            ${renderHeader('One', p.title, '🚗', true)}
+            ${renderBody('One', poputkaContent, true)}
         </div>
     `;
 
 
-    // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ / ПІЛЬГИ ---
+    // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ / ПІЛЬГИ (ID: Two) ---
     const g = data.generalInfo;
 
-    // Секція пільг та цін (динамічна генерація списку)
     const renderList = (items) => items.map(item => `
         <h4><span class="item-icon">${item.icon}</span> ${item.text}</h4>
     `).join('');
 
+    const generalContent = `
+        <div class="info-list">
+            ${renderList(g.busFares)}
+        </div>
+
+        <hr class="info-separator">
+
+        <div class="info-list privileges-list">
+            ${renderList(g.privileges)}
+        </div>
+    `;
+
     html += `
-        <div class="glass-panel info-panel general-info-panel">
-            <strong class="panel-title general-title">
-                <span class="title-icon">📜</span> ${g.title}
-            </strong>
-            
-            <div class="info-list">
-                ${renderList(g.busFares)}
-            </div>
-
-            <hr class="info-separator">
-
-            <div class="info-list privileges-list">
-                ${renderList(g.privileges)}
-            </div>
+        <div class="panel panel-default general-info-panel-wrapper">
+            ${renderHeader('Two', g.title, '📜', true)}
+            ${renderBody('Two', generalContent, true)}
         </div>
     `;
 
     container.innerHTML = html;
 }
+
 
 // 4. Малювання кнопок (Не змінено)
 function renderBusGrid(buses) {

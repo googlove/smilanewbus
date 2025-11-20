@@ -153,12 +153,14 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
 /* --- СТИЛІ ДЛЯ НОВИХ ІНФО-БЛОКІВ (Попутка, Пільги) --- */
+
 /* Спеціальний бокс-шадоу для секції "Попутка" */
 .poputka-panel-wrapper .glass-panel-header {
     /* Додаємо фіолетову тінь лише для заголовка, коли він згорнутий */
     box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
     border: 1px solid #5d5df5; 
 }
+
 /* Коли відкритий, застосовуємо ефект скла і до тіла, і до заголовка */
 .poputka-panel-wrapper .panel-collapse.in .info-panel {
     border: 1px solid #5d5df5; 
@@ -171,14 +173,12 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     /* Успадковує glass-panel */
 }
 
-
 .panel-title .title-icon {
     font-size: 1.5rem;
     margin-right: 10px;
 }
 
 /* Загальна інформація */
-/* Стилі для h4 всередині .info-panel */
 .info-panel h4 {
     display: flex;
     align-items: center;
@@ -188,7 +188,6 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     line-height: 1.4;
 }
 
-/* Стилі для іконок */
 .info-panel .item-icon {
     font-size: 1.2rem;
     margin-right: 10px;
@@ -197,15 +196,13 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     text-align: center;
 }
 
-
 .info-separator {
     border: none;
     border-top: 1px solid var(--glass-border);
     margin: 25px 0;
 }
 
-
-
+/* Попутка */
 .poputka-price {
     font-size: 1.1rem;
     font-weight: 800;
@@ -220,6 +217,11 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     border-left: 3px solid #5d5df5;
     background: rgba(93, 93, 245, 0.1);
     border-radius: 5px;
+}
+
+/* Темна тема для маршрутів попутки */
+body.dark-mode .poputka-route {
+    background: rgba(93, 93, 245, 0.15);
 }
 
 .route-city {
@@ -262,6 +264,7 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     font-size: 1.2rem;
     margin-right: 8px;
 }
+
 
 
 /* --- SCREEN: РОЗКЛАД (Details View) --- */

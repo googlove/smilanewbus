@@ -431,4 +431,63 @@ body.dark-mode .bot-btn-style {
     border: 1px solid rgba(40, 167, 69, 0.15);
 }
 
+/* Заголовок списку */
+.donor-list-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+/* Контейнер для списку, робить елементи вертикальними */
+.donor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Відступ між елементами списку */
+}
+
+/* Кожен елемент списку донатерів */
+.donor-item {
+    display: flex;
+    justify-content: space-between; /* Розносить ім'я та суму по краях */
+    align-items: center;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-weight: 700;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+
+    /* Liquid Glass ефект для кожного елемента */
+    background: rgba(255, 255, 255, 0.3); /* Світле скло */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    color: var(--text-color); /* Колір тексту за замовчуванням */
+}
+
+/* Дизайн для темної теми */
+body.dark-mode .donor-item {
+    background: rgba(255, 255, 255, 0.08); /* Темне скло */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Ефект при наведенні */
+.donor-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Ім'я донатера */
+.donor-name {
+    color: var(--primary); /* Виділяємо синім */
+}
+
+/* Сума донату */
+.donor-amount {
+    font-weight: 900;
+    color: var(--accent); /* Виділяємо акцентним кольором */
+}
+
 footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }

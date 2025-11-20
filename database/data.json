@@ -4,6 +4,7 @@
     "number": "3",
     "title": "АС-2 — Вул. Волошкова",
     "color": "#007DD6",
+"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1qQzimEwoNieCy52Cbl7BiXS5XPKNJ4U&ehbc=2E312F",
     "routes": [
       {
         "direction": "АС-2 ➝ Вул. Волошкова (Вт-Пт)",

@@ -490,4 +490,77 @@ body.dark-mode .donor-item {
     color: var(--accent); /* Виділяємо акцентним кольором */
 }
 
+/* --- СТИЛІ ДЛЯ АКОРДЕОНА (ПОПУТКА/ПІЛЬГИ) --- */
+
+#accordion {
+    margin-top: 20px;
+}
+
+.panel-default {
+    border: none;
+    background-color: transparent; /* Bootstrap за замовчуванням */
+    border-radius: var(--card-radius);
+    margin-bottom: 20px;
+}
+
+/* Оболонка для заголовка акордеона (Glass Header) */
+.glass-panel-header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--card-radius); /* Округлення верхніх кутів */
+    margin-bottom: 0 !important;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+/* Якщо блок відкритий, заокруглюємо тільки верхні кути */
+.glass-panel-header a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 1.3rem;
+    font-weight: 900;
+    transition: all 0.2s;
+    border-radius: var(--card-radius);
+}
+
+.glass-panel-header a:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Стиль для заголовка, коли він згорнутий */
+.glass-panel-header a.collapsed {
+    border-radius: var(--card-radius); /* Повне заокруглення, коли згорнуто */
+}
+
+/* Змінюємо заокруглення, коли блок відкритий */
+.glass-panel-header a:not(.collapsed) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+
+/* Додаємо невеликий відступ від заголовка до тіла */
+.panel-collapse .info-panel {
+    /* Тут вже використовуються стилі .glass-panel та .info-panel */
+    border-top: none; 
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -1px; /* Прибираємо подвійний бордер */
+}
+
+/* Перевизначаємо колір заголовків */
+.poputka-panel-wrapper .glass-panel-header a {
+    color: #5d5df5; /* Колір попутки */
+}
+
+.general-info-panel-wrapper .glass-panel-header a {
+    color: var(--primary); /* Колір загальної інформації */
+}
+
+
 footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }

@@ -50,7 +50,7 @@ body.dark-mode {
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     border-radius: var(--card-radius);
-    margin-bottom: 20px; /* Додав відступ між панелями */
+    margin-bottom: 20px;
 }
 
 /* Header (Меню у стилі скла) */
@@ -151,7 +151,7 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .bus-num { font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
-/* --- СТИЛІ ДЛЯ НОВИХ ІНФО-БЛОКІВ --- */
+/* --- СТИЛІ ДЛЯ НОВИХ ІНФО-БЛОКІВ (Попутка, Пільги) --- */
 .info-panel {
     padding: 25px;
     /* Успадковує glass-panel */
@@ -187,7 +187,7 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     font-size: 1.2rem;
     margin-right: 10px;
     flex-shrink: 0;
-    width: 30px; /* Фіксована ширина для вирівнювання іконок */
+    width: 30px; 
     text-align: center;
 }
 
@@ -199,7 +199,7 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 
 /* Попутка */
 .poputka-panel {
-    border: 2px solid #5d5df5; /* Виділяємо попутку іншим кольором рамки */
+    border: 2px solid #5d5df5; 
     box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
 }
 
@@ -291,6 +291,22 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
 }
 
+/* 1. КОНТЕЙНЕР ДЛЯ КАРТИ МАРШРУТУ */
+.map-panel {
+    padding: 0; /* Карта займає весь простір панелі */
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.map-panel iframe {
+    width: 100%;
+    height: 300px; 
+    border: none;
+    display: block;
+    border-radius: 20px; /* Успадковує від glass-panel */
+}
+
+
 /* Блок з часом */
 .route-block {
     padding: 25px;
@@ -349,18 +365,69 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     background: rgba(0, 0, 0, 0.05);
 }
 
-/* Footer */
-.info-links { margin-top: 30px; text-align: center; }
-.bot-link {
-    display: inline-block;
+/* Footer & Action Buttons */
+.info-links { 
+    margin-top: 30px; 
+    text-align: center; 
+    display: flex; 
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Базовий стиль Glass Action Button */
+.glass-action-button {
+    display: block; 
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    backdrop-filter: blur(5px);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+}
+
+.glass-action-button:active { transform: scale(0.98); }
+
+/* Донат Кнопка (Золотий/Жовтий) */
+.donate-btn-style {
+    background: rgba(255, 215, 0, 0.2);
+    color: #b8860b;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+body.dark-mode .donate-btn-style {
+    color: #ffef80;
+    background: rgba(255, 215, 0, 0.1);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+/* Зворотний Зв'язок Кнопка (Синій/Голубий) */
+.feedback-btn-style {
+    background: rgba(0, 191, 255, 0.2);
+    color: #0080ff;
+    border: 1px solid rgba(0, 191, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+}
+body.dark-mode .feedback-btn-style {
+    color: #a7f7ff;
+    background: rgba(0, 191, 255, 0.1);
+    border: 1px solid rgba(0, 191, 255, 0.15);
+}
+
+/* Бот Кнопка (Зелений) */
+.bot-btn-style {
     background: rgba(40, 167, 69, 0.2);
     color: #0f5132;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
     border: 1px solid rgba(40, 167, 69, 0.3);
-    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
-body.dark-mode .bot-link { color: #86efac; background: rgba(40, 167, 69, 0.3); }
+body.dark-mode .bot-btn-style {
+    color: #86efac;
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.15);
+}
+
 footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }

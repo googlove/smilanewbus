@@ -85,6 +85,7 @@
     "number": "30",
     "title": "Ст. Шевченка — АС-1 (Машбуд)",
     "color": "#007DD6",
+"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1Axylm3JiDQ-qzY6ZHu-rlRXSiXcqEN4&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від Ст. Шевченка",
@@ -106,7 +107,8 @@
     "id": "32",
     "number": "32",
     "title": "Ст. Шевченка — Міська лікарня",
-    "color": "#007DD6",
+    "color": "#007DD6", 
+"mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1CpFX4FecfM9Z015I2kokOMMPXXxK8fg&usp=sharing",
     "routes": [
       {
         "direction": "Від Ст. Шевченка",
@@ -129,6 +131,7 @@
     "number": "40",
     "title": "М. Яблунівка — Міська лікарня",
     "color": "#007DD6",
+    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1u4T3f9D945xSrdhDyA2jbCyaPTUBxdU&usp=sharing",
     "routes": [
       {
         "direction": "Від с.М.Яблунівка",
@@ -151,6 +154,7 @@
     "number": "41",
     "title": "Міська лікарня — вул. Кармелюка",
     "color": "#007DD6",
+    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1WPsDNiKqTzmuV54AKwa8Q0oCdUGVu1Q&usp=sharing",
     "routes": [
       {
         "direction": "Від Лікарні",
@@ -173,6 +177,7 @@
     "number": "302",
     "title": "Сміла — Черкаси",
     "color": "#b31a50",
+    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1SqOR3qkr7GEEgsJ-oVSngcTEC7XtSUI&usp=sharing",
     "routes": [
       {
         "direction": "Сміла (Ст. Шевченка) ➝ Черкаси",
@@ -195,6 +200,7 @@
     "number": "34",
     "title": "Стадіон Локомотив — Міська лікарня",
     "color": "#007DD6",
+    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1u6lpDXHjj2czMdZyBBdlQxyi_zqCQqw&usp=sharing",
     "routes": [
       {
         "direction": "Стадіон Локомотив",
@@ -217,6 +223,7 @@
     "number": "39",
     "title": "с. М.Яблунівка — Райлікарня (Залізнична станція Сміла)",
     "color": "#28a745",
+    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1pKQ3g4cTDu8STRN02ki4QmL1NCX2A3M&usp=sharing",
     "routes": [
       {
         "direction": "Від М.Яблунівка",
@@ -239,6 +246,7 @@
     "number": "48",
     "title": "Вул. Федорова — Міська лікарня",
     "color": "#28a745",
+    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1Sufn9IBnXK4ZdjVW8RT595f3gVrUlu8&usp=sharing",
     "routes": [
       {
         "direction": "Від Федорова",
@@ -261,6 +269,7 @@
     "number": "49",
     "title": "с. М.Яблунівка — Міська лікарня",
     "color": "#28a745",
+   "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1vNY7jE3T9L9R2yLJdrEV8WwJ12Aqgpk&usp=sharing",
     "routes": [
       {
         "direction": "Від М.Яблунівка",

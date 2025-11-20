@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 1. Завантаження даних маршрутів (data.json)
 function loadBusData() {
-    fetch('data.json')
+    fetch('database/data.json')
         .then(response => response.json())
         .then(data => {
             allBusData = data;
@@ -45,7 +45,7 @@ function loadBusData() {
 
 // 2. Завантаження додаткової інформації (info.json)
 function loadInfoData() {
-    fetch('info.json')
+    fetch('database/info.json')
         .then(response => response.json())
         .then(data => {
             renderInfoData(data);

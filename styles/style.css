@@ -153,21 +153,24 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
 /* --- СТИЛІ ДЛЯ НОВИХ ІНФО-БЛОКІВ (Попутка, Пільги) --- */
+/* Спеціальний бокс-шадоу для секції "Попутка" */
+.poputka-panel-wrapper .glass-panel-header {
+    /* Додаємо фіолетову тінь лише для заголовка, коли він згорнутий */
+    box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
+    border: 1px solid #5d5df5; 
+}
+/* Коли відкритий, застосовуємо ефект скла і до тіла, і до заголовка */
+.poputka-panel-wrapper .panel-collapse.in .info-panel {
+    border: 1px solid #5d5df5; 
+    border-top: none;
+    box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
+}
+
 .info-panel {
     padding: 25px;
     /* Успадковує glass-panel */
 }
 
-.panel-title {
-    display: flex;
-    align-items: center;
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: var(--primary);
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--glass-border);
-    padding-bottom: 15px;
-}
 
 .panel-title .title-icon {
     font-size: 1.5rem;
@@ -198,15 +201,7 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     margin: 25px 0;
 }
 
-/* Попутка */
-.poputka-panel {
-    border: 2px solid #5d5df5; 
-    box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
-}
 
-.poputka-title {
-    color: #5d5df5; 
-}
 
 .poputka-price {
     font-size: 1.1rem;

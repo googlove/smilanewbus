@@ -589,5 +589,41 @@ body.dark-mode .donor-item {
     text-align: center;
 }
 
+/*
+ * Стилі для сітки Карта + Розклад
+ */
+
+/* Додаткові відступи для колонок на мобільних пристроях */
+.schedule-view .row .col-xs-12 {
+    margin-bottom: 20px;
+}
+
+/* Прибираємо зайвий відступ для останньої колонки (щоб не було зайвого місця внизу) */
+@media (min-width: 992px) {
+    .schedule-view .row .col-md-6 {
+        margin-bottom: 0;
+    }
+}
+
+
+/* Заголовок карти */
+.map-title {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007DD6; /* Або інший колір, що підходить вашій темі */
+}
+
+/* Заголовок розкладу (щоб був відступ від заголовка сторінки) */
+.schedule-title {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #007DD6;
+}
+
+
 
 footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }

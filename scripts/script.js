@@ -165,45 +165,51 @@ function renderBusGrid(buses) {
     });
 }
 
-// 5. Відкриття розкладу (Додано відображення карти)
+// 5. Відкриття розкладу (Оновлено: прибрано виклик renderMap)
 function openSchedule(bus) {
     document.getElementById('main-view').classList.add('hidden');
     document.getElementById('schedule-view').classList.remove('hidden');
     document.getElementById('route-title-display').innerText = `№${bus.number} ${bus.title}`;
     
     // Оновлена логіка:
-    renderMap(bus);
-    renderRouteDetails(bus);
+    renderRouteDetails(bus); // Ця функція тепер рендерить і розклад, і карту в сітці
     window.scrollTo(0, 0);
 }
 
-// 6. Рендер Карти
-function renderMap(bus) {
-    const mapContainer = document.getElementById('route-map-container');
-    mapContainer.innerHTML = ''; // Очищаємо контейнер
-    
-    if (bus.mapIframe) {
-        mapContainer.innerHTML = bus.mapIframe;
-        mapContainer.style.display = 'block';
-    } else {
-        // Якщо карти немає, приховуємо контейнер, щоб не було порожнього "скла"
-        mapContainer.style.display = 'none';
-    }
-}
+// 6. ФУНКЦІЯ renderMap ВИДАЛЕНА
 
-
-// 7. Генерація часу (Не змінено)
+// 7. Генерація розкладу та карти (Оновлено: додано сітку Bootstrap та iframe карти)
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
-    container.innerHTML = '';
+    container.innerHTML = ''; // Очищаємо контейнер
+    
+    // Початок Bootstrap-сітки
+    let html = '<div class="row">';
+
+    // 1. Колонка для Карти (займає 6/12 на великих екранах)
+    const mapSrc = bus.mapIframeSrc || 'about:blank'; // Посилання на карту з JSON
+    
+    html += `
+        <div class="col-xs-12 col-md-6 map-column">
+            <h4 class="map-title">Маршрут на карті</h4>
+            <iframe 
+                frameborder="0" 
+                style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" 
+                src="${mapSrc}" 
+                width="300" 
+                height="303">
+            </iframe>
+        </div>
+    `;
+
+    // 2. Колонка для Розкладу (займає 6/12 на великих екранах)
+    html += '<div class="col-xs-12 col-md-6 schedule-column">';
+    html += `<h4 class="schedule-title">Розклад руху (Маршрут №${bus.number})</h4>`; // Новий заголовок для розкладу
 
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
     bus.routes.forEach(route => {
-        const block = document.createElement('div');
-        block.className = 'route-block';
-        
         let stopsHTML = '';
 
         route.stops.forEach(stop => {
@@ -235,12 +241,19 @@ function renderRouteDetails(bus) {
             `;
         });
 
-        block.innerHTML = `
-            <h3 class="route-direction">➡️ ${route.direction} <br><small style="font-size:0.7em; color:#666">📅 ${route.workDays}</small></h3>
-            ${stopsHTML}
+        html += `
+            <div class="route-block">
+                <h3 class="route-direction">➡️ ${route.direction} <br><small style="font-size:0.7em; color:#666">📅 ${route.workDays}</small></h3>
+                ${stopsHTML}
+            </div>
         `;
-        container.appendChild(block);
     });
+
+    // Закриття колонки розкладу та рядка
+    html += '</div></div>';
+    
+    // Встановлення фінального HTML
+    container.innerHTML = html;
 }
 
 // Годинник

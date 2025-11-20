@@ -57,7 +57,7 @@ function loadInfoData() {
         });
 }
 
-// 3. Рендер додаткової інформації
+// 3. Рендер додаткової інформації (Не змінено, використовує info.json)
 function renderInfoData(data) {
     const container = document.getElementById('info-section-container');
     let html = '';
@@ -121,7 +121,7 @@ function renderInfoData(data) {
     container.innerHTML = html;
 }
 
-// 4. Малювання кнопок
+// 4. Малювання кнопок (Не змінено)
 function renderBusGrid(buses) {
     const container = document.getElementById('bus-grid');
     container.innerHTML = '';
@@ -144,17 +144,34 @@ function renderBusGrid(buses) {
     });
 }
 
-// 5. Відкриття розкладу
+// 5. Відкриття розкладу (Додано відображення карти)
 function openSchedule(bus) {
     document.getElementById('main-view').classList.add('hidden');
     document.getElementById('schedule-view').classList.remove('hidden');
     document.getElementById('route-title-display').innerText = `№${bus.number} ${bus.title}`;
     
+    // Оновлена логіка:
+    renderMap(bus);
     renderRouteDetails(bus);
     window.scrollTo(0, 0);
 }
 
-// 6. Генерація часу (Не змінено)
+// 6. Рендер Карти
+function renderMap(bus) {
+    const mapContainer = document.getElementById('route-map-container');
+    mapContainer.innerHTML = ''; // Очищаємо контейнер
+    
+    if (bus.mapIframe) {
+        mapContainer.innerHTML = bus.mapIframe;
+        mapContainer.style.display = 'block';
+    } else {
+        // Якщо карти немає, приховуємо контейнер, щоб не було порожнього "скла"
+        mapContainer.style.display = 'none';
+    }
+}
+
+
+// 7. Генерація часу (Не змінено)
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
     container.innerHTML = '';

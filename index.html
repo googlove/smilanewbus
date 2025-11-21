@@ -37,23 +37,29 @@
         
         <div class="row controls-grid-row">
             
-            <div class="col-xs-12 col-md-4 search-col">
-                <div class="input-group search-group">
-                    <span class="input-group-addon search-icon">🔍</span>
-                    <input type="text" id="search-input" class="form-control" placeholder="Введіть номер маршруту або назву...">
+            <div class="col-xs-12 col-sm-12 col-md-8 links-and-donate-col">
+                <div class="row button-pair-row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
+                            🤖 Бот розкладу
+                        </a>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style full-width-btn">
+                            💰 Підтримати проєкт
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-xs-12" style="margin-top: 8px;">
+                        <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn">
+                            ✍️ Зворотний зв'язок / Підтримка
+                        </a>
+                    </div>
                 </div>
             </div>
             
-            <div class="col-xs-12 col-sm-6 col-md-4 links-col">
-                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
-                    🤖 Бот розкладу Telegram
-                </a>
-                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn margin-top-5">
-                    ✍️ Зворотний зв'язок / Підтримка
-                </a>
-            </div>
-            
-            <div class="col-xs-12 col-sm-6 col-md-4 donors-col">
+            <div class="col-xs-12 col-sm-12 col-md-4 donors-col">
                 <div class="top-donators-box glass-panel donate-banner">
                     <strong class="donor-list-title">👑 Топ донатери:</strong>
                     <div class="donor-list">
@@ -71,6 +77,15 @@
             
         </div>
         
+        <div class="row search-input-row">
+            <div class="col-xs-12 search-col-full">
+                <div class="input-group search-group">
+                    <span class="input-group-addon search-icon">🔍</span>
+                    <input type="text" id="search-input" class="form-control" placeholder="Введіть номер маршруту або назву...">
+                </div>
+            </div>
+        </div>
+
         <div class="row bus-grid-row">
             
             <div class="col-xs-12 ad-banner-col">
@@ -84,7 +99,6 @@
                     <div class="loader">Завантаження розкладу...</div>
                 </div>
             </div>
-
             <div class="col-xs-12 accordion-col">
                 <div id="accordion" role="tablist" aria-multiselectable="true">
                 </div>
@@ -93,19 +107,6 @@
         </div>
         
     </main>
-
-    <section id="schedule-view" class="hidden container">
-        <div class="schedule-header">
-            <button id="back-btn">⬅️ Назад</button>
-            <h2 id="route-title-display"></h2>
-        </div>
-        
-        <div id="route-map-container" class="glass-panel map-panel">
-            </div>
-
-        <div id="schedule-container">
-            </div>
-    </section>
 
     <div class="container">
         <div class="row">

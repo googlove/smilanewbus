@@ -626,4 +626,96 @@ body.dark-mode .donor-item {
 
 
 
+/* --- Адаптація заголовка та верхніх елементів --- */
+
+/* Контейнер годинника та кнопок теми */
+#busclock {
+    margin-top: 10px;
+}
+#busclock #clock {
+    font-size: 36px; /* Збільшуємо годинник */
+    font-weight: bold;
+}
+#theme-toggle {
+    font-size: 18px; /* Збільшуємо кнопку теми */
+}
+
+/* Вирівнювання елементів у середньому рядку на ПК */
+.search-support-row {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    align-items: flex-start; /* Вирівнювання елементів по верхньому краю */
+}
+
+/* Стиль для поля пошуку */
+.search-group .form-control {
+    height: 38px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+.search-group .input-group-addon {
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+
+/* Стилі для кнопок (Бот, Підтримка) */
+.support-links-col {
+    /* Додаємо невеликий відступ згори на мобільних, щоб розділити з пошуком */
+    padding-top: 10px;
+}
+.support-links-col .full-width-btn {
+    width: 100%; /* Кнопки займають всю ширину колонки */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+/* Стилі для блоку Топ Донатери */
+.top-donators-box {
+    padding: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    min-height: 80px; /* Фіксована мінімальна висота, щоб уникнути зсувів */
+    margin-top: 10px;
+}
+.top-donators-box h4 {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+.top-donators-box p {
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+/* Адаптація для планшетів та ПК (col-md-*) */
+@media (min-width: 992px) {
+    /* Вирівнювання годинника та логотипу */
+    .header-row {
+        align-items: center;
+    }
+    .logo-col {
+        text-align: left; /* Логотип зліва */
+    }
+    .clock-theme-col {
+        text-align: right; /* Годинник справа */
+        padding-top: 0; 
+    }
+    
+    /* Скидаємо відступи для середнього ряду, оскільки елементи тепер в одному рядку */
+    .support-links-col,
+    .top-donators-col {
+        padding-top: 0;
+    }
+
+    /* Відступ між кнопками підтримки та блоком донатерів */
+    .support-links-col {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+
 footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }

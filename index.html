@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="styles/bootstrap.min.css"> 
-
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
@@ -35,49 +34,7 @@
 
     <main id="main-view" class="container main-content-container">
         
-        <div class="row controls-grid-row">
-            
-            <div class="col-xs-12 col-sm-12 col-md-8 links-and-donate-col">
-                <div class="row button-pair-row">
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
-                            🤖 Бот розкладу
-                        </a>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style full-width-btn">
-                            💰 Підтримати проєкт
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                     <div class="col-xs-12" style="margin-top: 8px;">
-                        <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn">
-                            ✍️ Зворотний зв'язок / Підтримка
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-xs-12 col-sm-12 col-md-4 donors-col">
-                <div class="top-donators-box glass-panel donate-banner">
-                    <strong class="donor-list-title">👑 Топ донатери:</strong>
-                    <div class="donor-list">
-                        <a href="https://t.me/+v4ane3GeUuE5Mjhi" target="_blank" class="donor-item">
-                            <span class="donor-name">Сміла про головне:</span>
-                            <span class="donor-amount">200 UAH</span>
-                        </a>
-                        <a href="https://www.instagram.com/dima_rudas_/" target="_blank" class="donor-item">
-                            <span class="donor-name">Дмитро Рудас:</span>
-                            <span class="donor-amount">100 UAH</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        
-        <div class="row search-input-row">
+        <div class="row search-input-row" style="margin-top: 20px;">
             <div class="col-xs-12 search-col-full">
                 <div class="input-group search-group">
                     <span class="input-group-addon search-icon">🔍</span>
@@ -99,13 +56,50 @@
                     <div class="loader">Завантаження розкладу...</div>
                 </div>
             </div>
+            
             <div class="col-xs-12 accordion-col">
                 <div id="accordion" role="tablist" aria-multiselectable="true">
                 </div>
             </div>
-            
         </div>
         
+        
+        <div class="row donors-row" style="margin-top: 20px; margin-bottom: 20px;">
+            <div class="col-xs-12 donors-col-full">
+                <div class="top-donators-box glass-panel donate-banner">
+                    <strong class="donor-list-title">👑 Топ донатери:</strong>
+                    <div class="donor-list">
+                        <a href="https://t.me/+v4ane3GeUuE5Mjhi" target="_blank" class="donor-item">
+                            <span class="donor-name">Сміла про головне:</span>
+                            <span class="donor-amount">200 UAH</span>
+                        </a>
+                        <a href="https://www.instagram.com/dima_rudas_/" target="_blank" class="donor-item">
+                            <span class="donor-name">Дмитро Рудас:</span>
+                            <span class="donor-amount">100 UAH</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row action-buttons-row">
+            <div class="col-xs-12 col-sm-4 mb-3">
+                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
+                    🤖 Бот розкладу
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-4 mb-3">
+                <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style full-width-btn">
+                    💰 Підтримати проєкт
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-4 mb-3">
+                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn">
+                    ✍️ Зворотний зв'язок з розробником
+                </a>
+            </div>
+        </div>
+
     </main>
 
     <div class="container">

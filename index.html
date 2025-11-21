@@ -14,69 +14,87 @@
 </head>
 <body>
 
-    <header>
-        <div class="logo-area">
-            <a href="https://www.smila-rada.gov.ua/" target="_blank">
-                <img src="img/logo_gs_full.png" alt="Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                <span class="fallback-logo" style="display:none"> SmilaBusTime</span>
-            </a>
-        </div>
-        <div class="controls">
-            <div id="clock" class="clock">00:00</div>
-            <button id="theme-toggle" class="theme-btn" aria-label="Змінити тему">🌙</button>
+    <header class="container-fluid header-full-width">
+        <div class="row header-row-layout">
+            <div class="col-xs-12 col-sm-6 col-md-8 logo-area-col">
+                <div class="logo-area">
+                    <a href="https://www.smila-rada.gov.ua/" target="_blank">
+                        <img src="img/logo_gs_full.png" alt="Logo" class="logo-img img-responsive" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <span class="fallback-logo" style="display:none"> SmilaBusTime</span>
+                    </a>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 controls-area-col text-right">
+                <div class="controls">
+                    <div id="clock" class="clock">00:00</div>
+                    <button id="theme-toggle" class="theme-btn" aria-label="Змінити тему">🌙</button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <main id="main-view">
-        <div class="banners">
-            <div class="donate-banner">
-                <strong class="donor-list-title">👑 Топ донатери:</strong>
-                
-                <div class="donor-list">
-                    <a href="https://t.me/+v4ane3GeUuE5Mjhi" target="_blank" class="donor-item">
-                        <span class="donor-name">Сміла про головне:</span>
-                        <span class="donor-amount">200 UAH</span>
-                    </a>
-                    
-                    <a href="https://www.instagram.com/dima_rudas_/" target="_blank" class="donor-item">
-                        <span class="donor-name">Дмитро Рудас:</span>
-                        <span class="donor-amount">100 UAH</span>
-                    </a>
-                </div>
-
-            </div>
-            <div class="ad-banner">
-                📰 Тут може бути ваша реклама
-            </div>
-        </div>
-
-		<div class="info-links">
+    <main id="main-view" class="container main-content-container">
+        
+        <div class="row controls-grid-row">
             
-    <div class="action-buttons-row">
-        <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style">
-            💰 Підтримати проєкт (Донат)
-        </a>
-        <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style">
-            🤖 Бот розкладу
-        </a>
-    </div>
-
-
-
-        <div class="search-container">
-            <input type="text" id="search-input" placeholder="🔍 Введіть номер маршруту або назву...">
-        </div>
-
-        <div id="bus-grid" class="bus-grid">
-            <div class="loader">Завантаження розкладу...</div>
+            <div class="col-xs-12 col-md-4 search-col">
+                <div class="input-group search-group">
+                    <span class="input-group-addon search-icon">🔍</span>
+                    <input type="text" id="search-input" class="form-control" placeholder="Введіть номер маршруту або назву...">
+                </div>
+            </div>
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 links-col">
+                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
+                    🤖 Бот розкладу Telegram
+                </a>
+                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn margin-top-5">
+                    ✍️ Зворотний зв'язок / Підтримка
+                </a>
+            </div>
+            
+            <div class="col-xs-12 col-sm-6 col-md-4 donors-col">
+                <div class="top-donators-box glass-panel donate-banner">
+                    <strong class="donor-list-title">👑 Топ донатери:</strong>
+                    <div class="donor-list">
+                        <a href="https://t.me/+v4ane3GeUuE5Mjhi" target="_blank" class="donor-item">
+                            <span class="donor-name">Сміла про головне:</span>
+                            <span class="donor-amount">200 UAH</span>
+                        </a>
+                        <a href="https://www.instagram.com/dima_rudas_/" target="_blank" class="donor-item">
+                            <span class="donor-name">Дмитро Рудас:</span>
+                            <span class="donor-amount">100 UAH</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
         
-        <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="row bus-grid-row">
+            
+            <div class="col-xs-12 ad-banner-col">
+                <div class="ad-banner glass-panel" style="text-align: center; padding: 10px; margin-bottom: 20px;">
+                    📰 Тут може бути ваша реклама
+                </div>
             </div>
-			
+            
+            <div class="col-xs-12 bus-grid-col">
+                <div id="bus-grid" class="bus-grid">
+                    <div class="loader">Завантаження розкладу...</div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 accordion-col">
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                </div>
+            </div>
+            
+        </div>
+        
     </main>
 
-    <section id="schedule-view" class="hidden">
+    <section id="schedule-view" class="hidden container">
         <div class="schedule-header">
             <button id="back-btn">⬅️ Назад</button>
             <h2 id="route-title-display"></h2>
@@ -88,19 +106,19 @@
         <div id="schedule-container">
             </div>
     </section>
-	<div class="info-links">
- <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style">
-                ✍️ Зворотний зв'язок з розробником
-            </a>
-</div>
-&nbsp
-&nbsp
-<center>
-	<div class="footer-date">Оновлено: Травень 2024</div>
-</center>
-    <footer>
-        <p>© 2022-2025 SmilaBusTime | Dev by Yaroslav Hohulov</p>
-    </footer>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <p>&nbsp</p>
+                <div class="footer-date">Оновлено: Травень 2024</div>
+                <footer>
+                    <p>© 2022-2025 SmilaBusTime | Dev by Yaroslav Hohulov</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
 
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>

@@ -53,6 +53,10 @@ body.dark-mode {
     margin-bottom: 20px;
 }
 
+/* ================================================= */
+/* 1. АДАПТИВНИЙ HEADER                  */
+/* ================================================= */
+
 /* Header (Меню у стилі скла) */
 header {
     position: sticky;
@@ -69,25 +73,88 @@ header {
     box-shadow: var(--glass-shadow);
     border-radius: 50px; /* Округле меню-капсула */
     
+    /* Display: flex замінено на Bootstrap row/col */
+}
+
+/* Вирівнювання елементів хедера по вертикалі */
+.header-row-layout {
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
+/* Стилі для Логотипу */
+.logo-area-col {
+    padding-left: 0; /* Прибираємо зайві відступи, щоб логотип був ближче до краю */
+}
 .logo-area a { text-decoration: none; display: flex; align-items: center; }
-.logo-img { height: 35px; width: auto; }
-.clock { font-weight: 800; font-size: 1.1rem; font-family: monospace; margin-right: 15px; color: var(--text-color); }
-.theme-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.3s; }
+.logo-img { height: 35px; width: auto; max-width: 100%; }
+
+/* Стилі для Годинника та Теми */
+.controls-area-col {
+    display: flex;
+    justify-content: flex-end; /* Вирівнювання праворуч */
+    align-items: center;
+}
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Відступ між годинником та кнопкою */
+}
+.clock { 
+    font-weight: 800; 
+    font-size: 1.1rem; 
+    font-family: monospace; 
+    color: var(--text-color); 
+    /* Розмір годинника буде збільшено в медіа-запиті */
+}
+.theme-btn { 
+    background: none; 
+    border: none; 
+    font-size: 1.5rem; 
+    cursor: pointer; 
+    transition: transform 0.3s; 
+    padding: 0;
+}
 .theme-btn:hover { transform: rotate(20deg) scale(1.1); }
 
-/* Main Layout */
-main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
+/* Змінюємо розмір годинника для кращого вигляду на ПК */
+@media (min-width: 992px) {
+    .clock {
+        font-size: 2.25rem; /* ~36px */
+    }
+}
+
+/* --- Кінець АДАПТИВНИЙ HEADER --- */
+
+/* ================================================= */
+/* 2. MAIN LAYOUT & GRID                 */
+/* ================================================= */
+
+main, section { 
+    max-width: 700px; 
+    margin: 20px auto; 
+    padding: 0 15px; 
+}
+
+/* Ряд контролів (Пошук, Посилання, Донатери) */
+.controls-grid-row {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    align-items: flex-start; /* Вирівнювання елементів по верхньому краю */
+}
+
+/* Загальний відступ знизу для колонок на мобільних */
+.search-col,
+.links-col,
+.donors-col {
+    margin-bottom: 15px;
+}
+
 .hidden { display: none !important; }
 
-/* Banners */
-.banners { 
+/* Banners (Рекламний) */
+.ad-banner { 
     text-align: center; 
-    margin-bottom: 20px; 
     padding: 15px;
     /* Легке скло для банерів */
     background: rgba(255, 255, 255, 0.15);
@@ -95,30 +162,132 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255,255,255,0.2);
 }
-.donate-banner a { color: #008f39; font-weight: bold; text-decoration: none; }
 
-/* Search Input (Glassy) */
-.search-container input {
+/* --- Пошук (Тепер використовуємо Bootstrap Input Group) --- */
+.search-group {
     width: 100%;
-    padding: 15px 20px;
-    margin-bottom: 30px;
-    font-size: 1rem;
-    box-sizing: border-box;
-    
+}
+.search-group .form-control {
     /* Glass Input */
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
     color: var(--text-color);
     outline: none;
     backdrop-filter: blur(10px);
     transition: all 0.3s;
+    
+    /* Розміри */
+    height: 40px;
+    font-size: 16px;
+    padding-left: 15px; /* Забезпечуємо відступ */
+    
+    box-shadow: none; /* Прибираємо тінь, якщо вона була */
+}
+.search-group .input-group-addon {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-right: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 6px 12px;
+    font-size: 16px;
+    color: var(--text-color);
+}
+.search-group .form-control::placeholder { color: var(--text-color); opacity: 0.6; }
+.search-group .form-control:focus { box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+
+
+/* --- Посилання (Бот, Підтримка) --- */
+
+.links-col .full-width-btn {
+    width: 100%; 
+    display: block; 
+    font-weight: bold;
+}
+.links-col .margin-top-5 {
+    margin-top: 5px;
 }
 
-.search-container input::placeholder { color: var(--text-color); opacity: 0.6; }
-.search-container input:focus { box-shadow: 0 0 15px rgba(255,255,255,0.5); transform: scale(1.01); }
 
-/* Grid Layout */
+/* --- Топ Донатери --- */
+/* top-donators-box використовує glass-panel та donate-banner стилі */
+.top-donators-box {
+    padding: 10px;
+    min-height: 90px; /* Фіксована мінімальна висота для стабільності */
+}
+.donor-list-title {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+.donor-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.donor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: 700;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    color: var(--text-color);
+}
+body.dark-mode .donor-item {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.donor-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.donor-name { color: #833AB4; }
+.donor-amount { font-weight: 900; color: var(--accent); }
+
+
+/* --- АДАПТАЦІЯ GRID ДЛЯ ПК/ПЛАНШЕТІВ --- */
+@media (min-width: 768px) {
+    /* Вирівнювання елементів хедера */
+    .header-row-layout {
+        align-items: center;
+    }
+    .logo-area-col {
+        text-align: left;
+    }
+    .controls-area-col {
+        text-align: right;
+        padding-top: 0; 
+    }
+    
+    /* Скидаємо відступи знизу, оскільки елементи тепер в одному рядку */
+    .search-col,
+    .links-col,
+    .donors-col {
+        margin-bottom: 0;
+    }
+    
+    /* Відступ між посиланнями та донатерами */
+    .links-col {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+
+/* Grid Layout (Сітка маршрутів) */
 .bus-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -152,122 +321,83 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .bus-num { font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
-/* --- СТИЛІ ДЛЯ НОВИХ ІНФО-БЛОКІВ (Попутка, Пільги) --- */
+/* ================================================= */
+/* 3. ІНФО-БЛОКИ (АККОРДЕОН)              */
+/* ================================================= */
 
-/* Спеціальний бокс-шадоу для секції "Попутка" */
-.poputka-panel-wrapper .glass-panel-header {
-    /* Додаємо фіолетову тінь лише для заголовка, коли він згорнутий */
-    box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
-    border: 1px solid #5d5df5; 
-}
-
-/* Коли відкритий, застосовуємо ефект скла і до тіла, і до заголовка */
-.poputka-panel-wrapper .panel-collapse.in .info-panel {
-    border: 1px solid #5d5df5; 
-    border-top: none;
-    box-shadow: 0 8px 32px 0 rgba(93, 93, 245, 0.3);
-}
-
-.info-panel {
-    padding: 25px;
-    /* Успадковує glass-panel */
-}
-
-.panel-title .title-icon {
-    font-size: 1.5rem;
-    margin-right: 10px;
-}
-
-/* Загальна інформація */
-.info-panel h4 {
-    display: flex;
-    align-items: center;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 10px 0;
-    line-height: 1.4;
-}
-
-.info-panel .item-icon {
-    font-size: 1.2rem;
-    margin-right: 10px;
-    flex-shrink: 0;
-    width: 30px; 
-    text-align: center;
-}
-
-.info-separator {
-    border: none;
-    border-top: 1px solid var(--glass-border);
-    margin: 25px 0;
-}
-
-/* Попутка */
-.poputka-price {
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--accent);
-    margin-top: -10px;
-    margin-bottom: 20px;
-}
-
-.poputka-route {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-left: 3px solid #5d5df5;
-    background: rgba(93, 93, 245, 0.1);
-    border-radius: 5px;
-}
-
-/* Темна тема для маршрутів попутки */
-body.dark-mode .poputka-route {
-    background: rgba(93, 93, 245, 0.15);
-}
-
-.route-city {
-    font-weight: 800;
-    color: var(--primary);
-    display: block;
-    margin-bottom: 5px;
-}
-
-.route-points {
-    font-size: 0.95rem;
-    opacity: 0.9;
-}
-
-.poputka-links-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+#accordion {
     margin-top: 20px;
 }
-
-.poputka-link {
-    display: flex;
-    align-items: center;
-    padding: 8px 15px;
-    border-radius: 20px;
+.panel-default {
+    border: none;
+    background-color: transparent; 
+    border-radius: var(--card-radius);
+    margin-bottom: 20px;
+}
+.glass-panel-header {
     background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--card-radius); 
+    margin-bottom: 0 !important;
+    padding: 0;
+    transition: all 0.2s;
+}
+.glass-panel-header a {
+    display: block;
+    padding: 15px 20px;
     text-decoration: none;
     color: var(--text-color);
-    font-weight: 700;
-    transition: background 0.2s;
+    font-size: 1.3rem;
+    font-weight: 900;
+    transition: all 0.2s;
+    border-radius: var(--card-radius);
+}
+.glass-panel-header a:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+.glass-panel-header a.collapsed {
+    border-radius: var(--card-radius); 
+}
+.glass-panel-header a:not(.collapsed) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.panel-collapse .info-panel {
+    border-top: none; 
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top: -1px;
+    padding: 25px;
 }
 
-.poputka-link:hover {
-    background: rgba(255, 255, 255, 0.5);
-}
+/* Кольори заголовків */
+.poputka-panel-wrapper .glass-panel-header a { color: #5d5df5; }
+.general-info-panel-wrapper .glass-panel-header a { color: var(--primary); }
 
-.link-icon {
-    font-size: 1.2rem;
-    margin-right: 8px;
-}
+.panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
+.info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
+.info-panel .item-icon { font-size: 1.2rem; margin-right: 10px; flex-shrink: 0; width: 30px; text-align: center; }
+.info-separator { border: none; border-top: 1px solid var(--glass-border); margin: 25px 0; }
+
+/* Стилі Попутка */
+.poputka-price { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-top: -10px; margin-bottom: 20px; }
+.poputka-route { margin-bottom: 15px; padding: 10px; border-left: 3px solid #5d5df5; background: rgba(93, 93, 245, 0.1); border-radius: 5px; }
+body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
+.route-city { font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
+.route-points { font-size: 0.95rem; opacity: 0.9; }
+.poputka-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.poputka-link { display: flex; align-items: center; padding: 8px 15px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none; color: var(--text-color); font-weight: 700; transition: background 0.2s; }
+.poputka-link:hover { background: rgba(255, 255, 255, 0.5); }
+.link-icon { font-size: 1.2rem; margin-right: 8px; }
 
 
+/* ================================================= */
+/* 4. SCREEN: РОЗКЛАД (Details View)        */
+/* ================================================= */
 
-/* --- SCREEN: РОЗКЛАД (Details View) --- */
 .schedule-header {
     display: flex;
     align-items: center;
@@ -293,28 +423,43 @@ body.dark-mode .poputka-route {
     text-shadow: 0 1px 2px rgba(255,255,255,0.5);
 }
 
+/* Адаптація сітки Карта + Розклад */
+.schedule-view .row .col-xs-12 {
+    margin-bottom: 20px;
+}
+@media (min-width: 992px) {
+    .schedule-view .row .col-md-6 {
+        margin-bottom: 0;
+    }
+}
+
 /* 1. КОНТЕЙНЕР ДЛЯ КАРТИ МАРШРУТУ */
 .map-panel {
-    padding: 0; /* Карта займає весь простір панелі */
+    padding: 0;
     overflow: hidden;
     margin-bottom: 20px;
 }
-
 .map-panel iframe {
     width: 100%;
     height: 300px; 
     border: none;
     display: block;
-    border-radius: 20px; /* Успадковує від glass-panel */
+    border-radius: 20px;
 }
+.map-title, .schedule-title {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+.schedule-title { margin-bottom: 15px; }
 
 
 /* Блок з часом */
 .route-block {
     padding: 25px;
     margin-bottom: 20px;
-    
-    /* Glass properties */
     background: var(--glass-bg);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -351,7 +496,6 @@ body.dark-mode .poputka-route {
     border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* Найближчий рейс */
 .time-badge.next {
     background: var(--primary);
     color: white;
@@ -367,21 +511,12 @@ body.dark-mode .poputka-route {
     background: rgba(0, 0, 0, 0.05);
 }
 
-/* Footer & Action Buttons */
-.info-links { 
-    margin-top: 30px; 
-    text-align: center; 
-    display: flex; 
-    flex-direction: column;
-    gap: 15px;
-}
+/* ================================================= */
+/* 5. FOOTER & ACTIONS                 */
+/* ================================================= */
 
-/* Базовий стиль Glass Action Button */
+/* Стилі для кнопок Бот/Зворотний зв'язок */
 .glass-action-button {
-    display: block; 
-    max-width: 350px;
-    margin-left: auto;
-    margin-right: auto;
     text-decoration: none;
     padding: 12px 20px;
     border-radius: 30px;
@@ -389,21 +524,21 @@ body.dark-mode .poputka-route {
     backdrop-filter: blur(5px);
     transition: transform 0.2s, box-shadow 0.2s;
     font-size: 1rem;
+    color: var(--text-color); /* Колір тексту за замовчуванням */
 }
-
 .glass-action-button:active { transform: scale(0.98); }
 
-/* Донат Кнопка (Золотий/Жовтий) */
-.donate-btn-style {
-    background: rgba(255, 215, 0, 0.2);
-    color: #b8860b;
-    border: 1px solid rgba(255, 215, 0, 0.4);
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+/* Бот Кнопка (Зелений) */
+.bot-btn-style {
+    background: rgba(40, 167, 69, 0.2);
+    color: #0f5132;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
-body.dark-mode .donate-btn-style {
-    color: #ffef80;
-    background: rgba(255, 215, 0, 0.1);
-    border: 1px solid rgba(255, 215, 0, 0.15);
+body.dark-mode .bot-btn-style {
+    color: #86efac;
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.15);
 }
 
 /* Зворотний Зв'язок Кнопка (Синій/Голубий) */
@@ -419,303 +554,6 @@ body.dark-mode .feedback-btn-style {
     border: 1px solid rgba(0, 191, 255, 0.15);
 }
 
-/* Бот Кнопка (Зелений) */
-.bot-btn-style {
-    background: rgba(40, 167, 69, 0.2);
-    color: #0f5132;
-    border: 1px solid rgba(40, 167, 69, 0.3);
-    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
-}
-body.dark-mode .bot-btn-style {
-    color: #86efac;
-    background: rgba(40, 167, 69, 0.1);
-    border: 1px solid rgba(40, 167, 69, 0.15);
-}
 
-/* Заголовок списку */
-.donor-list-title {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-
-/* Контейнер для списку, робить елементи вертикальними */
-.donor-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px; /* Відступ між елементами списку */
-}
-
-/* Кожен елемент списку донатерів */
-.donor-item {
-    display: flex;
-    justify-content: space-between; /* Розносить ім'я та суму по краях */
-    align-items: center;
-    text-decoration: none;
-    padding: 10px 15px;
-    border-radius: 15px;
-    font-weight: 700;
-    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
-
-    /* Liquid Glass ефект для кожного елемента */
-    background: rgba(255, 255, 255, 0.3); /* Світле скло */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    color: var(--text-color); /* Колір тексту за замовчуванням */
-}
-
-/* Дизайн для темної теми */
-body.dark-mode .donor-item {
-    background: rgba(255, 255, 255, 0.08); /* Темне скло */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-/* Ефект при наведенні */
-.donor-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Ім'я донатера */
-.donor-name {
-    color: #833AB4; /* Виділяємо синім */
-}
-
-/* Сума донату */
-.donor-amount {
-    font-weight: 900;
-    color: var(--accent); /* Виділяємо акцентним кольором */
-}
-
-/* --- СТИЛІ ДЛЯ АКОРДЕОНА (ПОПУТКА/ПІЛЬГИ) --- */
-
-#accordion {
-    margin-top: 20px;
-}
-
-.panel-default {
-    border: none;
-    background-color: transparent; /* Bootstrap за замовчуванням */
-    border-radius: var(--card-radius);
-    margin-bottom: 20px;
-}
-
-/* Оболонка для заголовка акордеона (Glass Header) */
-.glass-panel-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: var(--card-radius); /* Округлення верхніх кутів */
-    margin-bottom: 0 !important;
-    padding: 0;
-    transition: all 0.2s;
-}
-
-/* Якщо блок відкритий, заокруглюємо тільки верхні кути */
-.glass-panel-header a {
-    display: block;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 1.3rem;
-    font-weight: 900;
-    transition: all 0.2s;
-    border-radius: var(--card-radius);
-}
-
-.glass-panel-header a:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
-
-/* Стиль для заголовка, коли він згорнутий */
-.glass-panel-header a.collapsed {
-    border-radius: var(--card-radius); /* Повне заокруглення, коли згорнуто */
-}
-
-/* Змінюємо заокруглення, коли блок відкритий */
-.glass-panel-header a:not(.collapsed) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-
-/* Додаємо невеликий відступ від заголовка до тіла */
-.panel-collapse .info-panel {
-    /* Тут вже використовуються стилі .glass-panel та .info-panel */
-    border-top: none; 
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin-top: -1px; /* Прибираємо подвійний бордер */
-}
-
-/* Перевизначаємо колір заголовків */
-.poputka-panel-wrapper .glass-panel-header a {
-    color: #5d5df5; /* Колір попутки */
-}
-
-.general-info-panel-wrapper .glass-panel-header a {
-    color: var(--primary); /* Колір загальної інформації */
-}
-
-
-/* --- СТИЛІ ДЛЯ КНОПОК ПОРУЧ (Донат та Бот) --- */
-
-.action-buttons-row {
-    display: flex; 
-    justify-content: space-between; /* Розносить кнопки на протилежні сторони контейнера */
-    gap: 15px; 
-    
-    /* Центрування ряду */
-    max-width: 350px; 
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-}
-
-/* Перевизначення стилів для кнопок, що знаходяться в рядку */
-.action-buttons-row .glass-action-button {
-    /* flex-grow: 1; було видалено, щоб кнопки не розтягувалися */
-    
-    /* Встановлюємо меншу максимальну ширину, щоб звільнити простір у центрі */
-    max-width: 160px; 
-    
-    margin: 0; 
-    text-align: center;
-}
-
-/*
- * Стилі для сітки Карта + Розклад
- */
-
-/* Додаткові відступи для колонок на мобільних пристроях */
-.schedule-view .row .col-xs-12 {
-    margin-bottom: 20px;
-}
-
-/* Прибираємо зайвий відступ для останньої колонки (щоб не було зайвого місця внизу) */
-@media (min-width: 992px) {
-    .schedule-view .row .col-md-6 {
-        margin-bottom: 0;
-    }
-}
-
-
-/* Заголовок карти */
-.map-title {
-    margin-top: 0;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #007DD6; /* Або інший колір, що підходить вашій темі */
-}
-
-/* Заголовок розкладу (щоб був відступ від заголовка сторінки) */
-.schedule-title {
-    margin-top: 0;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: #007DD6;
-}
-
-
-
-/* --- Адаптація заголовка та верхніх елементів --- */
-
-/* Контейнер годинника та кнопок теми */
-#busclock {
-    margin-top: 10px;
-}
-#busclock #clock {
-    font-size: 36px; /* Збільшуємо годинник */
-    font-weight: bold;
-}
-#theme-toggle {
-    font-size: 18px; /* Збільшуємо кнопку теми */
-}
-
-/* Вирівнювання елементів у середньому рядку на ПК */
-.search-support-row {
-    margin-top: 15px;
-    margin-bottom: 25px;
-    align-items: flex-start; /* Вирівнювання елементів по верхньому краю */
-}
-
-/* Стиль для поля пошуку */
-.search-group .form-control {
-    height: 38px;
-    font-size: 16px;
-    border-radius: 4px;
-}
-.search-group .input-group-addon {
-    padding: 6px 12px;
-    font-size: 16px;
-    border-radius: 4px;
-}
-
-
-/* Стилі для кнопок (Бот, Підтримка) */
-.support-links-col {
-    /* Додаємо невеликий відступ згори на мобільних, щоб розділити з пошуком */
-    padding-top: 10px;
-}
-.support-links-col .full-width-btn {
-    width: 100%; /* Кнопки займають всю ширину колонки */
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-
-/* Стилі для блоку Топ Донатери */
-.top-donators-box {
-    padding: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    min-height: 80px; /* Фіксована мінімальна висота, щоб уникнути зсувів */
-    margin-top: 10px;
-}
-.top-donators-box h4 {
-    margin-top: 0;
-    font-size: 16px;
-    font-weight: bold;
-}
-.top-donators-box p {
-    font-size: 14px;
-    margin-bottom: 0;
-}
-
-/* Адаптація для планшетів та ПК (col-md-*) */
-@media (min-width: 992px) {
-    /* Вирівнювання годинника та логотипу */
-    .header-row {
-        align-items: center;
-    }
-    .logo-col {
-        text-align: left; /* Логотип зліва */
-    }
-    .clock-theme-col {
-        text-align: right; /* Годинник справа */
-        padding-top: 0; 
-    }
-    
-    /* Скидаємо відступи для середнього ряду, оскільки елементи тепер в одному рядку */
-    .support-links-col,
-    .top-donators-col {
-        padding-top: 0;
-    }
-
-    /* Відступ між кнопками підтримки та блоком донатерів */
-    .support-links-col {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-
-
-footer { text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.7; }
+.footer-date { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.8; }
+footer { text-align: center; margin-top: 10px; font-size: 0.8rem; opacity: 0.7; }

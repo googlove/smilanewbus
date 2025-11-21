@@ -210,25 +210,67 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 /* ================================================= */
 /* 3. ІНФО-БЛОКИ (АККОРДЕОН)              */
 /* ================================================= */
-/* ... (Всі стилі для акордеона залишаються без змін) ... */
 
 #accordion { margin-top: 20px; }
 .panel-default { border: none; background-color: transparent; border-radius: var(--card-radius); margin-bottom: 20px; }
+
+/* Базовий стиль заголовка (фону) */
 .glass-panel-header {
-    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: var(--card-radius); 
-    margin-bottom: 0 !important; padding: 0; transition: all 0.2s;
+    background: var(--glass-bg); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); 
+    box-shadow: var(--glass-shadow); 
+    border-radius: var(--card-radius); 
+    margin-bottom: 0 !important; 
+    padding: 0; 
+    transition: all 0.2s;
 }
+
+/* Стилі для посилань всередині заголовка */
 .glass-panel-header a {
-    display: block; padding: 15px 20px; text-decoration: none; color: var(--text-color);
-    font-size: 1.3rem; font-weight: 900; transition: all 0.2s; border-radius: var(--card-radius);
+    display: block; 
+    padding: 15px 20px; 
+    text-decoration: none; 
+    color: var(--text-color); /* Адаптується під тему (чорний/білий) */
+    font-size: 1.3rem; 
+    font-weight: 900; 
+    transition: all 0.2s; 
+    border-radius: var(--card-radius);
 }
-.glass-panel-header a:hover { background: rgba(255, 255, 255, 0.4); }
+
+/* Hover-ефект (Liquid Glass) */
+.glass-panel-header a:hover { 
+    background: rgba(255, 255, 255, 0.4); /* Світла тема: прозоро-білий */
+}
+body.dark-mode .glass-panel-header a:hover {
+    background: rgba(255, 255, 255, 0.1); /* Темна тема: прозоро-сірий */
+}
+
 .glass-panel-header a.collapsed { border-radius: var(--card-radius); }
 .glass-panel-header a:not(.collapsed) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 .panel-collapse .info-panel { border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; padding: 25px; }
-.poputka-panel-wrapper .glass-panel-header a { color: #5d5df5; }
-.general-info-panel-wrapper .glass-panel-header a { color: var(--primary); }
+
+
+/* 🎨 КОЛЬОРОВА АДАПТАЦІЯ КНОПОК 🎨 */
+
+/* Кнопка "Попутка" */
+.poputka-panel-wrapper .glass-panel-header a { 
+    color: #5d5df5; /* Світла тема: синій/фіолетовий */
+}
+body.dark-mode .poputka-panel-wrapper .glass-panel-header a { 
+    color: #a0a0ff; /* Темна тема: світло-синій */
+}
+
+/* Кнопка "Загальна інформація" */
+.general-info-panel-wrapper .glass-panel-header a { 
+    color: var(--primary); /* Синій колір (змінна primary) */
+}
+body.dark-mode .general-info-panel-wrapper .glass-panel-header a { 
+    color: var(--primary); 
+}
+/* ---------------------------------- */
+
 
 .panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
 .info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }

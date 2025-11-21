@@ -24,7 +24,7 @@ body {
     padding-bottom: 60px;
     min-height: 100vh;
     
-    /* LIQUID BACKGROUND: Живий градієнт */
+    /* LIQUID BACKGROUND */
     background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff, #a1c4fd, #c2e9fb);
     background-size: 400% 400%;
     animation: liquidAnimation 15s ease infinite;
@@ -46,7 +46,7 @@ body.dark-mode {
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px); /* Для Safari */
+    -webkit-backdrop-filter: blur(12px); 
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     border-radius: var(--card-radius);
@@ -57,7 +57,6 @@ body.dark-mode {
 /* 1. АДАПТИВНИЙ HEADER                  */
 /* ================================================= */
 
-/* Header (Меню у стилі скла) */
 header {
     position: sticky;
     top: 15px;
@@ -65,63 +64,28 @@ header {
     margin: 0 15px;
     padding: 10px 20px;
     
-    /* Застосовуємо ефект скла */
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
-    border-radius: 50px; /* Округле меню-капсула */
-    
-    /* Display: flex замінено на Bootstrap row/col */
+    border-radius: 50px; 
 }
+.header-full-width { padding-left: 15px; padding-right: 15px; }
+.header-row-layout { display: flex; align-items: center; }
 
-/* Вирівнювання елементів хедера по вертикалі */
-.header-row-layout {
-    display: flex;
-    align-items: center;
-}
-
-/* Стилі для Логотипу */
-.logo-area-col {
-    padding-left: 0; /* Прибираємо зайві відступи, щоб логотип був ближче до краю */
-}
 .logo-area a { text-decoration: none; display: flex; align-items: center; }
 .logo-img { height: 35px; width: auto; max-width: 100%; }
 
-/* Стилі для Годинника та Теми */
-.controls-area-col {
-    display: flex;
-    justify-content: flex-end; /* Вирівнювання праворуч */
-    align-items: center;
-}
-.controls {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Відступ між годинником та кнопкою */
-}
-.clock { 
-    font-weight: 800; 
-    font-size: 1.1rem; 
-    font-family: monospace; 
-    color: var(--text-color); 
-    /* Розмір годинника буде збільшено в медіа-запиті */
-}
-.theme-btn { 
-    background: none; 
-    border: none; 
-    font-size: 1.5rem; 
-    cursor: pointer; 
-    transition: transform 0.3s; 
-    padding: 0;
-}
+.controls-area-col { display: flex; justify-content: flex-end; align-items: center; }
+.controls { display: flex; align-items: center; gap: 10px; }
+
+.clock { font-weight: 800; font-size: 1.1rem; font-family: monospace; color: var(--text-color); }
+.theme-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; transition: transform 0.3s; padding: 0; }
 .theme-btn:hover { transform: rotate(20deg) scale(1.1); }
 
-/* Змінюємо розмір годинника для кращого вигляду на ПК */
 @media (min-width: 992px) {
-    .clock {
-        font-size: 2.25rem; /* ~36px */
-    }
+    .clock { font-size: 2.25rem; }
 }
 
 /* --- Кінець АДАПТИВНИЙ HEADER --- */
@@ -130,45 +94,39 @@ header {
 /* 2. MAIN LAYOUT & GRID                 */
 /* ================================================= */
 
-main, section { 
-    max-width: 700px; 
-    margin: 20px auto; 
-    padding: 0 15px; 
-}
-
-/* Ряд контролів (Пошук, Посилання, Донатери) */
-.controls-grid-row {
-    margin-top: 15px;
-    margin-bottom: 25px;
-    align-items: flex-start; /* Вирівнювання елементів по верхньому краю */
-}
-
-/* Загальний відступ знизу для колонок на мобільних */
-.search-col,
-.links-col,
-.donors-col {
-    margin-bottom: 15px;
-}
-
+main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .hidden { display: none !important; }
 
 /* Banners (Рекламний) */
 .ad-banner { 
-    text-align: center; 
     padding: 15px;
-    /* Легке скло для банерів */
     background: rgba(255, 255, 255, 0.15);
     border-radius: 15px;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* --- Пошук (Тепер використовуємо Bootstrap Input Group) --- */
-.search-group {
-    width: 100%;
+/* --- НОВИЙ РЯД КНОПКИ + ДОНАТЕРИ --- */
+.controls-grid-row {
+    margin-top: 15px;
+    margin-bottom: 20px; 
+    align-items: flex-start;
 }
+
+/* Відступи для колонок на мобільних */
+.links-and-donate-col { margin-bottom: 15px; }
+.donors-col { margin-bottom: 15px; }
+
+/* --- НОВИЙ РЯД ПОШУК (ближче до автобусів) --- */
+.search-input-row {
+    margin-bottom: 25px; 
+}
+
+/* --- СТИЛІ КНОПОК ТА ПОШУКУ --- */
+
+/* Пошук (Використовуємо Bootstrap Input Group) */
+.search-group { width: 100%; }
 .search-group .form-control {
-    /* Glass Input */
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-top-right-radius: 30px;
@@ -177,13 +135,10 @@ main, section {
     outline: none;
     backdrop-filter: blur(10px);
     transition: all 0.3s;
-    
-    /* Розміри */
     height: 40px;
-    font-size: 16px;
-    padding-left: 15px; /* Забезпечуємо відступ */
-    
-    box-shadow: none; /* Прибираємо тінь, якщо вона була */
+    font-size: 1rem;
+    padding-left: 15px;
+    box-shadow: none;
 }
 .search-group .input-group-addon {
     background: var(--glass-bg);
@@ -198,94 +153,38 @@ main, section {
 .search-group .form-control::placeholder { color: var(--text-color); opacity: 0.6; }
 .search-group .form-control:focus { box-shadow: 0 0 15px rgba(255,255,255,0.5); }
 
-
-/* --- Посилання (Бот, Підтримка) --- */
-
-.links-col .full-width-btn {
-    width: 100%; 
-    display: block; 
-    font-weight: bold;
-}
-.links-col .margin-top-5 {
-    margin-top: 5px;
-}
-
+/* Кнопки */
+.full-width-btn { width: 100%; display: block; font-weight: 700; }
 
 /* --- Топ Донатери --- */
-/* top-donators-box використовує glass-panel та donate-banner стилі */
-.top-donators-box {
-    padding: 10px;
-    min-height: 90px; /* Фіксована мінімальна висота для стабільності */
-}
-.donor-list-title {
-    display: block;
-    font-size: 1.1rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-.donor-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+.top-donators-box { padding: 10px; min-height: 90px; }
+.donor-list-title { display: block; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--text-color); }
+.donor-list { display: flex; flex-direction: column; gap: 8px; }
 .donor-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: 700;
-    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
-
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    color: var(--text-color);
+    display: flex; justify-content: space-between; align-items: center; text-decoration: none;
+    padding: 5px 10px; border-radius: 15px; font-weight: 700; transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); color: var(--text-color);
 }
-body.dark-mode .donor-item {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-}
-.donor-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
+body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
+.donor-item:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
 .donor-name { color: #833AB4; }
 .donor-amount { font-weight: 900; color: var(--accent); }
 
 
 /* --- АДАПТАЦІЯ GRID ДЛЯ ПК/ПЛАНШЕТІВ --- */
 @media (min-width: 768px) {
-    /* Вирівнювання елементів хедера */
-    .header-row-layout {
-        align-items: center;
-    }
-    .logo-area-col {
-        text-align: left;
-    }
-    .controls-area-col {
-        text-align: right;
-        padding-top: 0; 
-    }
-    
-    /* Скидаємо відступи знизу, оскільки елементи тепер в одному рядку */
-    .search-col,
-    .links-col,
+    /* Скидаємо відступи знизу, оскільки елементи тепер в одному рядку на ПК */
+    .links-and-donate-col,
     .donors-col {
         margin-bottom: 0;
     }
     
-    /* Відступ між посиланнями та донатерами */
-    .links-col {
-        padding-left: 10px;
-        padding-right: 10px;
+    /* Додатковий відступ між колонками на ПК */
+    .links-and-donate-col {
+        padding-right: 15px; 
     }
 }
-
 
 /* Grid Layout (Сітка маршрутів) */
 .bus-grid {
@@ -297,83 +196,37 @@ body.dark-mode .donor-item {
 
 /* Кнопки автобусів (Glass Cards) */
 .bus-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 10px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s, background 0.3s;
-    
-    /* Glass properties */
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: 20px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 20px 10px; text-align: center; cursor: pointer; transition: transform 0.2s, background 0.3s;
+    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 20px;
 }
 
 .bus-card:active { transform: scale(0.95); }
 .bus-card:hover { background: rgba(255, 255, 255, 0.4); border-color: #fff; }
-
 .bus-num { font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
 /* ================================================= */
 /* 3. ІНФО-БЛОКИ (АККОРДЕОН)              */
 /* ================================================= */
+/* ... (Всі стилі для акордеона залишаються без змін) ... */
 
-#accordion {
-    margin-top: 20px;
-}
-.panel-default {
-    border: none;
-    background-color: transparent; 
-    border-radius: var(--card-radius);
-    margin-bottom: 20px;
-}
+#accordion { margin-top: 20px; }
+.panel-default { border: none; background-color: transparent; border-radius: var(--card-radius); margin-bottom: 20px; }
 .glass-panel-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: var(--card-radius); 
-    margin-bottom: 0 !important;
-    padding: 0;
-    transition: all 0.2s;
+    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: var(--card-radius); 
+    margin-bottom: 0 !important; padding: 0; transition: all 0.2s;
 }
 .glass-panel-header a {
-    display: block;
-    padding: 15px 20px;
-    text-decoration: none;
-    color: var(--text-color);
-    font-size: 1.3rem;
-    font-weight: 900;
-    transition: all 0.2s;
-    border-radius: var(--card-radius);
+    display: block; padding: 15px 20px; text-decoration: none; color: var(--text-color);
+    font-size: 1.3rem; font-weight: 900; transition: all 0.2s; border-radius: var(--card-radius);
 }
-.glass-panel-header a:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
-.glass-panel-header a.collapsed {
-    border-radius: var(--card-radius); 
-}
-.glass-panel-header a:not(.collapsed) {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.panel-collapse .info-panel {
-    border-top: none; 
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin-top: -1px;
-    padding: 25px;
-}
-
-/* Кольори заголовків */
+.glass-panel-header a:hover { background: rgba(255, 255, 255, 0.4); }
+.glass-panel-header a.collapsed { border-radius: var(--card-radius); }
+.glass-panel-header a:not(.collapsed) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.panel-collapse .info-panel { border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; padding: 25px; }
 .poputka-panel-wrapper .glass-panel-header a { color: #5d5df5; }
 .general-info-panel-wrapper .glass-panel-header a { color: var(--primary); }
 
@@ -381,8 +234,6 @@ body.dark-mode .donor-item {
 .info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
 .info-panel .item-icon { font-size: 1.2rem; margin-right: 10px; flex-shrink: 0; width: 30px; text-align: center; }
 .info-separator { border: none; border-top: 1px solid var(--glass-border); margin: 25px 0; }
-
-/* Стилі Попутка */
 .poputka-price { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-top: -10px; margin-bottom: 20px; }
 .poputka-route { margin-bottom: 15px; padding: 10px; border-left: 3px solid #5d5df5; background: rgba(93, 93, 245, 0.1); border-radius: 5px; }
 body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
@@ -398,160 +249,75 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 /* 4. SCREEN: РОЗКЛАД (Details View)        */
 /* ================================================= */
 
-.schedule-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
+.schedule-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
 #back-btn {
-    background: var(--glass-bg);
-    color: var(--text-color);
-    border: 1px solid var(--glass-border);
-    padding: 10px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: 700;
-    backdrop-filter: blur(10px);
+    background: var(--glass-bg); color: var(--text-color); border: 1px solid var(--glass-border);
+    padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 700; backdrop-filter: blur(10px);
 }
-
-#route-title-display {
-    margin: 0;
-    font-size: 1.3rem;
-    color: var(--primary);
-    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
-}
-
-/* Адаптація сітки Карта + Розклад */
-.schedule-view .row .col-xs-12 {
-    margin-bottom: 20px;
-}
-@media (min-width: 992px) {
-    .schedule-view .row .col-md-6 {
-        margin-bottom: 0;
-    }
-}
-
-/* 1. КОНТЕЙНЕР ДЛЯ КАРТИ МАРШРУТУ */
-.map-panel {
-    padding: 0;
-    overflow: hidden;
-    margin-bottom: 20px;
-}
-.map-panel iframe {
-    width: 100%;
-    height: 300px; 
-    border: none;
-    display: block;
-    border-radius: 20px;
-}
-.map-title, .schedule-title {
-    margin-top: 0;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--primary);
-}
+#route-title-display { margin: 0; font-size: 1.3rem; color: var(--primary); text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
+.schedule-view .row .col-xs-12 { margin-bottom: 20px; }
+@media (min-width: 992px) { .schedule-view .row .col-md-6 { margin-bottom: 0; } }
+.map-panel { padding: 0; overflow: hidden; margin-bottom: 20px; }
+.map-panel iframe { width: 100%; height: 300px; border: none; display: block; border-radius: 20px; }
+.map-title, .schedule-title { margin-top: 0; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: var(--primary); }
 .schedule-title { margin-bottom: 15px; }
-
-
-/* Блок з часом */
 .route-block {
-    padding: 25px;
-    margin-bottom: 20px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    border-radius: 25px;
+    padding: 25px; margin-bottom: 20px; background: var(--glass-bg); backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 25px;
 }
-
 .route-direction {
-    margin-top: 0;
-    color: var(--accent);
-    font-size: 1.1rem;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    margin-top: 0; color: var(--accent); font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 10px; margin-bottom: 15px;
 }
-
 .stop-item { margin-bottom: 20px; }
 .stop-name { font-weight: 800; margin-bottom: 10px; display: block; opacity: 0.8; }
-
-.times-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
+.times-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .time-badge {
-    background: rgba(255, 255, 255, 0.3);
-    padding: 6px 12px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-family: monospace;
-    font-weight: 600;
-    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.3); padding: 6px 12px; border-radius: 10px;
+    font-size: 1rem; font-family: monospace; font-weight: 600; border: 1px solid rgba(255,255,255,0.2);
 }
-
 .time-badge.next {
-    background: var(--primary);
-    color: white;
-    border: 1px solid var(--primary);
-    transform: scale(1.15);
-    box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4);
-    z-index: 2;
+    background: var(--primary); color: white; border: 1px solid var(--primary);
+    transform: scale(1.15); box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4); z-index: 2;
 }
-
-.time-badge.past {
-    opacity: 0.4;
-    text-decoration: line-through;
-    background: rgba(0, 0, 0, 0.05);
-}
+.time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
 /* 5. FOOTER & ACTIONS                 */
 /* ================================================= */
 
-/* Стилі для кнопок Бот/Зворотний зв'язок */
 .glass-action-button {
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 30px;
-    font-weight: 700;
-    backdrop-filter: blur(5px);
-    transition: transform 0.2s, box-shadow 0.2s;
-    font-size: 1rem;
-    color: var(--text-color); /* Колір тексту за замовчуванням */
+    text-decoration: none; padding: 12px 20px; border-radius: 30px;
+    font-weight: 700; backdrop-filter: blur(5px); transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 1rem; color: var(--text-color);
 }
 .glass-action-button:active { transform: scale(0.98); }
 
+/* Донат Кнопка (Золотий/Жовтий) */
+.donate-btn-style {
+    background: rgba(255, 215, 0, 0.2); color: #b8860b;
+    border: 1px solid rgba(255, 215, 0, 0.4); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+body.dark-mode .donate-btn-style {
+    color: #ffef80; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
 /* Бот Кнопка (Зелений) */
 .bot-btn-style {
-    background: rgba(40, 167, 69, 0.2);
-    color: #0f5132;
-    border: 1px solid rgba(40, 167, 69, 0.3);
-    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+    background: rgba(40, 167, 69, 0.2); color: #0f5132;
+    border: 1px solid rgba(40, 167, 69, 0.3); box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
 }
 body.dark-mode .bot-btn-style {
-    color: #86efac;
-    background: rgba(40, 167, 69, 0.1);
-    border: 1px solid rgba(40, 167, 69, 0.15);
+    color: #86efac; background: rgba(40, 167, 69, 0.1); border: 1px solid rgba(40, 167, 69, 0.15);
 }
 
 /* Зворотний Зв'язок Кнопка (Синій/Голубий) */
 .feedback-btn-style {
-    background: rgba(0, 191, 255, 0.2);
-    color: #0080ff;
-    border: 1px solid rgba(0, 191, 255, 0.4);
-    box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
+    background: rgba(0, 191, 255, 0.2); color: #0080ff;
+    border: 1px solid rgba(0, 191, 255, 0.4); box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3);
 }
 body.dark-mode .feedback-btn-style {
-    color: #a7f7ff;
-    background: rgba(0, 191, 255, 0.1);
-    border: 1px solid rgba(0, 191, 255, 0.15);
+    color: #a7f7ff; background: rgba(0, 191, 255, 0.1); border: 1px solid rgba(0, 191, 255, 0.15);
 }
 
 

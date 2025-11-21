@@ -252,24 +252,36 @@ body.dark-mode .glass-panel-header a:hover {
 .panel-collapse .info-panel { border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; padding: 25px; }
 
 
-/* 🎨 КОЛЬОРОВА АДАПТАЦІЯ КНОПОК 🎨 */
+/* 🎨 КОЛЬОРОВА АДАПТАЦІЯ КНОПОК АККОРДЕОНА (Liquid Glass Design) 🎨 */
 
-/* Кнопка "Попутка" */
+/* Кнопка "Попутка" - Синій/Фіолетовий скло-ефект */
+.poputka-panel-wrapper .glass-panel-header { 
+    background: rgba(93, 93, 245, 0.2); /* Світла тема: прозоро-фіолетовий */
+    border: 1px solid rgba(93, 93, 245, 0.4);
+}
+body.dark-mode .poputka-panel-wrapper .glass-panel-header { 
+    background: rgba(93, 93, 245, 0.4); /* Темна тема: насичений прозоро-фіолетовий */
+    border: 1px solid rgba(93, 93, 245, 0.15);
+}
+
+/* Кнопка "Загальна інформація" - Основний Синій скло-ефект */
+.general-info-panel-wrapper .glass-panel-header { 
+    background: rgba(0, 125, 214, 0.25); /* Світла тема: прозоро-синій */
+    border: 1px solid rgba(0, 125, 214, 0.5);
+}
+body.dark-mode .general-info-panel-wrapper .glass-panel-header { 
+    background: rgba(0, 125, 214, 0.4); /* Темна тема: насичений прозоро-синій */
+    border: 1px solid rgba(0, 125, 214, 0.15);
+}
+
+/* ⚠️ Забезпечуємо, щоб текст залишався контрастним (чорним/білим) */
 .poputka-panel-wrapper .glass-panel-header a { 
-    color: #5d5df5; /* Світла тема: синій/фіолетовий */
+    color: var(--text-color); 
 }
-body.dark-mode .poputka-panel-wrapper .glass-panel-header a { 
-    color: #a0a0ff; /* Темна тема: світло-синій */
-}
-
-/* Кнопка "Загальна інформація" */
 .general-info-panel-wrapper .glass-panel-header a { 
-    color: var(--primary); /* Синій колір (змінна primary) */
+    color: var(--text-color); 
 }
-body.dark-mode .general-info-panel-wrapper .glass-panel-header a { 
-    color: var(--primary); 
-}
-/* ---------------------------------- */
+/* ---------------------------------------------------- */
 
 
 .panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }

@@ -58,90 +58,94 @@
             </div>
             
            <div class="col-xs-12 accordion-col">
-    <div id="accordion" role="tablist" aria-multiselectable="true">
-        
-        <div class="panel panel-default poputka-panel-wrapper">
-            <div class="panel-heading glass-panel-header" role="tab" id="headingPoputka">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsePoputka" aria-expanded="false" aria-controls="collapsePoputka" class="collapsed">
-                        <span class="title-icon">🚗</span> Попутка / Таксі
-                    </a>
-                </h4>
-            </div>
-            <div id="collapsePoputka" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPoputka">
-                <div class="panel-body info-panel glass-panel">
+                <!-- Аккордеон залишається без змін -->
+                <div id="accordion" role="tablist" aria-multiselectable="true">
+                    <!-- ... (попутка і загальна інформація) ... -->
+                    <div class="panel panel-default poputka-panel-wrapper">
+                        <div class="panel-heading glass-panel-header" role="tab" id="headingPoputka">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsePoputka" aria-expanded="false" aria-controls="collapsePoputka" class="collapsed">
+                                    <span class="title-icon">🚗</span> Попутка / Таксі
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapsePoputka" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPoputka">
+                            <div class="panel-body info-panel glass-panel"></div>
+                        </div>
                     </div>
-            </div>
-        </div>
-        
-        <div class="panel panel-default general-info-panel-wrapper">
-            <div class="panel-heading glass-panel-header" role="tab" id="headingInfo">
-                <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo" class="collapsed">
-                        <span class="title-icon">ℹ️</span> Загальна інформація
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
-                <div class="panel-body info-panel glass-panel">
-                    </div>
-            </div>
-        </div>
-        
-    </div>
-</div>
-        
-        
-        <div class="row donors-row" style="margin-top: 20px; margin-bottom: 20px;">
-            <div class="col-xs-12 donors-col-full">
-                <div class="top-donators-box glass-panel donate-banner">
-                    <strong class="donor-list-title">👑 Топ донатери:</strong>
-                    <div class="donor-list">
-                        <a href="https://t.me/+v4ane3GeUuE5Mjhi" target="_blank" class="donor-item">
-                            <span class="donor-name">Сміла про головне:</span>
-                            <span class="donor-amount">200 UAH</span>
-                        </a>
-                        <a href="https://www.instagram.com/dima_rudas_/" target="_blank" class="donor-item">
-                            <span class="donor-name">Дмитро Рудас:</span>
-                            <span class="donor-amount">100 UAH</span>
-                        </a>
+                    
+                    <div class="panel panel-default general-info-panel-wrapper">
+                        <div class="panel-heading glass-panel-header" role="tab" id="headingInfo">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo" class="collapsed">
+                                    <span class="title-icon">ℹ️</span> Загальна інформація
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
+                            <div class="panel-body info-panel glass-panel"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
         
-        <div class="row action-buttons-row">
-            <div class="col-xs-12 col-sm-4 mb-3">
-                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
-                    🤖 Бот розкладу
-                </a>
+            <!-- 1. Топ донатери — тепер найвище після акордеону -->
+            <div class="row donors-row" style="margin-top: 30px; margin-bottom: 20px;">
+                <div class="col-xs-12 donors-col-full">
+                    <div class="top-donators-box glass-panel donate-banner">
+                        <strong class="donor-list-title">👑 Топ донатери:</strong>
+                        <div class="donor-list">
+                            <a href="https://t.me/+v4ane3GeUuE5Mjhi" target="_blank" class="donor-item">
+                                <span class="donor-name">Сміла про головне:</span>
+                                <span class="donor-amount">200 UAH</span>
+                            </a>
+                            <a href="https://www.instagram.com/dima_rudas_/" target="_blank" class="donor-item">
+                                <span class="donor-name">Дмитро Рудас:</span>
+                                <span class="donor-amount">100 UAH</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-4 mb-3">
-                <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style full-width-btn">
-                    💰 Підтримати проєкт
-                </a>
+
+            <!-- 2-3. Бот розкладу + Підтримати проєкт -->
+            <div class="row action-buttons-row" style="margin-bottom: 20px;">
+                <div class="col-xs-12 col-sm-6 mb-3">
+                    <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
+                        🤖 Бот розкладу
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 mb-3">
+                    <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style full-width-btn">
+                        💰 Підтримати проєкт
+                    </a>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-4 mb-3">
-                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn">
-                    ✍️ Зворотний зв'язок з розробником
-                </a>
-            </div>
-        </div>
+
+        </div> <!-- кінець .main-content-container -->
 
     </main>
 
+    <!-- Футер + кнопка зворотного зв'язку внизу -->
     <div class="container">
         <div class="row">
             <div class="col-xs-12 text-center">
-                <p>&nbsp</p>
-                <div class="footer-date">Оновлено: Травень 2024</div>
+
+                <!-- 4. Зворотний зв'язок — тепер тут, внизу сторінки -->
+                <div style="margin: 30px 0;">
+                    <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style" style="display: inline-block; padding: 12px 24px; font-size: 1.1em;">
+                        ✍️ Зворотний зв'язок з розробником
+                    </a>
+                </div>
+
+                <p>&nbsp;</p>
+                <div class="footer-date">Оновлено: Листопад 2025</div>
                 <footer>
                     <p>© 2022-2025 SmilaBusTime | Dev by Yaroslav Hohulov</p>
                 </footer>
             </div>
         </div>
     </div>
-
 
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>

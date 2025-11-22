@@ -208,18 +208,18 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
 /* ================================================= */
-/* 3. ІНФО-БЛОКИ (АККОРДЕОН)              */
+/* 3. ІНФО-БЛОКИ (АККОРДЕОН) - ВИПРАВЛЕНО!           */
 /* ================================================= */
 
 #accordion { margin-top: 20px; }
 .panel-default { border: none; background-color: transparent; border-radius: var(--card-radius); margin-bottom: 20px; }
 
-/* Базовий стиль заголовка (фону) */
+/* Базовий стиль для заголовка */
 .glass-panel-header {
-    background: var(--glass-bg); 
+    background: var(--glass-bg);
     backdrop-filter: blur(12px); 
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border); 
+    border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow); 
     border-radius: var(--card-radius); 
     margin-bottom: 0 !important; 
@@ -227,62 +227,93 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
     transition: all 0.2s;
 }
 
-/* Стилі для посилань всередині заголовка */
+/* Стиль посилань у заголовку */
 .glass-panel-header a {
     display: block; 
     padding: 15px 20px; 
     text-decoration: none; 
-    color: var(--text-color); /* Адаптується під тему (чорний/білий) */
+    /* Базовий колір тексту (буде перезаписаний для конкретних кнопок нижче) */
+    color: var(--text-color);
     font-size: 1.3rem; 
     font-weight: 900; 
     transition: all 0.2s; 
     border-radius: var(--card-radius);
 }
 
-/* Hover-ефект (Liquid Glass) */
-.glass-panel-header a:hover { 
-    background: rgba(255, 255, 255, 0.4); /* Світла тема: прозоро-білий */
+/* 🔥 ВИПРАВЛЕННЯ КОЛЬОРІВ КНОПОК (LIQUID GLASS) 🔥 */
+
+/* 1. ПОПУТКА */
+.poputka-panel-wrapper .glass-panel-header {
+    /* Світла тема: напівпрозорий Фіолетовий */
+    background: rgba(93, 93, 245, 0.3) !important; 
+    border: 1px solid rgba(93, 93, 245, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(93, 93, 245, 0.2);
 }
-body.dark-mode .glass-panel-header a:hover {
-    background: rgba(255, 255, 255, 0.1); /* Темна тема: прозоро-сірий */
+.poputka-panel-wrapper .glass-panel-header a {
+    color: #4b4bc4 !important; /* Темно-фіолетовий текст для контрасту */
 }
 
+/* Попутка - Темна тема */
+body.dark-mode .poputka-panel-wrapper .glass-panel-header {
+    /* Темна тема: більш насичений фон */
+    background: rgba(93, 93, 245, 0.5) !important; 
+    border: 1px solid rgba(93, 93, 245, 0.7) !important;
+}
+body.dark-mode .poputka-panel-wrapper .glass-panel-header a {
+    color: #ffffff !important; /* Білий текст на темному фоні */
+}
+
+
+/* 2. ЗАГАЛЬНА ІНФОРМАЦІЯ */
+.general-info-panel-wrapper .glass-panel-header {
+    /* Світла тема: напівпрозорий Синій */
+    background: rgba(0, 125, 214, 0.3) !important; 
+    border: 1px solid rgba(0, 125, 214, 0.5) !important;
+    box-shadow: 0 4px 15px rgba(0, 125, 214, 0.2);
+}
+.general-info-panel-wrapper .glass-panel-header a {
+    color: #005a9e !important; /* Темно-синій текст для контрасту */
+}
+
+/* Загальна інформація - Темна тема */
+body.dark-mode .general-info-panel-wrapper .glass-panel-header {
+    /* Темна тема: насичений фон */
+    background: rgba(0, 125, 214, 0.5) !important; 
+    border: 1px solid rgba(0, 125, 214, 0.7) !important;
+}
+body.dark-mode .general-info-panel-wrapper .glass-panel-header a {
+    color: #ffffff !important; /* Білий текст */
+}
+
+/* Hover ефекти */
+.glass-panel-header a:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Форма кнопок при відкритті/закритті */
 .glass-panel-header a.collapsed { border-radius: var(--card-radius); }
 .glass-panel-header a:not(.collapsed) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-.panel-collapse .info-panel { border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; padding: 25px; }
 
-
-/* 🎨 КОЛЬОРОВА АДАПТАЦІЯ КНОПОК АККОРДЕОНА (Liquid Glass Design) 🎨 */
-
-/* Кнопка "Попутка" - Синій/Фіолетовий скло-ефект */
-.poputka-panel-wrapper .glass-panel-header { 
-    background: rgba(93, 93, 245, 0.2); /* Світла тема: прозоро-фіолетовий */
-    border: 1px solid rgba(93, 93, 245, 0.4);
-}
-body.dark-mode .poputka-panel-wrapper .glass-panel-header { 
-    background: rgba(93, 93, 245, 0.4); /* Темна тема: насичений прозоро-фіолетовий */
-    border: 1px solid rgba(93, 93, 245, 0.15);
+/* Тіло аккордеона */
+.panel-collapse .info-panel { 
+    border-top: none; 
+    border-top-left-radius: 0; 
+    border-top-right-radius: 0; 
+    margin-top: -1px; 
+    padding: 25px; 
 }
 
-/* Кнопка "Загальна інформація" - Основний Синій скло-ефект */
-.general-info-panel-wrapper .glass-panel-header { 
-    background: rgba(0, 125, 214, 0.25); /* Світла тема: прозоро-синій */
+/* Кольори кордонів тіла аккордеона, щоб збігалися з кнопками */
+.poputka-panel-wrapper .panel-collapse.in .info-panel {
+    border: 1px solid rgba(93, 93, 245, 0.5);
+    box-shadow: 0 4px 15px rgba(93, 93, 245, 0.1);
+}
+.general-info-panel-wrapper .panel-collapse.in .info-panel {
     border: 1px solid rgba(0, 125, 214, 0.5);
-}
-body.dark-mode .general-info-panel-wrapper .glass-panel-header { 
-    background: rgba(0, 125, 214, 0.4); /* Темна тема: насичений прозоро-синій */
-    border: 1px solid rgba(0, 125, 214, 0.15);
+    box-shadow: 0 4px 15px rgba(0, 125, 214, 0.1);
 }
 
-/* ⚠️ Забезпечуємо, щоб текст залишався контрастним (чорним/білим) */
-.poputka-panel-wrapper .glass-panel-header a { 
-    color: var(--text-color); 
-}
-.general-info-panel-wrapper .glass-panel-header a { 
-    color: var(--text-color); 
-}
-/* ---------------------------------------------------- */
-
+/* ------------------------------------------------ */
 
 .panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
 .info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }

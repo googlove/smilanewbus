@@ -381,3 +381,39 @@ body.dark-mode .feedback-btn-style { color: #a7f7ff; background: rgba(0, 191, 25
 
 .footer-date { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.8; }
 footer { text-align: center; margin-top: 10px; font-size: 0.8rem; opacity: 0.7; }
+
+
+/* ================================================= */
+/* 7. ВИПРАВЛЕННЯ КОЛЬОРІВ ТЕКСТУ В ТЕМНІЙ ТЕМІ      */
+/* ================================================= */
+
+/* Це правило змушує номер автобуса ставати білим у темній темі,
+   навіть якщо в data.json прописаний чорний колір.
+*/
+body.dark-mode .bus-num {
+    color: #ffffff !important; /* !important перебиває inline-стилі з JS */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Легке світіння для краси */
+}
+
+/* Робимо назву маршруту (під номером) світло-сірою */
+body.dark-mode .bus-title {
+    color: #e0e0e0 !important;
+}
+
+/* Робимо заголовок "Розклад руху" та "На карті" світлими */
+body.dark-mode .schedule-title,
+body.dark-mode .map-title {
+    color: #ffffff !important;
+}
+
+/* Робимо стрілочку напрямку маршруту світлою */
+body.dark-mode .route-direction {
+    color: #a7f7ff !important; /* Світло-блакитний відтінок */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Робимо назви зупинок світлими */
+body.dark-mode .stop-name {
+    color: #f1f5f9 !important;
+}
+

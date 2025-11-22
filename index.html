@@ -7,7 +7,6 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="styles/bootstrap.min.css"> 
     <link rel="stylesheet" href="styles/style.css">
 </head>
@@ -26,8 +25,7 @@
             <div class="col-xs-12 col-sm-6 col-md-4 controls-area-col text-right">
                 <div class="controls">
                     <div id="clock" class="clock">00:00</div>
-                    <button id="theme-toggle" class="theme-btn" aria-label="Змінити тему">🌙</button>
-                </div>
+                    </div>
             </div>
         </div>
     </header>
@@ -52,6 +50,15 @@
             </div>
         </div>
 
+        <div class="row search-input-row" style="margin-bottom: 20px;">
+            <div class="col-xs-12 search-col-full">
+                <div class="input-group search-group">
+                    <span class="input-group-addon search-icon">🔍</span>
+                    <input type="text" id="search-input" class="form-control" placeholder="Введіть номер маршруту або назву...">
+                </div>
+            </div>
+        </div>
+
         <div class="row action-buttons-row" style="margin-bottom: 10px;">
             <div class="col-xs-6 col-sm-6 mb-3">
                 <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
@@ -65,42 +72,37 @@
             </div>
         </div>
         
-        <div class="row feedback-row" style="margin-bottom: 20px;">
+        <div class="row feedback-row" style="margin-bottom: 30px;">
              <div class="col-xs-12">
-                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn">
-                    <center>✍️ Зворотний зв'язок з розробником </center>
+                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn" style="margin-bottom: 15px;">
+                    ✍️ Зворотний зв'язок з розробником
                 </a>
-            </div>
-        </div>
-
-        <div class="row ad-banner-row" style="margin-bottom: 20px;">
-            <div class="col-xs-12 ad-banner-col">
-                <div class="ad-banner glass-panel" style="text-align: center; padding: 15px; font-weight: bold;">
-                    📰 Тут може бути ваша реклама
+                
+                <div class="theme-switch-container glass-panel">
+                    <span class="theme-icon">☀️</span>
+                    <label class="theme-switch">
+                        <input type="checkbox" id="theme-checkbox">
+                        <span class="slider round glass-slider"></span>
+                    </label>
+                    <span class="theme-icon">🌙</span>
                 </div>
-            </div>
-        </div>
 
-        <div class="row search-input-row" style="margin-bottom: 25px;">
-            <div class="col-xs-12 search-col-full">
-                <div class="input-group search-group">
-                    <span class="input-group-addon search-icon">🔍</span>
-                    <input type="text" id="search-input" class="form-control" placeholder="Введіть номер маршруту або назву...">
-                </div>
             </div>
         </div>
 
         <div class="row bus-grid-row">
-            
+            <div class="col-xs-12 ad-banner-col">
+                <div class="ad-banner glass-panel" style="text-align: center; padding: 10px; margin-bottom: 20px;">
+                    📰 Тут може бути ваша реклама
+                </div>
+            </div>
             <div class="col-xs-12 bus-grid-col">
                 <div id="bus-grid" class="bus-grid">
                     <div class="loader">Завантаження розкладу...</div>
                 </div>
             </div>
-            
             <div class="col-xs-12 accordion-col">
-                <div id="accordion" role="tablist" aria-multiselectable="true">
-                </div>
+                <div id="accordion" role="tablist" aria-multiselectable="true"></div>
             </div>
         </div>
         
@@ -111,12 +113,8 @@
             <button id="back-btn">⬅️ Назад</button>
             <h2 id="route-title-display"></h2>
         </div>
-        
-        <div id="route-map-container" class="glass-panel map-panel">
-            </div>
-
-        <div id="schedule-container">
-            </div>
+        <div id="route-map-container" class="glass-panel map-panel"></div>
+        <div id="schedule-container"></div>
     </section>
 
     <div class="container">
@@ -130,7 +128,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>

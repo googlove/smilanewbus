@@ -21,22 +21,34 @@ body {
     /* Стек шрифтів як в iOS */
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-color);
+    
+    /* Налаштування висоти та відступів */
+    min-height: 100vh; /* min-height краще для скролу, ніж height */
     margin: 0;
     padding-bottom: 60px;
-    min-height: 100vh;
     
-    /* 🟢🔵 Пастельний Зелений -> Пастельний Синій */
-    background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+    /* 🟢🔵 НОВА АНІМАЦІЯ ФОНУ (Світла тема) */
+    background-color: #b2f2bb;
+    animation: bgColorChange 8s infinite alternate;
+}
+
+/* Анімація зміни кольору для світлої теми */
+@keyframes bgColorChange {
+    0% {
+        background-color: #b2f2bb; /* пастельно-зелений */
+    }
+    100% {
+        background-color: #a0c4ff; /* пастельно-блакитний */
+    }
+}
+
+/* Темна тема: Градієнт + Анімація */
+body.dark-mode {
+    background: linear-gradient(45deg, #232526, #414345, #2c3e50, #000000);
     background-size: 400% 400%;
     animation: liquidAnimation 15s ease infinite;
 }
 
-body.dark-mode {
-    background: linear-gradient(45deg, #232526, #414345, #2c3e50, #000000);
-    background-size: 400% 400%;
-}
-
-/* Анімація "Рідкого" фону */
 @keyframes liquidAnimation {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
@@ -249,7 +261,7 @@ body.dark-mode .general-info-panel-wrapper .glass-panel-header a { color: #fffff
 .poputka-panel-wrapper .panel-collapse.in .info-panel { border: 1px solid rgba(93, 93, 245, 0.5); }
 .general-info-panel-wrapper .panel-collapse.in .info-panel { border: 1px solid rgba(0, 125, 214, 0.5); }
 
-/* Контент всередині панелей */
+/* Контент всередині панелей + ВИРІВНЮВАННЯ ІКОНОК FONTAWESOME */
 .panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
 .info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
 .info-panel .item-icon { font-size: 1.2rem; margin-right: 10px; flex-shrink: 0; width: 30px; text-align: center; }
@@ -260,7 +272,7 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .route-city { font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
 .route-points { font-size: 0.95rem; opacity: 0.9; }
 .poputka-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.poputka-link { display: flex; align-items: center; padding: 8px 15px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none; color: var(--text-color); font-weight: 700; transition: background 0.2s; }
+.poputka-link { display: flex; align-items: center; padding: 12px 20px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none; color: var(--text-color); font-weight: 700; transition: background 0.2s; }
 .poputka-link:hover { background: rgba(255, 255, 255, 0.5); }
 .link-icon { 
     display: flex; align-items: center; justify-content: center; width: 30px; margin-right: 10px; font-size: 1.2rem;
@@ -366,8 +378,30 @@ footer { text-align: center; margin-top: 10px; font-size: 0.8rem; opacity: 0.7; 
 /* 7. ВИПРАВЛЕННЯ КОЛЬОРІВ ТЕКСТУ В ТЕМНІЙ ТЕМІ      */
 /* ================================================= */
 
-body.dark-mode .bus-num { color: #ffffff !important; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
-body.dark-mode .bus-title { color: #e0e0e0 !important; }
-body.dark-mode .schedule-title, body.dark-mode .map-title { color: #ffffff !important; }
-body.dark-mode .route-direction { color: #a7f7ff !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
-body.dark-mode .stop-name { color: #f1f5f9 !important; }
+/* Це правило змушує номер автобуса ставати білим у темній темі */
+body.dark-mode .bus-num {
+    color: #ffffff !important; /* !important перебиває inline-стилі з JS */
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Легке світіння для краси */
+}
+
+/* Робимо назву маршруту (під номером) світло-сірою */
+body.dark-mode .bus-title {
+    color: #e0e0e0 !important;
+}
+
+/* Робимо заголовок "Розклад руху" та "На карті" світлими */
+body.dark-mode .schedule-title,
+body.dark-mode .map-title {
+    color: #ffffff !important;
+}
+
+/* Робимо стрілочку напрямку маршруту світлою */
+body.dark-mode .route-direction {
+    color: #a7f7ff !important; /* Світло-блакитний відтінок */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Робимо назви зупинок світлими */
+body.dark-mode .stop-name {
+    color: #f1f5f9 !important;
+}

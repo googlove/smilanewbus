@@ -3,13 +3,13 @@ let allBusData = [];
 // Запуск при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
-    setupTheme(); // Запускає логіку тумблера теми
+    setupTheme(); // Запускає логіку тумблера
     
     // Завантаження даних
     loadBusData(); 
     loadInfoData();
 
-    // Логіка Пошуку
+    // Пошук
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -190,7 +190,7 @@ function renderRouteDetails(bus) {
     // Початок Bootstrap-сітки
     let html = '<div class="row">';
 
-    // 1. Колонка для Карти
+    // 1. Колонка для Карти (займає 6/12 на великих екранах)
     const mapSrc = bus.mapIframeSrc || 'about:blank'; 
     
     html += `
@@ -221,6 +221,7 @@ function renderRouteDetails(bus) {
             let foundNext = false;
 
             stop.times.forEach(timeStr => {
+                // Парсинг часу "14:30 (примітка)"
                 const cleanTime = timeStr.split(' ')[0]; 
                 const [h, m] = cleanTime.split(':').map(Number);
                 const busMinutes = h * 60 + m;

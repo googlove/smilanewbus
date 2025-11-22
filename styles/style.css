@@ -24,8 +24,10 @@ body {
     padding-bottom: 60px;
     min-height: 100vh;
     
-    /* LIQUID BACKGROUND */
-    background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffd1ff, #a1c4fd, #c2e9fb);
+    /* 🟢🔵 ОНОВЛЕНО: Пастельний Зелений -> Пастельний Синій */
+    background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);
+    /* Альтернатива (більш синя): background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); */
+    
     background-size: 400% 400%;
     animation: liquidAnimation 15s ease infinite;
 }
@@ -87,8 +89,6 @@ header {
 @media (min-width: 992px) {
     .clock { font-size: 2.25rem; }
 }
-
-/* --- Кінець АДАПТИВНИЙ HEADER --- */
 
 /* ================================================= */
 /* 2. MAIN LAYOUT & GRID                 */
@@ -208,91 +208,85 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
 /* ================================================= */
-/* 3. ІНФО-БЛОКИ (АККОРДЕОН) - ВИПРАВЛЕНО!           */
+/* 3. ІНФО-БЛОКИ (АККОРДЕОН) - ОНОВЛЕНО           */
 /* ================================================= */
 
 #accordion { margin-top: 20px; }
 .panel-default { border: none; background-color: transparent; border-radius: var(--card-radius); margin-bottom: 20px; }
 
-/* Базовий стиль для заголовка */
-.glass-panel-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow); 
-    border-radius: var(--card-radius); 
-    margin-bottom: 0 !important; 
-    padding: 0; 
-    transition: all 0.2s;
+/* Скидання стандартних стилів Bootstrap для заголовка */
+.panel-default > .panel-heading {
+    background-color: transparent;
+    border: none;
+    padding: 0;
 }
 
-/* Стиль посилань у заголовку */
+/* Стиль для обгортки заголовка */
+.glass-panel-header {
+    padding: 0;
+    border-radius: var(--card-radius);
+    margin-bottom: 0;
+    transition: all 0.3s;
+}
+
+/* Основний стиль кнопок (посилань) всередині */
 .glass-panel-header a {
     display: block; 
     padding: 15px 20px; 
     text-decoration: none; 
-    /* Базовий колір тексту (буде перезаписаний для конкретних кнопок нижче) */
-    color: var(--text-color);
-    font-size: 1.3rem; 
-    font-weight: 900; 
-    transition: all 0.2s; 
+    font-size: 1.2rem; 
+    font-weight: 800; 
+    transition: all 0.3s ease; 
     border-radius: var(--card-radius);
+    
+    /* Liquid Glass Effect */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* 🔥 ВИПРАВЛЕННЯ КОЛЬОРІВ КНОПОК (LIQUID GLASS) 🔥 */
+/* --- КОЛЬОРИ КНОПОК --- */
 
-/* 1. ПОПУТКА */
-.poputka-panel-wrapper .glass-panel-header {
-    /* Світла тема: напівпрозорий Фіолетовий */
-    background: rgba(93, 93, 245, 0.3) !important; 
-    border: 1px solid rgba(93, 93, 245, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(93, 93, 245, 0.2);
-}
+/* 1. ПОПУТКА (Синій/Фіолетовий стиль) */
 .poputka-panel-wrapper .glass-panel-header a {
-    color: #4b4bc4 !important; /* Темно-фіолетовий текст для контрасту */
+    background: rgba(93, 93, 245, 0.15) !important; /* Легкий фіолетовий */
+    color: #4b4bc4 !important;
+    border-color: rgba(93, 93, 245, 0.3) !important;
 }
-
-/* Попутка - Темна тема */
-body.dark-mode .poputka-panel-wrapper .glass-panel-header {
-    /* Темна тема: більш насичений фон */
-    background: rgba(93, 93, 245, 0.5) !important; 
-    border: 1px solid rgba(93, 93, 245, 0.7) !important;
-}
+/* Темна тема */
 body.dark-mode .poputka-panel-wrapper .glass-panel-header a {
-    color: #ffffff !important; /* Білий текст на темному фоні */
+    background: rgba(93, 93, 245, 0.25) !important;
+    color: #ffffff !important;
+    border-color: rgba(93, 93, 245, 0.5) !important;
 }
 
-
-/* 2. ЗАГАЛЬНА ІНФОРМАЦІЯ */
-.general-info-panel-wrapper .glass-panel-header {
-    /* Світла тема: напівпрозорий Синій */
-    background: rgba(0, 125, 214, 0.3) !important; 
-    border: 1px solid rgba(0, 125, 214, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(0, 125, 214, 0.2);
-}
+/* 2. ЗАГАЛЬНА ІНФОРМАЦІЯ (Сірий/Нейтральний стиль) */
 .general-info-panel-wrapper .glass-panel-header a {
-    color: #005a9e !important; /* Темно-синій текст для контрасту */
+    background: rgba(255, 255, 255, 0.4) !important; /* Білувате скло */
+    color: #2c3e50 !important; /* Темно-сірий текст */
+    border-color: rgba(255, 255, 255, 0.6) !important;
 }
-
-/* Загальна інформація - Темна тема */
-body.dark-mode .general-info-panel-wrapper .glass-panel-header {
-    /* Темна тема: насичений фон */
-    background: rgba(0, 125, 214, 0.5) !important; 
-    border: 1px solid rgba(0, 125, 214, 0.7) !important;
-}
+/* Темна тема */
 body.dark-mode .general-info-panel-wrapper .glass-panel-header a {
-    color: #ffffff !important; /* Білий текст */
+    background: rgba(255, 255, 255, 0.1) !important; /* Прозоре скло */
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-/* Hover ефекти */
+/* Hover та Active стани */
 .glass-panel-header a:hover {
-    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
-
-/* Форма кнопок при відкритті/закритті */
-.glass-panel-header a.collapsed { border-radius: var(--card-radius); }
-.glass-panel-header a:not(.collapsed) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.glass-panel-header a:not(.collapsed) {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    background: rgba(255, 255, 255, 0.6) !important; /* Більш непрозорий при відкритті */
+}
+body.dark-mode .glass-panel-header a:not(.collapsed) {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
 
 /* Тіло аккордеона */
 .panel-collapse .info-panel { 
@@ -301,33 +295,13 @@ body.dark-mode .general-info-panel-wrapper .glass-panel-header a {
     border-top-right-radius: 0; 
     margin-top: -1px; 
     padding: 25px; 
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 0 0 20px 20px;
 }
 
-/* Кольори кордонів тіла аккордеона, щоб збігалися з кнопками */
-.poputka-panel-wrapper .panel-collapse.in .info-panel {
-    border: 1px solid rgba(93, 93, 245, 0.5);
-    box-shadow: 0 4px 15px rgba(93, 93, 245, 0.1);
-}
-.general-info-panel-wrapper .panel-collapse.in .info-panel {
-    border: 1px solid rgba(0, 125, 214, 0.5);
-    box-shadow: 0 4px 15px rgba(0, 125, 214, 0.1);
-}
-
-/* ------------------------------------------------ */
-
-.panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
-.info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
-.info-panel .item-icon { font-size: 1.2rem; margin-right: 10px; flex-shrink: 0; width: 30px; text-align: center; }
-.info-separator { border: none; border-top: 1px solid var(--glass-border); margin: 25px 0; }
-.poputka-price { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-top: -10px; margin-bottom: 20px; }
-.poputka-route { margin-bottom: 15px; padding: 10px; border-left: 3px solid #5d5df5; background: rgba(93, 93, 245, 0.1); border-radius: 5px; }
-body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
-.route-city { font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
-.route-points { font-size: 0.95rem; opacity: 0.9; }
-.poputka-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.poputka-link { display: flex; align-items: center; padding: 8px 15px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none; color: var(--text-color); font-weight: 700; transition: background 0.2s; }
-.poputka-link:hover { background: rgba(255, 255, 255, 0.5); }
-.link-icon { font-size: 1.2rem; margin-right: 8px; }
+/* --- Кінець стилів Аккордеона --- */
 
 
 /* ================================================= */

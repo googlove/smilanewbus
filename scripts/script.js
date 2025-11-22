@@ -3,7 +3,7 @@ let allBusData = [];
 // Запуск при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
-    setupTheme();
+    setupTheme(); // Запускає нову логіку теми
     
     // Завантаження ОСНОВНИХ ДАНИХ (маршрути)
     loadBusData(); 
@@ -12,21 +12,27 @@ document.addEventListener('DOMContentLoaded', () => {
     loadInfoData();
 
     // Пошук
-    document.getElementById('search-input').addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
-        const filtered = allBusData.filter(bus => 
-            bus.number.toLowerCase().includes(term) || 
-            bus.title.toLowerCase().includes(term)
-        );
-        renderBusGrid(filtered);
-    });
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = allBusData.filter(bus => 
+                bus.number.toLowerCase().includes(term) || 
+                bus.title.toLowerCase().includes(term)
+            );
+            renderBusGrid(filtered);
+        });
+    }
 
     // Кнопка Назад
-    document.getElementById('back-btn').addEventListener('click', () => {
-        document.getElementById('schedule-view').classList.add('hidden');
-        document.getElementById('main-view').classList.remove('hidden');
-        window.scrollTo(0, 0);
-    });
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            document.getElementById('schedule-view').classList.add('hidden');
+            document.getElementById('main-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        });
+    }
 });
 
 // 1. Завантаження даних маршрутів (data.json)
@@ -39,7 +45,8 @@ function loadBusData() {
         })
         .catch(err => {
             console.error("Помилка завантаження data.json:", err);
-            document.getElementById('bus-grid').innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження розкладу. Перевірте data.json.</p>';
+            const grid = document.getElementById('bus-grid');
+            if(grid) grid.innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження розкладу. Перевірте data.json.</p>';
         });
 }
 
@@ -52,14 +59,16 @@ function loadInfoData() {
         })
         .catch(err => {
             console.error("Помилка завантаження info.json:", err);
-            // ВИПРАВЛЕНО: Використовуємо новий ID 'accordion'
-            document.getElementById('accordion').innerHTML = '<p style="color:orange; text-align:center;">Інформація про попутку та пільги тимчасово недоступна.</p>';
+            const accordion = document.getElementById('accordion');
+            if(accordion) accordion.innerHTML = '<p style="color:orange; text-align:center;">Інформація про попутку та пільги тимчасово недоступна.</p>';
         });
 }
 
 // 3. Рендер додаткової інформації як акордеон (Використовує info.json)
 function renderInfoData(data) {
-    const container = document.getElementById('accordion'); // Контейнер-аккордеон
+    const container = document.getElementById('accordion');
+    if (!container) return;
+    
     let html = '';
 
     // Функція-шаблон для створення заголовка акордеона
@@ -111,7 +120,6 @@ function renderInfoData(data) {
         </div>
     `;
 
-
     // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ / ПІЛЬГИ (ID: Two) ---
     const g = data.generalInfo;
 
@@ -142,9 +150,11 @@ function renderInfoData(data) {
 }
 
 
-// 4. Малювання кнопок (Не змінено)
+// 4. Малювання кнопок (Сітка)
 function renderBusGrid(buses) {
     const container = document.getElementById('bus-grid');
+    if (!container) return;
+    
     container.innerHTML = '';
 
     if (buses.length === 0) {
@@ -165,29 +175,27 @@ function renderBusGrid(buses) {
     });
 }
 
-// 5. Відкриття розкладу (Оновлено: прибрано виклик renderMap)
+// 5. Відкриття розкладу (з картою)
 function openSchedule(bus) {
     document.getElementById('main-view').classList.add('hidden');
     document.getElementById('schedule-view').classList.remove('hidden');
     document.getElementById('route-title-display').innerText = `№${bus.number} ${bus.title}`;
     
-    // Оновлена логіка:
-    renderRouteDetails(bus); // Ця функція тепер рендерить і розклад, і карту в сітці
+    renderRouteDetails(bus);
     window.scrollTo(0, 0);
 }
 
-// 6. ФУНКЦІЯ renderMap ВИДАЛЕНА
-
-// 7. Генерація розкладу та карти (Оновлено: додано сітку Bootstrap та iframe карти)
+// 6. Генерація розкладу та карти
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
-    container.innerHTML = ''; // Очищаємо контейнер
+    if (!container) return;
+    container.innerHTML = ''; 
     
     // Початок Bootstrap-сітки
     let html = '<div class="row">';
 
     // 1. Колонка для Карти (займає 6/12 на великих екранах)
-    const mapSrc = bus.mapIframeSrc || 'about:blank'; // Посилання на карту з JSON
+    const mapSrc = bus.mapIframeSrc || 'about:blank'; 
     
     html += `
         <div class="col-xs-12 col-md-6 map-column">
@@ -204,7 +212,7 @@ function renderRouteDetails(bus) {
 
     // 2. Колонка для Розкладу (займає 6/12 на великих екранах)
     html += '<div class="col-xs-12 col-md-6 schedule-column">';
-    html += `<h4 class="schedule-title">Розклад руху (Маршрут №${bus.number})</h4>`; // Новий заголовок для розкладу
+    html += `<h4 class="schedule-title">Розклад руху (Маршрут №${bus.number})</h4>`;
 
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
@@ -217,6 +225,7 @@ function renderRouteDetails(bus) {
             let foundNext = false;
 
             stop.times.forEach(timeStr => {
+                // Парсинг часу "14:30 (примітка)"
                 const cleanTime = timeStr.split(' ')[0]; 
                 const [h, m] = cleanTime.split(':').map(Number);
                 const busMinutes = h * 60 + m;
@@ -249,35 +258,68 @@ function renderRouteDetails(bus) {
         `;
     });
 
-    // Закриття колонки розкладу та рядка
-    html += '</div></div>';
-    
-    // Встановлення фінального HTML
+    html += '</div></div>'; // Закриття колонок та рядка
     container.innerHTML = html;
 }
 
 // Годинник
 function setupClock() {
+    const clockEl = document.getElementById('clock');
+    if (!clockEl) return;
+
     const update = () => {
         const now = new Date();
-        document.getElementById('clock').innerText = now.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
+        clockEl.innerText = now.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
     };
     setInterval(update, 1000);
     update();
 }
 
-// Темна тема
+// 🔥 ОНОВЛЕНА ФУНКЦІЯ ТЕМИ (Тумблер + Автовизначення) 🔥
 function setupTheme() {
-    const btn = document.getElementById('theme-toggle');
-    const isDark = localStorage.getItem('theme') === 'dark';
+    const checkbox = document.getElementById('theme-checkbox');
+    const body = document.body;
     
-    if (isDark) document.body.classList.add('dark-mode');
-    btn.innerText = isDark ? '☀️' : '🌙';
+    if (!checkbox) return;
 
-    btn.onclick = () => {
-        document.body.classList.toggle('dark-mode');
-        const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-        btn.innerText = theme === 'dark' ? '☀️' : '🌙';
-        localStorage.setItem('theme', theme);
-    };
+    // 1. Перевіряємо, чи є збережена тема в пам'яті
+    const savedTheme = localStorage.getItem('theme');
+    
+    // 2. Перевіряємо налаштування системи (телефону)
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Логіка вибору початкової теми:
+    if (savedTheme === 'dark') {
+        enableDarkMode();
+    } else if (savedTheme === 'light') {
+        disableDarkMode();
+    } else {
+        // Якщо користувач ще не обирав вручну -> використовуємо системну
+        if (systemPrefersDark) {
+            enableDarkMode();
+        } else {
+            disableDarkMode();
+        }
+    }
+
+    // 3. Обробник кліку по тумблеру
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            enableDarkMode();
+            localStorage.setItem('theme', 'dark');
+        } else {
+            disableDarkMode();
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    function enableDarkMode() {
+        body.classList.add('dark-mode');
+        checkbox.checked = true; // Вмикаємо тумблер візуально
+    }
+
+    function disableDarkMode() {
+        body.classList.remove('dark-mode');
+        checkbox.checked = false; // Вимикаємо тумблер візуально
+    }
 }

@@ -77,17 +77,17 @@
       {
         "name": "Попутка.Сміла (Viber)",
         "url": "https://bit.ly/3BmTmMM",
-        "icon": "💜"
+        "icon": "<i class='fa-brands fa-viber' style='color: #7360f2; font-size: 1.4em;'></i>"
       },
       {
         "name": "Попутка.Сміла (Telegram)",
         "url": "https://t.me/PopytkaSmila",
-        "icon": "✈️"
+        "icon": "<i class='fa-brands fa-telegram' style='color: #24A1DE; font-size: 1.4em;'></i>"
       },
       {
         "name": "Попутка.Черкаси (Telegram)",
         "url": "https://t.me/telecar_cherkassy_geo",
-        "icon": "✈️"
+        "icon": "<i class='fa-brands fa-telegram' style='color: #24A1DE; font-size: 1.4em;'></i>"
       }
     ]
   }

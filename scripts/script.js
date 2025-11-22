@@ -3,15 +3,13 @@ let allBusData = [];
 // Запуск при завантаженні сторінки
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
-    setupTheme(); // Запускає нову логіку теми
+    setupTheme(); // Запускає логіку тумблера теми
     
-    // Завантаження ОСНОВНИХ ДАНИХ (маршрути)
+    // Завантаження даних
     loadBusData(); 
-
-    // Завантаження ДОДАТКОВОЇ ІНФОРМАЦІЇ (попутка, пільги)
     loadInfoData();
 
-    // Пошук
+    // Логіка Пошуку
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -64,14 +62,14 @@ function loadInfoData() {
         });
 }
 
-// 3. Рендер додаткової інформації як акордеон (Використовує info.json)
+// 3. Рендер додаткової інформації як акордеон
 function renderInfoData(data) {
     const container = document.getElementById('accordion');
     if (!container) return;
     
     let html = '';
 
-    // Функція-шаблон для створення заголовка акордеона
+    // Шаблон заголовка акордеона
     const renderHeader = (id, title, icon, isCollapsed = true) => `
         <div class="panel-heading glass-panel-header" role="tab" id="heading${id}">
             <h4 class="panel-title">
@@ -82,14 +80,14 @@ function renderInfoData(data) {
         </div>
     `;
 
-    // Функція-шаблон для створення тіла акордеона
+    // Шаблон тіла акордеона
     const renderBody = (id, content, isCollapsed = true) => `
         <div id="collapse${id}" class="panel-collapse collapse ${isCollapsed ? '' : 'in'}" role="tabpanel" aria-labelledby="heading${id}">
             <div class="glass-panel info-panel panel-body">${content}</div>
         </div>
     `;
 
-    // --- БЛОК 1: ПОПУТКА (ID: One) ---
+    // --- БЛОК 1: ПОПУТКА ---
     const p = data.poputka;
     let routesHtml = p.routes.map(route => `
         <div class="poputka-route">
@@ -120,7 +118,7 @@ function renderInfoData(data) {
         </div>
     `;
 
-    // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ / ПІЛЬГИ (ID: Two) ---
+    // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ ---
     const g = data.generalInfo;
 
     const renderList = (items) => items.map(item => `
@@ -131,9 +129,7 @@ function renderInfoData(data) {
         <div class="info-list">
             ${renderList(g.busFares)}
         </div>
-
         <hr class="info-separator">
-
         <div class="info-list privileges-list">
             ${renderList(g.privileges)}
         </div>
@@ -175,7 +171,7 @@ function renderBusGrid(buses) {
     });
 }
 
-// 5. Відкриття розкладу (з картою)
+// 5. Відкриття розкладу
 function openSchedule(bus) {
     document.getElementById('main-view').classList.add('hidden');
     document.getElementById('schedule-view').classList.remove('hidden');
@@ -194,7 +190,7 @@ function renderRouteDetails(bus) {
     // Початок Bootstrap-сітки
     let html = '<div class="row">';
 
-    // 1. Колонка для Карти (займає 6/12 на великих екранах)
+    // 1. Колонка для Карти
     const mapSrc = bus.mapIframeSrc || 'about:blank'; 
     
     html += `
@@ -210,7 +206,7 @@ function renderRouteDetails(bus) {
         </div>
     `;
 
-    // 2. Колонка для Розкладу (займає 6/12 на великих екранах)
+    // 2. Колонка для Розкладу
     html += '<div class="col-xs-12 col-md-6 schedule-column">';
     html += `<h4 class="schedule-title">Розклад руху (Маршрут №${bus.number})</h4>`;
 
@@ -225,7 +221,6 @@ function renderRouteDetails(bus) {
             let foundNext = false;
 
             stop.times.forEach(timeStr => {
-                // Парсинг часу "14:30 (примітка)"
                 const cleanTime = timeStr.split(' ')[0]; 
                 const [h, m] = cleanTime.split(':').map(Number);
                 const busMinutes = h * 60 + m;
@@ -258,7 +253,7 @@ function renderRouteDetails(bus) {
         `;
     });
 
-    html += '</div></div>'; // Закриття колонок та рядка
+    html += '</div></div>'; 
     container.innerHTML = html;
 }
 
@@ -275,26 +270,25 @@ function setupClock() {
     update();
 }
 
-// 🔥 ОНОВЛЕНА ФУНКЦІЯ ТЕМИ (Тумблер + Автовизначення) 🔥
+// 🔥 ФУНКЦІЯ ТЕМИ (Тумблер + Автовизначення) 🔥
 function setupTheme() {
     const checkbox = document.getElementById('theme-checkbox');
     const body = document.body;
     
     if (!checkbox) return;
 
-    // 1. Перевіряємо, чи є збережена тема в пам'яті
+    // 1. Перевірка збереженої теми
     const savedTheme = localStorage.getItem('theme');
     
-    // 2. Перевіряємо налаштування системи (телефону)
+    // 2. Перевірка системної теми
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    // Логіка вибору початкової теми:
+    // Встановлення початкового стану
     if (savedTheme === 'dark') {
         enableDarkMode();
     } else if (savedTheme === 'light') {
         disableDarkMode();
     } else {
-        // Якщо користувач ще не обирав вручну -> використовуємо системну
         if (systemPrefersDark) {
             enableDarkMode();
         } else {
@@ -302,7 +296,7 @@ function setupTheme() {
         }
     }
 
-    // 3. Обробник кліку по тумблеру
+    // 3. Обробник зміни тумблера
     checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
             enableDarkMode();
@@ -315,11 +309,11 @@ function setupTheme() {
 
     function enableDarkMode() {
         body.classList.add('dark-mode');
-        checkbox.checked = true; // Вмикаємо тумблер візуально
+        checkbox.checked = true; // Вмикає тумблер
     }
 
     function disableDarkMode() {
         body.classList.remove('dark-mode');
-        checkbox.checked = false; // Вимикаємо тумблер візуально
+        checkbox.checked = false; // Вимикає тумблер
     }
 }

@@ -337,7 +337,7 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІНАЛЬНИЙ ФІКС: ЗІ СТИЛЯМИ !IMPORTANT) */
+/* 5. FOOTER & ACTIONS (ФІНАЛЬНИЙ ВАРІАНТ: WHITE TEXT & YELLOW OUTLINE) */
 /* ================================================= */
 
 .glass-action-button {
@@ -352,34 +352,36 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 
 /* --- СПЕЦІАЛЬНІ СТИЛІ --- */
 
-/* 1. УНІВЕРСАЛЬНА GOLD BUTTON */
+/* 1. УНІВЕРСАЛЬНА GOLD BUTTON (для кнопки "Підтримати проєкт") */
 .gold-button-universal {
-    /* Світла тема: сріблясто-білий */
-    background: rgba(255, 255, 255, 0.5); 
-    border: 1px solid rgba(255, 255, 255, 0.9); 
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    color: var(--text-color);
+    /* Тимчасові змінні для жовтого кольору */
+    --gold: #ffc300; 
+    --dark-gold-border: #b8860b; 
+    
+    /* 🟢 СВІТЛА ТЕМА: Жовтий контур, прозорий фон, чорний текст */
+    background: transparent !important; 
+    border: 1px solid var(--dark-gold-border) !important; 
+    box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
+    color: var(--dark-gold-border) !important; /* Темний текст */
 }
 
-/* 🟢 НАСИЧЕНИЙ ЗОЛОТИЙ (Темна тема) - ВИКОРИСТАННЯ !IMPORTANT */
+/* 🟢 ТЕМНА ТЕМА: Жовта кнопка, білий текст */
 body.dark-mode .gold-button-universal {
-    --gold: #ffc300; /* Яскравий золотий */
-    --dark-gold: #b8860b; /* Темний золотий */
     
     /* ФОН: Насичений жовтий (Gold) */
     background: var(--gold) !important; 
     
-    /* КОНТУР: Чіткий, темно-золотистий, без прозорості */
-    border: 1px solid var(--dark-gold) !important; 
+    /* КОНТУР: Чіткий, темно-золотистий */
+    border: 1px solid var(--dark-gold-border) !important; 
     
     /* ТІНЬ: Золоте світіння */
     box-shadow: 0 0 18px 4px rgba(255, 195, 0, 0.8) !important; 
     
-    /* ТЕКСТ: Темний для контрасту на жовтому тлі */
-    color: var(--dark-gold) !important; 
+    /* ТЕКСТ: БІЛИЙ для контрасту */
+    color: #ffffff !important; 
     font-weight: 900 !important;
     
-    /* Додатково скидаємо filter, якщо він заважає кольору */
+    /* Скидаємо filter, якщо він заважає кольору */
     filter: none !important;
 }
 

@@ -337,7 +337,7 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІНАЛЬНИЙ ВАРІАНТ: WHITE TEXT & YELLOW OUTLINE) */
+/* 5. FOOTER & ACTIONS (ФІНАЛЬНИЙ ВАРІАНТ: ЧИСТИЙ ЖОВТИЙ КОНТУР) */
 /* ================================================= */
 
 .glass-action-button {
@@ -359,29 +359,31 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
     --dark-gold-border: #b8860b; 
     
     /* 🟢 СВІТЛА ТЕМА: Жовтий контур, прозорий фон, чорний текст */
-    background: transparent !important; 
+    background: transparent !important; /* Фон прозорий */
+    
+    /* КОНТУР: Чіткий, темно-жовтий (непрозорий) */
     border: 1px solid var(--dark-gold-border) !important; 
+    
     box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
     color: var(--dark-gold-border) !important; /* Темний текст */
 }
 
-/* 🟢 ТЕМНА ТЕМА: Жовта кнопка, білий текст */
+/* 🟢 ТЕМНА ТЕМА: Жовта кнопка, білий текст, темно-жовтий контур */
 body.dark-mode .gold-button-universal {
     
     /* ФОН: Насичений жовтий (Gold) */
     background: var(--gold) !important; 
     
-    /* КОНТУР: Чіткий, темно-золотистий */
+    /* КОНТУР: Чіткий, темно-жовтий (непрозорий) */
     border: 1px solid var(--dark-gold-border) !important; 
     
     /* ТІНЬ: Золоте світіння */
     box-shadow: 0 0 18px 4px rgba(255, 195, 0, 0.8) !important; 
     
-    /* ТЕКСТ: БІЛИЙ для контрасту */
+    /* ТЕКСТ: БІЛИЙ */
     color: #ffffff !important; 
     font-weight: 900 !important;
     
-    /* Скидаємо filter, якщо він заважає кольору */
     filter: none !important;
 }
 

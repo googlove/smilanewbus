@@ -337,71 +337,63 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІНАЛ: ЧІТКИЙ ЖОВТИЙ КОНТУР) */
+/* 5. FOOTER & ACTIONS (ФІКС СВІТЛОЇ ТЕМИ)           */
 /* ================================================= */
 
+/* Базові стилі для кнопок */
 .glass-action-button {
     text-decoration: none; padding: 12px 20px; border-radius: 30px;
-    font-weight: 700; 
-    /* Базове розмиття залишаємо для інших кнопок, але для золотої нижче вимкнемо */
-    backdrop-filter: blur(8px); 
-    transition: transform 0.2s, box-shadow 0.2s, border 0.3s;
-    font-size: 1rem; color: var(--text-color);
+    font-weight: 700;
+    /* ПРИБИРАЄМО ЗАГАЛЬНИЙ BLUR ТУТ. Додамо його тільки в темну тему. */
+    /* backdrop-filter: blur(8px); <--- ВИДАЛЕНО ЗВІДСИ */
+    transition: transform 0.2s, box-shadow 0.2s, border 0.3s, background 0.3s;
+    font-size: 1rem; 
     display: inline-flex; justify-content: center; align-items: center; 
 }
 .glass-action-button:active { transform: scale(0.98); }
 
 /* --- СПЕЦІАЛЬНІ СТИЛІ --- */
 
-/* 1. УНІВЕРСАЛЬНА GOLD BUTTON (для кнопки "Підтримати проєкт") */
+/* ========= 1. ЗОЛОТА КНОПКА (Підтримати) ========= */
+
+/* ⚪ СВІТЛА ТЕМА (Чистий контур) */
 .gold-button-universal {
-    /* 🟢 СВІТЛА ТЕМА: */
-    
-    /* 1. Фон повністю прозорий (ніякого кольору) */
-    background: transparent !important; 
-    
-    /* 2. Прибираємо ефект скла, щоб контур був чітким */
-    backdrop-filter: none !important; 
-    
-    /* 3. КОНТУР: Насичений темно-жовтий (Goldenrod), 2 пікселі, суцільний */
-    border: 2px solid #DAA520 !important; 
-    
-    /* 4. ТЕКСТ: Чорний */
-    color: #000000 !important;
-    
-    /* 5. Прибираємо тінь, якщо вона заважає, або робимо мінімальною */
-    box-shadow: none !important;
+    background: transparent !important; /* Повністю прозорий фон */
+    border: 2px solid #b8860b !important; /* Темно-жовтий контур */
+    color: #000000 !important; /* Чорний текст */
+    box-shadow: none !important; /* Без тіні */
+    backdrop-filter: none !important; /* Ніякого розмиття */
 }
 
-/* 🟢 ТЕМНА ТЕМА: */
+/* ⚫ ТЕМНА ТЕМА (Насичена золота) */
 body.dark-mode .gold-button-universal {
-    /* ФОН: Яскраво-жовтий */
-    background: #FFD700 !important; 
-    
-    /* КОНТУР: Такий самий жовтий */
+    background: #FFD700 !important; /* Яскраво-жовтий фон */
     border: 2px solid #FFD700 !important; 
-    
-    /* ТЕКСТ: Білий */
-    color: #ffffff !important; 
+    color: #ffffff !important; /* Білий текст */
     font-weight: 900 !important;
-    
-    /* Додаємо світіння для краси в темряві */
-    box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6) !important;
+    box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6) !important; /* Золоте світіння */
+    backdrop-filter: blur(8px) !important; /* Вмикаємо розмиття тільки тут */
 }
 
 
-/* 2. Liquid Blue (Бот та Зворотний зв'язок) - Без змін */
+/* ========= 2. СИНЯ КНОПКА (Бот/Зв'язок) ========= */
+
+/* ⚪ СВІТЛА ТЕМА (Чистий контур) */
 .ios-liquid-blue {
-    background: rgba(0, 125, 214, 0.1);
-    border: 1px solid rgba(0, 125, 214, 0.5);
-    box-shadow: 0 0 10px 1px rgba(0, 125, 214, 0.3);
-    color: var(--primary);
+    background: transparent !important; /* Повністю прозорий фон */
+    border: 1px solid var(--primary) !important; /* Синій контур */
+    color: var(--primary) !important; /* Синій текст */
+    box-shadow: none !important; /* Без тіні */
+    backdrop-filter: none !important; /* Ніякого розмиття */
 }
+
+/* ⚫ ТЕМНА ТЕМА (Liquid Glass Blue) */
 body.dark-mode .ios-liquid-blue {
-    background: rgba(0, 125, 214, 0.25);
-    border: 1px solid rgba(0, 125, 214, 0.7);
-    box-shadow: 0 0 15px 3px rgba(0, 125, 214, 0.7);
-    color: #ffffff;
+    background: rgba(0, 125, 214, 0.25) !important; /* Напівпрозорий синій */
+    border: 1px solid rgba(0, 125, 214, 0.7) !important;
+    box-shadow: 0 0 15px 3px rgba(0, 125, 214, 0.7) !important; /* Синє світіння */
+    color: #ffffff !important; /* Білий текст */
+    backdrop-filter: blur(8px) !important; /* Вмикаємо розмиття тільки тут */
 }
 
 /* Обнулюємо старі стилі */
@@ -410,7 +402,6 @@ body.dark-mode .ios-liquid-blue {
     border: none !important;
     box-shadow: none !important;
 }
-
 
 
 

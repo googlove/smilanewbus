@@ -353,20 +353,21 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 
 /* 1. Liquid White (Світла тема: сріблясто-білий) */
 .ios-liquid-white {
-    background: rgba(255, 255, 255, 0.5); /* Більш помітний на пастельному тлі */
+    background: rgba(255, 255, 255, 0.5); 
     border: 1px solid rgba(255, 255, 255, 0.9); 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
 }
-/* Liquid Gold (Темна тема: золотисте світіння) */
+/* Liquid Gold (Темна тема: темно-золотий контур) */
 body.dark-mode .ios-liquid-white {
-    --gold: #ffc300; /* Змінна для золотого кольору */
+    --gold: #ffc300; /* Змінна для основного золотого кольору */
     
     background: rgba(255, 195, 0, 0.1); /* Дуже легкий золотий фон */
-    border: 1px solid rgba(255, 195, 0, 0.4); /* Золотий контур */
+    /* Змінено: Посилений темно-золотий контур (більш темний відтінок) */
+    border: 1px solid rgba(184, 134, 11, 0.8); /* DarkGoldenrod (184, 134, 11) з високою непрозорістю */
     box-shadow: 0 0 15px 2px rgba(255, 195, 0, 0.5); /* Золоте світіння */
     color: var(--gold); /* Золотий текст */
-    font-weight: 800; /* Виділяємо текст */
+    font-weight: 800;
 }
 
 /* 2. Прозорий із синім світінням (Бот та Зворотний зв'язок) */
@@ -389,6 +390,7 @@ body.dark-mode .ios-liquid-blue {
     border: none !important;
     box-shadow: none !important;
 }
+
 
 /* ================================================= */
 /* 6. ТУМБЛЕР ТЕМИ (Black/White Liquid)              */

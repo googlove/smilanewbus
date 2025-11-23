@@ -58,15 +58,16 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* 1. HEADER                                         */
+/* 1. HEADER (ФІКС: ВСЕ В ОДНУ ЛІНІЮ)                */
 /* ================================================= */
 
 header {
     position: sticky;
     top: 15px;
     z-index: 100;
-    margin: 0 15px;
-    padding: 10px 20px;
+    margin: 0 10px; /* Трішки менші відступи з боків для мобільних */
+    padding: 8px 15px; /* Компактніший хедер */
+    
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -74,22 +75,93 @@ header {
     box-shadow: var(--glass-shadow);
     border-radius: 50px; 
 }
-.header-full-width { padding-left: 15px; padding-right: 15px; }
-.header-row-layout { display: flex; align-items: center; }
 
-.logo-area a { text-decoration: none; display: flex; align-items: center; }
-.logo-img { height: 35px; width: auto; max-width: 100%; }
-
-.controls-area-col { display: flex; justify-content: flex-end; align-items: center; }
-.controls { display: flex; align-items: center; gap: 10px; }
-
-.clock { font-weight: 800; font-size: 1.1rem; font-family: monospace; color: var(--text-color); }
-
-@media (min-width: 992px) {
-    .clock { font-size: 2.25rem; }
+/* Головний контейнер для вирівнювання */
+.header-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Лого зліва, решта справа */
+    width: 100%;
+    flex-wrap: nowrap; /* ЗАБОРОНА ПЕРЕНОСУ */
 }
 
-.header-actions-section { padding: 0 15px; max-width: 700px; margin: 0 auto; }
+/* --- ЛОГОТИП --- */
+.header-logo-wrapper {
+    flex-shrink: 0; /* Логотип не стискається */
+    margin-right: 10px;
+}
+
+.logo-img { 
+    height: 32px; /* Оптимальний розмір для мобільного */
+    width: auto; 
+    display: block;
+}
+
+/* --- ПРАВА ЧАСТИНА (Контроли) --- */
+.header-controls-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px; /* Відступ між кнопкою, годинником і тумблером */
+    flex-shrink: 1; /* Ця частина може трохи стискатися */
+}
+
+/* 1. Кнопка Бота в хедері */
+.header-bot-btn {
+    margin: 0 !important;
+    padding: 6px 12px !important; /* Компактні відступи */
+    font-size: 0.85rem !important; /* Менший шрифт */
+    height: 34px; /* Фіксована висота під тумблер */
+    white-space: nowrap; /* Текст не переноситься */
+}
+.header-bot-btn i {
+    margin-right: 4px;
+}
+
+/* 2. Годинник */
+.clock { 
+    font-weight: 700; 
+    font-size: 1.1rem; 
+    font-family: monospace; 
+    color: var(--text-color); 
+    white-space: nowrap;
+    margin: 0 2px; /* Мінімальний відступ */
+}
+
+/* 3. Тумблер у хедері */
+.theme-switch-wrapper.header-switch {
+    margin: 0;
+    padding: 0;
+    background: none; 
+    border: none; 
+    box-shadow: none;
+    backdrop-filter: none;
+    height: auto;
+    min-height: auto;
+}
+
+/* Зменшений масштаб тумблера для хедера */
+.theme-switch-wrapper.header-switch .custom-toggle {
+    transform: scale(0.85); /* Трішки зменшуємо, щоб влізло */
+    transform-origin: right center; /* Притискаємо до правого краю */
+    margin: 0;
+}
+
+/* Адаптація для дуже малих екранів (iPhone SE тощо) */
+@media (max-width: 380px) {
+    .bot-text { display: none; } /* Ховаємо слово "Бот", залишаємо іконку */
+    .header-bot-btn { padding: 6px 10px !important; }
+    .logo-img { height: 28px; }
+}
+
+/* Для ПК робимо трохи вільніше */
+@media (min-width: 992px) {
+    .clock { font-size: 1.5rem; margin: 0 10px; }
+    .header-bot-btn { font-size: 1rem !important; padding: 8px 20px !important; height: 40px; }
+    .logo-img { height: 40px; }
+    .theme-switch-wrapper.header-switch .custom-toggle { transform: scale(1); }
+}
+
 
 /* ================================================= */
 /* 2. MAIN LAYOUT & GRID                 */

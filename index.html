@@ -7,6 +7,7 @@
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="styles/bootstrap.min.css"> 
@@ -32,9 +33,32 @@
         </div>
     </header>
 
+    <section class="container header-actions-section">
+        <div class="row action-buttons-row" style="margin-bottom: 15px;">
+            <div class="col-xs-6 col-sm-6 mb-3">
+                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn ios-liquid-blue">
+                    <i class="fa-brands fa-telegram" style="margin-right: 5px; font-size: 1.2em;"></i> Бот розкладу
+                </a>
+            </div>
+            <div class="col-xs-6 col-sm-6 mb-3" style="display: flex; justify-content: flex-end;">
+                <div class="theme-switch-wrapper header-switch">
+                    <span class="theme-label">🌑/☀️</span>
+                    <label class="custom-toggle">
+                        <input type="checkbox" id="theme-checkbox">
+                        <div class="toggle-track">
+                            <div class="toggle-knob"></div>
+                            <span class="text-on">🌑</span>
+                            <span class="text-off">☀️</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <main id="main-view" class="container main-content-container">
         
-        <div class="row donors-row" style="margin-top: 20px; margin-bottom: 15px;">
+        <div class="row donors-row" style="margin-top: 10px; margin-bottom: 15px;">
             <div class="col-xs-12 donors-col-full">
                 <div class="top-donators-box glass-panel donate-banner">
                     <strong class="donor-list-title">👑 Топ донатери:</strong>
@@ -52,60 +76,23 @@
             </div>
         </div>
 
-<div class="col-xs-6 col-sm-6 mb-3">
-                <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style full-width-btn">
-   <center>
+        <div class="row donate-button-row text-center" style="margin-bottom: 25px;">
+            <div class="col-xs-12" style="display: flex; justify-content: center;">
+                 <a href="https://googlove.netlify.app/donate/index.html" target="_blank" class="glass-action-button donate-btn-style ios-liquid-white" style="max-width: 350px;">
                     💰 Підтримати проєкт
-   </center>
                 </a>
             </div>
-&nbsp
+        </div>
 
-<div class="col-xs-12 ad-banner-col">
-                <div class="ad-banner glass-panel" style="text-align: center; padding: 10px; margin-bottom: 20px;">
+        <div class="row ad-banner-row" style="margin-bottom: 20px;">
+            <div class="col-xs-12 ad-banner-col">
+                <div class="ad-banner glass-panel" style="text-align: center; padding: 15px; font-weight: bold;">
                     📰 Тут може бути ваша реклама
                 </div>
             </div>
-
-&nbsp
-&nbsp
-
-        <div class="row action-buttons-row" style="margin-bottom: 10px;">
-                  <div class="col-xs-6 col-sm-6 mb-3">
-                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button bot-btn-style full-width-btn">
-                    <i class="fa-brands fa-telegram" style="margin-right: 5px; font-size: 1.2em;"></i> Бот розкладу
-                </a>
-            </div>
-        </div>
-        
-        <div class="row feedback-row" style="margin-bottom: 30px;">
-             <div class="col-xs-12">
-                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button feedback-btn-style full-width-btn" style="margin-bottom: 20px;">
-        <center>
-                    ✍️ Зворотний зв'язок з розробником
-      </center>          
-             </a>
-
-                <div class="theme-switch-wrapper">
-                    <span class="theme-label">Темна тема</span>
-                    <label class="custom-toggle">
-                        <input type="checkbox" id="theme-checkbox">
-                        <div class="toggle-track">
-                            <div class="toggle-knob"></div>
-                            <span class="text-on">🌑</span>
-                            <span class="text-off">☀️</span>
-                        </div>
-                    </label>
-                </div>
-
-            </div>
         </div>
 
-        <div class="row bus-grid-row">
-            
-            
-           
-<div class="row search-input-row" style="margin-bottom: 20px;">
+        <div class="row search-input-row" style="margin-bottom: 25px;">
             <div class="col-xs-12 search-col-full">
                 <div class="input-group search-group">
                     <span class="input-group-addon search-icon">🔍</span>
@@ -113,15 +100,13 @@
                 </div>
             </div>
         </div>
- 
 
-
+        <div class="row bus-grid-row">
             <div class="col-xs-12 bus-grid-col">
                 <div id="bus-grid" class="bus-grid">
                     <div class="loader">Завантаження розкладу...</div>
                 </div>
             </div>
-            
             <div class="col-xs-12 accordion-col">
                 <div id="accordion" role="tablist" aria-multiselectable="true">
                 </div>
@@ -143,10 +128,17 @@
             </div>
     </section>
 
-    <div class="container">
+    <div class="container footer-container">
+        <div class="row feedback-footer-row" style="margin-top: 20px; margin-bottom: 10px;">
+            <div class="col-xs-12 text-center">
+                <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button full-width-btn ios-liquid-blue" style="max-width: 350px;">
+                    ✍️ Зворотний зв'язок з розробником
+                </a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-xs-12 text-center">
-                <p>&nbsp</p>
                 <div class="footer-date">Оновлено: Травень 2024</div>
                 <footer>
                     <p>© 2022-2025 SmilaBusTime | Dev by Yaroslav Hohulov</p>

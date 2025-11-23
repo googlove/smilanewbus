@@ -15,30 +15,25 @@
 </head>
 <body>
 
-    <header class="container-fluid header-full-width">
-        <div class="row header-row-layout" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+       <header class="container-fluid header-full-width">
+        <div class="header-flex-container">
             
-            <div class="col-xs-12 col-md-4 logo-area-col" style="margin-bottom: 5px;">
-                <div class="logo-area">
-                    <a href="https://www.smila-rada.gov.ua/" target="_blank">
-                        <img src="img/logo_gs_full.png" alt="Logo" class="logo-img img-responsive" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span class="fallback-logo" style="display:none"> SmilaBusTime</span>
-                    </a>
-                </div>
+            <div class="header-logo-wrapper">
+                <a href="https://www.smila-rada.gov.ua/" target="_blank">
+                    <img src="img/logo_gs_full.png" alt="Logo" class="logo-img">
+                </a>
             </div>
 
-            <div class="col-xs-12 col-md-8 controls-area-col" style="display: flex; align-items: center; justify-content: flex-end; gap: 15px; flex-wrap: wrap;">
+            <div class="header-controls-wrapper">
                 
-                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button ios-liquid-blue" style="margin: 0; padding: 8px 15px; font-size: 0.9rem; width: auto;">
-                    <i class="fa-brands fa-telegram" style="margin-right: 5px; font-size: 1.2em;"></i> Бот
+                <a href="https://t.me/SmilaBusTime_bot" target="_blank" class="glass-action-button ios-liquid-blue header-bot-btn">
+                    <i class="fa-brands fa-telegram"></i> <span class="bot-text">Бот</span>
                 </a>
 
-                <div class="controls" style="margin: 0;">
-                    <div id="clock" class="clock" style="font-size: 1.5rem; margin: 0;">00:00</div>
-                </div>
+                <div id="clock" class="clock">00:00</div>
 
-                <div class="theme-switch-wrapper header-switch" style="margin: 0; padding: 5px; background: none; border: none; box-shadow: none;">
-                    <label class="custom-toggle" style="transform: scale(0.8); margin: 0;">
+                <div class="theme-switch-wrapper header-switch">
+                    <label class="custom-toggle">
                         <input type="checkbox" id="theme-checkbox">
                         <div class="toggle-track">
                             <div class="toggle-knob"></div>
@@ -51,6 +46,7 @@
             </div>
         </div>
     </header>
+
 
     <main id="main-view" class="container main-content-container">
         

@@ -121,7 +121,7 @@ header {
 /* 2. Годинник */
 .clock { 
     font-weight: 700; 
-    font-size: 1.1rem; 
+    font-size: 1.5rem; 
     font-family: monospace; 
     color: var(--text-color); 
     white-space: nowrap;

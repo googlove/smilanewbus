@@ -284,52 +284,71 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІНАЛ З ВИПРАВЛЕННЯМ СВІТЛОЇ ТЕМИ) */
+/* 5. FOOTER & ACTIONS (ФІКС: ВИДИМІСТЬ У СВІТЛІЙ ТЕМІ) */
 /* ================================================= */
 
 .glass-action-button {
     text-decoration: none; padding: 12px 20px; border-radius: 30px;
     font-weight: 700; 
-    /* ПРИБРАНО ЗАГАЛЬНИЙ BLUR ТУТ, щоб не було муті в світлій темі */
     transition: transform 0.2s, box-shadow 0.2s, border 0.3s, background 0.3s;
     font-size: 1rem; color: var(--text-color);
     display: inline-flex; justify-content: center; align-items: center; 
 }
 .glass-action-button:active { transform: scale(0.98); }
 
-/* 1. УНІВЕРСАЛЬНА GOLD BUTTON (Підтримати) */
+/* --- СПЕЦІАЛЬНІ СТИЛІ --- */
 
-/* СВІТЛА ТЕМА: Повністю прозора, тільки контур */
+/* 1. ЗОЛОТА КНОПКА (Підтримати) */
+
+/* ⚪ СВІТЛА ТЕМА: */
 .gold-button-universal {
-    background: transparent !important; 
-    border: 2px solid #b8860b !important; /* Темно-жовтий контур */
-    color: #000000 !important; /* Чорний текст */
-    box-shadow: none !important; 
+    /* Додаємо білий напівпрозорий фон, щоб відділити від кольорової сторінки */
+    background: rgba(255, 255, 255, 0.7) !important; 
+    
+    /* Контур: Темний золотистий/коричневий, 2px */
+    border: 2px solid #b8860b !important; 
+    
+    /* Текст: Чорний */
+    color: #000000 !important; 
+    font-weight: 800 !important;
+    
+    /* Тінь для об'єму */
+    box-shadow: 0 4px 10px rgba(184, 134, 11, 0.2) !important;
+    
     backdrop-filter: none !important; 
 }
 
-/* ТЕМНА ТЕМА: Жовтий фон, світіння, blur */
+/* ⚫ ТЕМНА ТЕМА: */
 body.dark-mode .gold-button-universal {
+    /* Фон: Насичений жовтий */
     background: #FFD700 !important; 
+    
+    /* Контур: Жовтий */
     border: 2px solid #FFD700 !important; 
-    color: #ffffff !important;
+    
+    /* Текст: Білий */
+    color: #ffffff !important; 
     font-weight: 900 !important;
+    
+    /* Світіння */
     box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6) !important;
-    backdrop-filter: blur(8px) !important; /* Тут вмикаємо ефект скла */
+    
+    backdrop-filter: blur(8px) !important;
 }
+
 
 /* 2. СИНЯ КНОПКА (Бот/Зв'язок) */
 
-/* СВІТЛА ТЕМА: Повністю прозора, тільки синій контур */
+/* ⚪ СВІТЛА ТЕМА */
 .ios-liquid-blue {
-    background: transparent !important; 
+    background: rgba(255, 255, 255, 0.6) !important; /* Трохи білого фону для читабельності */
     border: 1px solid #007DD6 !important; 
-    color: #007DD6 !important; /* Синій текст */
-    box-shadow: none !important;
+    color: #007DD6 !important; 
+    box-shadow: 0 2px 5px rgba(0, 125, 214, 0.1) !important;
     backdrop-filter: none !important;
 }
 
-/* ТЕМНА ТЕМА: Liquid Glass Blue */
+/* ⚫ ТЕМНА ТЕМА */
 body.dark-mode .ios-liquid-blue {
     background: rgba(0, 125, 214, 0.25) !important; 
     border: 1px solid rgba(0, 125, 214, 0.7) !important;
@@ -338,10 +357,11 @@ body.dark-mode .ios-liquid-blue {
     backdrop-filter: blur(8px) !important; 
 }
 
-/* Скидання старих стилів */
+/* Обнулення */
 .donate-btn-style, .bot-btn-style, .feedback-btn-style {
     background: none !important; border: none !important; box-shadow: none !important;
 }
+
 
 /* ================================================= */
 /* 6. ТУМБЛЕР ТЕМИ                                   */

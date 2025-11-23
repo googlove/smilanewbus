@@ -58,15 +58,15 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* 1. HEADER (ФІКС: ВСЕ В ОДНУ ЛІНІЮ)                */
+/* 1. HEADER (ФІКС: ВІДСТУПИ ТА ЦЕНТРУВАННЯ)         */
 /* ================================================= */
 
 header {
     position: sticky;
     top: 15px;
     z-index: 100;
-    margin: 0 10px; /* Трішки менші відступи з боків для мобільних */
-    padding: 8px 15px; /* Компактніший хедер */
+    margin: 0 10px; 
+    padding: 8px 15px; 
     
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
@@ -76,57 +76,75 @@ header {
     border-radius: 50px; 
 }
 
-/* Головний контейнер для вирівнювання */
+/* Головний контейнер */
 .header-flex-container {
     display: flex;
-    align-items: center;
-    justify-content: space-between; /* Лого зліва, решта справа */
+    align-items: center; /* Вертикальне центрування всього рядка */
+    justify-content: space-between; 
     width: 100%;
-    flex-wrap: nowrap; /* ЗАБОРОНА ПЕРЕНОСУ */
+    flex-wrap: nowrap;
 }
 
 /* --- ЛОГОТИП --- */
 .header-logo-wrapper {
-    flex-shrink: 0; /* Логотип не стискається */
-    margin-right: 10px;
+    flex-shrink: 0;
+    margin-right: auto; /* Відштовхує праву частину максимально вправо */
+    display: flex;
+    align-items: center;
 }
 
 .logo-img { 
-    height: 32px; /* Оптимальний розмір для мобільного */
+    height: 32px; 
     width: auto; 
     display: block;
 }
 
-/* --- ПРАВА ЧАСТИНА (Контроли) --- */
+/* --- ПРАВА ЧАСТИНА (Бот, Час, Тумблер) --- */
 .header-controls-wrapper {
     display: flex;
-    align-items: center;
+    align-items: center; /* Ідеальне вертикальне центрування */
     justify-content: flex-end;
-    gap: 8px; /* Відступ між кнопкою, годинником і тумблером */
-    flex-shrink: 1; /* Ця частина може трохи стискатися */
+    
+    /* 👇 ЗБІЛЬШЕНО ВІДСТУП МІЖ ЕЛЕМЕНТАМИ (було 8px) */
+    gap: 15px; 
+    
+    flex-shrink: 1;
 }
 
 /* 1. Кнопка Бота в хедері */
 .header-bot-btn {
-    margin: 0 !important;
-    padding: 6px 12px !important; /* Компактні відступи */
-    font-size: 0.85rem !important; /* Менший шрифт */
-    height: 34px; /* Фіксована висота під тумблер */
-    white-space: nowrap; /* Текст не переноситься */
+    /* 👇 ДОДАНО ВІДСТУПИ З БОКІВ */
+    margin: 0 5px !important; 
+    
+    padding: 6px 15px !important;
+    font-size: 0.85rem !important;
+    height: 34px; 
+    white-space: nowrap;
+    
+    /* 👇 Щоб текст і іконка були ідеально по центру кнопки */
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
 }
 .header-bot-btn i {
-    margin-right: 4px;
+    margin-right: 5px;
 }
 
 /* 2. Годинник */
 .clock { 
     font-weight: 700; 
-    font-size: 1.4rem; 
+    
+    /* 👇 ВАШ ЗБІЛЬШЕНИЙ РОЗМІР ШРИФТА */
+    font-size: 1.4rem;  
+    
     font-family: monospace; 
     color: var(--text-color); 
     white-space: nowrap;
+    
+    /* Відступи для годинника, щоб він не лип до сусідів */
     margin: 0 5px; 
-    line-height: 1; /* Вирівнювання по висоті
+    line-height: 1; /* Вирівнювання по висоті */
+}
 
 /* 3. Тумблер у хедері */
 .theme-switch-wrapper.header-switch {
@@ -138,29 +156,34 @@ header {
     backdrop-filter: none;
     height: auto;
     min-height: auto;
+    display: flex;
+    align-items: center; /* Центрування тумблера */
 }
 
-/* Зменшений масштаб тумблера для хедера */
+/* Зменшений масштаб тумблера */
 .theme-switch-wrapper.header-switch .custom-toggle {
-    transform: scale(0.85); /* Трішки зменшуємо, щоб влізло */
-    transform-origin: right center; /* Притискаємо до правого краю */
+    transform: scale(0.85); 
+    transform-origin: right center; 
     margin: 0;
 }
 
-/* Адаптація для дуже малих екранів (iPhone SE тощо) */
+/* Адаптація для дуже малих екранів */
 @media (max-width: 380px) {
-    .bot-text { display: none; } /* Ховаємо слово "Бот", залишаємо іконку */
+    .bot-text { display: none; } 
     .header-bot-btn { padding: 6px 10px !important; }
     .logo-img { height: 28px; }
+    .header-controls-wrapper { gap: 8px; } /* Менший відступ на мікро-екранах */
 }
 
-/* Для ПК робимо трохи вільніше */
+/* Для ПК */
 @media (min-width: 992px) {
-    .clock { font-size: 1.5rem; margin: 0 10px; }
+    /* 👇 ЩЕ БІЛЬШИЙ ГОДИННИК ДЛЯ ПК */
+    .clock { font-size: 2rem; margin: 0 15px; } 
     .header-bot-btn { font-size: 1rem !important; padding: 8px 20px !important; height: 40px; }
     .logo-img { height: 40px; }
     .theme-switch-wrapper.header-switch .custom-toggle { transform: scale(1); }
 }
+
 
 
 /* ================================================= */

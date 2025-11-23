@@ -23,7 +23,7 @@ body {
     color: var(--text-color);
     
     /* Налаштування висоти та відступів */
-    min-height: 100vh; /* min-height краще для скролу, ніж height */
+    min-height: 100vh;
     margin: 0;
     padding-bottom: 60px;
     
@@ -67,7 +67,7 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* 1. HEADER                                         */
+/* 1. HEADER & TOP ACTIONS (Новий блок під хедером)  */
 /* ================================================= */
 
 header {
@@ -96,6 +96,26 @@ header {
 
 @media (min-width: 992px) {
     .clock { font-size: 2.25rem; }
+}
+
+/* Секція кнопок під хедером */
+.header-actions-section {
+    padding: 0 15px; /* Вирівнювання з main */
+    max-width: 700px; 
+    margin: 0 auto;
+}
+
+/* Стилі для тумблера у хедері */
+.theme-switch-wrapper.header-switch {
+    margin: 0;
+    padding: 10px;
+    height: 100%;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 15px;
+}
+.theme-switch-wrapper.header-switch .theme-label {
+    display: none; /* Приховуємо великий текст "Dark Mode" */
 }
 
 /* ================================================= */
@@ -317,24 +337,53 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS                               */
+/* 5. FOOTER & ACTIONS (НОВІ СТИЛІ LIQUID IOS)       */
 /* ================================================= */
 
 .glass-action-button {
     text-decoration: none; padding: 12px 20px; border-radius: 30px;
-    font-weight: 700; backdrop-filter: blur(5px); transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 700; backdrop-filter: blur(5px); transition: transform 0.2s, box-shadow 0.2s, border 0.3s;
     font-size: 1rem; color: var(--text-color);
+    display: inline-flex; justify-content: center; align-items: center; 
 }
 .glass-action-button:active { transform: scale(0.98); }
 
-.donate-btn-style { background: rgba(255, 215, 0, 0.2); color: #b8860b; border: 1px solid rgba(255, 215, 0, 0.4); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
-body.dark-mode .donate-btn-style { color: #ffef80; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.15); }
+/* --- IOS LIQUID DESIGN STYLES --- */
 
-.bot-btn-style { background: rgba(40, 167, 69, 0.2); color: #0f5132; border: 1px solid rgba(40, 167, 69, 0.3); box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3); }
-body.dark-mode .bot-btn-style { color: #86efac; background: rgba(40, 167, 69, 0.1); border: 1px solid rgba(40, 167, 69, 0.15); }
+/* 1. Прозорий злегка білий (для кнопки Підтримати) */
+.ios-liquid-white {
+    background: rgba(255, 255, 255, 0.2); 
+    border: 1px solid rgba(255, 255, 255, 0.7); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+body.dark-mode .ios-liquid-white {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #f1f5f9;
+}
 
-.feedback-btn-style { background: rgba(0, 191, 255, 0.2); color: #0080ff; border: 1px solid rgba(0, 191, 255, 0.4); box-shadow: 0 4px 15px rgba(0, 191, 255, 0.3); }
-body.dark-mode .feedback-btn-style { color: #a7f7ff; background: rgba(0, 191, 255, 0.1); border: 1px solid rgba(0, 191, 255, 0.15); }
+
+/* 2. Прозорий із синім світінням (для Бота та Зворотного зв'язку) */
+.ios-liquid-blue {
+    background: rgba(0, 125, 214, 0.15); 
+    border: 1px solid rgba(0, 125, 214, 0.5); 
+    box-shadow: 0 0 15px 1px rgba(0, 125, 214, 0.3); 
+    color: var(--text-color);
+}
+body.dark-mode .ios-liquid-blue {
+    background: rgba(0, 125, 214, 0.25);
+    border: 1px solid rgba(0, 125, 214, 0.6);
+    box-shadow: 0 0 15px 1px rgba(0, 125, 214, 0.6);
+    color: #ffffff; 
+}
+
+/* Обнулюємо старі стилі, які перебиваються новими Liquid стилями */
+.donate-btn-style, .bot-btn-style, .feedback-btn-style {
+    background: none !important;
+    color: var(--text-color) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
 
 /* ================================================= */
 /* 6. ТУМБЛЕР ТЕМИ (Black/White Liquid)              */

@@ -125,8 +125,8 @@ header {
     font-family: monospace; 
     color: var(--text-color); 
     white-space: nowrap;
-    margin: 0 3px; /* Мінімальний відступ */
-}
+    margin: 0 5px; 
+    line-height: 1; /* Вирівнювання по висоті
 
 /* 3. Тумблер у хедері */
 .theme-switch-wrapper.header-switch {

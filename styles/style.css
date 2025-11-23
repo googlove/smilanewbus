@@ -337,7 +337,7 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІНАЛЬНИЙ ВАРІАНТ: ЧИСТИЙ ЖОВТИЙ КОНТУР) */
+/* 5. FOOTER & ACTIONS (ФІНАЛЬНА ВЕРСІЯ: ЧОРНИЙ ТЕКСТ + ЖОВТИЙ КОНТУР) */
 /* ================================================= */
 
 .glass-action-button {
@@ -354,37 +354,63 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 
 /* 1. УНІВЕРСАЛЬНА GOLD BUTTON (для кнопки "Підтримати проєкт") */
 .gold-button-universal {
-    /* Тимчасові змінні для жовтого кольору */
+    /* Змінні кольорів */
     --gold: #ffc300; 
-    --dark-gold-border: #b8860b; 
+    --dark-gold-border: #b8860b; /* Темно-золотий */
     
-    /* 🟢 СВІТЛА ТЕМА: Жовтий контур, прозорий фон, чорний текст */
-    background: transparent !important; /* Фон прозорий */
+    /* 🟢 СВІТЛА ТЕМА: */
+    /* Фон: Прозорий (або можна поставити white, якщо треба білий фон) */
+    background: transparent !important; 
     
-    /* КОНТУР: Чіткий, темно-жовтий (непрозорий) */
-    border: 1px solid var(--dark-gold-border) !important; 
+    /* Контур: СУЦІЛЬНИЙ ЖОВТИЙ (2px для кращої видимості) */
+    border: 2px solid var(--dark-gold-border) !important; 
     
+    /* Тінь: Легке світіння */
     box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
-    color: var(--dark-gold-border) !important; /* Темний текст */
+    
+    /* Текст: ЧОРНИЙ (Темний) */
+    color: #1e293b !important; 
 }
 
-/* 🟢 ТЕМНА ТЕМА: Жовта кнопка, білий текст, темно-жовтий контур */
+/* 🟢 ТЕМНА ТЕМА: */
 body.dark-mode .gold-button-universal {
     
-    /* ФОН: Насичений жовтий (Gold) */
+    /* Фон: Насичений жовтий */
     background: var(--gold) !important; 
     
-    /* КОНТУР: Чіткий, темно-жовтий (непрозорий) */
-    border: 1px solid var(--dark-gold-border) !important; 
+    /* Контур: Темно-золотистий */
+    border: 2px solid var(--dark-gold-border) !important; 
     
-    /* ТІНЬ: Золоте світіння */
+    /* Тінь: Золоте світіння */
     box-shadow: 0 0 18px 4px rgba(255, 195, 0, 0.8) !important; 
     
-    /* ТЕКСТ: БІЛИЙ */
+    /* Текст: БІЛИЙ */
     color: #ffffff !important; 
     font-weight: 900 !important;
     
     filter: none !important;
+}
+
+
+/* 2. Liquid Blue (Бот та Зворотний зв'язок) */
+.ios-liquid-blue {
+    background: rgba(0, 125, 214, 0.1);
+    border: 1px solid rgba(0, 125, 214, 0.5);
+    box-shadow: 0 0 10px 1px rgba(0, 125, 214, 0.3);
+    color: var(--primary);
+}
+body.dark-mode .ios-liquid-blue {
+    background: rgba(0, 125, 214, 0.25);
+    border: 1px solid rgba(0, 125, 214, 0.7);
+    box-shadow: 0 0 15px 3px rgba(0, 125, 214, 0.7);
+    color: #ffffff;
+}
+
+/* Обнулюємо старі стилі */
+.donate-btn-style, .bot-btn-style, .feedback-btn-style {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
 }
 
 

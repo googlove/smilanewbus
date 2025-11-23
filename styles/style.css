@@ -18,31 +18,22 @@ body.dark-mode {
 }
 
 body {
-    /* Стек шрифтів як в iOS */
     font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text-color);
-    
-    /* Налаштування висоти та відступів */
-    min-height: 100vh;
     margin: 0;
     padding-bottom: 60px;
+    min-height: 100vh;
     
-    /* 🟢🔵 НОВА АНІМАЦІЯ ФОНУ (Світла тема) */
+    /* 🟢🔵 Анімація фону (Світла тема) */
     background-color: #b2f2bb;
     animation: bgColorChange 8s infinite alternate;
 }
 
-/* Анімація зміни кольору для світлої теми */
 @keyframes bgColorChange {
-    0% {
-        background-color: #b2f2bb; /* пастельно-зелений */
-    }
-    100% {
-        background-color: #a0c4ff; /* пастельно-блакитний */
-    }
+    0% { background-color: #b2f2bb; } /* пастельно-зелений */
+    100% { background-color: #a0c4ff; } /* пастельно-блакитний */
 }
 
-/* Темна тема: Градієнт + Анімація */
 body.dark-mode {
     background: linear-gradient(45deg, #232526, #414345, #2c3e50, #000000);
     background-size: 400% 400%;
@@ -55,7 +46,7 @@ body.dark-mode {
     100% { background-position: 0% 50%; }
 }
 
-/* --- GLASSMOPHISM BASE --- */
+/* --- GLASSMOPHISM BASE (Тільки для панелей, не для кнопок) --- */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
@@ -67,7 +58,7 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* 1. HEADER & TOP ACTIONS (Новий блок під хедером)  */
+/* 1. HEADER                                         */
 /* ================================================= */
 
 header {
@@ -98,25 +89,7 @@ header {
     .clock { font-size: 2.25rem; }
 }
 
-/* Секція кнопок під хедером */
-.header-actions-section {
-    padding: 0 15px; /* Вирівнювання з main */
-    max-width: 700px; 
-    margin: 0 auto;
-}
-
-/* Стилі для тумблера у хедері */
-.theme-switch-wrapper.header-switch {
-    margin: 0;
-    padding: 10px;
-    height: 100%;
-    justify-content: space-around;
-    flex-direction: row;
-    gap: 15px;
-}
-.theme-switch-wrapper.header-switch .theme-label {
-    display: none; /* Приховуємо великий текст "Dark Mode" */
-}
+.header-actions-section { padding: 0 15px; max-width: 700px; margin: 0 auto; }
 
 /* ================================================= */
 /* 2. MAIN LAYOUT & GRID                 */
@@ -125,7 +98,6 @@ header {
 main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .hidden { display: none !important; }
 
-/* Banners (Рекламний) */
 .ad-banner { 
     padding: 15px;
     background: rgba(255, 255, 255, 0.15);
@@ -134,11 +106,9 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
     border: 1px solid rgba(255,255,255,0.2);
 }
 
-/* --- СІТКА КОНТРОЛІВ --- */
 .controls-grid-row { margin-top: 15px; margin-bottom: 20px; align-items: flex-start; }
 .search-input-row { margin-bottom: 25px; }
 
-/* --- ПОШУК --- */
 .search-group { width: 100%; }
 .search-group .form-control {
     background: var(--glass-bg);
@@ -167,7 +137,6 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .search-group .form-control::placeholder { color: var(--text-color); opacity: 0.6; }
 .search-group .form-control:focus { box-shadow: 0 0 15px rgba(255,255,255,0.5); }
 
-/* Кнопки */
 .full-width-btn { width: 100%; display: block; font-weight: 700; }
 
 /* --- ТОП ДОНАТЕРИ --- */
@@ -185,14 +154,11 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 .donor-name { color: #833AB4; }
 .donor-amount { font-weight: 900; color: var(--accent); }
 
-
-/* --- АДАПТАЦІЯ GRID --- */
 @media (min-width: 768px) {
     .links-and-donate-col, .donors-col { margin-bottom: 0; }
     .links-and-donate-col { padding-right: 15px; }
 }
 
-/* Grid Layout (Сітка маршрутів) */
 .bus-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -200,7 +166,6 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
     margin-bottom: 20px;
 }
 
-/* Кнопки автобусів */
 .bus-card {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     padding: 20px 10px; text-align: center; cursor: pointer; transition: transform 0.2s, background 0.3s;
@@ -213,13 +178,12 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 .bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
 
 /* ================================================= */
-/* 3. ІНФО-БЛОКИ (АККОРДЕОН) - COLOR FIX         */
+/* 3. ІНФО-БЛОКИ (АККОРДЕОН)                         */
 /* ================================================= */
 
 #accordion { margin-top: 20px; }
 .panel-default { border: none; background-color: transparent; border-radius: var(--card-radius); margin-bottom: 20px; }
 
-/* Заголовок аккордеона */
 .glass-panel-header {
     background: var(--glass-bg);
     backdrop-filter: blur(12px); 
@@ -232,41 +196,28 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
     transition: all 0.2s;
 }
 
-/* Кнопка всередині заголовка */
 .glass-panel-header a {
-    display: block; 
-    padding: 15px 20px; 
-    text-decoration: none; 
-    color: var(--text-color);
-    font-size: 1.3rem; 
-    font-weight: 900; 
-    transition: all 0.2s; 
-    border-radius: var(--card-radius);
+    display: block; padding: 15px 20px; text-decoration: none; color: var(--text-color);
+    font-size: 1.3rem; font-weight: 900; transition: all 0.2s; border-radius: var(--card-radius);
 }
 
-/* 1. ПОПУТКА (Фіолетовий) */
+/* Попутка */
 .poputka-panel-wrapper .glass-panel-header {
-    background: rgba(93, 93, 245, 0.3) !important; 
-    border: 1px solid rgba(93, 93, 245, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(93, 93, 245, 0.2);
+    background: rgba(93, 93, 245, 0.3) !important; border: 1px solid rgba(93, 93, 245, 0.5) !important;
 }
 .poputka-panel-wrapper .glass-panel-header a { color: #4b4bc4 !important; }
 body.dark-mode .poputka-panel-wrapper .glass-panel-header {
-    background: rgba(93, 93, 245, 0.5) !important; 
-    border: 1px solid rgba(93, 93, 245, 0.7) !important;
+    background: rgba(93, 93, 245, 0.5) !important; border: 1px solid rgba(93, 93, 245, 0.7) !important;
 }
 body.dark-mode .poputka-panel-wrapper .glass-panel-header a { color: #ffffff !important; }
 
-/* 2. ЗАГАЛЬНА ІНФОРМАЦІЯ (Синій) */
+/* Інфо */
 .general-info-panel-wrapper .glass-panel-header {
-    background: rgba(0, 125, 214, 0.3) !important; 
-    border: 1px solid rgba(0, 125, 214, 0.5) !important;
-    box-shadow: 0 4px 15px rgba(0, 125, 214, 0.2);
+    background: rgba(0, 125, 214, 0.3) !important; border: 1px solid rgba(0, 125, 214, 0.5) !important;
 }
 .general-info-panel-wrapper .glass-panel-header a { color: #005a9e !important; }
 body.dark-mode .general-info-panel-wrapper .glass-panel-header {
-    background: rgba(0, 125, 214, 0.5) !important; 
-    border: 1px solid rgba(0, 125, 214, 0.7) !important;
+    background: rgba(0, 125, 214, 0.5) !important; border: 1px solid rgba(0, 125, 214, 0.7) !important;
 }
 body.dark-mode .general-info-panel-wrapper .glass-panel-header a { color: #ffffff !important; }
 
@@ -281,7 +232,6 @@ body.dark-mode .general-info-panel-wrapper .glass-panel-header a { color: #fffff
 .poputka-panel-wrapper .panel-collapse.in .info-panel { border: 1px solid rgba(93, 93, 245, 0.5); }
 .general-info-panel-wrapper .panel-collapse.in .info-panel { border: 1px solid rgba(0, 125, 214, 0.5); }
 
-/* Контент всередині панелей + ВИРІВНЮВАННЯ ІКОНОК FONTAWESOME */
 .panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
 .info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
 .info-panel .item-icon { font-size: 1.2rem; margin-right: 10px; flex-shrink: 0; width: 30px; text-align: center; }
@@ -294,13 +244,10 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .poputka-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
 .poputka-link { display: flex; align-items: center; padding: 12px 20px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none; color: var(--text-color); font-weight: 700; transition: background 0.2s; }
 .poputka-link:hover { background: rgba(255, 255, 255, 0.5); }
-.link-icon { 
-    display: flex; align-items: center; justify-content: center; width: 30px; margin-right: 10px; font-size: 1.2rem;
-}
-
+.link-icon { display: flex; align-items: center; justify-content: center; width: 30px; margin-right: 10px; font-size: 1.2rem; }
 
 /* ================================================= */
-/* 4. SCREEN: РОЗКЛАД (Details View)        */
+/* 4. SCREEN: РОЗКЛАД                                */
 /* ================================================= */
 
 .schedule-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
@@ -337,76 +284,67 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІКС СВІТЛОЇ ТЕМИ)           */
+/* 5. FOOTER & ACTIONS (ФІНАЛ З ВИПРАВЛЕННЯМ СВІТЛОЇ ТЕМИ) */
 /* ================================================= */
 
-/* Базові стилі для кнопок */
 .glass-action-button {
     text-decoration: none; padding: 12px 20px; border-radius: 30px;
-    font-weight: 700;
-    /* ПРИБИРАЄМО ЗАГАЛЬНИЙ BLUR ТУТ. Додамо його тільки в темну тему. */
-    /* backdrop-filter: blur(8px); <--- ВИДАЛЕНО ЗВІДСИ */
+    font-weight: 700; 
+    /* ПРИБРАНО ЗАГАЛЬНИЙ BLUR ТУТ, щоб не було муті в світлій темі */
     transition: transform 0.2s, box-shadow 0.2s, border 0.3s, background 0.3s;
-    font-size: 1rem; 
+    font-size: 1rem; color: var(--text-color);
     display: inline-flex; justify-content: center; align-items: center; 
 }
 .glass-action-button:active { transform: scale(0.98); }
 
-/* --- СПЕЦІАЛЬНІ СТИЛІ --- */
+/* 1. УНІВЕРСАЛЬНА GOLD BUTTON (Підтримати) */
 
-/* ========= 1. ЗОЛОТА КНОПКА (Підтримати) ========= */
-
-/* ⚪ СВІТЛА ТЕМА (Чистий контур) */
+/* СВІТЛА ТЕМА: Повністю прозора, тільки контур */
 .gold-button-universal {
-    background: transparent !important; /* Повністю прозорий фон */
+    background: transparent !important; 
     border: 2px solid #b8860b !important; /* Темно-жовтий контур */
     color: #000000 !important; /* Чорний текст */
-    box-shadow: none !important; /* Без тіні */
-    backdrop-filter: none !important; /* Ніякого розмиття */
+    box-shadow: none !important; 
+    backdrop-filter: none !important; 
 }
 
-/* ⚫ ТЕМНА ТЕМА (Насичена золота) */
+/* ТЕМНА ТЕМА: Жовтий фон, світіння, blur */
 body.dark-mode .gold-button-universal {
-    background: #FFD700 !important; /* Яскраво-жовтий фон */
+    background: #FFD700 !important; 
     border: 2px solid #FFD700 !important; 
-    color: #ffffff !important; /* Білий текст */
+    color: #ffffff !important;
     font-weight: 900 !important;
-    box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6) !important; /* Золоте світіння */
-    backdrop-filter: blur(8px) !important; /* Вмикаємо розмиття тільки тут */
+    box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6) !important;
+    backdrop-filter: blur(8px) !important; /* Тут вмикаємо ефект скла */
 }
 
+/* 2. СИНЯ КНОПКА (Бот/Зв'язок) */
 
-/* ========= 2. СИНЯ КНОПКА (Бот/Зв'язок) ========= */
-
-/* ⚪ СВІТЛА ТЕМА (Чистий контур) */
+/* СВІТЛА ТЕМА: Повністю прозора, тільки синій контур */
 .ios-liquid-blue {
-    background: transparent !important; /* Повністю прозорий фон */
-    border: 1px solid var(--primary) !important; /* Синій контур */
-    color: var(--primary) !important; /* Синій текст */
-    box-shadow: none !important; /* Без тіні */
-    backdrop-filter: none !important; /* Ніякого розмиття */
-}
-
-/* ⚫ ТЕМНА ТЕМА (Liquid Glass Blue) */
-body.dark-mode .ios-liquid-blue {
-    background: rgba(0, 125, 214, 0.25) !important; /* Напівпрозорий синій */
-    border: 1px solid rgba(0, 125, 214, 0.7) !important;
-    box-shadow: 0 0 15px 3px rgba(0, 125, 214, 0.7) !important; /* Синє світіння */
-    color: #ffffff !important; /* Білий текст */
-    backdrop-filter: blur(8px) !important; /* Вмикаємо розмиття тільки тут */
-}
-
-/* Обнулюємо старі стилі */
-.donate-btn-style, .bot-btn-style, .feedback-btn-style {
-    background: none !important;
-    border: none !important;
+    background: transparent !important; 
+    border: 1px solid #007DD6 !important; 
+    color: #007DD6 !important; /* Синій текст */
     box-shadow: none !important;
+    backdrop-filter: none !important;
 }
 
+/* ТЕМНА ТЕМА: Liquid Glass Blue */
+body.dark-mode .ios-liquid-blue {
+    background: rgba(0, 125, 214, 0.25) !important; 
+    border: 1px solid rgba(0, 125, 214, 0.7) !important;
+    box-shadow: 0 0 15px 3px rgba(0, 125, 214, 0.7) !important;
+    color: #ffffff !important; 
+    backdrop-filter: blur(8px) !important; 
+}
 
+/* Скидання старих стилів */
+.donate-btn-style, .bot-btn-style, .feedback-btn-style {
+    background: none !important; border: none !important; box-shadow: none !important;
+}
 
 /* ================================================= */
-/* 6. ТУМБЛЕР ТЕМИ (Black/White Liquid)              */
+/* 6. ТУМБЛЕР ТЕМИ                                   */
 /* ================================================= */
 
 .theme-switch-wrapper {
@@ -414,6 +352,11 @@ body.dark-mode .ios-liquid-blue {
     background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border); border-radius: 25px; box-shadow: var(--glass-shadow); width: fit-content;
 }
+.theme-switch-wrapper.header-switch {
+    margin: 0; padding: 10px; height: 100%; justify-content: space-around; flex-direction: row; gap: 15px;
+}
+.theme-switch-wrapper.header-switch .theme-label { display: none; }
+
 .theme-label { font-size: 1.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-color); }
 .custom-toggle { position: relative; width: 100px; height: 44px; display: block; cursor: pointer; margin-bottom: 0; }
 .custom-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
@@ -431,7 +374,6 @@ body.dark-mode .ios-liquid-blue {
 .text-off { right: 12px; color: #ffffff; opacity: 1; }
 .text-on { left: 14px; color: #000000; opacity: 0; }
 
-/* Стан ON (Dark Mode) */
 .custom-toggle input:checked + .toggle-track { background-color: rgba(255, 255, 255, 0.9); border-color: rgba(0, 0, 0, 0.1); }
 .custom-toggle input:checked + .toggle-track .toggle-knob { transform: translateX(56px); background: #1a1a1a; }
 .custom-toggle input:checked + .toggle-track .text-on { opacity: 1; }
@@ -442,35 +384,12 @@ body.dark-mode .ios-liquid-blue {
 .footer-date { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.8; }
 footer { text-align: center; margin-top: 10px; font-size: 0.8rem; opacity: 0.7; }
 
-
 /* ================================================= */
-/* 7. ВИПРАВЛЕННЯ КОЛЬОРІВ ТЕКСТУ В ТЕМНІЙ ТЕМІ      */
+/* 7. DARK MODE TEXT FIXES                           */
 /* ================================================= */
 
-/* Це правило змушує номер автобуса ставати білим у темній темі */
-body.dark-mode .bus-num {
-    color: #ffffff !important; /* !important перебиває inline-стилі з JS */
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* Легке світіння для краси */
-}
-
-/* Робимо назву маршруту (під номером) світло-сірою */
-body.dark-mode .bus-title {
-    color: #e0e0e0 !important;
-}
-
-/* Робимо заголовок "Розклад руху" та "На карті" світлими */
-body.dark-mode .schedule-title,
-body.dark-mode .map-title {
-    color: #ffffff !important;
-}
-
-/* Робимо стрілочку напрямку маршруту світлою */
-body.dark-mode .route-direction {
-    color: #a7f7ff !important; /* Світло-блакитний відтінок */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Робимо назви зупинок світлими */
-body.dark-mode .stop-name {
-    color: #f1f5f9 !important;
-}
+body.dark-mode .bus-num { color: #ffffff !important; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+body.dark-mode .bus-title { color: #e0e0e0 !important; }
+body.dark-mode .schedule-title, body.dark-mode .map-title { color: #ffffff !important; }
+body.dark-mode .route-direction { color: #a7f7ff !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+body.dark-mode .stop-name { color: #f1f5f9 !important; }

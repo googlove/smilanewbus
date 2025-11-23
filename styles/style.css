@@ -337,46 +337,49 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ФІНАЛЬНА ВЕРСІЯ: Liquid IOS + Gold) */
+/* 5. FOOTER & ACTIONS (ФІНАЛЬНА ВЕРСІЯ: GOLD BUTTON) */
 /* ================================================= */
 
 .glass-action-button {
+    /* Базові стилі для всіх кнопок */
     text-decoration: none; padding: 12px 20px; border-radius: 30px;
-    font-weight: 700; backdrop-filter: blur(8px); 
+    font-weight: 700; backdrop-filter: blur(8px); /* Залишаємо blur для загального стилю */
     transition: transform 0.2s, box-shadow 0.2s, border 0.3s;
     font-size: 1rem; color: var(--text-color);
     display: inline-flex; justify-content: center; align-items: center; 
 }
 .glass-action-button:active { transform: scale(0.98); }
 
-/* --- IOS LIQUID DESIGN STYLES --- */
+/* --- СПЕЦІАЛЬНІ СТИЛІ --- */
 
-/* 1. Liquid White (Кнопка "Підтримати проєкт" - Світла тема: сріблясто-білий) */
-.ios-liquid-white {
+/* 1. УНІВЕРСАЛЬНА GOLD BUTTON (для кнопки "Підтримати проєкт") */
+.gold-button-universal {
+    /* Світла тема: сріблясто-білий вигляд, щоб не конфліктувати зі світлим тлом */
     background: rgba(255, 255, 255, 0.5); 
     border: 1px solid rgba(255, 255, 255, 0.9); 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
 }
 
-/* 🟢 ФІКС: ЗОЛОТА КНОПКА З ЧІТКИМ КОНТУРОМ (Темна тема) */
-body.dark-mode .ios-liquid-white {
+/* 🟢 НАСИЧЕНИЙ ЗОЛОТИЙ (Темна тема) */
+body.dark-mode .gold-button-universal {
     --gold: #ffc300; 
-    --dark-gold: #b8860b; /* Темний золотий для тексту та контуру */
+    --dark-gold: #b8860b; 
     
-    /* ФОН: Жовтий, але злегка прозорий, щоб зберегти Liquid Glass */
-    background: rgba(255, 215, 0, 0.4); 
+    /* ФОН: Насичений жовтий (Gold) */
+    background: var(--gold); 
     
     /* КОНТУР: Чіткий, темно-золотистий, без прозорості */
     border: 1px solid var(--dark-gold); 
     
     /* ТІНЬ: Золоте світіння */
-    box-shadow: 0 0 15px 3px rgba(255, 195, 0, 0.6); 
+    box-shadow: 0 0 18px 4px rgba(255, 195, 0, 0.8); 
     
     /* ТЕКСТ: Темний для контрасту на жовтому тлі */
     color: var(--dark-gold); 
     font-weight: 900;
 }
+
 
 /* 2. Liquid Blue (Бот та Зворотний зв'язок) */
 .ios-liquid-blue {
@@ -392,7 +395,7 @@ body.dark-mode .ios-liquid-blue {
     color: #ffffff;
 }
 
-/* Обнулюємо старі стилі, які перебиваються новими Liquid стилями */
+/* Обнулюємо старі стилі, які перебиваються новими стилями */
 .donate-btn-style, .bot-btn-style, .feedback-btn-style {
     background: none !important;
     border: none !important;

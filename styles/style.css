@@ -55,7 +55,7 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* 1. HEADER                                         */
+/* 1. HEADER (ФІКС: ВСЕ В ОДНУ ЛІНІЮ)                */
 /* ================================================= */
 
 header {
@@ -69,7 +69,7 @@ header {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
-    border-radius: 50px; /* Додано заокруглення хедеру */
+    border-radius: 50px; 
 }
 
 /* Головний контейнер */
@@ -84,7 +84,7 @@ header {
 /* --- ЛОГОТИП --- */
 .header-logo-wrapper {
     flex-shrink: 0;
-    flex: 1;
+    margin-right: auto;
     display: flex;
     align-items: center;
 }
@@ -106,7 +106,7 @@ header {
 
 /* Кнопка Бота */
 .header-bot-btn {
-    margin: 0 auto !important;
+    margin: 0 5px !important;
     padding: 6px 15px !important;
     font-size: 0.85rem !important;
     height: 34px;
@@ -114,37 +114,12 @@ header {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    line-height: 1 !important;
 }
-
 .header-bot-btn i { margin-right: 5px; }
-
-/* Адаптація кнопки бота */
-@media (max-width: 575px) {
-    .header-bot-btn { height: 34px !important; padding: 6px 14px !important; font-size: 1.1rem !important; }
-    .header-bot-btn i { font-size: 1.5rem !important; }
-    .header-bot-btn .bot-text { font-size: 1.1rem !important; }
-    .logo-img { height: 40px !important; }
-}
-
-@media (min-width: 576px) and (max-width: 991px) {
-    .header-bot-btn { height: 40px !important; padding: 8px 20px !important; font-size: 1.1rem !important; }
-    .header-bot-btn i { font-size: 1.5rem !important; }
-    .header-bot-btn .bot-text { font-size: 1.4rem !important; }
-    .logo-img { height: 48px !important; }
-}
-
-@media (min-width: 992px) {
-    .header-bot-btn { height: 45px !important; padding: 10px 25px !important; font-size: 1.3rem !important; }
-    .header-bot-btn i { font-size: 1.8rem !important; margin-right: 8px !important; width: auto !important; }
-    .header-bot-btn .bot-text { font-size: 1.55rem !important; }
-    .logo-img { height: 55px !important; }
-    header { padding: 4px 15px !important; }
-}
 
 /* Годинник */
 .clock {
-    font-weight: 530;
+    font-weight: 700;
     font-size: 1.4rem;
     color: var(--text-color);
     white-space: nowrap;
@@ -152,37 +127,30 @@ header {
     line-height: 1;
 }
 
-@media (min-width: 992px) {
-    .clock { font-size: 1.9rem; }
-}
-
-/* Тумблер у хедері */
+/* Тумблер */
 .theme-switch-wrapper.header-switch {
     margin: 0; padding: 0; background: none; border: none; box-shadow: none;
     backdrop-filter: none; height: auto; min-height: auto;
     display: flex; align-items: center;
 }
-
 .theme-switch-wrapper.header-switch .custom-toggle {
     transform: scale(0.85); transform-origin: right center; margin: 0;
 }
-@media (min-width: 992px) {
-    .theme-switch-wrapper.header-switch .custom-toggle { transform: scale(1); }
-}
 
-/* Адаптація хедера для малих екранів */
+/* Адаптація */
 @media (max-width: 380px) {
     .bot-text { display: none; }
     .header-bot-btn { padding: 6px 10px !important; }
     .logo-img { height: 28px; }
     .header-controls-wrapper { gap: 8px; }
 }
-
-@media (max-width: 991px) {
-    .header-right { gap: 8px !important; }
-    .clock { margin-right: 4px !important; }
-    .theme-switch-wrapper.header-switch { gap: 5px !important; padding: 5px !important; }
+@media (min-width: 992px) {
+    .clock { font-size: 2rem; margin: 0 15px; }
+    .header-bot-btn { font-size: 1rem !important; padding: 8px 20px !important; height: 40px; }
+    .logo-img { height: 40px; }
+    .theme-switch-wrapper.header-switch .custom-toggle { transform: scale(1); }
 }
+
 
 /* ================================================= */
 /* 2. MAIN LAYOUT & GRID                             */
@@ -382,8 +350,14 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .schedule-view .row .col-xs-12 { margin-bottom: 20px; }
 @media (min-width: 992px) { .schedule-view .row .col-md-6 { margin-bottom: 0; } }
 
-.map-panel { padding: 0; overflow: hidden; margin-bottom: 20px; border-radius: 25px !important; }
-.map-panel iframe { width: 100%; height: auto !important; border: none; display: block; border-radius: 20px; }
+.map-panel { 
+    padding: 0; overflow: hidden !important; margin-bottom: 20px; border-radius: 25px !important; 
+    -webkit-mask-image: -webkit-radial-gradient(white, black); /* Фікс для айфонів */
+}
+.map-panel iframe { 
+    width: 100%; height: auto !important; border: none; display: block; border-radius: 25px !important; 
+}
+
 
 .map-title, .schedule-title { margin-top: 0; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: var(--primary); }
 .schedule-title { margin-bottom: 15px; }
@@ -452,10 +426,10 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 /* --- ЗОЛОТА КНОПКА (Підтримати) --- */
 /* СВІТЛА ТЕМА: Біла прозора + Чіткий темний контур */
 .gold-button-universal {
-    background: #f8fafcb2 !important;
+    background: transparent !important;
     border: 2px solid #b8860b !important;
-    color: var(--text-color) !important; /* Темний текст */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    color: #000000 !important; /* Чорний текст */
+    box-shadow: none !important; /* Без тіні */
     backdrop-filter: none !important;
 }
 /* ТЕМНА ТЕМА: Яскраво-жовта + Білий текст */
@@ -470,10 +444,10 @@ body.dark-mode .gold-button-universal {
 /* --- СИНЯ КНОПКА (Бот/Зв'язок) --- */
 /* СВІТЛА ТЕМА */
 .ios-liquid-blue {
-    background: #f8fafc71 !important;
+    background: transparent !important;
     border: 2px solid #007DD6 !important;
     color: #007DD6 !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+    box-shadow: none !important;
     backdrop-filter: none !important;
 }
 /* ТЕМНА ТЕМА */

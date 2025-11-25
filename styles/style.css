@@ -359,23 +359,29 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 
 
 
+/* ================================================= */
+/* ФІКС КАРТИ (ЯДЕРНИЙ МЕТОД)                        */
+/* ================================================= */
 
-/* 🟢 ФІКС КАРТИ (Примусове заокруглення) */
-.map-panel {
-    padding: 0;
-    margin-bottom: 20px;
-
-    /* 1. Задаємо радіус */
-    border-radius: 25px !important;
+.map-panel { 
+    padding: 0; 
+    margin-bottom: 20px; 
     
-    /* 2. Обрізаємо все, що вилазить */
-    overflow: hidden !important;
+    /* 1. Жорстке заокруглення та обрізка */
+    border-radius: 25px !important; 
+    overflow: hidden !important; 
+    
+    /* 2. Створення нового контексту накладання (виправляє глюк, коли карта вилазить зверху) */
+    position: relative !important;
+    z-index: 1 !important;
 
-    /* --- 🔥 ГОЛОВНИЙ ФІКС ДЛЯ ГУГЛ КАРТ 🔥 --- */
-    /* Змушує браузер застосувати апаратне прискорення для обрізки */
-    transform: translateZ(0);
-    /* Спеціальна маска для Safari (iPhone) та Chrome, щоб точно обрізати iframe */
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    /* 3. Примусове GPU-прискорення (змушує відеокарту обрізати краї) */
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+
+    /* 4. Маска для WebKit (Safari/Chrome) - це найсильніший інструмент */
+    -webkit-mask-image: -webkit-radial-gradient(white, black) !important;
+    mask-image: radial-gradient(white, black) !important;
 
     /* Стиль Liquid Glass */
     background: var(--glass-bg);
@@ -385,13 +391,18 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
     box-shadow: var(--glass-shadow);
 }
 
-.map-panel iframe {
-    width: 100%;
-    height: 300px; /* Або auto, як у вас налаштовано */
-    border: none;
+.map-panel iframe { 
+    width: 100%; 
+    height: 300px; 
+    border: none; 
     display: block;
+    
+    /* 5. Заокруглюємо сам iframe теж (для надійності) */
+    border-radius: 25px !important; 
+    
+    /* Запобігаємо виходу за межі */
+    clip-path: inset(0 round 25px); 
 }
-
 
 .map-title, .schedule-title { margin-top: 0; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: var(--primary); }
 .schedule-title { margin-bottom: 15px; }

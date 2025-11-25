@@ -213,6 +213,13 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 .donor-name { color: #173a53; font-size: 1.4rem; }
 .donor-amount { font-weight: 900; color: #071219; }
 
+body.dark-mode .donor-name {
+    color: #ffffff !important;
+}
+body.dark-mode .donor-amount {
+    color: #f0f0f0 !important;
+}
+
 @media (min-width: 768px) {
     .links-and-donate-col, .donors-col { margin-bottom: 0; }
     .links-and-donate-col { padding-right: 15px; }

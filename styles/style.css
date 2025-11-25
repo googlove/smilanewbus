@@ -342,7 +342,7 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .link-icon { display: flex; align-items: center; justify-content: center; width: 30px; margin-right: 10px; font-size: 1.2rem; }
 
 /* ================================================= */
-/* 4. SCREEN: РОЗКЛАД (Details View)        */
+/* 4. SCREEN: РОЗКЛАД (Details View)                 */
 /* ================================================= */
 
 .schedule-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
@@ -360,49 +360,45 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .schedule-view .row .col-xs-12 { margin-bottom: 20px; }
 @media (min-width: 992px) { .schedule-view .row .col-md-6 { margin-bottom: 0; } }
 
-/* 🟢 ЗАОКРУГЛЕННЯ КАРТИ (IFRAME) */
+/* 🟢 ФІКС КАРТИ (Примусове заокруглення) */
 .map-panel { 
     padding: 0; 
     margin-bottom: 20px; 
     
-    /* Ключова властивість: обрізає все, що вилазить за радіус */
-    overflow: hidden; 
+    /* Головні властивості для заокруглення */
+    border-radius: 25px !important; 
+    overflow: hidden !important; /* Обрізає гострі кути карти */
     
-    /* Сильне заокруглення */
-    border-radius: 25px; 
-    
-    /* Стиль Liquid Glass для рамки */
+    /* Стиль Liquid Glass */
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
+    
+    /* Фікс для Safari/iOS, щоб кути точно обрізалися */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+    transform: translateZ(0);
 }
 
 .map-panel iframe { 
     width: 100%; 
     height: 300px; 
     border: none; 
-    display: block; 
+    display: block;
     
-    /* Також заокруглюємо саму карту */
-    border-radius: 25px; 
+    /* Дублюємо заокруглення для самої карти */
+    border-radius: 25px !important; 
 }
 
 .map-title, .schedule-title { margin-top: 0; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: var(--primary); }
 .schedule-title { margin-bottom: 15px; }
 
-/* Блоки маршруту (теж в стилі Liquid Glass) */
+/* Решта стилів розкладу */
 .route-block {
-    padding: 25px; margin-bottom: 20px; 
-    background: var(--glass-bg); 
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); 
-    border: 1px solid var(--glass-border); 
-    box-shadow: var(--glass-shadow); 
-    border-radius: 25px; /* Заокруглення блоків з часом */
+    padding: 25px; margin-bottom: 20px; background: var(--glass-bg); backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 25px;
 }
-
 .route-direction {
     margin-top: 0; color: var(--accent); font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.05);
     padding-bottom: 10px; margin-bottom: 15px;
@@ -420,6 +416,8 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
     transform: scale(1.15); box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4); z-index: 2;
 }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
+
+
 /* ================================================= */
 /* 5. FOOTER & ACTIONS (ВИПРАВЛЕНО КОНФЛІКТИ)        */
 /* ================================================= */

@@ -321,6 +321,12 @@ body.dark-mode .general-info-panel-wrapper .glass-panel-header a { color: #fffff
 .poputka-price { font-size: 1.6rem !important; font-weight: 800; color: #031c2f !important; margin-top: -10px; margin-bottom: 20px; }
 .poputka-route { margin-bottom: 15px; padding: 10px; border-left: 3px solid #5d5df5; background: rgba(93, 93, 245, 0.1); border-radius: 5px; }
 body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
+body.dark-mode .poputka-price {
+    color: #ffffff !important;
+}
+
+
+
 .route-city { font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
 .route-points { font-size: 1.25rem; opacity: 0.9; }
 .poputka-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }

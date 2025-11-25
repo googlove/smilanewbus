@@ -1,10 +1,19 @@
 let allBusData = [];
 
-// Запуск при завантаженні сторінки
+// -----------------------------------------------------------
+// ЗАПУСК ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ (ОНОВЛЕНО)
+// -----------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
     setupTheme(); // Запускає логіку тумблера
     
+    // Встановлення початкового стану для History API
+    // Це потрібно для коректного повернення жестом "Назад"
+    history.replaceState({ view: 'main' }, '', window.location.pathname);
+
+    // 🔥 Обробка жесту "Назад" браузера (popstate) 🔥
+    setupHistoryListener();
+
     // Завантаження даних
     loadBusData(); 
     loadInfoData();
@@ -22,16 +31,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Кнопка Назад
+    // Кнопка Назад (ОНОВЛЕНО)
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
         backBtn.addEventListener('click', () => {
-            document.getElementById('schedule-view').classList.add('hidden');
-            document.getElementById('main-view').classList.remove('hidden');
+            // Замість прямого приховування, імітуємо натискання "Назад" у браузері.
+            // Це запустить наш popstate обробник і забезпечить узгодженість.
+            history.back();
             window.scrollTo(0, 0);
         });
     }
 });
+
+// -----------------------------------------------------------
+// НОВІ ФУНКЦІЇ ДЛЯ HISTORY API
+// -----------------------------------------------------------
+
+// 🔥 Функція обробки жесту "Назад" 🔥
+function setupHistoryListener() {
+    window.addEventListener('popstate', (event) => {
+        // Якщо стан історії говорить, що ми повертаємося до головного виду,
+        // або якщо стану немає (повернення до початкової точки)
+        if (event.state && event.state.view === 'main') {
+            // Показати головну сторінку
+            document.getElementById('schedule-view').classList.add('hidden');
+            document.getElementById('main-view').classList.remove('hidden');
+        } 
+        
+        // Якщо state порожній, ми намагаємося повернутися за межі додатка.
+        // Ваш браузер обробить це сам.
+    });
+}
+
+// Функція для зміни відображення між головною та розкладом
+function switchView(toView) {
+    if (toView === 'main') {
+        document.getElementById('schedule-view').classList.add('hidden');
+        document.getElementById('main-view').classList.remove('hidden');
+    } else if (toView === 'schedule') {
+        document.getElementById('main-view').classList.add('hidden');
+        document.getElementById('schedule-view').classList.remove('hidden');
+    }
+}
+
 
 // 1. Завантаження даних маршрутів (data.json)
 function loadBusData() {
@@ -62,7 +104,7 @@ function loadInfoData() {
         });
 }
 
-// 3. Рендер додаткової інформації як акордеон
+// 3. Рендер додаткової інформації як акордеон (БЕЗ ЗМІН)
 function renderInfoData(data) {
     const container = document.getElementById('accordion');
     if (!container) return;
@@ -146,7 +188,7 @@ function renderInfoData(data) {
 }
 
 
-// 4. Малювання кнопок (Сітка)
+// 4. Малювання кнопок (Сітка) (БЕЗ ЗМІН)
 function renderBusGrid(buses) {
     const container = document.getElementById('bus-grid');
     if (!container) return;
@@ -171,17 +213,19 @@ function renderBusGrid(buses) {
     });
 }
 
-// 5. Відкриття розкладу
+// 5. Відкриття розкладу (ОНОВЛЕНО: ДОДАНО history.pushState)
 function openSchedule(bus) {
-    document.getElementById('main-view').classList.add('hidden');
-    document.getElementById('schedule-view').classList.remove('hidden');
+    // 🔥 Додаємо нову точку в історію браузера 🔥
+    history.pushState({ view: 'schedule', busId: bus.number }, `Маршрут №${bus.number}`, `#bus=${bus.number}`);
+    
+    switchView('schedule');
     document.getElementById('route-title-display').innerText = `№${bus.number} ${bus.title}`;
     
     renderRouteDetails(bus);
     window.scrollTo(0, 0);
 }
 
-// 6. Генерація розкладу та карти
+// 6. Генерація розкладу та карти (БЕЗ ЗМІН)
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
     if (!container) return;
@@ -190,24 +234,24 @@ function renderRouteDetails(bus) {
     // Початок Bootstrap-сітки
     let html = '<div class="row">';
 
-    // 1. Колонка для Карти (займає 6/12 на великих екранах)
-const mapSrc = bus.mapIframeSrc || 'about:blank'; 
+    // 1. Колонка для Карти (з фіксом map-panel)
+    const mapSrc = bus.mapIframeSrc || 'about:blank'; 
 
-html += `
-    <div class="col-xs-12 col-md-6">
-        <h4 class="map-title">Маршрут на карті</h4>
-        
-        <div class="map-panel">
-            <iframe 
-                frameborder="0" 
-                
-                src="${mapSrc}" 
-                width="100%" 
-                height="303">
-            </iframe>
+    html += `
+        <div class="col-xs-12 col-md-6">
+            <h4 class="map-title">Маршрут на карті</h4>
+            
+            <div class="map-panel">
+                <iframe 
+                    frameborder="0" 
+                    
+                    src="${mapSrc}" 
+                    width="100%" 
+                    height="303">
+                </iframe>
+            </div>
         </div>
-    </div>
-`;
+    `;
 
 
     // 2. Колонка для Розкладу
@@ -262,7 +306,7 @@ html += `
     container.innerHTML = html;
 }
 
-// Годинник
+// Годинник (БЕЗ ЗМІН)
 function setupClock() {
     const clockEl = document.getElementById('clock');
     if (!clockEl) return;
@@ -275,7 +319,7 @@ function setupClock() {
     update();
 }
 
-// 🔥 ФУНКЦІЯ ТЕМИ (Тумблер + Автовизначення) 🔥
+// Функція Теми (БЕЗ ЗМІН)
 function setupTheme() {
     const checkbox = document.getElementById('theme-checkbox');
     const body = document.body;

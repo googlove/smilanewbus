@@ -342,25 +342,67 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .link-icon { display: flex; align-items: center; justify-content: center; width: 30px; margin-right: 10px; font-size: 1.2rem; }
 
 /* ================================================= */
-/* 4. SCREEN: РОЗКЛАД                                */
+/* 4. SCREEN: РОЗКЛАД (Details View)        */
 /* ================================================= */
 
 .schedule-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+
 #back-btn {
     background: var(--glass-bg); color: var(--text-color); border: 1px solid var(--glass-border);
     padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 700; backdrop-filter: blur(10px);
+    transition: all 0.2s;
 }
+#back-btn:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
 #route-title-display { margin: 0; font-size: 1.3rem; color: var(--primary); text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
 .schedule-view .row .col-xs-12 { margin-bottom: 20px; }
 @media (min-width: 992px) { .schedule-view .row .col-md-6 { margin-bottom: 0; } }
-.map-panel { padding: 0; overflow: hidden; margin-bottom: 20px; }
-.map-panel iframe { width: 100%; height: 300px; border: none; display: block; border-radius: 20px; }
+
+/* 🟢 ЗАОКРУГЛЕННЯ КАРТИ (IFRAME) */
+.map-panel { 
+    padding: 0; 
+    margin-bottom: 20px; 
+    
+    /* Ключова властивість: обрізає все, що вилазить за радіус */
+    overflow: hidden; 
+    
+    /* Сильне заокруглення */
+    border-radius: 25px; 
+    
+    /* Стиль Liquid Glass для рамки */
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+.map-panel iframe { 
+    width: 100%; 
+    height: 300px; 
+    border: none; 
+    display: block; 
+    
+    /* Також заокруглюємо саму карту */
+    border-radius: 25px; 
+}
+
 .map-title, .schedule-title { margin-top: 0; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: var(--primary); }
 .schedule-title { margin-bottom: 15px; }
+
+/* Блоки маршруту (теж в стилі Liquid Glass) */
 .route-block {
-    padding: 25px; margin-bottom: 20px; background: var(--glass-bg); backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 25px;
+    padding: 25px; margin-bottom: 20px; 
+    background: var(--glass-bg); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px); 
+    border: 1px solid var(--glass-border); 
+    box-shadow: var(--glass-shadow); 
+    border-radius: 25px; /* Заокруглення блоків з часом */
 }
+
 .route-direction {
     margin-top: 0; color: var(--accent); font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.05);
     padding-bottom: 10px; margin-bottom: 15px;
@@ -368,6 +410,7 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .stop-item { margin-bottom: 20px; }
 .stop-name { font-weight: 800; margin-bottom: 10px; display: block; opacity: 0.8; }
 .times-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
 .time-badge {
     background: rgba(255, 255, 255, 0.3); padding: 6px 12px; border-radius: 10px;
     font-size: 1rem; font-family: monospace; font-weight: 600; border: 1px solid rgba(255,255,255,0.2);
@@ -377,7 +420,6 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
     transform: scale(1.15); box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4); z-index: 2;
 }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
-
 /* ================================================= */
 /* 5. FOOTER & ACTIONS (ВИПРАВЛЕНО КОНФЛІКТИ)        */
 /* ================================================= */

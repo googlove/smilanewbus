@@ -359,44 +359,36 @@ body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 
 
 
-/* ================================================= */
-/* ФІКС КАРТИ (МЕТОД CLIP-PATH)                       */
-/* ================================================= */
+/* 🟢 ФІКС КАРТИ (Примусове заокруглення) */
+.map-panel {
+    padding: 0;
+    margin-bottom: 20px;
 
-.map-panel { 
-    /* Форма та обрізка */
-    border-radius: 25px !important; 
-    overflow: hidden !important; 
+    /* 1. Задаємо радіус */
+    border-radius: 25px !important;
     
-    /* Додаємо маніпуляції для надійності */
-    position: relative !important;
-    z-index: 1 !important;
-    transform: translate3d(0, 0, 0) !important;
-    -webkit-transform: translate3d(0, 0, 0) !important;
-    
+    /* 2. Обрізаємо все, що вилазить */
+    overflow: hidden !important;
+
+    /* --- 🔥 ГОЛОВНИЙ ФІКС ДЛЯ ГУГЛ КАРТ 🔥 --- */
+    /* Змушує браузер застосувати апаратне прискорення для обрізки */
+    transform: translateZ(0);
+    /* Спеціальна маска для Safari (iPhone) та Chrome, щоб точно обрізати iframe */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+
     /* Стиль Liquid Glass */
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
-    
-    /* 🔴 НАЙСИЛЬНІШИЙ МЕТОД ОБРІЗКИ: CLIP-PATH */
-    clip-path: inset(0 round 25px);
-    -webkit-clip-path: inset(0 round 25px);
-    
-    padding: 0; 
-    margin-bottom: 20px; 
 }
 
-.map-panel iframe { 
-    width: 100%; 
-    height: 300px; 
-    border: none; 
+.map-panel iframe {
+    width: 100%;
+    height: 300px; /* Або auto, як у вас налаштовано */
+    border: none;
     display: block;
-
-    /* Обрізаємо сам iframe */
-    border-radius: 25px !important; 
 }
 
 

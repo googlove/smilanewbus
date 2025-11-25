@@ -4,7 +4,7 @@
     "number": "3",
     "title": "АС-2 — Вул. Волошкова",
     "color": "#2f2f2f",
-"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1qQzimEwoNieCy52Cbl7BiXS5XPKNJ4U&ehbc=2E312F",
+    "mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1qQzimEwoNieCy52Cbl7BiXS5XPKNJ4U&ehbc=2E312F",
     "routes": [
       {
         "direction": "АС-2 ➝ Вул. Волошкова (Вт-Пт)",
@@ -22,7 +22,7 @@
     "number": "4",
     "title": "Тимурівець — Сагайдачного",
     "color": "#2f2f2f",
-"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1zz64r9m2eFv75kiMI-DC02EGxm1bQfU&ehbc=2E312F",
+    "mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1zz64r9m2eFv75kiMI-DC02EGxm1bQfU&ehbc=2E312F",
     "routes": [
       {
         "direction": "Тимурівець ➝ Сагайдачного",
@@ -39,7 +39,7 @@
     "number": "5",
     "title": "БК СЕМЗ – вул. Федорова",
     "color": "#2f2f2f",
-"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1gvWIthILW36RHZRzQUZO7I51oO5GTBc&ehbc=2E312F",
+    "mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1gvWIthILW36RHZRzQUZO7I51oO5GTBc&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від БК СЕМЗ",
@@ -62,7 +62,7 @@
     "number": "17",
     "title": "Ст. Шевченка — АС-1",
     "color": "#2f2f2f",
-"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1TcLlgwou9oaE0OhXOJ4FklBwydwtgF4&ehbc=2E312F",
+    "mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1TcLlgwou9oaE0OhXOJ4FklBwydwtgF4&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від Ст. Шевченка",
@@ -85,7 +85,7 @@
     "number": "30",
     "title": "Ст. Шевченка — АС-1 (Машбуд)",
     "color": "#2f2f2f",
-"mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1Axylm3JiDQ-qzY6ZHu-rlRXSiXcqEN4&ehbc=2E312F",
+    "mapIframeSrc":"https://www.google.com/maps/d/embed?mid=1Axylm3JiDQ-qzY6ZHu-rlRXSiXcqEN4&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від Ст. Шевченка",
@@ -108,7 +108,7 @@
     "number": "32",
     "title": "Ст. Шевченка — Міська лікарня",
     "color": "#2f2f2f", 
-"mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1CpFX4FecfM9Z015I2kokOMMPXXxK8fg&ehbc=2E312F",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1CpFX4FecfM9Z015I2kokOMMPXXxK8fg&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від Ст. Шевченка",
@@ -200,7 +200,7 @@
     "number": "34",
     "title": "Стадіон Локомотив — Міська лікарня",
     "color": "#2f2f2f",
-    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1u6lpDXHjj2czMdZyBBdlQxyi_zqCQqw&usp=sharing",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1u6lpDXHjj2czMdZyBBdlQxyi_zqCQqw&hl=ru&ehbc=2E312F",
     "routes": [
       {
         "direction": "Стадіон Локомотив",
@@ -223,7 +223,7 @@
     "number": "39",
     "title": "с. М.Яблунівка — Райлікарня (Залізнична станція Сміла)",
     "color": "#2f2f2f",
-    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1pKQ3g4cTDu8STRN02ki4QmL1NCX2A3M&usp=sharing",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1pKQ3g4cTDu8STRN02ki4QmL1NCX2A3M&hl=ru&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від М.Яблунівка",
@@ -246,7 +246,7 @@
     "number": "48",
     "title": "Вул. Федорова — Міська лікарня",
     "color": "#2f2f2f",
-    "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1Sufn9IBnXK4ZdjVW8RT595f3gVrUlu8&usp=sharing",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1IbbSiHUU8VXA1sad4xTbMTcy1YOypRU&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від Федорова",
@@ -269,7 +269,7 @@
     "number": "49",
     "title": "с. М.Яблунівка — Міська лікарня",
     "color": "#2f2f2f",
-   "mapIframeSrc": "https://www.google.com/maps/d/u/0/edit?mid=1vNY7jE3T9L9R2yLJdrEV8WwJ12Aqgpk&usp=sharing",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1vNY7jE3T9L9R2yLJdrEV8WwJ12Aqgpk&hl=ru&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від М.Яблунівка",
@@ -292,6 +292,7 @@
     "number": "123",
     "title": "Райлікарня — с.Ковалиха",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=15weHj_XQWeXtR6JRUxtJQwQFCw_YoWs&ehbc=2E312F",
     "routes": [
       {
         "direction": "Від Райлікарні",
@@ -314,6 +315,7 @@
     "number": "126",
     "title": "Ст. Шевченка — с.Макіївка",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1aXceaRlVy-ptzPEzicYsqhZ31J5hVjw&ehbc=2E312F",
     "routes": [
       {
         "direction": "Напрямок",
@@ -330,6 +332,7 @@
     "number": "129",
     "title": "Ст. Шевченка — с.М.Старосілля",
     "color": "#2f2f2f",
+    "mapIframeSrc":  "https://www.google.com/maps/d/embed?mid=1Q3pKo22L-U-FFU1z7vkuJoWGl_78ImU&ehbc=2E312F",
     "routes": [
       {
         "direction": "Зі Сміли",
@@ -354,6 +357,7 @@
     "number": "135",
     "title": "АС-2 – с.Плескачівка",
     "color": "#2f2f2f",
+    "mapIframeSrc":  "https://www.google.com/maps/d/embed?mid=1yIKEttnFkI7LoKamkpSQvx2b6YI22Zg&ehbc=2E312F",
     "routes": [
        {
         "direction": "Напрямок",
@@ -370,6 +374,7 @@
     "number": "137",
     "title": "АС-2 – c.Бузуків",
     "color": "#2f2f2f",
+    "mapIframeSrc":  "https://www.google.com/maps/d/embed?mid=1FQ5wMH1BlC_3fM8vIvXBr-y_PRFxNec&ehbc=2E312F",
     "routes": [
        {
         "direction": "З АС-2",
@@ -392,6 +397,7 @@
     "number": "139",
     "title": "АС-2 – с.Санжариха",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1q6ZjVgWvbiSBuM76kopF3-zxb5yGCOM&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "З АС-2",
@@ -414,6 +420,7 @@
     "number": "140",
     "title": "АС-2 — с. Березняки",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1qhRhrJeRsp02n-9g26-A7UXK72zb2dQ&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "З АС-2",
@@ -436,6 +443,7 @@
     "number": "141",
     "title": "с.Будки — Ст.Шевченка",
     "color": "#2f2f2f",
+     "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1nk-l9rrqywfpVgao7AubXN8oimLRRYU&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "Від ст. Шевченка",
@@ -458,6 +466,7 @@
     "number": "150",
     "title": "В. Яблунівка — Райлікарня",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1KnfPme6iFu-QfTLoZ56c3UdL7XnKF4s&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "З с. В. Яблунівка",
@@ -480,6 +489,7 @@
     "number": "151",
     "title": "Райлікарня — с.Тернівка",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1b-WU_ezmSDqyEmng5DvTanXIObh3viU&ehbc=2E312F",
     "routes": [
        {
         "direction": "З Райлікарні",
@@ -502,6 +512,7 @@
     "number": "152",
     "title": "Райлікарня — с.Теклине",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1OUB3ObaSUZta2r9cvcdMvd1yCMVXqNM&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "З Райлікарні",
@@ -524,6 +535,7 @@
     "number": "153",
     "title": "Ст. Шевченка — ст. Володимирівка",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1NAQfwb_ocf0mbwfMS4sFHlkH9l292T4&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "Від Ст. Шевченка",
@@ -546,6 +558,7 @@
     "number": "154",
     "title": "Райлікарня — с.Сердюківка",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1WpJc0-cVC_6F1Dn1pi7bJLy4cdkS31c&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "З Райлікарні",
@@ -568,6 +581,7 @@
     "number": "155",
     "title": "Райлікарня — с.Ротмистрівка",
     "color": "#2f2f2f",
+     "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=1vpWHeCpN-lFM75qYoDHaWoYW6BePY44&ehbc=2E312F",
     "routes": [
        {
         "direction": "З Райлікарні",
@@ -590,6 +604,7 @@
     "number": "309",
     "title": "Автостанція №3 — с.Орловець",
     "color": "#2f2f2f",
+    "mapIframeSrc": "https://www.google.com/maps/d/embed?mid=18WTkDF8PcJju6Im6cK6rnelYsBE5ZVM&hl=ru&ehbc=2E312F",
     "routes": [
        {
         "direction": "Від Автостанція №3",

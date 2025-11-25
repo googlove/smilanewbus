@@ -4,11 +4,11 @@
     --glass-border: rgba(255, 255, 255, 0.5);
     --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     --primary: #007DD6;
-    --accent: #b31a50;
+    --accent: #11417b;
     --card-radius: 20px;
 }
 
-/* Темна тема (Smoked Glass) */
+/* Темна тема */
 body.dark-mode {
     --text-color: #f1f5f9;
     --glass-bg: rgba(30, 30, 30, 0.6);
@@ -23,15 +23,12 @@ body {
     margin: 0;
     padding-bottom: 60px;
     min-height: 100vh;
-    
-    /* 🟢🔵 Анімація фону (Світла тема) */
-    background-color: #b2f2bb;
-    animation: bgColorChange 8s infinite alternate;
+    animation: bgColorChange 5s infinite alternate;
 }
 
 @keyframes bgColorChange {
     0% { background-color: #b2f2bb; } /* пастельно-зелений */
-    100% { background-color: #a0c4ff; } /* пастельно-блакитний */
+    100% { background-color: #99d0df; } /* пастельно-блакитний */
 }
 
 body.dark-mode {
@@ -46,11 +43,11 @@ body.dark-mode {
     100% { background-position: 0% 50%; }
 }
 
-/* --- GLASSMOPHISM BASE (Тільки для панелей, не для кнопок) --- */
+/* --- GLASSMOPHISM BASE --- */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
     border-radius: var(--card-radius);
@@ -58,29 +55,28 @@ body.dark-mode {
 }
 
 /* ================================================= */
-/* 1. HEADER (ФІКС: ВІДСТУПИ ТА ЦЕНТРУВАННЯ)         */
+/* 1. HEADER                                         */
 /* ================================================= */
 
 header {
     position: sticky;
-    top: 15px;
+    top: 0px;
     z-index: 100;
-    margin: 0 10px; 
-    padding: 8px 15px; 
-    
+    margin: 0 10px;
+    padding: 8px 15px;
     background: var(--glass-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--glass-shadow);
-    border-radius: 50px; 
+    border-radius: 50px; /* Додано заокруглення хедеру */
 }
 
 /* Головний контейнер */
 .header-flex-container {
     display: flex;
-    align-items: center; /* Вертикальне центрування всього рядка */
-    justify-content: space-between; 
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     flex-wrap: nowrap;
 }
@@ -88,112 +84,115 @@ header {
 /* --- ЛОГОТИП --- */
 .header-logo-wrapper {
     flex-shrink: 0;
-    margin-right: auto; /* Відштовхує праву частину максимально вправо */
+    flex: 1;
     display: flex;
     align-items: center;
 }
 
-.logo-img { 
-    height: 32px; 
-    width: auto; 
+.logo-img {
+    height: 32px;
+    width: auto;
     display: block;
 }
 
-/* --- ПРАВА ЧАСТИНА (Бот, Час, Тумблер) --- */
+/* --- ПРАВА ЧАСТИНА --- */
 .header-controls-wrapper {
     display: flex;
-    align-items: center; /* Ідеальне вертикальне центрування */
+    align-items: center;
     justify-content: flex-end;
-    
-    /* 👇 ЗБІЛЬШЕНО ВІДСТУП МІЖ ЕЛЕМЕНТАМИ (було 8px) */
-    gap: 15px; 
-    
+    gap: 15px;
     flex-shrink: 1;
 }
 
-/* 1. Кнопка Бота в хедері */
+/* Кнопка Бота */
 .header-bot-btn {
-    /* 👇 ДОДАНО ВІДСТУПИ З БОКІВ */
-    margin: 0 5px !important; 
-    
+    margin: 0 auto !important;
     padding: 6px 15px !important;
     font-size: 0.85rem !important;
-    height: 34px; 
+    height: 34px;
     white-space: nowrap;
-    
-    /* 👇 Щоб текст і іконка були ідеально по центру кнопки */
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-}
-.header-bot-btn i {
-    margin-right: 5px;
+    line-height: 1 !important;
 }
 
-/* 2. Годинник */
-.clock { 
-    font-weight: 700; 
-    
-    /* 👇 ВАШ ЗБІЛЬШЕНИЙ РОЗМІР ШРИФТА */
-    font-size: 1.4rem;  
-    
-    font-family: monospace; 
-    color: var(--text-color); 
-    white-space: nowrap;
-    
-    /* Відступи для годинника, щоб він не лип до сусідів */
-    margin: 0 5px; 
-    line-height: 1; /* Вирівнювання по висоті */
+.header-bot-btn i { margin-right: 5px; }
+
+/* Адаптація кнопки бота */
+@media (max-width: 575px) {
+    .header-bot-btn { height: 34px !important; padding: 6px 14px !important; font-size: 1.1rem !important; }
+    .header-bot-btn i { font-size: 1.5rem !important; }
+    .header-bot-btn .bot-text { font-size: 1.1rem !important; }
+    .logo-img { height: 40px !important; }
 }
 
-/* 3. Тумблер у хедері */
-.theme-switch-wrapper.header-switch {
-    margin: 0;
-    padding: 0;
-    background: none; 
-    border: none; 
-    box-shadow: none;
-    backdrop-filter: none;
-    height: auto;
-    min-height: auto;
-    display: flex;
-    align-items: center; /* Центрування тумблера */
+@media (min-width: 576px) and (max-width: 991px) {
+    .header-bot-btn { height: 40px !important; padding: 8px 20px !important; font-size: 1.1rem !important; }
+    .header-bot-btn i { font-size: 1.5rem !important; }
+    .header-bot-btn .bot-text { font-size: 1.4rem !important; }
+    .logo-img { height: 48px !important; }
 }
 
-/* Зменшений масштаб тумблера */
-.theme-switch-wrapper.header-switch .custom-toggle {
-    transform: scale(0.85); 
-    transform-origin: right center; 
-    margin: 0;
-}
-
-/* Адаптація для дуже малих екранів */
-@media (max-width: 380px) {
-    .bot-text { display: none; } 
-    .header-bot-btn { padding: 6px 10px !important; }
-    .logo-img { height: 28px; }
-    .header-controls-wrapper { gap: 8px; } /* Менший відступ на мікро-екранах */
-}
-
-/* Для ПК */
 @media (min-width: 992px) {
-    /* 👇 ЩЕ БІЛЬШИЙ ГОДИННИК ДЛЯ ПК */
-    .clock { font-size: 2rem; margin: 0 15px; } 
-    .header-bot-btn { font-size: 1rem !important; padding: 8px 20px !important; height: 40px; }
-    .logo-img { height: 40px; }
+    .header-bot-btn { height: 45px !important; padding: 10px 25px !important; font-size: 1.3rem !important; }
+    .header-bot-btn i { font-size: 1.8rem !important; margin-right: 8px !important; width: auto !important; }
+    .header-bot-btn .bot-text { font-size: 1.55rem !important; }
+    .logo-img { height: 55px !important; }
+    header { padding: 4px 15px !important; }
+}
+
+/* Годинник */
+.clock {
+    font-weight: 530;
+    font-size: 1.4rem;
+    color: var(--text-color);
+    white-space: nowrap;
+    margin: 0 5px;
+    line-height: 1;
+}
+
+@media (min-width: 992px) {
+    .clock { font-size: 1.9rem; }
+}
+
+/* Тумблер у хедері */
+.theme-switch-wrapper.header-switch {
+    margin: 0; padding: 0; background: none; border: none; box-shadow: none;
+    backdrop-filter: none; height: auto; min-height: auto;
+    display: flex; align-items: center;
+}
+
+.theme-switch-wrapper.header-switch .custom-toggle {
+    transform: scale(0.85); transform-origin: right center; margin: 0;
+}
+@media (min-width: 992px) {
     .theme-switch-wrapper.header-switch .custom-toggle { transform: scale(1); }
 }
 
+/* Адаптація хедера для малих екранів */
+@media (max-width: 380px) {
+    .bot-text { display: none; }
+    .header-bot-btn { padding: 6px 10px !important; }
+    .logo-img { height: 28px; }
+    .header-controls-wrapper { gap: 8px; }
+}
 
+@media (max-width: 991px) {
+    .header-right { gap: 8px !important; }
+    .clock { margin-right: 4px !important; }
+    .theme-switch-wrapper.header-switch { gap: 5px !important; padding: 5px !important; }
+}
 
 /* ================================================= */
-/* 2. MAIN LAYOUT & GRID                 */
+/* 2. MAIN LAYOUT & GRID                             */
 /* ================================================= */
 
-main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
+main { max-width: 700px; margin: 20px auto; padding: 0 15px; }
+#schedule-view { width: 100%; margin: 20px auto; }
 .hidden { display: none !important; }
 
-.ad-banner { 
+.ad-banner {
     padding: 15px;
     background: rgba(255, 255, 255, 0.15);
     border-radius: 15px;
@@ -204,73 +203,93 @@ main, section { max-width: 700px; margin: 20px auto; padding: 0 15px; }
 .controls-grid-row { margin-top: 15px; margin-bottom: 20px; align-items: flex-start; }
 .search-input-row { margin-bottom: 25px; }
 
-.search-group { width: 100%; }
+.search-group { width: 100%; padding: 0 30px; }
+@media (max-width: 991px) {
+    .search-group { padding: 0 !important; width: 100% !important; }
+}
+
 .search-group .form-control {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-    color: var(--text-color);
-    outline: none;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-    height: 40px;
-    font-size: 1rem;
-    padding-left: 15px;
-    box-shadow: none;
+    border-top-right-radius: 30px; border-bottom-right-radius: 30px;
+    color: var(--text-color); outline: none;
+    backdrop-filter: blur(10px); transition: all 0.3s;
+    height: 40px; font-size: 1.3rem; padding-left: 15px; box-shadow: none;
 }
 .search-group .input-group-addon {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-right: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    padding: 6px 12px;
-    font-size: 16px;
-    color: var(--text-color);
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    border-right: none; border-top-left-radius: 30px; border-bottom-left-radius: 30px;
+    padding: 6px 12px; font-size: 16px; color: var(--text-color);
 }
 .search-group .form-control::placeholder { color: var(--text-color); opacity: 0.6; }
-.search-group .form-control:focus { box-shadow: 0 0 15px rgba(255,255,255,0.5); }
+.search-group .form-control:focus { box-shadow: none !important; }
 
 .full-width-btn { width: 100%; display: block; font-weight: 700; }
 
 /* --- ТОП ДОНАТЕРИ --- */
 .top-donators-box { padding: 10px; min-height: 90px; }
-.donor-list-title { display: block; font-size: 1.1rem; font-weight: 800; margin-bottom: 10px; color: var(--text-color); }
+.donor-list-title {
+    display: block; font-size: 1.6rem; text-align: center; font-weight: 800;
+    margin-bottom: 10px; margin-top: 5px; color: var(--text-color);
+}
 .donor-list { display: flex; flex-direction: column; gap: 8px; }
 .donor-item {
     display: flex; justify-content: space-between; align-items: center; text-decoration: none;
-    padding: 5px 10px; border-radius: 15px; font-weight: 700; transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    padding: 5px 10px; border-radius: 15px; font-weight: 700;
+    transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
     background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); color: var(--text-color);
 }
 body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
 .donor-item:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); }
-.donor-name { color: #833AB4; }
-.donor-amount { font-weight: 900; color: var(--accent); }
+.donor-name { color: #173a53; font-size: 1.4rem; }
+.donor-amount { font-weight: 900; color: #071219; }
 
 @media (min-width: 768px) {
     .links-and-donate-col, .donors-col { margin-bottom: 0; }
     .links-and-donate-col { padding-right: 15px; }
 }
 
+/* --- СІТКА АВТОБУСІВ --- */
 .bus-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+    display: grid; gap: 15px; margin-bottom: 20px; padding: 0 30px;
+}
+@media (max-width: 991px) {
+    .bus-grid { padding: 0 !important; width: 100% !important; }
+}
+@media (max-width: 575px) {
+    .bus-grid { grid-template-columns: repeat(2, 1fr); padding: 0 10px !important; }
+}
+@media (min-width: 576px) and (max-width: 991px) {
+    .bus-grid { grid-template-columns: repeat(4, 1fr); padding: 0 15px !important; }
+}
+@media (min-width: 992px) {
+    .bus-grid { grid-template-columns: repeat(7, 1fr); }
 }
 
 .bus-card {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 20px 10px; text-align: center; cursor: pointer; transition: transform 0.2s, background 0.3s;
+    padding: 20px 10px; text-align: center; cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
     background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 20px;
 }
+@media (max-width: 991px) {
+    .bus-card { padding: 25px 15px !important; border-radius: 18px; }
+}
 .bus-card:active { transform: scale(0.95); }
 .bus-card:hover { background: rgba(255, 255, 255, 0.4); border-color: #fff; }
-.bus-num { font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-.bus-title { font-size: 0.85rem; margin-top: 5px; opacity: 0.9; font-weight: 600; }
+
+.bus-num {
+    font-size: 2rem; font-weight: 900; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 991px) { .bus-num { font-size: 2.2rem !important; } }
+@media (max-width: 575px) { .bus-num { font-size: 2rem !important; } }
+
+.bus-title {
+    font-size: 1.2rem; margin-top: 5px; opacity: 0.9; font-weight: 600;
+}
+@media (max-width: 991px) { .bus-title { font-size: 1.3rem !important; } }
 
 /* ================================================= */
 /* 3. ІНФО-БЛОКИ (АККОРДЕОН)                         */
@@ -278,226 +297,206 @@ body.dark-mode .donor-item { background: rgba(255, 255, 255, 0.08); border: 1px 
 
 #accordion { margin-top: 20px; }
 .panel-default { border: none; background-color: transparent; border-radius: var(--card-radius); margin-bottom: 20px; }
+#accordion .panel-default { max-width: 700px; margin-left: auto; margin-right: auto; }
 
 .glass-panel-header {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px); 
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow); 
-    border-radius: var(--card-radius); 
-    margin-bottom: 0 !important; 
-    padding: 0; 
-    transition: all 0.2s;
+    background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+    border-radius: 0 !important; padding: 0; transition: all 0.2s; text-align: center;
+}
+/* Закруглення заголовка */
+.glass-panel-header:has(a.collapsed) { border-radius: 20px !important; }
+.glass-panel-header:has(a:not(.collapsed)) {
+    border-top-left-radius: 20px !important; border-top-right-radius: 20px !important;
+}
+.glass-panel-header:has(a.collapsed) a { border-radius: 20px !important; }
+.glass-panel-header:has(a:not(.collapsed)) a {
+    border-top-left-radius: 20px !important; border-top-right-radius: 20px !important;
 }
 
 .glass-panel-header a {
     display: block; padding: 15px 20px; text-decoration: none; color: var(--text-color);
-    font-size: 1.3rem; font-weight: 900; transition: all 0.2s; border-radius: var(--card-radius);
+    font-size: 1.5rem; font-weight: 900; transition: all 0.2s;
 }
+.glass-panel-header a:hover { background: rgba(255, 255, 255, 0.2); text-decoration: none !important; }
 
-/* Попутка */
-.poputka-panel-wrapper .glass-panel-header {
-    background: rgba(93, 93, 245, 0.3) !important; border: 1px solid rgba(93, 93, 245, 0.5) !important;
-}
-.poputka-panel-wrapper .glass-panel-header a { color: #4b4bc4 !important; }
-body.dark-mode .poputka-panel-wrapper .glass-panel-header {
-    background: rgba(93, 93, 245, 0.5) !important; border: 1px solid rgba(93, 93, 245, 0.7) !important;
-}
+/* Кольори аккордеона */
+.poputka-panel-wrapper .glass-panel-header { background: rgba(0, 125, 214, 0.20) !important; border: 1px solid rgba(0, 125, 214, 0.45) !important; }
+.poputka-panel-wrapper .glass-panel-header a { color: #05355a !important; }
+body.dark-mode .poputka-panel-wrapper .glass-panel-header { background: rgba(93, 93, 245, 0.5) !important; border: 1px solid rgba(93, 93, 245, 0.7) !important; }
 body.dark-mode .poputka-panel-wrapper .glass-panel-header a { color: #ffffff !important; }
 
-/* Інфо */
-.general-info-panel-wrapper .glass-panel-header {
-    background: rgba(0, 125, 214, 0.3) !important; border: 1px solid rgba(0, 125, 214, 0.5) !important;
-}
-.general-info-panel-wrapper .glass-panel-header a { color: #005a9e !important; }
-body.dark-mode .general-info-panel-wrapper .glass-panel-header {
-    background: rgba(0, 125, 214, 0.5) !important; border: 1px solid rgba(0, 125, 214, 0.7) !important;
-}
+.general-info-panel-wrapper .glass-panel-header { background: rgba(0, 125, 214, 0.20) !important; border: 1px solid rgba(0, 125, 214, 0.45) !important; }
+.general-info-panel-wrapper .glass-panel-header a { color: #05355a !important; }
+body.dark-mode .general-info-panel-wrapper .glass-panel-header { background: rgba(0, 125, 214, 0.5) !important; border: 1px solid rgba(0, 125, 214, 0.7) !important; }
 body.dark-mode .general-info-panel-wrapper .glass-panel-header a { color: #ffffff !important; }
 
-.glass-panel-header a:hover { background: rgba(255, 255, 255, 0.2); }
-.glass-panel-header a.collapsed { border-radius: var(--card-radius); }
-.glass-panel-header a:not(.collapsed) { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
-
-.panel-collapse .info-panel { 
-    border-top: none; border-top-left-radius: 0; border-top-right-radius: 0; margin-top: -1px; padding: 25px; 
-    background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 0 0 20px 20px;
+.panel-collapse .info-panel {
+    border-top: none; margin-top: -1px; padding: 25px; background: var(--glass-bg);
+    backdrop-filter: blur(12px); border: 1px solid var(--glass-border); border-radius: 0 0 20px 20px !important;
 }
 .poputka-panel-wrapper .panel-collapse.in .info-panel { border: 1px solid rgba(93, 93, 245, 0.5); }
 .general-info-panel-wrapper .panel-collapse.in .info-panel { border: 1px solid rgba(0, 125, 214, 0.5); }
 
 .panel-title .title-icon { font-size: 1.5rem; margin-right: 10px; }
-.info-panel h4 { display: flex; align-items: center; font-size: 1rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
+.info-panel h4 { display: flex; align-items: center; font-size: 1.35rem; font-weight: 600; margin: 10px 0; line-height: 1.4; }
 .info-panel .item-icon { font-size: 1.2rem; margin-right: 10px; flex-shrink: 0; width: 30px; text-align: center; }
 .info-separator { border: none; border-top: 1px solid var(--glass-border); margin: 25px 0; }
-.poputka-price { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin-top: -10px; margin-bottom: 20px; }
+
+.poputka-price { font-size: 1.6rem !important; font-weight: 800; color: #031c2f !important; margin-top: -10px; margin-bottom: 20px; }
 .poputka-route { margin-bottom: 15px; padding: 10px; border-left: 3px solid #5d5df5; background: rgba(93, 93, 245, 0.1); border-radius: 5px; }
 body.dark-mode .poputka-route { background: rgba(93, 93, 245, 0.15); }
 .route-city { font-weight: 800; color: var(--primary); display: block; margin-bottom: 5px; }
-.route-points { font-size: 0.95rem; opacity: 0.9; }
+.route-points { font-size: 1.25rem; opacity: 0.9; }
 .poputka-links-list { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
-.poputka-link { display: flex; align-items: center; padding: 12px 20px; border-radius: 20px; background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none; color: var(--text-color); font-weight: 700; transition: background 0.2s; }
-.poputka-link:hover { background: rgba(255, 255, 255, 0.5); }
+.poputka-link {
+    display: flex; align-items: center; padding: 12px 20px; border-radius: 20px;
+    background: var(--glass-bg); border: 1px solid var(--glass-border); text-decoration: none;
+    color: var(--text-color); font-weight: 700; transition: background 0.2s;
+}
+.poputka-link:hover { background: rgba(255, 255, 255, 0.5); color: rgba(11, 71, 130, 0.985); }
 .link-icon { display: flex; align-items: center; justify-content: center; width: 30px; margin-right: 10px; font-size: 1.2rem; }
 
 /* ================================================= */
-/* 4. SCREEN: РОЗКЛАД (Details View)                 */
+/* 4. SCREEN: РОЗКЛАД                                */
 /* ================================================= */
 
 .schedule-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
 
+/* Кнопка Назад */
 #back-btn {
     background: var(--glass-bg); color: var(--text-color); border: 1px solid var(--glass-border);
     padding: 10px 20px; border-radius: 30px; cursor: pointer; font-weight: 700; backdrop-filter: blur(10px);
-    transition: all 0.2s;
+    font-size: 1.33rem !important;
 }
-#back-btn:hover {
-    background: rgba(255, 255, 255, 0.4);
+#back-btn img, #back-btn i { width: 20px !important; height: 20px !important; margin-right: 6px; }
+@media (min-width: 576px) and (max-width: 991px) {
+    #back-btn { font-size: 1.4rem !important; padding: 10px 20px !important; }
+    #back-btn img, #back-btn i { width: 24px !important; height: 24px !important; }
+}
+@media (min-width: 992px) {
+    #back-btn { display: block; width: fit-content; margin-left: 7.5%; }
 }
 
-#route-title-display { margin: 0; font-size: 1.3rem; color: var(--primary); text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
+#route-title-display { margin: 0; font-size: 1.3rem; color: var(--primary); text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5); }
 .schedule-view .row .col-xs-12 { margin-bottom: 20px; }
 @media (min-width: 992px) { .schedule-view .row .col-md-6 { margin-bottom: 0; } }
 
-/* 🟢 ФІКС КАРТИ (Примусове заокруглення) */
-.map-panel { 
-    padding: 0; 
-    margin-bottom: 20px; 
-    
-    /* Головні властивості для заокруглення */
-    border-radius: 25px !important; 
-    overflow: hidden !important; /* Обрізає гострі кути карти */
-    
-    /* Стиль Liquid Glass */
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--glass-shadow);
-    
-    /* Фікс для Safari/iOS, щоб кути точно обрізалися */
-    -webkit-mask-image: -webkit-radial-gradient(white, black);
-    transform: translateZ(0);
-}
-
-.map-panel iframe { 
-    width: 100%; 
-    height: 300px; 
-    border: none; 
-    display: block;
-    
-    /* Дублюємо заокруглення для самої карти */
-    border-radius: 25px !important; 
-}
+.map-panel { padding: 0; overflow: hidden; margin-bottom: 20px; border-radius: 25px !important; }
+.map-panel iframe { width: 100%; height: auto !important; border: none; display: block; border-radius: 20px; }
 
 .map-title, .schedule-title { margin-top: 0; font-size: 16px; font-weight: bold; margin-bottom: 10px; color: var(--primary); }
 .schedule-title { margin-bottom: 15px; }
 
-/* Решта стилів розкладу */
 .route-block {
     padding: 25px; margin-bottom: 20px; background: var(--glass-bg); backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); border-radius: 25px;
+    -webkit-backdrop-filter: blur(15px); border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow); border-radius: 25px;
 }
+/* ПК: без карток усередині */
+@media (min-width: 992px) {
+    .route-block {
+        background: transparent !important; border: none !important; box-shadow: none !important;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        padding: 0 !important; margin: 0 0 25px 0 !important; border-radius: 0 !important;
+    }
+    .route-direction { border: none !important; padding-bottom: 5px !important; margin-bottom: 10px !important; }
+}
+
 .route-direction {
-    margin-top: 0; color: var(--accent); font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.05);
-    padding-bottom: 10px; margin-bottom: 15px;
+    margin-top: 0; color: var(--accent); font-size: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding-bottom: 10px; margin-bottom: 15px;
 }
 .stop-item { margin-bottom: 20px; }
 .stop-name { font-weight: 800; margin-bottom: 10px; display: block; opacity: 0.8; }
-.times-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.times-row { display: flex; flex-wrap: wrap; gap: 11px; }
 
 .time-badge {
     background: rgba(255, 255, 255, 0.3); padding: 6px 12px; border-radius: 10px;
-    font-size: 1rem; font-family: monospace; font-weight: 600; border: 1px solid rgba(255,255,255,0.2);
+    font-size: 1rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .time-badge.next {
     background: var(--primary); color: white; border: 1px solid var(--primary);
-    transform: scale(1.15); box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4); z-index: 2;
+    transform: scale(1); box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4); z-index: 2;
 }
 .time-badge.past { opacity: 0.4; text-decoration: line-through; background: rgba(0, 0, 0, 0.05); }
 
+/* ПК макет розкладу */
+@media (min-width: 992px) {
+    .big-blue-box {
+        display: flex; gap: 40px; padding: 30px; background: #D9F2EB;
+        border-radius: 25px; border: 1px solid var(--glass-border); backdrop-filter: blur(12px);
+    }
+    #route-map-container, #schedule-container { flex: 1; }
+    .schedule-desktop-box { width: 85%; margin: 0 auto; }
+    #mobile-map, #mobile-schedule { display: none; }
+    #desktop-schedule-box { display: block; }
+}
+@media (max-width: 991px) {
+    #mobile-map, #mobile-schedule { display: block; }
+    #desktop-schedule-box { display: none; }
+}
 
 /* ================================================= */
-/* 5. FOOTER & ACTIONS (ВИПРАВЛЕНО КОНФЛІКТИ)        */
+/* 5. FOOTER & ACTIONS (ФІНАЛ: ЧІТКІ КНОПКИ)         */
 /* ================================================= */
 
 .glass-action-button {
-    text-decoration: none; 
-    padding: 12px 20px; 
-    border-radius: 30px;
-    font-weight: 700; 
+    text-decoration: none; padding: 12px 20px; border-radius: 30px; font-weight: 700;
     transition: transform 0.2s, box-shadow 0.2s, border 0.3s, background 0.3s;
-    font-size: 1rem; 
-    color: var(--text-color);
-    display: inline-flex; justify-content: center; align-items: center; 
+    font-size: 1.4rem; color: var(--text-color);
+    display: inline-flex; justify-content: center; align-items: center;
 }
 .glass-action-button:active { transform: scale(0.98); }
 
-/* --- СПЕЦІАЛЬНІ СТИЛІ --- */
-
-/* 1. ЗОЛОТА КНОПКА (Підтримати) */
-
-/* ⚪ СВІТЛА ТЕМА: 
-   - Фон: Білий (щоб не зливався з пастельним фоном)
-   - Контур: Темно-золотий/Коричневий (щоб було чітко видно)
-*/
+/* --- ЗОЛОТА КНОПКА (Підтримати) --- */
+/* СВІТЛА ТЕМА: Біла прозора + Чіткий темний контур */
 .gold-button-universal {
-    background: #ffffff !important; /* Суцільний білий фон */
-    border: 2px solid #b8860b !important; /* Чіткий темний контур */
-    color: #000000 !important; /* Чорний текст */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important; /* Легка тінь для об'єму */
+    background: #f8fafcb2 !important;
+    border: 2px solid #b8860b !important;
+    color: var(--text-color) !important; /* Темний текст */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
     backdrop-filter: none !important;
 }
-
-/* ⚫ ТЕМНА ТЕМА: 
-   - Фон: Яскраво-жовтий
-   - Текст: Білий
-*/
+/* ТЕМНА ТЕМА: Яскраво-жовта + Білий текст */
 body.dark-mode .gold-button-universal {
-    background: #FFD700 !important; 
-    border: 2px solid #FFD700 !important; 
-    color: #ffffff !important; 
-    font-weight: 900 !important;
+    background: #FFD700 !important;
+    border: 2px solid #FFD700 !important;
+    color: #ffffff !important; font-weight: 900 !important;
     box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.6) !important;
     backdrop-filter: blur(8px) !important;
 }
 
-
-/* 2. СИНЯ КНОПКА (Бот/Зв'язок) */
-
-/* ⚪ СВІТЛА ТЕМА */
+/* --- СИНЯ КНОПКА (Бот/Зв'язок) --- */
+/* СВІТЛА ТЕМА */
 .ios-liquid-blue {
-    background: #ffffff !important; /* Білий фон для контрасту */
-    border: 2px solid #007DD6 !important; /* Синій контур */
-    color: #007DD6 !important; /* Синій текст */
+    background: #f8fafc71 !important;
+    border: 2px solid #007DD6 !important;
+    color: #007DD6 !important;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
     backdrop-filter: none !important;
 }
-
-/* ⚫ ТЕМНА ТЕМА */
+/* ТЕМНА ТЕМА */
 body.dark-mode .ios-liquid-blue {
-    background: rgba(0, 125, 214, 0.25) !important; 
+    background: rgba(0, 125, 214, 0.25) !important;
     border: 1px solid rgba(0, 125, 214, 0.7) !important;
     box-shadow: 0 0 15px 3px rgba(0, 125, 214, 0.7) !important;
-    color: #ffffff !important; 
-    backdrop-filter: blur(8px) !important; 
+    color: #ffffff !important;
+    backdrop-filter: blur(8px) !important;
 }
 
-/* Скидання старих конфліктних стилів */
+/* Скидання */
 .donate-btn-style, .bot-btn-style, .feedback-btn-style {
-    background: none !important; 
-    border: none !important; 
-    box-shadow: none !important;
+    background: none !important; border: none !important; box-shadow: none !important;
 }
-
 
 /* ================================================= */
 /* 6. ТУМБЛЕР ТЕМИ                                   */
 /* ================================================= */
 
 .theme-switch-wrapper {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 20px auto; padding: 15px; gap: 10px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    margin: 20px auto; padding: 15px; gap: 10px;
     background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border); border-radius: 25px; box-shadow: var(--glass-shadow); width: fit-content;
 }
@@ -505,38 +504,51 @@ body.dark-mode .ios-liquid-blue {
     margin: 0; padding: 10px; height: 100%; justify-content: space-around; flex-direction: row; gap: 15px;
 }
 .theme-switch-wrapper.header-switch .theme-label { display: none; }
-
 .theme-label { font-size: 1.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--text-color); }
-.custom-toggle { position: relative; width: 100px; height: 44px; display: block; cursor: pointer; margin-bottom: 0; }
+
+.custom-toggle {
+    position: relative; width: 80px !important; height: 36px !important; display: block; cursor: pointer; margin-bottom: 0;
+}
 .custom-toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
 .toggle-track {
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50px; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background-color: rgba(30, 30, 30, 0.85); border: 2px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(4px); box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 40px !important; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background-color: rgba(30, 30, 30, 0.85); border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px); box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
 }
 .toggle-knob {
-    position: absolute; height: 36px; width: 36px; left: 4px; bottom: 2px; border-radius: 50%; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: 2;
-    background: #ffffff; box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    position: absolute; width: 32px !important; height: 32px !important; left: 2px !important; bottom: 2px !important;
+    border-radius: 50%; transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: 2;
+    background: #ffffff; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
+/* ЗМЕНШЕНИЙ КРУЖОЧОК для хедера (перезапис) */
+.custom-toggle .toggle-knob {
+    width: 24px !important; height: 24px !important; left: 4px !important; bottom: 4px !important;
+}
+
 .text-on, .text-off {
-    position: absolute; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 900; font-family: sans-serif; pointer-events: none; transition: opacity 0.3s;
+    position: absolute; top: 50%; transform: translateY(-50%); font-size: 14px; font-weight: 900;
+    font-family: sans-serif; pointer-events: none; transition: opacity 0.3s;
 }
 .text-off { right: 12px; color: #ffffff; opacity: 1; }
 .text-on { left: 14px; color: #000000; opacity: 0; }
 
-.custom-toggle input:checked + .toggle-track { background-color: rgba(255, 255, 255, 0.9); border-color: rgba(0, 0, 0, 0.1); }
-.custom-toggle input:checked + .toggle-track .toggle-knob { transform: translateX(56px); background: #1a1a1a; }
-.custom-toggle input:checked + .toggle-track .text-on { opacity: 1; }
-.custom-toggle input:checked + .toggle-track .text-off { opacity: 0; }
-.custom-toggle:hover .toggle-knob { transform: scale(1.05); }
-.custom-toggle input:checked:hover + .toggle-track .toggle-knob { transform: translateX(56px) scale(1.05); }
+.custom-toggle input:checked+.toggle-track { background-color: rgba(255, 255, 255, 0.9); border-color: rgba(0, 0, 0, 0.1); }
+.custom-toggle input:checked+.toggle-track .toggle-knob { transform: translateX(44px) !important; background: #1a1a1a; }
+/* Позиція для включеного стану (перезапис для хедера) */
+.custom-toggle input:checked+.toggle-track .toggle-knob { transform: translateX(48px) !important; }
 
-.footer-date { text-align: center; margin-top: 20px; font-size: 0.9rem; opacity: 0.8; }
-footer { text-align: center; margin-top: 10px; font-size: 0.8rem; opacity: 0.7; }
+.custom-toggle input:checked+.toggle-track .text-on { opacity: 1; }
+.custom-toggle input:checked+.toggle-track .text-off { opacity: 0; }
+.custom-toggle:hover .toggle-knob { transform: scale(1.05); }
+.custom-toggle input:checked:hover+.toggle-track .toggle-knob { transform: translateX(48px) scale(1.05); }
+
+.footer-date { text-align: center; margin-top: 20px; font-size: 1.2rem; opacity: 0.8; }
+footer { text-align: center; margin-top: 10px; font-size: 1.2rem; opacity: 0.7; }
 
 /* ================================================= */
 /* 7. DARK MODE TEXT FIXES                           */
 /* ================================================= */
-
 body.dark-mode .bus-num { color: #ffffff !important; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
 body.dark-mode .bus-title { color: #e0e0e0 !important; }
 body.dark-mode .schedule-title, body.dark-mode .map-title { color: #ffffff !important; }

@@ -191,20 +191,24 @@ function renderRouteDetails(bus) {
     let html = '<div class="row">';
 
     // 1. Колонка для Карти (займає 6/12 на великих екранах)
-    const mapSrc = bus.mapIframeSrc || 'about:blank'; 
-    
-    html += `
-        <div class="col-xs-12 col-md-6 map-column">
-            <h4 class="map-title">Маршрут на карті</h4>
+const mapSrc = bus.mapIframeSrc || 'about:blank'; 
+
+html += `
+    <div class="col-xs-12 col-md-6">
+        <h4 class="map-title">Маршрут на карті</h4>
+        
+        <div class="map-panel">
             <iframe 
                 frameborder="0" 
-                style="-moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); box-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); border: 0; width: 100%; height: 303px;" 
+                
                 src="${mapSrc}" 
-                width="300" 
+                width="100%" 
                 height="303">
             </iframe>
         </div>
-    `;
+    </div>
+`;
+
 
     // 2. Колонка для Розкладу
     html += '<div class="col-xs-12 col-md-6 schedule-column">';

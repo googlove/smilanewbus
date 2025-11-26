@@ -567,3 +567,72 @@ body.dark-mode .bus-title { color: #e0e0e0 !important; }
 body.dark-mode .schedule-title, body.dark-mode .map-title { color: #ffffff !important; }
 body.dark-mode .route-direction { color: #a7f7ff !important; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
 body.dark-mode .stop-name { color: #f1f5f9 !important; }
+
+
+
+/* === MOBILE & TABLET: пошук повної ширини === */
+@media (max-width: 991px) {
+    .search-group {
+        padding: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+}
+
+/* === MOBILE & TABLET: картки автобусів вирівняні по ширині === */
+@media (max-width: 991px) {
+    .bus-grid {
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box;
+    }
+    
+    .bus-card {
+        padding: 25px 15px !important;
+        border-radius: 18px;
+    }
+
+    .bus-num {
+        font-size: 2.2rem !important;
+    }
+
+    .bus-title {
+        font-size: 1.3rem !important;
+    }
+}
+
+/* 📱 СМАРТФОНИ (≤575px) */
+@media (max-width: 575px) {
+    .bus-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bus-num {
+        font-size: 2rem !important;
+    }
+}
+
+/* 📟 ПЛАНШЕТИ (576px – 991px) */
+@media (min-width: 576px) and (max-width: 991px) {
+    .bus-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+    }
+}
+
+/* 🖥 ПК (≥992px) */
+@media (min-width: 992px) {
+    .bus-grid {
+        grid-template-columns: repeat(7, 1fr); /* 7 колонок */
+    }
+    
+    .links-and-donate-col,
+    .donors-col {
+        margin-bottom: 0;
+    }
+
+    .links-and-donate-col {
+        padding-right: 15px;
+    }
+}
+

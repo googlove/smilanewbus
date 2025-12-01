@@ -342,13 +342,13 @@ header {
     }
 
     .header-bot-btn {
-        font-size: 1rem !important;
-        padding: 8px 20px !important;
-        height: 40px;
+        font-size: 1.4rem !important; /* Збільшено для ПК */
+        padding: 10px 25px !important; /* Збільшено для ПК */
+        height: 45px;
     }
 
     .logo-img {
-        height: 40px;
+        height: 55px !important; /* Збільшено для ПК */
     }
 
     .theme-switch-wrapper.header-switch .custom-toggle {
@@ -497,7 +497,11 @@ body.dark-mode .donor-item {
 .donor-name {
     color: #173a53;
     font-size: 1.4rem;
+}
 
+/* 🔥 ЗМІНА: Колір донатерів у темній темі на білий */
+body.dark-mode .donor-name {
+    color: #ffffff !important;
 }
 
 .donor-amount {
@@ -821,7 +825,7 @@ body.dark-mode .poputka-route {
     font-size: 1.2rem;
 }
 
-/* 🔥 ФІКС: БІЛИЙ ТЕКСТ ЦІНИ В ТЕМНІЙ ТЕМІ (з попереднього запиту) */
+/* ФІКС: БІЛИЙ ТЕКСТ ЦІНИ В ТЕМНІЙ ТЕМІ */
 body.dark-mode .poputka-price {
     color: #ffffff !important;
 }
@@ -873,12 +877,21 @@ body.dark-mode .poputka-price {
 
 .map-panel iframe {
     width: 100%;
-    height: auto !important;
-    /* Дозволяємо JS ставити правильну висоту */
+    /* 🔥 ЗБІЛЬШЕННЯ ВИСОТИ КАРТИ */
+    height: 280px !important; 
+    /* Було auto. Нова фіксована висота для мобільних/планшетів. */
     border: none;
     display: block;
     border-radius: 20px;
 }
+
+@media (min-width: 992px) {
+    .map-panel iframe {
+        height: 400px !important;
+        /* Ще більше для ПК */
+    }
+}
+
 
 .map-title,
 .schedule-title {
@@ -979,10 +992,7 @@ body.dark-mode .poputka-price {
 
 /* 1. ЗОЛОТА КНОПКА (Підтримати) */
 
-/* ⚪ СВІТЛА ТЕМА: 
-   - Фон: Білий (щоб не зливався з пастельним фоном)
-   - Контур: Темно-золотий/Коричневий (щоб було чітко видно)
-*/
+/* ⚪ СВІТЛА ТЕМА: */
 .gold-button-universal {
     background: #f8fafcb2 !important;
     /* Суцільний білий фон */
@@ -995,10 +1005,7 @@ body.dark-mode .poputka-price {
     backdrop-filter: none !important;
 }
 
-/* ⚫ ТЕМНА ТЕМА: 
-   - Фон: Яскраво-жовтий
-   - Текст: Чорний (для кращого контрасту)
-*/
+/* ⚫ ТЕМНА ТЕМА: */
 body.dark-mode .gold-button-universal {
     background: #FFD700 !important;
     border: 2px solid #FFD700 !important;
@@ -1086,8 +1093,8 @@ body.dark-mode .ios-liquid-blue {
 
 .custom-toggle {
     position: relative;
-    width: 100px;
-    height: 44px;
+    width: 80px !important;
+    height: 36px !important;
     display: block;
     cursor: pointer;
     margin-bottom: 0;
@@ -1106,7 +1113,7 @@ body.dark-mode .ios-liquid-blue {
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 50px;
+    border-radius: 40px !important;
     transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background-color: rgba(30, 30, 30, 0.85);
     border: 2px solid rgba(255, 255, 255, 0.2);
@@ -1116,10 +1123,10 @@ body.dark-mode .ios-liquid-blue {
 
 .toggle-knob {
     position: absolute;
-    height: 36px;
-    width: 36px;
-    left: 4px;
-    bottom: 2px;
+    width: 24px !important;
+    height: 24px !important;
+    left: 4px !important;
+    bottom: 4px !important;
     border-radius: 50%;
     transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 2;
@@ -1157,7 +1164,7 @@ body.dark-mode .ios-liquid-blue {
 }
 
 .custom-toggle input:checked+.toggle-track .toggle-knob {
-    transform: translateX(56px);
+    transform: translateX(48px) !important;
     background: #1a1a1a;
 }
 
@@ -1174,7 +1181,7 @@ body.dark-mode .ios-liquid-blue {
 }
 
 .custom-toggle input:checked:hover+.toggle-track .toggle-knob {
-    transform: translateX(56px) scale(1.05);
+    transform: translateX(48px) scale(1.05) !important;
 }
 
 .footer-date {
@@ -1272,43 +1279,19 @@ body.dark-mode .stop-name {
    🔧 Тумблер теми — менший трек + більший повзунок
    ============================================ */
 
-/* Зменшуємо фон (track) */
+/* Скидання старих значень для мобільного/планшета, які були перевизначені раніше */
 .custom-toggle {
     width: 80px !important;
-    /* було 100px */
     height: 36px !important;
-    /* було 44px */
 }
 
-/* Фон всередині */
-.toggle-track {
-    border-radius: 40px !important;
-}
-
-/* Збільшуємо саму кнопку (knob) */
 .toggle-knob {
-    width: 32px !important;
-    /* було 36px */
-    height: 32px !important;
-    bottom: 2px !important;
-    left: 2px !important;
-}
-
-/* Коли увімкнено — зсуваємо на правильну позицію */
-.custom-toggle input:checked+.toggle-track .toggle-knob {
-    transform: translateX(44px) !important;
-    /* під твій новий розмір */
-}
-
-/* ЗМЕНЬШЕНИЙ КРУЖОЧОК (knob) */
-.custom-toggle .toggle-knob {
     width: 24px !important;
     height: 24px !important;
     left: 4px !important;
     bottom: 4px !important;
 }
 
-/* НОВА позиція для включеного стану */
 .custom-toggle input:checked+.toggle-track .toggle-knob {
     transform: translateX(48px) !important;
 }
@@ -1333,86 +1316,6 @@ body.dark-mode .stop-name {
 
 /* 🔓 Відкритий — лише верх */
 .glass-panel-header:has(a:not(.collapsed)) {
-    border-top-left-radius: 20px !important;
-    border-top-right-radius: 20px !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
-
-/* Телефони */
-@media (max-width: 575px) {
-    .logo-img {
-        height: 40px !important;
-        /* було 32–36 */
-    }
-}
-
-/* Планшети */
-@media (min-width: 576px) and (max-width: 991px) {
-    .logo-img {
-        height: 48px !important;
-    }
-}
-
-
-/* === MOBILE & TABLET: пошук повної ширини === */
-@media (max-width: 991px) {
-    .search-group {
-        padding: 0 !important;
-        /* було 30px */
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-}
-
-
-/* === MOBILE & TABLET: картки автобусів вирівняні по ширині === */
-@media (max-width: 991px) {
-    .bus-grid {
-        padding: 0 !important;
-        /* знімаємо зайві відступи */
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box;
-    }
-}
-
-@media (max-width: 575px) {
-    .bus-num {
-        font-size: 2rem !important;
-        /* було ~2–2.2rem */
-    }
-}
-
-
-
-
-@media (min-width: 992px) {
-    .big-blue-box {
-        display: flex;
-        gap: 40px;
-        padding: 30px;
-        background: #D9F2EB;
-        border-radius: 25px;
-        border: 1px solid var(--glass-border);
-        backdrop-filter: blur(12px);
-    }
-
-    #route-map-container,
-    #schedule-container {
-        flex: 1;
-    }
-}
-
-
-
-/* Закритий accordion — <a> теж заокруглений */
-.glass-panel-header:has(a.collapsed) a {
-    border-radius: 20px !important;
-}
-
-/* Відкритий accordion — верхні кути, нижні прямі */
-.glass-panel-header:has(a:not(.collapsed)) a {
     border-top-left-radius: 20px !important;
     border-top-right-radius: 20px !important;
     border-bottom-left-radius: 0 !important;

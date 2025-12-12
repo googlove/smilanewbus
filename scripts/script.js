@@ -213,6 +213,64 @@ function renderBusGrid(buses) {
     });
 }
 
+
+// Список номерів міських автобусів (ціна 13 грн)
+const CITY_ROUTES_IDS = ['3', '4', '5', '17', '30', '34', '39', '40', '41', '48', '49', '32'];
+
+// 4. Малювання кнопок (Сітка) — ОНОВЛЕНО
+function renderBusGrid(buses) {
+    const container = document.getElementById('bus-grid');
+    if (!container) return;
+    
+    container.innerHTML = '';
+
+    if (buses.length === 0) {
+        container.innerHTML = '<p style="text-align:center; width:100%">Маршрутів не знайдено</p>';
+        return;
+    }
+
+    buses.forEach(bus => {
+        const card = document.createElement('div');
+        card.className = 'bus-card';
+        
+        // Визначення ціни
+        let priceHtml = '';
+        let priceText = '';
+        
+        // Перевірка: чи це міський автобус зі списку?
+        if (CITY_ROUTES_IDS.includes(bus.number.toString())) {
+            priceText = '13 грн';
+            // Додаємо зелений бейдж
+            priceHtml = `<div class="bus-price-badge">${priceText}</div>`;
+        } 
+        // Якщо ні, перевіряємо чи є ціна в data-price (для приміських)
+        else if (bus.price || (card.dataset && card.dataset.price)) {
+            // Беремо ціну з JSON або атрибуту
+            priceText = bus.price || 'від 30 грн'; 
+            // Додаємо золотистий бейдж (клас suburban-price)
+            priceHtml = `<div class="bus-price-badge suburban-price">${priceText}</div>`;
+        }
+
+        // Зберігаємо ціну в атрибут, щоб передати в розклад при кліку
+        card.dataset.routeId = bus.number;
+        card.dataset.price = priceText; 
+
+        card.onclick = () => {
+            const title = bus.title || card.querySelector('.bus-title').innerText;
+            // Передаємо ціну у функцію відкриття
+            openSchedule(bus, priceText); 
+        };
+        
+        // HTML Картки
+        card.innerHTML = `
+            <span class="bus-num" style="color: ${bus.color || 'inherit'}">№${bus.number}</span>
+            ${priceHtml} <div class="bus-title">${bus.title}</div>
+        `;
+        
+        container.appendChild(card);
+    });
+}
+
 // 5. Відкриття розкладу (ОНОВЛЕНО: ДОДАНО history.pushState)
 function openSchedule(bus) {
     // 🔥 Додаємо нову точку в історію браузера 🔥

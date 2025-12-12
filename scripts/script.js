@@ -1,17 +1,19 @@
 let allBusData = [];
 
+// Список номерів міських автобусів (ціна 13 грн)
+const CITY_ROUTES_IDS = ['3', '4', '5', '17', '30', '34', '39', '40', '41', '48', '49', '32'];
+
 // -----------------------------------------------------------
-// ЗАПУСК ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ (ОНОВЛЕНО)
+// ЗАПУСК ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ
 // -----------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
     setupTheme(); // Запускає логіку тумблера
     
     // Встановлення початкового стану для History API
-    // Це потрібно для коректного повернення жестом "Назад"
     history.replaceState({ view: 'main' }, '', window.location.pathname);
 
-    // 🔥 Обробка жесту "Назад" браузера (popstate) 🔥
+    // Обробка жесту "Назад" браузера (popstate)
     setupHistoryListener();
 
     // Завантаження даних
@@ -31,39 +33,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Кнопка Назад (ОНОВЛЕНО)
+    // Кнопка Назад (в інтерфейсі)
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
         backBtn.addEventListener('click', () => {
-            // Замість прямого приховування, імітуємо натискання "Назад" у браузері.
-            // Це запустить наш popstate обробник і забезпечить узгодженість.
-            history.back();
-            window.scrollTo(0, 0);
+            history.back(); // Імітуємо натискання "Назад" у браузері
         });
     }
 });
 
 // -----------------------------------------------------------
-// НОВІ ФУНКЦІЇ ДЛЯ HISTORY API
+// ФУНКЦІЇ HISTORY API & НАВІГАЦІЯ
 // -----------------------------------------------------------
 
-// 🔥 Функція обробки жесту "Назад" 🔥
 function setupHistoryListener() {
     window.addEventListener('popstate', (event) => {
-        // Якщо стан історії говорить, що ми повертаємося до головного виду,
-        // або якщо стану немає (повернення до початкової точки)
-        if (event.state && event.state.view === 'main') {
-            // Показати головну сторінку
+        // Якщо повертаємося на головну (view: 'main') або стан пустий
+        if (!event.state || event.state.view === 'main') {
             document.getElementById('schedule-view').classList.add('hidden');
             document.getElementById('main-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
         } 
-        
-        // Якщо state порожній, ми намагаємося повернутися за межі додатка.
-        // Ваш браузер обробить це сам.
+        // Якщо повертаємося на розклад (view: 'schedule') - це обробляється автоматично,
+        // бо ми вже там, але якщо потрібно, можна додати логіку тут.
     });
 }
 
-// Функція для зміни відображення між головною та розкладом
 function switchView(toView) {
     if (toView === 'main') {
         document.getElementById('schedule-view').classList.add('hidden');
@@ -74,8 +69,11 @@ function switchView(toView) {
     }
 }
 
+// -----------------------------------------------------------
+// ЗАВАНТАЖЕННЯ ДАНИХ
+// -----------------------------------------------------------
 
-// 1. Завантаження даних маршрутів (data.json)
+// 1. Завантаження маршрутів
 function loadBusData() {
     fetch('database/data.json')
         .then(response => response.json())
@@ -86,11 +84,11 @@ function loadBusData() {
         .catch(err => {
             console.error("Помилка завантаження data.json:", err);
             const grid = document.getElementById('bus-grid');
-            if(grid) grid.innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження розкладу. Перевірте data.json.</p>';
+            if(grid) grid.innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження розкладу.</p>';
         });
 }
 
-// 2. Завантаження додаткової інформації (info.json)
+// 2. Завантаження інфо
 function loadInfoData() {
     fetch('database/info.json')
         .then(response => response.json())
@@ -99,19 +97,17 @@ function loadInfoData() {
         })
         .catch(err => {
             console.error("Помилка завантаження info.json:", err);
-            const accordion = document.getElementById('accordion');
-            if(accordion) accordion.innerHTML = '<p style="color:orange; text-align:center;">Інформація про попутку та пільги тимчасово недоступна.</p>';
         });
 }
 
-// 3. Рендер додаткової інформації як акордеон (БЕЗ ЗМІН)
+// 3. Рендер акордеона (Інфо)
 function renderInfoData(data) {
     const container = document.getElementById('accordion');
     if (!container) return;
     
     let html = '';
 
-    // Шаблон заголовка акордеона
+    // Шаблони
     const renderHeader = (id, title, icon, isCollapsed = true) => `
         <div class="panel-heading glass-panel-header" role="tab" id="heading${id}">
             <h4 class="panel-title">
@@ -122,14 +118,13 @@ function renderInfoData(data) {
         </div>
     `;
 
-    // Шаблон тіла акордеона
     const renderBody = (id, content, isCollapsed = true) => `
         <div id="collapse${id}" class="panel-collapse collapse ${isCollapsed ? '' : 'in'}" role="tabpanel" aria-labelledby="heading${id}">
             <div class="glass-panel info-panel panel-body">${content}</div>
         </div>
     `;
 
-    // --- БЛОК 1: ПОПУТКА ---
+    // --- ПОПУТКА ---
     const p = data.poputka;
     let routesHtml = p.routes.map(route => `
         <div class="poputka-route">
@@ -160,9 +155,8 @@ function renderInfoData(data) {
         </div>
     `;
 
-    // --- БЛОК 2: ЗАГАЛЬНА ІНФОРМАЦІЯ ---
+    // --- ЗАГАЛЬНА ІНФО ---
     const g = data.generalInfo;
-
     const renderList = (items) => items.map(item => `
         <h4><span class="item-icon">${item.icon}</span> ${item.text}</h4>
     `).join('');
@@ -187,37 +181,9 @@ function renderInfoData(data) {
     container.innerHTML = html;
 }
 
-
-// 4. Малювання кнопок (Сітка) (БЕЗ ЗМІН)
-function renderBusGrid(buses) {
-    const container = document.getElementById('bus-grid');
-    if (!container) return;
-    
-    container.innerHTML = '';
-
-    if (buses.length === 0) {
-        container.innerHTML = '<p style="text-align:center; width:100%">Маршрутів не знайдено</p>';
-        return;
-    }
-
-    buses.forEach(bus => {
-        const card = document.createElement('div');
-        card.className = 'bus-card';
-        card.onclick = () => openSchedule(bus);
-        
-        card.innerHTML = `
-            <span class="bus-num" style="color: ${bus.color}">№${bus.number}</span>
-            <div class="bus-title">${bus.title}</div>
-        `;
-        container.appendChild(card);
-    });
-}
-
-
-// Список номерів міських автобусів (ціна 13 грн)
-const CITY_ROUTES_IDS = ['3', '4', '5', '17', '30', '34', '39', '40', '41', '48', '49', '32'];
-
-// 4. Малювання кнопок (Сітка) — ОНОВЛЕНО
+// -----------------------------------------------------------
+// 4. РЕНДЕР СІТКИ (З ЦІНАМИ) - ОНОВЛЕНО
+// -----------------------------------------------------------
 function renderBusGrid(buses) {
     const container = document.getElementById('bus-grid');
     if (!container) return;
@@ -233,66 +199,87 @@ function renderBusGrid(buses) {
         const card = document.createElement('div');
         card.className = 'bus-card';
         
-        // Визначення ціни
+        // --- ЛОГІКА ЦІНИ ---
         let priceHtml = '';
         let priceText = '';
         
-        // Перевірка: чи це міський автобус зі списку?
+        // 1. Перевірка на міський автобус (13 грн)
         if (CITY_ROUTES_IDS.includes(bus.number.toString())) {
             priceText = '13 грн';
-            // Додаємо зелений бейдж
             priceHtml = `<div class="bus-price-badge">${priceText}</div>`;
         } 
-        // Якщо ні, перевіряємо чи є ціна в data-price (для приміських)
+        // 2. Перевірка на приміський (з data.json або dataset)
         else if (bus.price || (card.dataset && card.dataset.price)) {
-            // Беремо ціну з JSON або атрибуту
             priceText = bus.price || 'від 30 грн'; 
-            // Додаємо золотистий бейдж (клас suburban-price)
             priceHtml = `<div class="bus-price-badge suburban-price">${priceText}</div>`;
         }
 
-        // Зберігаємо ціну в атрибут, щоб передати в розклад при кліку
+        // Зберігаємо для передачі
         card.dataset.routeId = bus.number;
-        card.dataset.price = priceText; 
+        card.dataset.price = priceText;
 
+        // Клік
         card.onclick = () => {
+            // Якщо title не прийшов з JSON, беремо з DOM (рідкісний випадок)
             const title = bus.title || card.querySelector('.bus-title').innerText;
-            // Передаємо ціну у функцію відкриття
-            openSchedule(bus, priceText); 
+            openSchedule(bus, priceText);
         };
         
-        // HTML Картки
+        // HTML картки
         card.innerHTML = `
             <span class="bus-num" style="color: ${bus.color || 'inherit'}">№${bus.number}</span>
-            ${priceHtml} <div class="bus-title">${bus.title}</div>
+            ${priceHtml} 
+            <div class="bus-title">${bus.title}</div>
         `;
         
         container.appendChild(card);
     });
 }
 
-// 5. Відкриття розкладу (ОНОВЛЕНО: ДОДАНО history.pushState)
-function openSchedule(bus) {
-    // 🔥 Додаємо нову точку в історію браузера 🔥
-    history.pushState({ view: 'schedule', busId: bus.number }, `Маршрут №${bus.number}`, `#bus=${bus.number}`);
+// -----------------------------------------------------------
+// 5. ВІДКРИТТЯ РОЗКЛАДУ - ОНОВЛЕНО
+// -----------------------------------------------------------
+function openSchedule(bus, priceText) {
+    // 1. Додаємо точку в історію
+    history.pushState(
+        { view: 'schedule', busId: bus.number }, 
+        `Маршрут №${bus.number}`, 
+        `#bus=${bus.number}`
+    );
     
+    // 2. Перемикаємо екран
     switchView('schedule');
+    
+    // 3. Заповнюємо заголовок
     document.getElementById('route-title-display').innerText = `№${bus.number} ${bus.title}`;
     
+    // 4. Заповнюємо ціну (якщо елемент існує в HTML)
+    const priceDisplay = document.getElementById('route-price-display');
+    if (priceDisplay) {
+        if (priceText) {
+            // Можна додати красивий колір або жирність
+            priceDisplay.innerHTML = `Вартість проїзду: <span style="color:var(--primary); font-weight:800;">${priceText}</span>`;
+        } else {
+            priceDisplay.innerHTML = '';
+        }
+    }
+    
+    // 5. Рендеримо деталі
     renderRouteDetails(bus);
     window.scrollTo(0, 0);
 }
 
-// 6. Генерація розкладу та карти (БЕЗ ЗМІН)
+// -----------------------------------------------------------
+// 6. РЕНДЕР ДЕТАЛЕЙ РОЗКЛАДУ (БЕЗ ЗМІН, ТІЛЬКИ FIX MAP)
+// -----------------------------------------------------------
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
     if (!container) return;
     container.innerHTML = ''; 
     
-    // Початок Bootstrap-сітки
     let html = '<div class="row">';
 
-    // 1. Колонка для Карти (з фіксом map-panel)
+    // 1. Карта (З ФІКСОМ .map-panel)
     const mapSrc = bus.mapIframeSrc || 'about:blank'; 
 
     html += `
@@ -302,7 +289,6 @@ function renderRouteDetails(bus) {
             <div class="map-panel">
                 <iframe 
                     frameborder="0" 
-                    
                     src="${mapSrc}" 
                     width="100%" 
                     height="303">
@@ -311,8 +297,7 @@ function renderRouteDetails(bus) {
         </div>
     `;
 
-
-    // 2. Колонка для Розкладу
+    // 2. Розклад
     html += '<div class="col-xs-12 col-md-6 schedule-column">';
     html += `<h4 class="schedule-title">Розклад руху (Маршрут №${bus.number})</h4>`;
 
@@ -327,7 +312,6 @@ function renderRouteDetails(bus) {
             let foundNext = false;
 
             stop.times.forEach(timeStr => {
-                // Парсинг часу "14:30 (примітка)"
                 const cleanTime = timeStr.split(' ')[0]; 
                 const [h, m] = cleanTime.split(':').map(Number);
                 const busMinutes = h * 60 + m;
@@ -364,7 +348,10 @@ function renderRouteDetails(bus) {
     container.innerHTML = html;
 }
 
-// Годинник (БЕЗ ЗМІН)
+// -----------------------------------------------------------
+// ДОДАТКОВІ ФУНКЦІЇ (ГОДИННИК, ТЕМА)
+// -----------------------------------------------------------
+
 function setupClock() {
     const clockEl = document.getElementById('clock');
     if (!clockEl) return;
@@ -377,20 +364,15 @@ function setupClock() {
     update();
 }
 
-// Функція Теми (БЕЗ ЗМІН)
 function setupTheme() {
     const checkbox = document.getElementById('theme-checkbox');
     const body = document.body;
     
     if (!checkbox) return;
 
-    // 1. Перевірка збереженої теми
     const savedTheme = localStorage.getItem('theme');
-    
-    // 2. Перевірка системної теми
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    // Встановлення початкового стану
     if (savedTheme === 'dark') {
         enableDarkMode();
     } else if (savedTheme === 'light') {
@@ -403,7 +385,6 @@ function setupTheme() {
         }
     }
 
-    // 3. Обробник зміни тумблера
     checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
             enableDarkMode();
@@ -416,11 +397,11 @@ function setupTheme() {
 
     function enableDarkMode() {
         body.classList.add('dark-mode');
-        checkbox.checked = true; // Вмикає тумблер
+        checkbox.checked = true;
     }
 
     function disableDarkMode() {
         body.classList.remove('dark-mode');
-        checkbox.checked = false; // Вимикає тумблер
+        checkbox.checked = false;
     }
 }

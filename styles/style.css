@@ -8,6 +8,48 @@
     --card-radius: 20px;
 }
 
+
+/* ================================================= */
+/* 🏷️ СТИЛІ ДЛЯ ЦІНИ (ПРЯМОКУТНИК)                   */
+/* ================================================= */
+
+.bus-price-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 8px 0 4px 0;
+    
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px; /* Заокруглені кути прямокутника */
+    
+    /* Колір для міських (13 грн) - наприклад, зеленуватий */
+    background: rgba(44, 147, 143, 0.15); 
+    color: #2c938f;
+    border: 1px solid rgba(44, 147, 143, 0.3);
+    
+    transition: all 0.3s;
+}
+
+/* Колір для приміських (дорожчих) - наприклад, золотистий */
+.bus-price-badge.suburban-price {
+    background: rgba(218, 165, 32, 0.15);
+    color: #b8860b;
+    border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+/* ТЕМНА ТЕМА */
+body.dark-mode .bus-price-badge {
+    background: rgba(44, 147, 143, 0.25);
+    color: #81E6E1; /* Світло-бірюзовий */
+    border-color: rgba(44, 147, 143, 0.5);
+}
+
+body.dark-mode .bus-price-badge.suburban-price {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700; /* Золотий */
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
 /* Темна тема (Smoked Glass) */
 body.dark-mode {
     --text-color: #f1f5f9;

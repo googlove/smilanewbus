@@ -542,9 +542,25 @@ body.dark-mode .donor-item {
 }
 
 /* 🔥 ЗМІНА: Колір донатерів у темній темі на білий */
-body.dark-mode .donor-name {
+/* Встановлюємо білий колір для тексту донаторів та реклами у темній темі */
+
+body.dark-mode .top-donators-card,
+body.dark-mode .donator-name,
+body.dark-mode .donator-amount,
+body.dark-mode .ad-placeholder {
     color: #ffffff !important;
 }
+
+
+body.dark-mode .donators-list-item {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Окремо для рекламного напису "Тут може бути ваша реклама" */
+body.dark-mode .ad-text {
+    color: #cccccc; /* Трохи сіріший для візуального розділення */
+}
+
 
 .donor-amount {
     font-weight: 900;

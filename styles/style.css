@@ -545,34 +545,20 @@ body.dark-mode .donor-item {
 /* 👑 БЛОК ДОНАТЕРІВ — ФІКС КОЛЬОРІВ ТЕМНОЇ ТЕМИ     */
 /* ================================================= */
 
-/* ПОВНЕ ПЕРЕКРИТТЯ КОЛЬОРІВ ДЛЯ ДОНАТОРІВ */
-
-/* 1. Робимо текст білим для всього блоку */
-body.dark-mode .top-donators-card {
-    color: #ffffff !important;
+/* ПРИМУСОВЕ ВИПРАВЛЕННЯ КОЛЬОРІВ ДЛЯ ТЕМНОЇ ТЕМИ */
+body.dark-mode .top-donators-card,
+body.dark-mode .top-donators-card *, 
+body.dark-mode .donators-list-item,
+body.dark-mode .donators-list-item * {
+    color: #ffffff !important; /* Робимо БІЛИМ абсолютно все: текст, посилання, спани */
+    text-decoration: none !important; /* Прибираємо синє підкреслення */
+    border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* 2. ВИПРАВЛЕННЯ СИНІХ ІМЕН:
-   Ми звертаємося безпосередньо до тегу <a> всередині .donator-name, 
-   щоб браузер не міг застосувати свій синій колір */
-body.dark-mode .donator-name,
-body.dark-mode .donator-name a,
-body.dark-mode .donator-name span {
-    color: #ffffff !important;
-    text-decoration: none !important;
-}
-
-/* 3. ВИПРАВЛЕННЯ СУМИ:
-   Явно задаємо білий колір для цифр */
-body.dark-mode .donator-amount {
-    color: #ffffff !important;
-    font-weight: 900 !important;
-}
-
-/* 4. РЕКЛАМНИЙ ТЕКСТ */
-body.dark-mode .ad-text {
-    color: #ffffff !important;
-    opacity: 0.8;
+/* Окремо для рекламного рядка, щоб він був трішки тускнішим */
+body.dark-mode .ad-text,
+body.dark-mode .ad-text * {
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
 

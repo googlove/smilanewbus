@@ -541,35 +541,43 @@ body.dark-mode .donor-item {
     font-size: 1.4rem;
 }
 
-/* 👑 БЛОК ДОНАТЕРІВ ТА РЕКЛАМИ (ФІКС ТЕМНОЇ ТЕМИ)   */
+/* ================================================= */
+/* 👑 БЛОК ДОНАТЕРІВ — ФІКС КОЛЬОРІВ ТЕМНОЇ ТЕМИ     */
 /* ================================================= */
 
-/* Загальні стилі для світлої теми (про всяк випадок) */
-.donator-name, .donator-amount, .ad-text {
-    color: #071219; /* Темний колір для світлої теми */
-}
-
-/* 🔥 ТЕМНА ТЕМА (DARK MODE) 🔥 */
-body.dark-mode .top-donators-card h3 {
+/* ТЕМНА ТЕМА */
+body.dark-mode .top-donators-card {
     color: #ffffff !important;
 }
 
-/* Виправляємо імена донаторів (щоб не були синіми) */
-body.dark-mode .donator-name {
+/* Білі імена: примусово для тексту, посилань та станів посилань */
+body.dark-mode .donator-name,
+body.dark-mode .donator-name a,
+body.dark-mode .donator-name a:visited,
+body.dark-mode .donator-name a:hover {
     color: #ffffff !important;
+    text-decoration: none !important; /* Прибираємо підкреслення, якщо воно є */
 }
 
-/* Виправляємо суми донаторів */
+/* Біла сума: виправляємо чорний колір */
 body.dark-mode .donator-amount {
     color: #ffffff !important;
-    font-weight: 900;
+    font-weight: 900 !important;
 }
 
-/* Виправляємо текст реклами */
-body.dark-mode .ad-text, 
+/* Текст реклами та заголовок */
+body.dark-mode .top-donators-card h3,
+body.dark-mode .ad-text,
 body.dark-mode .ad-placeholder {
-    color: #cccccc !important;
+    color: #ffffff !important;
+    opacity: 0.9;
 }
+
+/* Прибираємо синій колір, якщо він приходить від загальних стилів сайту */
+body.dark-mode .donators-list-item * {
+    color: inherit;
+}
+
 
 @media (min-width: 768px) {
 

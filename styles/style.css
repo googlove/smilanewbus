@@ -541,30 +541,34 @@ body.dark-mode .donor-item {
     font-size: 1.4rem;
 }
 
-/* 🔥 ЗМІНА: Колір донатерів у темній темі на білий */
-/* Встановлюємо білий колір для тексту донаторів та реклами у темній темі */
+/* 👑 БЛОК ДОНАТЕРІВ ТА РЕКЛАМИ (ФІКС ТЕМНОЇ ТЕМИ)   */
+/* ================================================= */
 
-body.dark-mode .top-donators-card,
-body.dark-mode .donator-name,
-body.dark-mode .donator-amount,
-body.dark-mode .ad-placeholder {
+/* Загальні стилі для світлої теми (про всяк випадок) */
+.donator-name, .donator-amount, .ad-text {
+    color: #071219; /* Темний колір для світлої теми */
+}
+
+/* 🔥 ТЕМНА ТЕМА (DARK MODE) 🔥 */
+body.dark-mode .top-donators-card h3 {
     color: #ffffff !important;
 }
 
-
-body.dark-mode .donators-list-item {
-    color: rgba(255, 255, 255, 0.9);
+/* Виправляємо імена донаторів (щоб не були синіми) */
+body.dark-mode .donator-name {
+    color: #ffffff !important;
 }
 
-/* Окремо для рекламного напису "Тут може бути ваша реклама" */
-body.dark-mode .ad-text {
-    color: #cccccc; /* Трохи сіріший для візуального розділення */
-}
-
-
-.donor-amount {
+/* Виправляємо суми донаторів */
+body.dark-mode .donator-amount {
+    color: #ffffff !important;
     font-weight: 900;
-    color: #071219;
+}
+
+/* Виправляємо текст реклами */
+body.dark-mode .ad-text, 
+body.dark-mode .ad-placeholder {
+    color: #cccccc !important;
 }
 
 @media (min-width: 768px) {

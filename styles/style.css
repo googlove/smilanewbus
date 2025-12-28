@@ -545,19 +545,26 @@ body.dark-mode .donor-item {
 /* 👑 БЛОК ДОНАТЕРІВ — ФІКС КОЛЬОРІВ ТЕМНОЇ ТЕМИ     */
 /* ================================================= */
 
-/* ПРИМУСОВЕ ВИПРАВЛЕННЯ КОЛЬОРІВ ДЛЯ ТЕМНОЇ ТЕМИ */
-body.dark-mode .top-donators-card,
-body.dark-mode .top-donators-card *, 
-body.dark-mode .donators-list-item,
-body.dark-mode .donators-list-item * {
-    color: #ffffff !important; /* Робимо БІЛИМ абсолютно все: текст, посилання, спани */
-    text-decoration: none !important; /* Прибираємо синє підкреслення */
-    border-color: rgba(255, 255, 255, 0.1) !important;
+/* ПРИМУСОВЕ ВИДАЛЕННЯ СИНЬОГО КОЛЬОРУ ТА ПІДКРЕСЛЕННЯ */
+
+/* Впливаємо на всі елементи всередині блоку донаторів у темній темі */
+body.dark-mode .top-donators-card a, 
+body.dark-mode .top-donators-card a:link, 
+body.dark-mode .top-donators-card a:visited, 
+body.dark-mode .top-donators-card a:hover, 
+body.dark-mode .top-donators-card a:active {
+    color: #ffffff !important;           /* Примусово білий колір */
+    text-decoration: none !important;    /* Прибираємо підкреслення */
 }
 
-/* Окремо для рекламного рядка, щоб він був трішки тускнішим */
-body.dark-mode .ad-text,
-body.dark-mode .ad-text * {
+/* Додатково для суми (UAH), якщо вона в окремому спані */
+body.dark-mode .donator-amount {
+    color: #ffffff !important;
+    font-weight: 900 !important;
+}
+
+/* Для рекламного напису внизу */
+body.dark-mode .ad-text {
     color: rgba(255, 255, 255, 0.7) !important;
 }
 

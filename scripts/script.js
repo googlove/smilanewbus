@@ -219,28 +219,41 @@ function openSchedule(bus, routeId) {
     switchView('schedule');
     
     // Заголовок
-    document.getElementById('route-title-display').innerText = `№${bus.number} ${bus.title}`;
+    const titleEl = document.getElementById('route-title-display');
+    titleEl.innerHTML = `№${bus.number} ${bus.title}`;
     
-    // --- БЛОК ВІДОБРАЖЕННЯ ЦІНИ ТА ІНФО ---
+    // --- ДОДАВАННЯ КНОПКИ СПОВІЩЕНЬ ---
+    // Перевіряємо, чи ми вже підписані
+    const isSubscribed = subscribedRoutes.includes(bus.number.toString());
+    const btnText = isSubscribed ? '<span class="bell-icon">🔕</span> Вимкнути сповіщення' : '<span class="bell-icon">🔔</span> Нагадати про автобус';
+    const btnClass = isSubscribed ? 'notification-btn active' : 'notification-btn';
+
+    // Додаємо кнопку під заголовком (використовуємо div-обгортку якщо треба, або просто append)
+    // Щоб не дублювати кнопки, спочатку видалимо стару, якщо є
+    const oldBtn = document.getElementById('notify-btn');
+    if (oldBtn) oldBtn.remove();
+
+    const notifyBtn = document.createElement('button');
+    notifyBtn.id = 'notify-btn';
+    notifyBtn.className = btnClass;
+    notifyBtn.innerHTML = btnText;
+    notifyBtn.onclick = () => toggleSubscription(bus.number);
+    
+    // Вставляємо кнопку після заголовка
+    titleEl.parentNode.insertBefore(notifyBtn, titleEl.nextSibling);
+    // ----------------------------------
+
+    // БЛОК ЦІНИ (Ваш попередній код)
     const priceDisplay = document.getElementById('route-price-display');
-    
     if (priceDisplay) {
-        // 1. Перевірка на спеціальні дані з SUBURBAN_DATA
         if (SUBURBAN_DATA[routeId]) {
             const info = SUBURBAN_DATA[routeId];
             let html = `Вартість проїзду: <span style="color:var(--primary); font-weight:800;">${info.price}</span>`;
-            
-            if (info.note) {
-                html += `<br><span style="font-size:0.9em; opacity:0.8; font-weight:400;">${info.note}</span>`;
-            }
+            if (info.note) html += `<br><span style="font-size:0.9em; opacity:0.8; font-weight:400;">${info.note}</span>`;
             priceDisplay.innerHTML = html;
-        } 
-        // 2. Перевірка на міський
-        else if (CITY_ROUTES_IDS.includes(routeId)) {
+        } else if (CITY_ROUTES_IDS.includes(routeId)) {
             priceDisplay.innerHTML = `Вартість проїзду: <span style="color:var(--fares-color-light); font-weight:800;">13 грн</span>`;
-        } 
-        // 3. Стандартний варіант
-        else {
+        } else {
             priceDisplay.innerHTML = '';
         }
     }

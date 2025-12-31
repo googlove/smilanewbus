@@ -330,3 +330,108 @@ function setupTheme() {
     function enableDarkMode() { body.classList.add('dark-mode'); checkbox.checked = true; }
     function disableDarkMode() { body.classList.remove('dark-mode'); checkbox.checked = false; }
 }
+
+
+// ===========================================================
+// 🔔 СИСТЕМА СПОВІЩЕНЬ (NOTIFICATIONS)
+// ===========================================================
+
+// Збережені підписки
+let subscribedRoutes = JSON.parse(localStorage.getItem('subscribedRoutes')) || [];
+
+// Запуск перевірки часу щохвилини
+setInterval(checkBusNotifications, 60000);
+
+// Функція перемикання підписки
+function toggleSubscription(busNumber) {
+    // 1. Запит дозволу, якщо ще не надано
+    if (Notification.permission !== "granted") {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") {
+                toggleSubscriptionLogic(busNumber);
+            } else {
+                alert("Будь ласка, дозвольте сповіщення в налаштуваннях браузера, щоб ми могли попередити вас про автобус.");
+            }
+        });
+    } else {
+        toggleSubscriptionLogic(busNumber);
+    }
+}
+
+// Логіка додавання/видалення
+function toggleSubscriptionLogic(busNumber) {
+    const index = subscribedRoutes.indexOf(busNumber.toString());
+    const btn = document.getElementById('notify-btn');
+
+    if (index === -1) {
+        // Додаємо
+        subscribedRoutes.push(busNumber.toString());
+        if (btn) {
+            btn.classList.add('active');
+            btn.innerHTML = '<span class="bell-icon">🔕</span> Вимкнути сповіщення';
+        }
+        sendLocalNotification("Сповіщення увімкнено!", `Ми попередимо вас, коли маршрут №${busNumber} буде поруч.`);
+    } else {
+        // Видаляємо
+        subscribedRoutes.splice(index, 1);
+        if (btn) {
+            btn.classList.remove('active');
+            btn.innerHTML = '<span class="bell-icon">🔔</span> Нагадати про автобус';
+        }
+    }
+    
+    localStorage.setItem('subscribedRoutes', JSON.stringify(subscribedRoutes));
+}
+
+// Відправка самого сповіщення
+function sendLocalNotification(title, body) {
+    if (Notification.permission === "granted") {
+        // Для мобільних пристроїв використовуємо ServiceWorker (якщо є) або звичайний API
+        try {
+            new Notification(title, {
+                body: body,
+                icon: 'https://cdn-icons-png.flaticon.com/512/3448/3448339.png', // Можна замінити на іконку автобуса
+                vibrate: [200, 100, 200]
+            });
+        } catch (e) {
+            console.log("Browser does not support standard Notification API");
+        }
+    }
+}
+
+// 🔥 ГОЛОВНА ЛОГІКА: Перевірка часу
+function checkBusNotifications() {
+    if (subscribedRoutes.length === 0) return;
+
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+    // Перебираємо всі дані про автобуси
+    allBusData.forEach(bus => {
+        // Якщо ми підписані на цей маршрут
+        if (subscribedRoutes.includes(bus.number.toString())) {
+            
+            // Шукаємо найближчий час у всіх напрямках
+            bus.routes.forEach(route => {
+                route.stops.forEach(stop => {
+                    stop.times.forEach(timeStr => {
+                        const cleanTime = timeStr.split(' ')[0];
+                        const [h, m] = cleanTime.split(':').map(Number);
+                        const busMinutes = h * 60 + m;
+
+                        const diff = busMinutes - currentMinutes;
+
+                        // Якщо автобус через 15 хв, 10 хв або 5 хв
+                        if (diff === 15 || diff === 10 || diff === 5) {
+                            sendLocalNotification(
+                                `🚌 Маршрут №${bus.number}`, 
+                                `Автобус буде на зупинці "${stop.name}" через ${diff} хвилин (${cleanTime})`
+                            );
+                        }
+                    });
+                });
+            });
+        }
+    });
+}
+

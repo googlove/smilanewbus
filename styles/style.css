@@ -204,9 +204,9 @@ header {
         font-size: 1.1rem !important;
     }
 }
-
 /* 📟 Планшети (576–991px) */
 @media (min-width: 576px) and (max-width: 991px) {
+    /* Ваші стилі для кнопки */
     .header-bot-btn {
         height: 40px !important;
         padding: 8px 20px !important;
@@ -220,10 +220,25 @@ header {
     .header-bot-btn .bot-text {
         font-size: 1.4rem !important;
     }
+
+    /* 🔥 Додаємо центрування карток для планшетів (вертикально) */
+    .routes-container {
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    .routes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Картки трохи більші */
+        gap: 15px;
+        justify-content: center; /* Головний секрет центрування */
+    }
 }
 
-/* 🖥 ПК (992px+) */
+/* 🖥 ПК та Планшети горизонтально (992px+) */
 @media (min-width: 992px) {
+    /* Ваші стилі для кнопки */
     .header-bot-btn {
         height: 45px !important;
         padding: 10px 25px !important;
@@ -236,6 +251,19 @@ header {
 
     .header-bot-btn .bot-text {
         font-size: 1.55rem !important;
+    }
+
+    /* 🔥 Додаємо центрування карток для великих екранів та ландшафтного режиму планшетів */
+    .routes-container {
+        max-width: 960px; /* Обмежуємо ширину, щоб картки не розтягувалися на весь екран ПК */
+        margin: 0 auto; /* Центруємо весь блок посередині */
+    }
+
+    .routes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Ще більші картки для вільного місця */
+        gap: 20px;
+        justify-content: center; /* Вирівнювання по центру, якщо карток не вистачає на повний ряд */
     }
 }
 

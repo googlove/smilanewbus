@@ -1808,3 +1808,56 @@ a:hover {
     90% { transform: rotate(30deg); }
     100% { transform: rotate(0); }
 }
+
+
+/* --- СТИЛІ ДЛЯ КАРТКИ "ХАБ" --- */
+.bus-card.hub-card {
+    background: linear-gradient(135deg, #fff3cd, #ffe8a1);
+    border: 2px solid #ffc107;
+    position: relative;
+    overflow: hidden;
+}
+
+.bus-card.hub-card h4 {
+    color: #856404;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.bus-card.hub-card p {
+    color: #664d03;
+    font-weight: 500;
+}
+
+.hub-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.hub-badge {
+    display: inline-block;
+    background: #ffc107;
+    color: #000;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-top: 8px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 🌙 Темна тема для Хабу */
+body.dark-mode .bus-card.hub-card {
+    background: linear-gradient(135deg, #4d3a00, #2b2000);
+    border-color: #ffc107;
+}
+
+body.dark-mode .bus-card.hub-card h4,
+body.dark-mode .bus-card.hub-card p {
+    color: #ffda6a;
+}
+
+body.dark-mode .hub-badge {
+    background: #ffda6a;
+    color: #2b2000;
+}

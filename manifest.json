@@ -1,0 +1,35 @@
+{
+  "name": "SmilaBusTime — Розклад автобусів Сміли",
+  "short_name": "SmilaBus",
+  "description": "Зручний розклад міських та приміських автобусів Сміли з нагадуваннями та офлайн-режимом.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#b2f2bb",
+  "theme_color": "#007DD6",
+  "lang": "uk",
+  "dir": "ltr",
+  "categories": ["transportation", "navigation", "utilities"],
+  "icons": [
+    {
+      "src": "img/com.googlove.smilabus_0.0_3_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "img/com.googlove.smilabus_0.0_2_icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Бот розкладу",
+      "url": "https://t.me/SmilaBusTime_bot",
+      "description": "Відкрити Telegram-бот"
+    }
+  ]
+}

@@ -611,10 +611,19 @@ body.dark-mode .ad-text {
 @media (max-width: 575px) {
     .bus-grid {
         grid-template-columns: repeat(2, 1fr);
-        padding: 0 10px !important;
-        /* було 30px */
+        padding: 0 22px !important;
+        /* було 10px — тепер картки мають нормальний відступ від країв екрана */
+        gap: 12px;
         width: 100% !important;
         box-sizing: border-box;
+    }
+}
+
+/* Дуже малі екрани — трохи менший відступ, щоб картки не звужувались критично */
+@media (max-width: 360px) {
+    .bus-grid {
+        padding: 0 14px !important;
+        gap: 10px;
     }
 }
 
@@ -2109,5 +2118,47 @@ body.dark-mode .next-banner.soon {
     .next-banner { padding: 12px 14px; gap: 12px; }
     .next-banner .nb-icon { font-size: 1.7rem; }
     .next-banner .nb-main { font-size: 1.05rem; }
-    .fav-btn { width: 32px; height: 32px; font-size: 1.05rem; }
+    .fav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+        top: 6px;
+        right: 6px;
+    }
+    .countdown-pill {
+        font-size: 0.74rem;
+        padding: 3px 8px;
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.25;
+    }
+    .bus-countdown {
+        min-height: 20px;
+    }
+    .bus-card {
+        padding: 22px 10px !important;
+    }
+    .bus-num {
+        font-size: 1.9rem !important;
+    }
+    .bus-title {
+        font-size: 1.05rem !important;
+    }
+}
+
+/* --- Very small phones: tighter still --- */
+@media (max-width: 360px) {
+    .countdown-pill {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+    .bus-card {
+        padding: 20px 8px !important;
+    }
+    .bus-num {
+        font-size: 1.75rem !important;
+    }
+    .bus-title {
+        font-size: 0.95rem !important;
+    }
 }

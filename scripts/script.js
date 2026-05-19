@@ -1,4 +1,12 @@
+// ===========================================================
+// SmilaBusTime — головний скрипт
+// ===========================================================
+
 let allBusData = [];
+let currentBus = null; // обраний маршрут, який зараз показується на екрані розкладу
+
+// Дата останнього оновлення розкладу — змінюйте тут одне місце
+const APP_UPDATED = 'Травень 2026';
 
 // ===========================================================
 // 🛠️ КОНФІГУРАЦІЯ ЦІН ТА МАРШРУТІВ
@@ -28,41 +36,131 @@ const SUBURBAN_DATA = {
 };
 
 // -----------------------------------------------------------
+// ⭐ ОБРАНЕ (FAVORITES)
+// -----------------------------------------------------------
+let favoriteRoutes = [];
+try {
+    favoriteRoutes = JSON.parse(localStorage.getItem('favoriteRoutes') || '[]');
+} catch (_) { favoriteRoutes = []; }
+
+function isFavorite(num) {
+    return favoriteRoutes.includes(num.toString());
+}
+
+function toggleFavorite(num) {
+    const id = num.toString();
+    const idx = favoriteRoutes.indexOf(id);
+    if (idx === -1) favoriteRoutes.push(id);
+    else favoriteRoutes.splice(idx, 1);
+    localStorage.setItem('favoriteRoutes', JSON.stringify(favoriteRoutes));
+}
+
+function sortByFavorites(buses) {
+    return [...buses].sort((a, b) => {
+        const af = isFavorite(a.number);
+        const bf = isFavorite(b.number);
+        if (af && !bf) return -1;
+        if (!af && bf) return 1;
+        return 0;
+    });
+}
+
+// -----------------------------------------------------------
+// ⏱️ ХЕЛПЕРИ ДЛЯ ЧАСУ
+// -----------------------------------------------------------
+function getCurrentMinutes() {
+    const n = new Date();
+    return n.getHours() * 60 + n.getMinutes();
+}
+
+function parseTimeStr(timeStr) {
+    if (!timeStr) return null;
+    const clean = String(timeStr).split(' ')[0];
+    const parts = clean.split(':');
+    if (parts.length < 2) return null;
+    const h = parseInt(parts[0], 10);
+    const m = parseInt(parts[1], 10);
+    if (isNaN(h) || isNaN(m)) return null;
+    return h * 60 + m;
+}
+
+// Знаходить найближчий рейс для маршруту (відносно зараз)
+function findNextDeparture(bus) {
+    const cur = getCurrentMinutes();
+    let best = null;
+    bus.routes.forEach(route => {
+        route.stops.forEach(stop => {
+            stop.times.forEach(timeStr => {
+                const t = parseTimeStr(timeStr);
+                if (t === null) return;
+                if (t >= cur && (best === null || t < best.minutes)) {
+                    best = {
+                        minutes: t,
+                        time: String(timeStr).split(' ')[0],
+                        stop: stop.name,
+                        direction: route.direction,
+                        diff: t - cur
+                    };
+                }
+            });
+        });
+    });
+    return best;
+}
+
+function formatDiffMinutes(diff) {
+    if (diff <= 0) return 'зараз';
+    if (diff < 60) return `через ${diff} хв`;
+    const h = Math.floor(diff / 60);
+    const m = diff % 60;
+    return m === 0 ? `через ${h} год` : `через ${h} год ${m} хв`;
+}
+
+// -----------------------------------------------------------
 // ЗАПУСК ПРИ ЗАВАНТАЖЕННІ СТОРІНКИ
 // -----------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     setupClock();
-    setupTheme(); 
-    
+    setupTheme();
+    setupFooterDate();
+    registerServiceWorker();
+
     // History API
-    history.replaceState({ view: 'main' }, '', window.location.pathname);
+    history.replaceState({ view: 'main' }, '', window.location.pathname + window.location.hash);
     setupHistoryListener();
 
     // Завантаження
-    loadBusData(); 
+    loadBusData();
     loadInfoData();
 
     // Пошук
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            const filtered = allBusData.filter(bus => 
-                bus.number.toLowerCase().includes(term) || 
-                bus.title.toLowerCase().includes(term)
-            );
-            renderBusGrid(filtered);
-        });
-    }
+    setupSearch();
 
     // Кнопка Назад
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
-        backBtn.addEventListener('click', () => {
-            history.back(); 
-        });
+        backBtn.addEventListener('click', () => history.back());
     }
+
+    // Запуск регулярного оновлення (наближення часу — оновлюємо беджі та банер)
+    setInterval(tickEveryMinute, 30000); // кожні 30 секунд
 });
+
+// -----------------------------------------------------------
+// 🔄 РЕГУЛЯРНЕ ОНОВЛЕННЯ ЧАСУ
+// -----------------------------------------------------------
+function tickEveryMinute() {
+    const mainHidden = document.getElementById('main-view').classList.contains('hidden');
+    const scheduleHidden = document.getElementById('schedule-view').classList.contains('hidden');
+
+    if (!mainHidden) {
+        updateCardCountdowns();
+    }
+    if (!scheduleHidden && currentBus) {
+        refreshScheduleBadges();
+        updateNextBanner();
+    }
+}
 
 // -----------------------------------------------------------
 // ФУНКЦІЇ HISTORY API
@@ -70,9 +168,15 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupHistoryListener() {
     window.addEventListener('popstate', (event) => {
         if (!event.state || event.state.view === 'main') {
-            document.getElementById('schedule-view').classList.add('hidden');
-            document.getElementById('main-view').classList.remove('hidden');
+            switchView('main');
+            currentBus = null;
+            if (window.location.hash) {
+                history.replaceState({ view: 'main' }, '', window.location.pathname);
+            }
             window.scrollTo(0, 0);
+        } else if (event.state.view === 'schedule' && event.state.busId) {
+            const bus = allBusData.find(b => b.number.toString() === event.state.busId.toString());
+            if (bus) openSchedule(bus, bus.number.toString(), { skipPush: true });
         }
     });
 }
@@ -96,20 +200,20 @@ function loadBusData() {
         .then(data => {
             allBusData = data;
             renderBusGrid(data);
+            // Якщо в URL був #bus=..., відкриваємо одразу
+            handleHashRoute();
         })
         .catch(err => {
             console.error("Помилка завантаження data.json:", err);
-            const grid = document.getElementById('bus-grid'); // Якщо є загальний грід
-            if(grid) grid.innerHTML = '<p style="color:red; text-align:center;">Помилка.</p>';
+            const grid = document.getElementById('bus-grid');
+            if (grid) grid.innerHTML = '<p style="color:red; text-align:center;">Помилка завантаження розкладу.</p>';
         });
 }
 
 function loadInfoData() {
     fetch('database/info.json')
         .then(response => response.json())
-        .then(data => {
-            renderInfoData(data);
-        })
+        .then(data => renderInfoData(data))
         .catch(err => console.error("Помилка інфо:", err));
 }
 
@@ -117,7 +221,7 @@ function loadInfoData() {
 function renderInfoData(data) {
     const container = document.getElementById('accordion');
     if (!container) return;
-    
+
     let html = '';
     const renderHeader = (id, title, icon, isCollapsed = true) => `
         <div class="panel-heading glass-panel-header" role="tab" id="heading${id}">
@@ -136,7 +240,7 @@ function renderInfoData(data) {
     const p = data.poputka;
     let routesHtml = p.routes.map(r => `<div class="poputka-route"><span class="route-city">${r.city}:</span><div class="route-points">Початкова: <strong>${r.start}</strong><br>Кінцевий: <strong>${r.end}</strong></div></div>`).join('');
     let linksHtml = p.links.map(l => `<a href="${l.url}" target="_blank" class="poputka-link"><span class="link-icon">${l.icon}</span> ${l.name}</a>`).join('');
-    
+
     html += `<div class="panel panel-default poputka-panel-wrapper">${renderHeader('One', p.title, '🚗', true)}${renderBody('One', `<h4 class="poputka-price">Ціна: ${p.price}</h4><div class="poputka-routes-list">${routesHtml}</div><div class="poputka-links-list">${linksHtml}</div>`, true)}</div>`;
 
     // Загальна інфо
@@ -148,60 +252,118 @@ function renderInfoData(data) {
 }
 
 // -----------------------------------------------------------
-// 4. РЕНДЕР СІТКИ (З НОВИМИ ЦІНАМИ)
+// 🔎 ПОШУК (з підтримкою назв зупинок)
+// -----------------------------------------------------------
+function setupSearch() {
+    const searchInput = document.getElementById('search-input');
+    const clearBtn = document.getElementById('search-clear');
+    if (!searchInput) return;
+
+    const applyFilter = () => {
+        const raw = searchInput.value.trim();
+        const term = raw.toLowerCase();
+        if (clearBtn) clearBtn.style.display = raw ? 'flex' : 'none';
+
+        if (!term) {
+            renderBusGrid(allBusData);
+            return;
+        }
+
+        const filtered = allBusData.filter(bus => {
+            if (bus.number.toString().toLowerCase().includes(term)) return true;
+            if (bus.title && bus.title.toLowerCase().includes(term)) return true;
+            return bus.routes.some(r =>
+                (r.direction && r.direction.toLowerCase().includes(term)) ||
+                r.stops.some(s => s.name && s.name.toLowerCase().includes(term))
+            );
+        });
+        renderBusGrid(filtered);
+    };
+
+    searchInput.addEventListener('input', applyFilter);
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            applyFilter();
+            searchInput.focus();
+        });
+    }
+}
+
+// -----------------------------------------------------------
+// 4. РЕНДЕР СІТКИ (картки з ⭐ обраним та ⏱️ countdown)
 // -----------------------------------------------------------
 function renderBusGrid(buses) {
-    // Шукаємо обидві сітки
     const urbanContainer = document.querySelector('.bus-grid-urban');
     const suburbanContainer = document.querySelector('.bus-grid-suburban');
-    
-    // Якщо сіток немає (наприклад, стара верстка), шукаємо загальну
     const generalContainer = document.getElementById('bus-grid');
+    const emptyState = document.getElementById('empty-state');
 
-    // Очищення
     if (urbanContainer) urbanContainer.innerHTML = '';
     if (suburbanContainer) suburbanContainer.innerHTML = '';
     if (generalContainer) generalContainer.innerHTML = '';
 
-    buses.forEach(bus => {
+    if (!buses || buses.length === 0) {
+        if (emptyState) emptyState.style.display = 'flex';
+        if (generalContainer) generalContainer.style.display = 'none';
+        return;
+    } else {
+        if (emptyState) emptyState.style.display = 'none';
+        if (generalContainer) generalContainer.style.display = '';
+    }
+
+    const sorted = sortByFavorites(buses);
+
+    sorted.forEach(bus => {
         const card = document.createElement('div');
         card.className = 'bus-card';
         const routeIdStr = bus.number.toString();
-        
+        card.dataset.busNumber = routeIdStr;
+
+        const fav = isFavorite(routeIdStr);
+        if (fav) card.classList.add('is-favorite');
+
         let priceHtml = '';
         let isUrban = false;
 
-        // 1. Перевірка: Міський (13 грн)
         if (CITY_ROUTES_IDS.includes(routeIdStr)) {
             isUrban = true;
-            // Для міських ціну на картці зазвичай не пишемо (вона стандартна), 
-            // але можна розкоментувати рядок нижче, якщо хочете бейдж "13 грн"
-            // priceHtml = `<div class="bus-price-badge">13 грн</div>`;
-        } 
-        // 2. Перевірка: Приміський (з SUBURBAN_DATA)
-        else if (SUBURBAN_DATA[routeIdStr]) {
+        } else if (SUBURBAN_DATA[routeIdStr]) {
             const info = SUBURBAN_DATA[routeIdStr];
             priceHtml = `<div class="bus-price-badge suburban-price">${info.price}</div>`;
-        }
-        // 3. Fallback (якщо немає в списку, беремо з JSON)
-        else if (bus.price) {
+        } else if (bus.price) {
             priceHtml = `<div class="bus-price-badge suburban-price">${bus.price}</div>`;
         }
 
-        // Клік по картці
-        card.onclick = () => {
-            const title = bus.title || card.querySelector('.bus-title').innerText;
+        card.onclick = (e) => {
+            if (e.target.closest('.fav-btn')) return;
             openSchedule(bus, routeIdStr);
         };
-        
-        // HTML Картки
+
         card.innerHTML = `
+            <button class="fav-btn ${fav ? 'active' : ''}" aria-label="${fav ? 'Прибрати з обраного' : 'Додати в обране'}" title="${fav ? 'Прибрати з обраного' : 'Додати в обране'}">
+                <span class="star-icon">${fav ? '★' : '☆'}</span>
+            </button>
             <span class="bus-num" style="color: ${bus.color || 'inherit'}">№${bus.number}</span>
-            ${priceHtml} 
+            ${priceHtml}
             <div class="bus-title">${bus.title}</div>
+            <div class="bus-countdown" data-bus="${routeIdStr}"></div>
         `;
-        
-        // Розподіл по контейнерах
+
+        const favBtn = card.querySelector('.fav-btn');
+        favBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleFavorite(routeIdStr);
+            const searchInput = document.getElementById('search-input');
+            const term = searchInput ? searchInput.value.trim().toLowerCase() : '';
+            if (term) {
+                searchInput.dispatchEvent(new Event('input'));
+            } else {
+                renderBusGrid(allBusData);
+            }
+        });
+
         if (urbanContainer && suburbanContainer) {
             if (isUrban) urbanContainer.appendChild(card);
             else suburbanContainer.appendChild(card);
@@ -209,41 +371,53 @@ function renderBusGrid(buses) {
             generalContainer.appendChild(card);
         }
     });
+
+    updateCardCountdowns();
+}
+
+// Оновлення countdown-бейджа на картках
+function updateCardCountdowns() {
+    document.querySelectorAll('.bus-countdown').forEach(el => {
+        const num = el.dataset.bus;
+        const bus = allBusData.find(b => b.number.toString() === num);
+        if (!bus) { el.innerHTML = ''; return; }
+        const nxt = findNextDeparture(bus);
+        if (!nxt) {
+            el.innerHTML = `<span class="countdown-pill done">⏹ на сьогодні все</span>`;
+            return;
+        }
+        const isSoon = nxt.diff <= 15;
+        el.innerHTML = `<span class="countdown-pill ${isSoon ? 'soon' : ''}">🚌 ${formatDiffMinutes(nxt.diff)} (${nxt.time})</span>`;
+    });
 }
 
 // -----------------------------------------------------------
-// 5. ВІДКРИТТЯ РОЗКЛАДУ (З ДЕТАЛЬНОЮ ЦІНОЮ ТА ПРИМІТКАМИ)
+// 5. ВІДКРИТТЯ РОЗКЛАДУ
 // -----------------------------------------------------------
-function openSchedule(bus, routeId) {
-    history.pushState({ view: 'schedule', busId: bus.number }, `Маршрут №${bus.number}`, `#bus=${bus.number}`);
+function openSchedule(bus, routeId, options) {
+    options = options || {};
+    currentBus = bus;
+
+    const url = `${window.location.pathname}#bus=${bus.number}`;
+    if (options.skipPush) {
+        // popstate-режим
+    } else if (options.replace) {
+        history.replaceState({ view: 'schedule', busId: bus.number }, `Маршрут №${bus.number}`, url);
+    } else {
+        history.pushState({ view: 'schedule', busId: bus.number }, `Маршрут №${bus.number}`, url);
+    }
     switchView('schedule');
-    
-    // Заголовок
+
     const titleEl = document.getElementById('route-title-display');
     titleEl.innerHTML = `№${bus.number} ${bus.title}`;
-    
-    // --- ДОДАВАННЯ КНОПКИ СПОВІЩЕНЬ ---
-    // Перевіряємо, чи ми вже підписані
-    const isSubscribed = subscribedRoutes.includes(bus.number.toString());
-    const btnText = isSubscribed ? '<span class="bell-icon">🔕</span> Вимкнути сповіщення' : '<span class="bell-icon">🔔</span> Нагадати про автобус';
-    const btnClass = isSubscribed ? 'notification-btn active' : 'notification-btn';
 
-    // Додаємо кнопку під заголовком (використовуємо div-обгортку якщо треба, або просто append)
-    // Щоб не дублювати кнопки, спочатку видалимо стару, якщо є
-    const oldBtn = document.getElementById('notify-btn');
-    if (oldBtn) oldBtn.remove();
+    // Тулбар (поширення + сповіщення)
+    renderRouteToolbar(bus);
 
-    const notifyBtn = document.createElement('button');
-    notifyBtn.id = 'notify-btn';
-    notifyBtn.className = btnClass;
-    notifyBtn.innerHTML = btnText;
-    notifyBtn.onclick = () => toggleSubscription(bus.number);
-    
-    // Вставляємо кнопку після заголовка
-    titleEl.parentNode.insertBefore(notifyBtn, titleEl.nextSibling);
-    // ----------------------------------
+    // Банер з найближчим рейсом
+    updateNextBanner();
 
-    // БЛОК ЦІНИ (Ваш попередній код)
+    // Ціна
     const priceDisplay = document.getElementById('route-price-display');
     if (priceDisplay) {
         if (SUBURBAN_DATA[routeId]) {
@@ -257,9 +431,180 @@ function openSchedule(bus, routeId) {
             priceDisplay.innerHTML = '';
         }
     }
-    
+
     renderRouteDetails(bus);
     window.scrollTo(0, 0);
+
+    // Прокрутити .times-row так, щоб видно було наступний рейс
+    setTimeout(scrollNextIntoView, 150);
+}
+
+// Прокрутка горизонтальної смужки часів до .next-беджа
+function scrollNextIntoView() {
+    document.querySelectorAll('#schedule-container .times-row').forEach(row => {
+        const next = row.querySelector('.time-badge.next');
+        if (next && typeof next.scrollIntoView === 'function') {
+            try {
+                next.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+            } catch (_) { /* старі браузери */ }
+        }
+    });
+}
+
+// -----------------------------------------------------------
+// 🛎️ ТУЛБАР: SHARE + NOTIFY
+// -----------------------------------------------------------
+function renderRouteToolbar(bus) {
+    const toolbar = document.getElementById('route-toolbar');
+    if (!toolbar) return;
+
+    const subscribed = subscribedRoutes.includes(bus.number.toString());
+    const notifyLabel = subscribed
+        ? '<span class="bell-icon">🔕</span> Вимкнути сповіщення'
+        : '<span class="bell-icon">🔔</span> Нагадати про автобус';
+    const notifyClass = subscribed ? 'notification-btn active' : 'notification-btn';
+
+    toolbar.innerHTML = `
+        <div class="toolbar-row toolbar-share-row">
+            <span class="toolbar-label">📤 Поділитись:</span>
+            <div class="share-buttons">
+                <button class="share-btn share-tg" data-platform="telegram" aria-label="Поділитись у Telegram">
+                    <i class="fa-brands fa-telegram"></i>
+                </button>
+                <button class="share-btn share-viber" data-platform="viber" aria-label="Поділитись у Viber">
+                    <i class="fa-brands fa-viber"></i>
+                </button>
+                <button class="share-btn share-wa" data-platform="whatsapp" aria-label="Поділитись у WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <button class="share-btn share-copy" data-platform="copy" aria-label="Скопіювати посилання">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+        </div>
+        <div class="toolbar-row toolbar-notify-row">
+            <button id="notify-btn" class="${notifyClass}">${notifyLabel}</button>
+        </div>
+    `;
+
+    toolbar.querySelectorAll('.share-btn').forEach(btn => {
+        btn.addEventListener('click', () => shareRoute(btn.dataset.platform, bus));
+    });
+
+    const notifyBtn = document.getElementById('notify-btn');
+    if (notifyBtn) notifyBtn.addEventListener('click', () => toggleSubscription(bus.number));
+}
+
+// -----------------------------------------------------------
+// 📤 SHARE — Telegram / Viber / WhatsApp / Copy link
+// -----------------------------------------------------------
+function buildShareData(bus) {
+    const baseUrl = `${window.location.origin}${window.location.pathname}#bus=${bus.number}`;
+    const text = `🚌 Розклад маршруту №${bus.number} ${bus.title} — SmilaBusTime`;
+    return { url: baseUrl, text, full: `${text}\n${baseUrl}` };
+}
+
+function shareRoute(platform, bus) {
+    const data = buildShareData(bus);
+
+    switch (platform) {
+        case 'telegram': {
+            const url = `https://t.me/share/url?url=${encodeURIComponent(data.url)}&text=${encodeURIComponent(data.text)}`;
+            window.open(url, '_blank', 'noopener,noreferrer');
+            break;
+        }
+        case 'viber': {
+            // viber://forward — мобільний додаток Viber.
+            // На desktop спрацює, якщо встановлений Viber Desktop.
+            const vbUrl = `viber://forward?text=${encodeURIComponent(data.full)}`;
+            window.location.href = vbUrl;
+            break;
+        }
+        case 'whatsapp': {
+            const url = `https://wa.me/?text=${encodeURIComponent(data.full)}`;
+            window.open(url, '_blank', 'noopener,noreferrer');
+            break;
+        }
+        case 'copy': {
+            const fallbackCopy = (txt) => {
+                const ta = document.createElement('textarea');
+                ta.value = txt;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (_) { /* nothing */ }
+                document.body.removeChild(ta);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(data.full)
+                    .then(() => showToast('🔗 Посилання скопійовано!'))
+                    .catch(() => { fallbackCopy(data.full); showToast('🔗 Посилання скопійовано!'); });
+            } else {
+                fallbackCopy(data.full);
+                showToast('🔗 Посилання скопійовано!');
+            }
+            break;
+        }
+        case 'native': {
+            if (navigator.share) {
+                navigator.share({ title: data.text, text: data.text, url: data.url }).catch(() => {});
+            }
+            break;
+        }
+    }
+}
+
+function showToast(msg) {
+    let t = document.getElementById('sbt-toast');
+    if (!t) {
+        t = document.createElement('div');
+        t.id = 'sbt-toast';
+        t.className = 'sbt-toast';
+        document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    requestAnimationFrame(() => t.classList.add('show'));
+    clearTimeout(showToast._h);
+    showToast._h = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// -----------------------------------------------------------
+// 🔗 DEEP LINK — відкрити маршрут із URL #bus=NN
+// -----------------------------------------------------------
+function handleHashRoute() {
+    const m = window.location.hash.match(/^#bus=(.+)$/);
+    if (!m) return;
+    const num = decodeURIComponent(m[1]).trim();
+    const bus = allBusData.find(b => b.number.toString() === num);
+    if (bus) {
+        openSchedule(bus, bus.number.toString(), { replace: true });
+    }
+}
+
+// -----------------------------------------------------------
+// 🚌 БАНЕР: Наступний автобус
+// -----------------------------------------------------------
+function updateNextBanner() {
+    const banner = document.getElementById('next-banner');
+    if (!banner || !currentBus) return;
+    const nxt = findNextDeparture(currentBus);
+    if (!nxt) {
+        banner.style.display = 'flex';
+        banner.innerHTML = `<span class="nb-icon">⏹</span><span class="nb-text">На сьогодні рейсів більше немає</span>`;
+        banner.classList.remove('soon');
+        return;
+    }
+    const soon = nxt.diff <= 10;
+    banner.classList.toggle('soon', soon);
+    banner.style.display = 'flex';
+    banner.innerHTML = `
+        <span class="nb-icon">🚌</span>
+        <div class="nb-content">
+            <div class="nb-main">Наступний ${formatDiffMinutes(nxt.diff)}</div>
+            <div class="nb-sub">${nxt.time} · ${nxt.stop}</div>
+        </div>
+    `;
 }
 
 // -----------------------------------------------------------
@@ -268,17 +613,17 @@ function openSchedule(bus, routeId) {
 function renderRouteDetails(bus) {
     const container = document.getElementById('schedule-container');
     if (!container) return;
-    container.innerHTML = ''; 
-    
+    container.innerHTML = '';
+
     let html = '<div class="row">';
 
-    const mapSrc = bus.mapIframeSrc || 'about:blank'; 
+    const mapSrc = bus.mapIframeSrc || 'about:blank';
 
     html += `
         <div class="col-xs-12 col-md-6">
             <h4 class="map-title">Маршрут на карті</h4>
             <div class="map-panel">
-                <iframe frameborder="0" src="${mapSrc}" width="100%" height="303"></iframe>
+                <iframe frameborder="0" src="${mapSrc}" width="100%" height="303" loading="lazy"></iframe>
             </div>
         </div>
     `;
@@ -286,8 +631,7 @@ function renderRouteDetails(bus) {
     html += '<div class="col-xs-12 col-md-6 schedule-column">';
     html += `<h4 class="schedule-title">Розклад руху (Маршрут №${bus.number})</h4>`;
 
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const currentMinutes = getCurrentMinutes();
 
     bus.routes.forEach(route => {
         let stopsHTML = '';
@@ -295,32 +639,51 @@ function renderRouteDetails(bus) {
             let timesHTML = '';
             let foundNext = false;
             stop.times.forEach(timeStr => {
-                const cleanTime = timeStr.split(' ')[0]; 
-                const [h, m] = cleanTime.split(':').map(Number);
-                const busMinutes = h * 60 + m;
+                const busMinutes = parseTimeStr(timeStr);
                 let className = 'time-badge';
-                if (busMinutes < currentMinutes) { className += ' past'; } 
-                else if (!foundNext && busMinutes >= currentMinutes) { className += ' next'; foundNext = true; }
-                timesHTML += `<span class="${className}">${timeStr}</span>`;
+                if (busMinutes !== null) {
+                    if (busMinutes < currentMinutes) { className += ' past'; }
+                    else if (!foundNext) { className += ' next'; foundNext = true; }
+                }
+                timesHTML += `<span class="${className}" data-min="${busMinutes !== null ? busMinutes : ''}">${timeStr}</span>`;
             });
             stopsHTML += `<div class="stop-item"><span class="stop-name">🚏 ${stop.name}</span><div class="times-row">${timesHTML}</div></div>`;
         });
         html += `<div class="route-block"><h3 class="route-direction">➡️ ${route.direction} <br><small style="font-size:0.7em; color:#666">📅 ${route.workDays}</small></h3>${stopsHTML}</div>`;
     });
 
-    html += '</div></div>'; 
+    html += '</div></div>';
     container.innerHTML = html;
 }
 
+// Оновлення past/next без перерендеру
+function refreshScheduleBadges() {
+    const current = getCurrentMinutes();
+    document.querySelectorAll('#schedule-container .times-row').forEach(row => {
+        let foundNext = false;
+        row.querySelectorAll('.time-badge').forEach(badge => {
+            const min = parseInt(badge.dataset.min, 10);
+            badge.classList.remove('past', 'next');
+            if (isNaN(min)) return;
+            if (min < current) {
+                badge.classList.add('past');
+            } else if (!foundNext) {
+                badge.classList.add('next');
+                foundNext = true;
+            }
+        });
+    });
+}
+
 // -----------------------------------------------------------
-// ДОДАТКОВІ (ГОДИННИК, ТЕМА)
+// ДОДАТКОВІ (ГОДИННИК, ТЕМА, ДАТА У ФУТЕРІ, SW)
 // -----------------------------------------------------------
 function setupClock() {
     const clockEl = document.getElementById('clock');
     if (!clockEl) return;
     const update = () => {
         const now = new Date();
-        clockEl.innerText = now.toLocaleTimeString('uk-UA', {hour: '2-digit', minute:'2-digit'});
+        clockEl.innerText = now.toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit' });
     };
     setInterval(update, 1000);
     update();
@@ -332,38 +695,57 @@ function setupTheme() {
     if (!checkbox) return;
     const savedTheme = localStorage.getItem('theme');
     const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (savedTheme === 'dark') { enableDarkMode(); } 
-    else if (savedTheme === 'light') { disableDarkMode(); } 
+    if (savedTheme === 'dark') { enableDarkMode(); }
+    else if (savedTheme === 'light') { disableDarkMode(); }
     else { if (systemPrefersDark) enableDarkMode(); else disableDarkMode(); }
 
     checkbox.addEventListener('change', () => {
-        if (checkbox.checked) { enableDarkMode(); localStorage.setItem('theme', 'dark'); } 
+        if (checkbox.checked) { enableDarkMode(); localStorage.setItem('theme', 'dark'); }
         else { disableDarkMode(); localStorage.setItem('theme', 'light'); }
     });
     function enableDarkMode() { body.classList.add('dark-mode'); checkbox.checked = true; }
     function disableDarkMode() { body.classList.remove('dark-mode'); checkbox.checked = false; }
 }
 
+function setupFooterDate() {
+    const el = document.getElementById('footer-date');
+    if (el) el.textContent = `Оновлено: ${APP_UPDATED}`;
+}
+
+function registerServiceWorker() {
+    if (!('serviceWorker' in navigator)) return;
+    if (window.location.protocol !== 'http:' && window.location.protocol !== 'https:') return;
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+            .catch(err => console.warn('[SW] Реєстрація не вдалася:', err));
+    });
+}
 
 // ===========================================================
 // 🔔 СИСТЕМА СПОВІЩЕНЬ (NOTIFICATIONS)
 // ===========================================================
 
-// Збережені підписки
-let subscribedRoutes = JSON.parse(localStorage.getItem('subscribedRoutes')) || [];
+let subscribedRoutes = [];
+try {
+    subscribedRoutes = JSON.parse(localStorage.getItem('subscribedRoutes') || '[]');
+} catch (_) { subscribedRoutes = []; }
 
-// Запуск перевірки часу щохвилини
 setInterval(checkBusNotifications, 60000);
 
-// Функція перемикання підписки
+// Запобігаємо повторним сповіщенням про той самий рейс
+const _notifiedKeys = new Set();
+
 function toggleSubscription(busNumber) {
-    // 1. Запит дозволу, якщо ще не надано
+    if (typeof Notification === 'undefined') {
+        showToast('⚠️ Браузер не підтримує сповіщення');
+        return;
+    }
     if (Notification.permission !== "granted") {
         Notification.requestPermission().then(permission => {
             if (permission === "granted") {
                 toggleSubscriptionLogic(busNumber);
             } else {
-                alert("Будь ласка, дозвольте сповіщення в налаштуваннях браузера, щоб ми могли попередити вас про автобус.");
+                showToast('Дозвольте сповіщення в налаштуваннях');
             }
         });
     } else {
@@ -371,39 +753,37 @@ function toggleSubscription(busNumber) {
     }
 }
 
-// Логіка додавання/видалення
 function toggleSubscriptionLogic(busNumber) {
-    const index = subscribedRoutes.indexOf(busNumber.toString());
+    const idStr = busNumber.toString();
+    const index = subscribedRoutes.indexOf(idStr);
     const btn = document.getElementById('notify-btn');
 
     if (index === -1) {
-        // Додаємо
-        subscribedRoutes.push(busNumber.toString());
+        subscribedRoutes.push(idStr);
         if (btn) {
             btn.classList.add('active');
             btn.innerHTML = '<span class="bell-icon">🔕</span> Вимкнути сповіщення';
         }
-        sendLocalNotification("Сповіщення увімкнено!", `Ми попередимо вас, коли маршрут №${busNumber} буде поруч.`);
+        sendLocalNotification("Сповіщення увімкнено!", `Ми попередимо вас про маршрут №${busNumber}.`);
     } else {
-        // Видаляємо
         subscribedRoutes.splice(index, 1);
         if (btn) {
             btn.classList.remove('active');
             btn.innerHTML = '<span class="bell-icon">🔔</span> Нагадати про автобус';
         }
     }
-    
+
     localStorage.setItem('subscribedRoutes', JSON.stringify(subscribedRoutes));
 }
 
-// Відправка самого сповіщення
 function sendLocalNotification(title, body) {
+    if (typeof Notification === 'undefined') return;
     if (Notification.permission === "granted") {
-        // Для мобільних пристроїв використовуємо ServiceWorker (якщо є) або звичайний API
         try {
             new Notification(title, {
                 body: body,
-                icon: 'https://cdn-icons-png.flaticon.com/512/3448/3448339.png', // Можна замінити на іконку автобуса
+                icon: 'img/com.googlove.smilabus_0.0_3_icon.png',
+                badge: 'img/favicon.ico',
                 vibrate: [200, 100, 200]
             });
         } catch (e) {
@@ -412,39 +792,32 @@ function sendLocalNotification(title, body) {
     }
 }
 
-// 🔥 ГОЛОВНА ЛОГІКА: Перевірка часу
 function checkBusNotifications() {
     if (subscribedRoutes.length === 0) return;
 
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const currentMinutes = getCurrentMinutes();
+    const today = new Date().toDateString();
 
-    // Перебираємо всі дані про автобуси
     allBusData.forEach(bus => {
-        // Якщо ми підписані на цей маршрут
-        if (subscribedRoutes.includes(bus.number.toString())) {
-            
-            // Шукаємо найближчий час у всіх напрямках
-            bus.routes.forEach(route => {
-                route.stops.forEach(stop => {
-                    stop.times.forEach(timeStr => {
-                        const cleanTime = timeStr.split(' ')[0];
-                        const [h, m] = cleanTime.split(':').map(Number);
-                        const busMinutes = h * 60 + m;
-
-                        const diff = busMinutes - currentMinutes;
-
-                        // Якщо автобус через 15 хв, 10 хв або 5 хв
-                        if (diff === 15 || diff === 10 || diff === 5) {
-                            sendLocalNotification(
-                                `🚌 Маршрут №${bus.number}`, 
-                                `Автобус буде на зупинці "${stop.name}" через ${diff} хвилин (${cleanTime})`
-                            );
-                        }
-                    });
+        if (!subscribedRoutes.includes(bus.number.toString())) return;
+        bus.routes.forEach(route => {
+            route.stops.forEach(stop => {
+                stop.times.forEach(timeStr => {
+                    const busMinutes = parseTimeStr(timeStr);
+                    if (busMinutes === null) return;
+                    const diff = busMinutes - currentMinutes;
+                    if (diff === 15 || diff === 10 || diff === 5) {
+                        const key = `${today}|${bus.number}|${stop.name}|${busMinutes}|${diff}`;
+                        if (_notifiedKeys.has(key)) return;
+                        _notifiedKeys.add(key);
+                        const cleanTime = String(timeStr).split(' ')[0];
+                        sendLocalNotification(
+                            `🚌 Маршрут №${bus.number}`,
+                            `Автобус буде на "${stop.name}" через ${diff} хв (${cleanTime})`
+                        );
+                    }
                 });
             });
-        }
+        });
     });
 }
-

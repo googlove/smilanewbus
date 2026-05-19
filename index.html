@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SmilaBusTime</title>
+    <title>SmilaBusTime — Розклад автобусів Сміли</title>
+    <meta name="description" content="Зручний розклад міських та приміських автобусів Сміли. Нагадування, обране, офлайн-режим.">
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="apple-touch-icon" href="img/com.googlove.smilabus_0.0_3_icon.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#007DD6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SmilaBus">
+
+    <!-- Open Graph (для поширення в соцмережах) -->
+    <meta property="og:title" content="SmilaBusTime — Розклад автобусів Сміли">
+    <meta property="og:description" content="Розклад міських та приміських маршрутів Сміли з нагадуваннями.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="img/com.googlove.smilabus_0.0_3_icon.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     
@@ -91,7 +108,8 @@
             <div class="col-xs-12 search-col-full">
                 <div class="input-group search-group">
                     <span class="input-group-addon search-icon">🔍</span>
-                    <input type="text" id="search-input" class="form-control" placeholder="Введіть номер маршруту або назву...">
+                    <input type="text" id="search-input" class="form-control" placeholder="Номер, напрям або назва зупинки...">
+                    <span class="input-group-addon search-clear" id="search-clear" role="button" aria-label="Очистити пошук">✕</span>
                 </div>
             </div>
         </div>
@@ -100,6 +118,11 @@
             <div class="col-xs-12 bus-grid-col">
                 <div id="bus-grid" class="bus-grid">
                     <div class="loader">Завантаження розкладу...</div>
+                </div>
+                <div id="empty-state" class="empty-state" style="display:none;">
+                    <span class="empty-emoji">🔎</span>
+                    <p>Нічого не знайдено</p>
+                    <small>Спробуйте інший номер або назву зупинки</small>
                 </div>
             </div>
             <div class="col-xs-12 accordion-col">
@@ -115,7 +138,11 @@
             <button id="back-btn">⬅️ Назад</button>
             <h2 id="route-title-display"></h2>
         </div>
-        
+
+        <div id="next-banner" class="next-banner" style="display:none;"></div>
+
+        <div id="route-toolbar" class="route-toolbar"></div>
+
         <div id="route-map-container" class="glass-panel map-panel">
             </div>
 
@@ -134,7 +161,7 @@
 
         <div class="row">
             <div class="col-xs-12 text-center">
-                <div class="footer-date">Оновлено: Травень 2024</div>
+                <div class="footer-date" id="footer-date">Оновлено: Травень 2026</div>
                 <footer>
                     <p>© 2022-2025 SmilaBusTime | Dev by Yaroslav Hohulov</p>
                 </footer>

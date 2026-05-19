@@ -1812,3 +1812,302 @@ a:hover {
 
 
  
+
+
+
+
+/* =====================================================================
+   ✨ NEW FEATURES — Search clear / Empty state / Favorites / Countdown /
+   Share toolbar / Next-bus banner / Toast / Next-time pulse
+   ===================================================================== */
+
+/* --- Search clear button (×) --- */
+.search-clear {
+    display: none; /* keep default 'none' (JS toggles to 'flex' when input non-empty) */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    opacity: 0.55;
+    transition: opacity 0.2s, transform 0.2s;
+    user-select: none;
+}
+.search-clear:hover { opacity: 1; transform: scale(1.1); }
+.search-clear:active { transform: scale(0.9); }
+
+/* --- Empty state --- */
+.empty-state {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-color);
+    opacity: 0.75;
+}
+.empty-state .empty-emoji { font-size: 3rem; margin-bottom: 10px; }
+.empty-state p { font-size: 1.2rem; font-weight: 700; margin: 0; }
+.empty-state small { font-size: 0.95rem; margin-top: 5px; opacity: 0.7; }
+
+/* --- Bus card needs relative for star --- */
+.bus-card { position: relative; }
+
+/* Tiny tweak to vertical rhythm with countdown below */
+.bus-card .bus-title { margin-bottom: 4px; }
+
+/* --- Favorite star (⭐) --- */
+.fav-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 1.15rem;
+    color: rgba(120, 120, 120, 0.7);
+    transition: transform 0.2s ease, background 0.2s, color 0.2s, box-shadow 0.2s;
+    z-index: 3;
+    line-height: 1;
+}
+.fav-btn:hover  { transform: scale(1.12); }
+.fav-btn:active { transform: scale(0.9); }
+.fav-btn.active {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #fff;
+    border-color: #FFD700;
+    box-shadow: 0 0 14px rgba(255, 165, 0, 0.55);
+}
+body.dark-mode .fav-btn {
+    background: rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+body.dark-mode .fav-btn.active {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #1a1a1a;
+}
+
+/* Card highlight when favorited */
+.bus-card.is-favorite {
+    box-shadow: 0 8px 32px 0 rgba(255, 165, 0, 0.22), 0 0 0 1.5px rgba(255, 165, 0, 0.45);
+}
+body.dark-mode .bus-card.is-favorite {
+    box-shadow: 0 8px 32px 0 rgba(255, 165, 0, 0.32), 0 0 0 1.5px rgba(255, 215, 0, 0.55);
+}
+
+/* --- Countdown pill on bus cards --- */
+.bus-countdown {
+    margin-top: 6px;
+    min-height: 22px;
+    display: flex;
+    justify-content: center;
+}
+.countdown-pill {
+    display: inline-block;
+    padding: 3px 11px;
+    border-radius: 12px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: rgba(0, 125, 214, 0.14);
+    color: var(--primary);
+    border: 1px solid rgba(0, 125, 214, 0.28);
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+.countdown-pill.soon {
+    background: linear-gradient(135deg, rgba(255, 99, 71, 0.20), rgba(255, 165, 0, 0.20));
+    color: #c0392b;
+    border-color: rgba(255, 99, 71, 0.45);
+    animation: pulse-soon 1.5s ease-in-out infinite;
+}
+.countdown-pill.done {
+    background: rgba(120, 120, 120, 0.15);
+    color: rgba(120, 120, 120, 0.9);
+    border-color: rgba(120, 120, 120, 0.3);
+}
+body.dark-mode .countdown-pill {
+    background: rgba(0, 125, 214, 0.28);
+    color: #7CC4F0;
+    border-color: rgba(0, 125, 214, 0.45);
+}
+body.dark-mode .countdown-pill.soon {
+    background: linear-gradient(135deg, rgba(255, 99, 71, 0.35), rgba(255, 165, 0, 0.32));
+    color: #FFB59A;
+    border-color: rgba(255, 99, 71, 0.6);
+}
+body.dark-mode .countdown-pill.done {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+@keyframes pulse-soon {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+}
+
+/* --- Route toolbar (Share + Notify) --- */
+.route-toolbar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+.toolbar-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.toolbar-share-row {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--card-radius);
+    padding: 12px 16px;
+    justify-content: space-between;
+}
+.toolbar-label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-color);
+    white-space: nowrap;
+}
+.share-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.share-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: #fff;
+    transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+    padding: 0;
+}
+.share-btn:hover  { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); }
+.share-btn:active { transform: scale(0.95); }
+.share-btn i { line-height: 1; }
+
+.share-tg    { background: linear-gradient(135deg, #37BBFE, #007DBB); }
+.share-viber { background: linear-gradient(135deg, #8E7BF7, #665CAC); }
+.share-wa    { background: linear-gradient(135deg, #25D366, #128C7E); }
+.share-copy  { background: linear-gradient(135deg, #6c757d, #343a40); }
+
+.toolbar-notify-row { justify-content: center; }
+.toolbar-notify-row .notification-btn { margin-top: 0; }
+
+/* --- Next-bus banner --- */
+.next-banner {
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border-radius: var(--card-radius);
+    background: linear-gradient(135deg, rgba(0, 125, 214, 0.22), rgba(0, 125, 214, 0.08));
+    border: 1px solid rgba(0, 125, 214, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 125, 214, 0.18);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    margin-bottom: 18px;
+    color: var(--text-color);
+}
+.next-banner.soon {
+    background: linear-gradient(135deg, rgba(255, 99, 71, 0.28), rgba(255, 165, 0, 0.18));
+    border-color: rgba(255, 99, 71, 0.55);
+    animation: pulse-soon 1.8s ease-in-out infinite;
+}
+.next-banner .nb-icon { font-size: 2rem; flex-shrink: 0; line-height: 1; }
+.next-banner .nb-content { display: flex; flex-direction: column; }
+.next-banner .nb-main { font-weight: 800; font-size: 1.15rem; }
+.next-banner .nb-sub  { font-size: 0.9rem; opacity: 0.75; margin-top: 2px; }
+.next-banner .nb-text { font-weight: 700; font-size: 1.05rem; }
+
+body.dark-mode .next-banner {
+    background: linear-gradient(135deg, rgba(0, 125, 214, 0.38), rgba(0, 125, 214, 0.18));
+    border-color: rgba(0, 125, 214, 0.55);
+}
+body.dark-mode .next-banner.soon {
+    background: linear-gradient(135deg, rgba(255, 99, 71, 0.4), rgba(255, 165, 0, 0.28));
+    border-color: rgba(255, 99, 71, 0.65);
+}
+
+/* --- Toast notifications --- */
+.sbt-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(40px);
+    background: rgba(20, 20, 20, 0.93);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    pointer-events: none;
+    max-width: 90%;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.sbt-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- Pulse animation on the "next" time badge --- */
+.time-badge.next {
+    animation: badge-pulse 2.2s ease-in-out infinite;
+}
+@keyframes badge-pulse {
+    0%, 100% { box-shadow: 0 5px 15px rgba(0, 125, 214, 0.4); }
+    50%      { box-shadow: 0 5px 25px rgba(0, 125, 214, 0.7); }
+}
+
+/* --- Mobile tweaks for the new components --- */
+@media (max-width: 480px) {
+    .toolbar-share-row {
+        padding: 12px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .toolbar-share-row .toolbar-label {
+        text-align: center;
+    }
+    .share-buttons {
+        justify-content: center;
+    }
+    .share-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
+    }
+    .next-banner { padding: 12px 14px; gap: 12px; }
+    .next-banner .nb-icon { font-size: 1.7rem; }
+    .next-banner .nb-main { font-size: 1.05rem; }
+    .fav-btn { width: 32px; height: 32px; font-size: 1.05rem; }
+}

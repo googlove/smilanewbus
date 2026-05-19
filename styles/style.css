@@ -460,48 +460,205 @@ main {
     align-items: flex-start;
 }
 
+/* ============================================================ */
+/* 🔍 SEARCH BAR — iOS Liquid Glass Design                      */
+/* ============================================================ */
 .search-input-row {
     margin-bottom: 25px;
 }
 
+/* Контейнер пошуку — це сам "скляний" пілл */
 .search-group {
     width: 100%;
     padding: 0 30px;
+    display: flex;
+    justify-content: center;
 }
 
+.search-group.input-group {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 720px;
+
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.22),
+        rgba(255, 255, 255, 0.08));
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+
+    /* iOS Liquid Glass — сильний blur + насиченість */
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+    /* Багатошарові тіні: зовнішня + внутрішня "плівка" світла */
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.10),
+        0 1px 2px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    overflow: hidden;
+}
+
+.search-group.input-group:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 10px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.search-group.input-group:focus-within {
+    border-color: rgba(0, 125, 214, 0.55);
+    box-shadow:
+        0 10px 36px rgba(0, 125, 214, 0.20),
+        0 0 0 4px rgba(0, 125, 214, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* 🔍 Іконка зліва — без фону, без рамки, просто символ всередині скла */
+.search-group .input-group-addon.search-icon {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 6px 0 20px;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: var(--text-color);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+/* Поле вводу — повністю прозоре, рамка задається контейнером */
 .search-group .form-control {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
     color: var(--text-color);
-    outline: none;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s;
-    height: 40px;
-    font-size: 1.3rem;
-    padding-left: 15px;
-    box-shadow: none;
-}
-
-.search-group .input-group-addon {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-right: none;
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-    padding: 6px 12px;
-    font-size: 16px;
-    color: var(--text-color);
+    outline: none !important;
+    box-shadow: none !important;
+    height: 50px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    padding: 0 12px;
+    flex: 1 1 auto;
+    min-width: 0;
+    letter-spacing: 0.01em;
 }
 
 .search-group .form-control::placeholder {
     color: var(--text-color);
-    opacity: 0.6;
+    opacity: 0.45;
+    font-weight: 400;
 }
 
 .search-group .form-control:focus {
+    background: transparent !important;
     box-shadow: none !important;
+    outline: none !important;
+}
+
+/* ✕ Кнопка очищення — маленька кругла "пігулка" в кінці */
+.search-group .input-group-addon.search-clear {
+    background: rgba(120, 120, 120, 0.18) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 26px;
+    height: 26px;
+    margin: 0 12px 0 4px;
+    padding: 0 !important;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: rgba(80, 80, 80, 0.85);
+
+    /* JS виставить display:flex коли є текст; ці стилі — лише оформлення */
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    cursor: pointer;
+    flex: 0 0 auto;
+
+    transition: background 0.2s ease, transform 0.15s ease, color 0.2s ease;
+    user-select: none;
+}
+
+.search-group .input-group-addon.search-clear:hover {
+    background: rgba(120, 120, 120, 0.32) !important;
+    color: #fff;
+    transform: scale(1.08);
+}
+
+.search-group .input-group-addon.search-clear:active {
+    transform: scale(0.9);
+}
+
+/* --- Темна тема --- */
+body.dark-mode .search-group.input-group {
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.10),
+        rgba(255, 255, 255, 0.03));
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow:
+        0 8px 28px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+body.dark-mode .search-group.input-group:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 10px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+body.dark-mode .search-group.input-group:focus-within {
+    border-color: rgba(80, 170, 240, 0.6);
+    box-shadow:
+        0 10px 36px rgba(0, 125, 214, 0.32),
+        0 0 0 4px rgba(0, 125, 214, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .search-group .input-group-addon.search-icon {
+    opacity: 0.65;
+}
+
+body.dark-mode .search-group .input-group-addon.search-clear {
+    background: rgba(255, 255, 255, 0.14) !important;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+body.dark-mode .search-group .input-group-addon.search-clear:hover {
+    background: rgba(255, 255, 255, 0.26) !important;
+    color: #fff;
+}
+
+/* --- Адаптив під мобільні --- */
+@media (max-width: 575px) {
+    .search-group {
+        padding: 0 16px;
+    }
+    .search-group.input-group {
+        max-width: 100%;
+    }
+    .search-group .form-control {
+        height: 46px;
+        font-size: 1rem;
+    }
+    .search-group .input-group-addon.search-icon {
+        padding: 0 4px 0 16px;
+        font-size: 1.05rem;
+    }
+    .search-group .input-group-addon.search-clear {
+        width: 24px;
+        height: 24px;
+        margin: 0 10px 0 4px;
+        font-size: 0.65rem;
+    }
 }
 
 .full-width-btn {

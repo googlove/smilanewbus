@@ -2575,3 +2575,143 @@ body.dark-mode .stop-time-done {
     .stop-terminal { width: 24px; height: 24px; font-size: 0.8rem; }
     .stop-dot { width: 12px; height: 12px; }
 }
+
+/* ============================================================ */
+/* 📁 ЗГОРТАННЯ СЕКЦІЙ — кнопки + плавна анімація                */
+/* ============================================================ */
+
+/* --- Кнопка згортання для direction view --- */
+.section-collapse-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 9px 14px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 12px;
+    color: var(--text-color);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+}
+.section-collapse-btn:hover {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.10));
+}
+.section-collapse-btn:active { transform: scale(0.98); }
+.section-collapse-btn .collapse-chevron {
+    display: inline-block;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: rotate(0deg);
+}
+.direction-view-container.is-collapsed .section-collapse-btn .collapse-chevron {
+    transform: rotate(180deg);
+}
+
+body.dark-mode .section-collapse-btn {
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+    border-color: rgba(255,255,255,0.12);
+}
+body.dark-mode .section-collapse-btn:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.05));
+}
+
+/* --- Direction body collapse --- */
+#direction-body {
+    transition: opacity 0.25s ease;
+}
+
+/* --- Schedule route-block collapse --- */
+.route-direction-collapsible {
+    display: flex !important;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: default;
+}
+.route-direction-text {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.route-collapse-btn {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: linear-gradient(135deg, rgba(255,255,255,0.20), rgba(255,255,255,0.06));
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 0.85;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.route-collapse-btn:hover {
+    opacity: 1;
+    background: linear-gradient(135deg, rgba(255,255,255,0.28), rgba(255,255,255,0.10));
+}
+.route-collapse-btn:active { transform: scale(0.92); }
+.route-collapse-btn .collapse-chevron {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transform: rotate(0deg);
+}
+
+body.dark-mode .route-collapse-btn {
+    background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.03));
+    border-color: rgba(255,255,255,0.15);
+}
+body.dark-mode .route-collapse-btn:hover {
+    background: linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+}
+
+/* --- Згорнутий стан route-block --- */
+.route-block .route-block-body {
+    max-height: 5000px;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0.0, 0.2, 1), opacity 0.25s ease;
+    opacity: 1;
+}
+.route-block.is-collapsed .route-block-body {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+.route-block.is-collapsed .route-collapse-btn .collapse-chevron {
+    transform: rotate(180deg);
+}
+
+/* Маленький натяк що згорнуто — додати тонку підказку */
+.route-block.is-collapsed .route-direction::after {
+    content: ' (згорнуто — натисніть, щоб показати)';
+    font-size: 0.7em;
+    font-weight: 400;
+    opacity: 0.6;
+    color: #666;
+}
+body.dark-mode .route-block.is-collapsed .route-direction::after {
+    color: rgba(255,255,255,0.55);
+}
+
+/* Мобільна адаптація */
+@media (max-width: 575px) {
+    .route-collapse-btn { width: 32px; height: 32px; font-size: 1rem; }
+    .section-collapse-btn { padding: 8px 12px; font-size: 0.85rem; }
+}

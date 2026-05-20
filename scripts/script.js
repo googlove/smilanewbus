@@ -159,6 +159,7 @@ function tickEveryMinute() {
     if (!scheduleHidden && currentBus) {
         refreshScheduleBadges();
         updateNextBanner();
+        refreshDirectionStops(); // 🆕 оновлення списку зупинок
     }
 }
 
@@ -414,6 +415,9 @@ function openSchedule(bus, routeId, options) {
     // Тулбар (поширення + сповіщення)
     renderRouteToolbar(bus);
 
+    // 🆕 Вкладки прямий/зворотній зі списком зупинок (якщо є directionRoutes)
+    renderDirectionView(bus);
+
     // Банер з найближчим рейсом
     updateNextBanner();
 
@@ -580,6 +584,127 @@ function handleHashRoute() {
     if (bus) {
         openSchedule(bus, bus.number.toString(), { replace: true });
     }
+}
+
+// -----------------------------------------------------------
+// 🔀 ВКЛАДКИ "ПРЯМИЙ / ЗВОРОТНІЙ" + СПИСОК ЗУПИНОК З ВІДЛІКОМ
+// -----------------------------------------------------------
+let currentDirection = 'forward'; // 'forward' або 'backward'
+
+function computeStopArrival(dir, stop, nowMin) {
+    const offset = stop.offsetMin || 0;
+    for (let i = 0; i < dir.departureTimes.length; i++) {
+        const depMin = parseTimeStr(dir.departureTimes[i]);
+        if (depMin === null) continue;
+        const arrMin = depMin + offset;
+        if (arrMin >= nowMin) {
+            return { arrMin, depMin, diff: arrMin - nowMin };
+        }
+    }
+    return null;
+}
+
+function formatStopArrival(arr) {
+    if (!arr) return { text: '—', cls: 'done' };
+    if (arr.diff < 1)  return { text: 'Зараз', cls: 'now' };
+    if (arr.diff <= 60) return { text: `${arr.diff} хв`, cls: 'soon' };
+    const h = Math.floor(arr.diff / 60);
+    const m = arr.diff % 60;
+    return { text: m === 0 ? `${h} год` : `${h} год ${m} хв`, cls: 'later' };
+}
+
+function renderDirectionView(bus) {
+    const wrap = document.getElementById('direction-view-container');
+    if (!wrap) return;
+    wrap.innerHTML = '';
+
+    if (!bus.directionRoutes || !bus.directionRoutes.forward || !bus.directionRoutes.backward) {
+        wrap.style.display = 'none';
+        return;
+    }
+    wrap.style.display = 'block';
+
+    wrap.innerHTML = `
+        <div class="direction-tabs glass-panel">
+            <button class="dir-tab" data-dir="forward">Прямий</button>
+            <button class="dir-tab" data-dir="backward">Зворотній</button>
+            <span class="dir-tab-indicator"></span>
+        </div>
+        <div class="direction-meta">
+            <span class="direction-name" id="direction-name"></span>
+            <span class="direction-workdays" id="direction-workdays"></span>
+        </div>
+        <div class="direction-list" id="direction-list"></div>
+    `;
+
+    wrap.querySelectorAll('.dir-tab').forEach(btn => {
+        btn.addEventListener('click', () => setDirection(btn.dataset.dir));
+    });
+
+    setDirection(currentDirection || 'forward');
+}
+
+function setDirection(dir) {
+    currentDirection = dir;
+    const wrap = document.getElementById('direction-view-container');
+    if (!wrap) return;
+
+    wrap.querySelectorAll('.dir-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.dir === dir);
+    });
+    const tabs = wrap.querySelector('.direction-tabs');
+    if (tabs) tabs.classList.toggle('backward', dir === 'backward');
+
+    renderStopList();
+}
+
+function renderStopList() {
+    if (!currentBus || !currentBus.directionRoutes) return;
+    const dirData = currentBus.directionRoutes[currentDirection];
+    if (!dirData) return;
+
+    const nameEl = document.getElementById('direction-name');
+    const wdEl   = document.getElementById('direction-workdays');
+    const list   = document.getElementById('direction-list');
+    if (!list) return;
+
+    if (nameEl) nameEl.textContent = '➡️ ' + (dirData.name || '');
+    if (wdEl)   wdEl.textContent   = dirData.workDays ? '📅 ' + dirData.workDays : '';
+
+    const nowMin = getCurrentMinutes();
+    let html = '';
+
+    dirData.stops.forEach((stop, idx) => {
+        const arr = computeStopArrival(dirData, stop, nowMin);
+        const fmt = formatStopArrival(arr);
+
+        const isFirst = idx === 0;
+        const isLast  = idx === dirData.stops.length - 1;
+        const markerCls = isFirst ? 'first' : (isLast ? 'last' : 'middle');
+        const letterFirst = currentDirection === 'forward' ? 'A' : 'B';
+        const letterLast  = currentDirection === 'forward' ? 'B' : 'A';
+
+        let markerInner = '<span class="stop-dot"></span>';
+        if (isFirst)      markerInner = `<span class="stop-terminal">${letterFirst}</span>`;
+        else if (isLast)  markerInner = `<span class="stop-terminal">${letterLast}</span>`;
+
+        html += `
+            <div class="stop-row ${arr && arr.diff < 1 ? 'is-now' : ''}" data-idx="${idx}">
+                <div class="stop-line stop-line-${markerCls}">
+                    ${markerInner}
+                </div>
+                <div class="stop-label">${stop.name}</div>
+                <div class="stop-time stop-time-${fmt.cls}">${fmt.text}</div>
+            </div>
+        `;
+    });
+
+    list.innerHTML = html;
+}
+
+function refreshDirectionStops() {
+    if (!currentBus || !currentBus.directionRoutes) return;
+    renderStopList();
 }
 
 // -----------------------------------------------------------

@@ -271,7 +271,7 @@
             "offsetMin": 2
           },
           {
-            "name": Парк",
+            "name": "Парк",
             "offsetMin": 3
           },
           {
@@ -288,11 +288,11 @@
           },
           {
             "name": "Старий Технікум/Ельдорадо",
-            "offsetMin": , В 
+            "offsetMin": 5 
           },
           {
             "name": "Школа №8",
-            "offsetMin": 3
+            "offsetMin": 4
           },
           {
             "name": "Сільгосптехніка",

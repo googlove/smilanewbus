@@ -587,6 +587,66 @@ function handleHashRoute() {
 }
 
 // -----------------------------------------------------------
+// 📁 ЗГОРТАННЯ СЕКЦІЙ (direction view + schedule blocks)
+// -----------------------------------------------------------
+function getCollapsedState() {
+    try { return JSON.parse(localStorage.getItem('collapsedSections') || '{}'); }
+    catch (e) { return {}; }
+}
+function setCollapsedState(state) {
+    try { localStorage.setItem('collapsedSections', JSON.stringify(state)); }
+    catch (e) {}
+}
+
+// Згортання за іменованим ключем (для schedule route-block)
+function toggleSectionByKey(key) {
+    const state = getCollapsedState();
+    state[key] = !state[key];
+    setCollapsedState(state);
+    applyCollapsedStateByKey(key);
+}
+function applyCollapsedStateByKey(key, defaultCollapsed) {
+    const state = getCollapsedState();
+    // Якщо в localStorage немає явного значення — використовуємо default
+    let isCollapsed;
+    if (key in state) {
+        isCollapsed = state[key];
+    } else {
+        isCollapsed = !!defaultCollapsed;
+    }
+    const block = document.querySelector(`.route-block[data-section-key="${key}"]`);
+    if (!block) return;
+    block.classList.toggle('is-collapsed', isCollapsed);
+    const btn = block.querySelector('.route-collapse-btn');
+    if (btn) btn.setAttribute('aria-expanded', String(!isCollapsed));
+}
+
+// Згортання для direction view (per-bus)
+function toggleSection(section, busNumber) {
+    const key = `${section}_${busNumber}`;
+    const state = getCollapsedState();
+    state[key] = !state[key];
+    setCollapsedState(state);
+    applyCollapsedState(section, busNumber);
+}
+function applyCollapsedState(section, busNumber) {
+    const key = `${section}_${busNumber}`;
+    const state = getCollapsedState();
+    const isCollapsed = !!state[key];
+
+    if (section === 'direction') {
+        const wrap = document.getElementById('direction-view-container');
+        const body = document.getElementById('direction-body');
+        const btn  = document.getElementById('direction-collapse-btn');
+        const label = btn ? btn.querySelector('.collapse-label') : null;
+        if (wrap) wrap.classList.toggle('is-collapsed', isCollapsed);
+        if (body) body.style.display = isCollapsed ? 'none' : '';
+        if (label) label.textContent = isCollapsed ? 'Показати зупинки' : 'Згорнути зупинки';
+        if (btn) btn.setAttribute('aria-expanded', String(!isCollapsed));
+    }
+}
+
+// -----------------------------------------------------------
 // 🔀 ВКЛАДКИ "ПРЯМИЙ / ЗВОРОТНІЙ" + СПИСОК ЗУПИНОК З ВІДЛІКОМ
 // -----------------------------------------------------------
 let currentDirection = 'forward'; // 'forward' або 'backward'
@@ -625,21 +685,34 @@ function renderDirectionView(bus) {
     wrap.style.display = 'block';
 
     wrap.innerHTML = `
-        <div class="direction-tabs glass-panel">
+        <div class="direction-tabs glass-panel" id="direction-tabs">
             <button class="dir-tab" data-dir="forward">Прямий</button>
             <button class="dir-tab" data-dir="backward">Зворотній</button>
             <span class="dir-tab-indicator"></span>
         </div>
-        <div class="direction-meta">
-            <span class="direction-name" id="direction-name"></span>
-            <span class="direction-workdays" id="direction-workdays"></span>
+        <button class="section-collapse-btn" id="direction-collapse-btn" aria-label="Згорнути/розгорнути">
+            <span class="collapse-label">Згорнути зупинки</span>
+            <span class="collapse-chevron">⌃</span>
+        </button>
+        <div class="section-body" id="direction-body">
+            <div class="direction-meta">
+                <span class="direction-name" id="direction-name"></span>
+                <span class="direction-workdays" id="direction-workdays"></span>
+            </div>
+            <div class="direction-list" id="direction-list"></div>
         </div>
-        <div class="direction-list" id="direction-list"></div>
     `;
 
     wrap.querySelectorAll('.dir-tab').forEach(btn => {
         btn.addEventListener('click', () => setDirection(btn.dataset.dir));
     });
+
+    // Кнопка згортання
+    const collapseBtn = document.getElementById('direction-collapse-btn');
+    if (collapseBtn) {
+        collapseBtn.addEventListener('click', () => toggleSection('direction', bus.number));
+    }
+    applyCollapsedState('direction', bus.number);
 
     setDirection(currentDirection || 'forward');
 }
@@ -758,7 +831,12 @@ function renderRouteDetails(bus) {
 
     const currentMinutes = getCurrentMinutes();
 
-    bus.routes.forEach(route => {
+    bus.routes.forEach((route, routeIdx) => {
+        // Скільки всього часів у цьому напрямку (для авто-згортання)
+        let totalTimes = 0;
+        route.stops.forEach(s => { totalTimes += (s.times || []).length; });
+        const isLongRoute = totalTimes >= 20;
+
         let stopsHTML = '';
         route.stops.forEach(stop => {
             let timesHTML = '';
@@ -774,11 +852,38 @@ function renderRouteDetails(bus) {
             });
             stopsHTML += `<div class="stop-item"><span class="stop-name">🚏 ${stop.name}</span><div class="times-row">${timesHTML}</div></div>`;
         });
-        html += `<div class="route-block"><h3 class="route-direction">➡️ ${route.direction} <br><small style="font-size:0.7em; color:#666">📅 ${route.workDays}</small></h3>${stopsHTML}</div>`;
+
+        const sectionKey = `schedule_${bus.number}_${routeIdx}`;
+        html += `
+            <div class="route-block" data-section-key="${sectionKey}" data-long="${isLongRoute ? '1' : '0'}">
+                <h3 class="route-direction route-direction-collapsible">
+                    <span class="route-direction-text">
+                        ➡️ ${route.direction}
+                        <br><small style="font-size:0.7em; color:#666">📅 ${route.workDays}</small>
+                    </span>
+                    <button class="route-collapse-btn" data-section-key="${sectionKey}" aria-label="Згорнути/розгорнути">
+                        <span class="collapse-chevron">⌃</span>
+                    </button>
+                </h3>
+                <div class="route-block-body">${stopsHTML}</div>
+            </div>
+        `;
     });
 
     html += '</div></div>';
     container.innerHTML = html;
+
+    // Вішаємо обробники + застосовуємо збережений стан
+    container.querySelectorAll('.route-collapse-btn').forEach(btn => {
+        const key = btn.dataset.sectionKey;
+        btn.addEventListener('click', () => toggleSectionByKey(key));
+    });
+    // Застосовуємо стани: для довгих графіків — згорнути за замовчуванням
+    container.querySelectorAll('.route-block').forEach(block => {
+        const key = block.dataset.sectionKey;
+        const isLong = block.dataset.long === '1';
+        applyCollapsedStateByKey(key, isLong); // isLong = default-collapsed
+    });
 }
 
 // Оновлення past/next без перерендеру

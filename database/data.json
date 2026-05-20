@@ -231,72 +231,72 @@
             "offsetMin": 2
           },
           {
-            "name": "АТП 17128",
+            "name": "БК СЕМЗ",
+            "offsetMin": 3
+          },
+          {
+            "name": "В.Стуса",
             "offsetMin": 4
           },
           {
-            "name": "Вул. В. Гордієнка",
+            "name": "Солов'їна",
+            "offsetMin": 4
+          },
+          {
+            "name": "Заслонова",
             "offsetMin": 6
           },
           {
+            "name": "Н.Яремчука",
+            "offsetMin": 7
+          },
+          {
+            "name": "Підгосп",
+            "offsetMin": 5
+          },
+          {
+            "name": "Лікарня Семашко",
+            "offsetMin": 6
+          },
+          {
+            "name": "Євгенії Єршової",
+            "offsetMin": 5
+          },
+          {
+            "name": "Миколи Зерова",
+            "offsetMin": 3
+          },
+          {
+            "name": "вул. Перемоги",
+            "offsetMin": 2
+          },
+          {
+            "name": Парк",
+            "offsetMin": 3
+          },
+          {
+            "name": "ЦЕНТР",
+            "offsetMin": 3
+          },
+          {
+            "name": "Центральна зупинка",
+            "offsetMin": 3
+          },
+          {
+            "name": "Будинок юнацтва",
+            "offsetMin": 4
+          },
+          {
+            "name": "Старий Технікум/Ельдорадо",
+            "offsetMin": , В 
+          },
+          {
+            "name": "Школа №8",
+            "offsetMin": 3
+          },
+          {
             "name": "Сільгосптехніка",
-            "offsetMin": 8
-          },
-          {
-            "name": "ТЦентр",
-            "offsetMin": 10
-          },
-          {
-            "name": "Універсам",
-            "offsetMin": 12
-          },
-          {
-            "name": "РПЗ",
-            "offsetMin": 14
-          },
-          {
-            "name": "Південна",
-            "offsetMin": 16
-          },
-          {
-            "name": "Делікат Шевченка",
-            "offsetMin": 18
-          },
-          {
-            "name": "Павлова",
-            "offsetMin": 20
-          },
-          {
-            "name": "Ст. Шевченка",
-            "offsetMin": 22
-          },
-          {
-            "name": "БК Залізничників",
-            "offsetMin": 24
-          },
-          {
-            "name": "Б. Хмельницького",
-            "offsetMin": 26
-          },
-          {
-            "name": "АТБ",
-            "offsetMin": 28
-          },
-          {
-            "name": "Кармелюка",
-            "offsetMin": 30
-          },
-          {
-            "name": "Коледж",
-            "offsetMin": 32
-          },
-          {
-            "name": "Делікат Богдана",
-            "offsetMin": 34
-          },
-          {
-            "name": "Вул. П. Сагайдачного",
-            "offsetMin": 36
+            "offsetMin": 5
           }
         ]
       },

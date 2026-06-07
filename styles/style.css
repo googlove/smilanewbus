@@ -2715,3 +2715,237 @@ body.dark-mode .route-block.is-collapsed .route-direction::after {
     .route-collapse-btn { width: 32px; height: 32px; font-size: 1rem; }
     .section-collapse-btn { padding: 8px 12px; font-size: 0.85rem; }
 }
+
+
+/* ================================================================= */
+/* 🚏 РОЗДІЛЕННЯ МАРШРУТІВ: МІСЬКІ / ПРИМІСЬКІ (Glass iOS)            */
+/* ================================================================= */
+
+.route-section {
+    margin-bottom: 26px;
+    animation: routeSectionIn 0.5s ease both;
+}
+.route-section + .route-section { margin-top: 4px; }
+
+@keyframes routeSectionIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Заголовок секції — скляна "пігулка" в стилі iOS */
+.route-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 0 30px 16px 30px;
+    padding: 14px 18px;
+    border-radius: 22px;
+    position: relative;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Тонкий кольоровий "промінь" зверху картки-заголовка */
+.route-section-header::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 3px;
+    opacity: 0.9;
+}
+.route-head--urban::before {
+    background: linear-gradient(90deg, #3c82f6, #60a5fa, transparent);
+}
+.route-head--suburban::before {
+    background: linear-gradient(90deg, #b8860b, #f5c542, transparent);
+}
+
+/* Емодзі-плитка зліва */
+.route-section-emoji {
+    flex: 0 0 auto;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    font-size: 1.7rem;
+    border-radius: 16px;
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+.route-head--urban .route-section-emoji {
+    background: rgba(60, 130, 246, 0.16);
+}
+.route-head--suburban .route-section-emoji {
+    background: rgba(218, 165, 32, 0.16);
+}
+
+.route-section-titles {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.route-section-title {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-color);
+    letter-spacing: -0.01em;
+}
+.route-section-sub {
+    font-size: 0.86rem;
+    font-weight: 600;
+    opacity: 0.72;
+    color: var(--text-color);
+    margin-top: 2px;
+}
+
+/* Лічильник маршрутів справа */
+.route-count-pill {
+    flex: 0 0 auto;
+    min-width: 34px;
+    height: 34px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 1rem;
+    border: 1px solid var(--glass-border);
+}
+.route-count-pill--urban {
+    background: rgba(60, 130, 246, 0.18);
+    color: #2c6fd6;
+    border-color: rgba(60, 130, 246, 0.35);
+}
+.route-count-pill--suburban {
+    background: rgba(218, 165, 32, 0.18);
+    color: #b8860b;
+    border-color: rgba(218, 165, 32, 0.4);
+}
+
+body.dark-mode .route-count-pill--urban {
+    background: rgba(60, 130, 246, 0.28);
+    color: #9ec3ff;
+    border-color: rgba(60, 130, 246, 0.5);
+}
+body.dark-mode .route-count-pill--suburban {
+    background: rgba(255, 215, 0, 0.2);
+    color: #FFD700;
+    border-color: rgba(255, 215, 0, 0.5);
+}
+
+/* Кутова емодзі-мітка на самій картці маршруту */
+.bus-card { position: relative; }
+.bus-kind-emoji {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    font-size: 0.95rem;
+    opacity: 0.8;
+    line-height: 1;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+    pointer-events: none;
+}
+
+/* Легкий кольоровий акцент на верхньому краї карток */
+.bus-card--urban    { border-top: 2px solid rgba(60, 130, 246, 0.55); }
+.bus-card--suburban { border-top: 2px solid rgba(218, 165, 32, 0.55); }
+
+body.dark-mode .bus-card--urban    { border-top-color: rgba(96, 165, 250, 0.6); }
+body.dark-mode .bus-card--suburban { border-top-color: rgba(255, 215, 0, 0.55); }
+
+/* Адаптив для заголовків секцій */
+@media (max-width: 575px) {
+    .route-section-header { margin: 0 22px 14px 22px; gap: 11px; padding: 12px 14px; }
+    .route-section-emoji { width: 44px; height: 44px; font-size: 1.45rem; border-radius: 14px; }
+    .route-section-title { font-size: 1.18rem; }
+    .route-section-sub { font-size: 0.78rem; }
+}
+@media (max-width: 360px) {
+    .route-section-header { margin: 0 14px 12px 14px; }
+}
+
+/* ================================================================= */
+/* 💡 ЦІКАВИЙ ФАКТ (Glass iOS картка внизу)                          */
+/* ================================================================= */
+
+.fun-fact-card {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+}
+
+.fun-fact-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg,
+        rgba(60, 130, 246, 0.10) 0%,
+        rgba(125, 211, 252, 0.06) 45%,
+        rgba(218, 165, 32, 0.12) 100%);
+    pointer-events: none;
+}
+
+.fun-fact-icon {
+    flex: 0 0 auto;
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    font-size: 1.9rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 1px solid var(--glass-border);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 1;
+}
+body.dark-mode .fun-fact-icon { background: rgba(255, 255, 255, 0.08); }
+
+.fun-fact-body {
+    position: relative;
+    z-index: 1;
+    text-align: left;
+}
+.fun-fact-label {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    color: var(--text-color);
+    margin-bottom: 4px;
+}
+.fun-fact-text {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text-color);
+}
+.fun-fact-highlight {
+    font-weight: 900;
+    font-size: 1.12em;
+    color: #2c6fd6;
+    white-space: nowrap;
+}
+body.dark-mode .fun-fact-highlight { color: #7dd3fc; }
+
+@media (max-width: 575px) {
+    .fun-fact-card { gap: 13px; padding: 16px; border-radius: 20px; }
+    .fun-fact-icon { width: 48px; height: 48px; font-size: 1.6rem; border-radius: 15px; }
+    .fun-fact-text { font-size: 0.96rem; }
+}

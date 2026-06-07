@@ -295,83 +295,113 @@ function setupSearch() {
 // -----------------------------------------------------------
 // 4. РЕНДЕР СІТКИ (картки з ⭐ обраним та ⏱️ countdown)
 // -----------------------------------------------------------
+// Маршрут вважається МІСЬКИМ, якщо його номер одно- або двозначний (1–2 цифри),
+// і ПРИМІСЬКИМ, якщо тризначний (3+ цифри). Список CITY_ROUTES_IDS лишається
+// як надійний фолбек для нетипових номерів.
+function isUrbanRoute(routeIdStr) {
+    const digits = routeIdStr.replace(/\D/g, '');
+    if (digits.length > 0) return digits.length <= 2;
+    return CITY_ROUTES_IDS.includes(routeIdStr);
+}
+
+function buildBusCard(bus) {
+    const card = document.createElement('div');
+    card.className = 'bus-card';
+    const routeIdStr = bus.number.toString();
+    card.dataset.busNumber = routeIdStr;
+
+    const fav = isFavorite(routeIdStr);
+    if (fav) card.classList.add('is-favorite');
+
+    const urban = isUrbanRoute(routeIdStr);
+    card.classList.add(urban ? 'bus-card--urban' : 'bus-card--suburban');
+
+    let priceHtml = '';
+    if (!urban) {
+        if (SUBURBAN_DATA[routeIdStr]) {
+            priceHtml = `<div class="bus-price-badge suburban-price">${SUBURBAN_DATA[routeIdStr].price}</div>`;
+        } else if (bus.price) {
+            priceHtml = `<div class="bus-price-badge suburban-price">${bus.price}</div>`;
+        }
+    }
+
+    card.onclick = (e) => {
+        if (e.target.closest('.fav-btn')) return;
+        openSchedule(bus, routeIdStr);
+    };
+
+    card.innerHTML = `
+        <button class="fav-btn ${fav ? 'active' : ''}" aria-label="${fav ? 'Прибрати з обраного' : 'Додати в обране'}" title="${fav ? 'Прибрати з обраного' : 'Додати в обране'}">
+            <span class="star-icon">${fav ? '★' : '☆'}</span>
+        </button>
+        <span class="bus-kind-emoji" aria-hidden="true">${urban ? '🏙️' : '🌄'}</span>
+        <span class="bus-num" style="color: ${bus.color || 'inherit'}">№${bus.number}</span>
+        ${priceHtml}
+        <div class="bus-title">${bus.title}</div>
+        <div class="bus-countdown" data-bus="${routeIdStr}"></div>
+    `;
+
+    const favBtn = card.querySelector('.fav-btn');
+    favBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleFavorite(routeIdStr);
+        const searchInput = document.getElementById('search-input');
+        const term = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        if (term) {
+            searchInput.dispatchEvent(new Event('input'));
+        } else {
+            renderBusGrid(allBusData);
+        }
+    });
+
+    return { card, urban };
+}
+
 function renderBusGrid(buses) {
     const urbanContainer = document.querySelector('.bus-grid-urban');
     const suburbanContainer = document.querySelector('.bus-grid-suburban');
     const generalContainer = document.getElementById('bus-grid');
     const emptyState = document.getElementById('empty-state');
+    const urbanSection = document.getElementById('urban-section');
+    const suburbanSection = document.getElementById('suburban-section');
+    const urbanCountEl = document.getElementById('urban-count');
+    const suburbanCountEl = document.getElementById('suburban-count');
 
     if (urbanContainer) urbanContainer.innerHTML = '';
     if (suburbanContainer) suburbanContainer.innerHTML = '';
-    if (generalContainer) generalContainer.innerHTML = '';
-
-    if (!buses || buses.length === 0) {
-        if (emptyState) emptyState.style.display = 'flex';
-        if (generalContainer) generalContainer.style.display = 'none';
-        return;
-    } else {
-        if (emptyState) emptyState.style.display = 'none';
-        if (generalContainer) generalContainer.style.display = '';
+    if (generalContainer) {
+        generalContainer.innerHTML = '';
+        generalContainer.style.display = 'none';
     }
 
-    const sorted = sortByFavorites(buses);
+    const useSections = urbanContainer && suburbanContainer;
+    const sorted = sortByFavorites(buses || []);
+
+    let urbanCount = 0;
+    let suburbanCount = 0;
 
     sorted.forEach(bus => {
-        const card = document.createElement('div');
-        card.className = 'bus-card';
-        const routeIdStr = bus.number.toString();
-        card.dataset.busNumber = routeIdStr;
-
-        const fav = isFavorite(routeIdStr);
-        if (fav) card.classList.add('is-favorite');
-
-        let priceHtml = '';
-        let isUrban = false;
-
-        if (CITY_ROUTES_IDS.includes(routeIdStr)) {
-            isUrban = true;
-        } else if (SUBURBAN_DATA[routeIdStr]) {
-            const info = SUBURBAN_DATA[routeIdStr];
-            priceHtml = `<div class="bus-price-badge suburban-price">${info.price}</div>`;
-        } else if (bus.price) {
-            priceHtml = `<div class="bus-price-badge suburban-price">${bus.price}</div>`;
-        }
-
-        card.onclick = (e) => {
-            if (e.target.closest('.fav-btn')) return;
-            openSchedule(bus, routeIdStr);
-        };
-
-        card.innerHTML = `
-            <button class="fav-btn ${fav ? 'active' : ''}" aria-label="${fav ? 'Прибрати з обраного' : 'Додати в обране'}" title="${fav ? 'Прибрати з обраного' : 'Додати в обране'}">
-                <span class="star-icon">${fav ? '★' : '☆'}</span>
-            </button>
-            <span class="bus-num" style="color: ${bus.color || 'inherit'}">№${bus.number}</span>
-            ${priceHtml}
-            <div class="bus-title">${bus.title}</div>
-            <div class="bus-countdown" data-bus="${routeIdStr}"></div>
-        `;
-
-        const favBtn = card.querySelector('.fav-btn');
-        favBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleFavorite(routeIdStr);
-            const searchInput = document.getElementById('search-input');
-            const term = searchInput ? searchInput.value.trim().toLowerCase() : '';
-            if (term) {
-                searchInput.dispatchEvent(new Event('input'));
-            } else {
-                renderBusGrid(allBusData);
-            }
-        });
-
-        if (urbanContainer && suburbanContainer) {
-            if (isUrban) urbanContainer.appendChild(card);
-            else suburbanContainer.appendChild(card);
+        const { card, urban } = buildBusCard(bus);
+        if (useSections) {
+            if (urban) { urbanContainer.appendChild(card); urbanCount++; }
+            else { suburbanContainer.appendChild(card); suburbanCount++; }
         } else if (generalContainer) {
             generalContainer.appendChild(card);
+            generalContainer.style.display = '';
         }
     });
+
+    if (useSections) {
+        // Лічильники маршрутів у заголовках секцій
+        if (urbanCountEl) urbanCountEl.textContent = urbanCount;
+        if (suburbanCountEl) suburbanCountEl.textContent = suburbanCount;
+        // Ховаємо секцію цілком, якщо в ній нічого немає (наприклад, під час пошуку)
+        if (urbanSection) urbanSection.style.display = urbanCount ? '' : 'none';
+        if (suburbanSection) suburbanSection.style.display = suburbanCount ? '' : 'none';
+    }
+
+    const total = useSections ? (urbanCount + suburbanCount) : sorted.length;
+    if (emptyState) emptyState.style.display = total === 0 ? 'flex' : 'none';
 
     updateCardCountdowns();
 }

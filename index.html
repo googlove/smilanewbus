@@ -116,9 +116,38 @@
 
         <div class="row bus-grid-row">
             <div class="col-xs-12 bus-grid-col">
-                <div id="bus-grid" class="bus-grid">
-                    <div class="loader">Завантаження розкладу...</div>
-                </div>
+
+                <!-- 🏙️ МІСЬКІ МАРШРУТИ (одно- та двозначні номери) -->
+                <section id="urban-section" class="route-section">
+                    <div class="route-section-header glass-panel route-head--urban">
+                        <span class="route-section-emoji">🏙️</span>
+                        <div class="route-section-titles">
+                            <h2 class="route-section-title">Міські маршрути</h2>
+                            <span class="route-section-sub">🚌 Одно- та двозначні номери</span>
+                        </div>
+                        <span class="route-count-pill route-count-pill--urban" id="urban-count">—</span>
+                    </div>
+                    <div class="bus-grid bus-grid-urban">
+                        <div class="loader">Завантаження розкладу...</div>
+                    </div>
+                </section>
+
+                <!-- 🌄 ПРИМІСЬКІ МАРШРУТИ (тризначні номери) -->
+                <section id="suburban-section" class="route-section">
+                    <div class="route-section-header glass-panel route-head--suburban">
+                        <span class="route-section-emoji">🌄</span>
+                        <div class="route-section-titles">
+                            <h2 class="route-section-title">Приміські маршрути</h2>
+                            <span class="route-section-sub">🚐 Тризначні номери</span>
+                        </div>
+                        <span class="route-count-pill route-count-pill--suburban" id="suburban-count">—</span>
+                    </div>
+                    <div class="bus-grid bus-grid-suburban"></div>
+                </section>
+
+                <!-- Прихований загальний контейнер (fallback для старого коду) -->
+                <div id="bus-grid" class="bus-grid" style="display:none;"></div>
+
                 <div id="empty-state" class="empty-state" style="display:none;">
                     <span class="empty-emoji">🔎</span>
                     <p>Нічого не знайдено</p>
@@ -153,6 +182,22 @@
     </section>
 
     <div class="container footer-container">
+
+        <div class="row fun-fact-row" style="margin-top: 20px;">
+            <div class="col-xs-12" style="display:flex; justify-content:center;">
+                <div class="fun-fact-card glass-panel">
+                    <div class="fun-fact-icon">🛣️</div>
+                    <div class="fun-fact-body">
+                        <span class="fun-fact-label">💡 Цікавий факт</span>
+                        <p class="fun-fact-text">
+                            Загальна протяжність маршрутної мережі громадського транспорту Сміли —
+                            <span class="fun-fact-highlight">445 км</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row feedback-footer-row" style="margin-top: 20px; margin-bottom: 10px;">
             <div class="col-xs-12 text-center">
                 <a href="https://t.me/flame4ost" target="_blank" class="glass-action-button full-width-btn ios-liquid-blue" style="max-width: 350px;">

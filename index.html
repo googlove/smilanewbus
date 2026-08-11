@@ -35,9 +35,80 @@
 </head>
 <body>
 
+    <!-- ☰ БІЧНЕ МЕНЮ (виїжджає зліва) -->
+    <div id="drawer-overlay" class="drawer-overlay" hidden></div>
+    <aside id="side-drawer" class="side-drawer" aria-hidden="true" aria-label="Головне меню">
+        <div class="drawer-head">
+            <div class="drawer-brand">
+                <span class="drawer-brand-emoji">🚌</span>
+                <div class="drawer-brand-text">
+                    <strong>SmilaBusTime</strong>
+                    <small>Розклад автобусів Сміли</small>
+                </div>
+            </div>
+            <button id="drawer-close" class="drawer-close" aria-label="Закрити меню">✕</button>
+        </div>
+
+        <nav class="drawer-nav">
+            <p class="drawer-group-label">Навігація</p>
+            <button class="drawer-link" data-action="trip-planner">
+                <span class="drawer-link-icon">🧭</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Прокласти маршрут</span><span class="drawer-link-sub">Звідки й куди — коли та яким їхати</span></span>
+            </button>
+            <button class="drawer-link" data-action="routes">
+                <span class="drawer-link-icon">📋</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Усі маршрути</span><span class="drawer-link-sub">Міські та приміські</span></span>
+            </button>
+
+            <p class="drawer-group-label">Про проєкт</p>
+            <button class="drawer-link" data-action="about-system">
+                <span class="drawer-link-icon">ℹ️</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Про систему розкладу</span><span class="drawer-link-sub">Як усе працює</span></span>
+            </button>
+            <button class="drawer-link" data-action="about-dev">
+                <span class="drawer-link-icon">👨‍💻</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Про розробника</span><span class="drawer-link-sub">Хто робить застосунок</span></span>
+            </button>
+
+            <p class="drawer-group-label">Зв'язок та підтримка</p>
+            <a class="drawer-link" href="https://t.me/SmilaBusTime_bot" target="_blank" rel="noopener">
+                <span class="drawer-link-icon">🤖</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Telegram-бот розкладу</span></span>
+            </a>
+            <a class="drawer-link" href="https://t.me/flame4ost" target="_blank" rel="noopener">
+                <span class="drawer-link-icon">✍️</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Зворотний зв'язок</span></span>
+            </a>
+            <a class="drawer-link drawer-link--gold" href="https://googlove.netlify.app/donate/index.html" target="_blank" rel="noopener">
+                <span class="drawer-link-icon">💸</span>
+                <span class="drawer-link-body"><span class="drawer-link-title">Підтримати проєкт</span></span>
+            </a>
+        </nav>
+
+        <div class="drawer-foot">
+            <span>© 2022–2025 SmilaBusTime</span>
+            <span class="drawer-foot-ver" id="drawer-version">Оновлено: Травень 2026</span>
+        </div>
+    </aside>
+
+    <!-- 💬 МОДАЛЬНЕ ВІКНО (про систему / розробника) -->
+    <div id="app-modal" class="app-modal" hidden>
+        <div class="app-modal__backdrop"></div>
+        <div class="app-modal__panel glass-panel" role="dialog" aria-modal="true" aria-labelledby="app-modal-title">
+            <button class="app-modal__close" id="app-modal-close" aria-label="Закрити">✕</button>
+            <div class="app-modal__content" id="app-modal-content"></div>
+        </div>
+    </div>
+
        <header class="container-fluid header-full-width">
         <div class="header-flex-container">
-            
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Відкрити меню" aria-expanded="false" aria-controls="side-drawer">
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+                <span class="menu-bar"></span>
+            </button>
+
             <div class="header-logo-wrapper">
                 <a href="https://www.smila-rada.gov.ua/" target="_blank">
                     <img src="img/logo_gs_full.png" alt="Logo" class="logo-img">
@@ -104,8 +175,54 @@
 
         
 
+        <!-- 🧭 ПЛАНУВАЛЬНИК ПОЇЗДКИ -->
+        <section id="trip-planner" class="trip-planner glass-panel">
+            <div class="tp-head">
+                <span class="tp-emoji" aria-hidden="true">🧭</span>
+                <div class="tp-head-text">
+                    <h2 class="tp-title">Прокласти маршрут</h2>
+                    <p class="tp-sub">Оберіть зупинки — покажу, коли і яким автобусом їхати</p>
+                </div>
+            </div>
+
+            <div class="tp-fields">
+                <div class="tp-field">
+                    <label class="tp-label" for="tp-from">Звідки</label>
+                    <div class="tp-input-wrap">
+                        <span class="tp-dot tp-dot--from" aria-hidden="true">A</span>
+                        <input type="text" id="tp-from" class="tp-input" autocomplete="off" spellcheck="false"
+                               placeholder="Початкова зупинка" aria-label="Початкова зупинка">
+                        <button class="tp-clear" data-target="tp-from" aria-label="Очистити" type="button">✕</button>
+                    </div>
+                    <div class="tp-suggest" id="tp-from-suggest" role="listbox"></div>
+                </div>
+
+                <button id="tp-swap" class="tp-swap" type="button" aria-label="Поміняти зупинки місцями" title="Поміняти місцями">⇅</button>
+
+                <div class="tp-field">
+                    <label class="tp-label" for="tp-to">Куди</label>
+                    <div class="tp-input-wrap">
+                        <span class="tp-dot tp-dot--to" aria-hidden="true">B</span>
+                        <input type="text" id="tp-to" class="tp-input" autocomplete="off" spellcheck="false"
+                               placeholder="Кінцева зупинка" aria-label="Кінцева зупинка">
+                        <button class="tp-clear" data-target="tp-to" aria-label="Очистити" type="button">✕</button>
+                    </div>
+                    <div class="tp-suggest" id="tp-to-suggest" role="listbox"></div>
+                </div>
+            </div>
+
+            <button id="tp-search" class="tp-search-btn" type="button">
+                <span class="tp-search-icon">🔎</span> Знайти автобуси
+            </button>
+
+            <p class="tp-hint" id="tp-hint">Наприклад: <button class="tp-example" type="button" data-from="АС-2" data-to="ЦЕНТР">АС-2 → Центр</button></p>
+
+            <div id="tp-results" class="tp-results" aria-live="polite"></div>
+        </section>
+
         <div class="row search-input-row" style="margin-bottom: 25px;">
             <div class="col-xs-12 search-col-full">
+                <p class="section-eyebrow">або переглянь усі маршрути</p>
                 <div class="input-group search-group">
                     <span class="input-group-addon search-icon">🔍</span>
                     <input type="text" id="search-input" class="form-control" placeholder="Номер, напрям або назва зупинки...">

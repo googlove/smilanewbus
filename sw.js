@@ -1,7 +1,7 @@
 // SmilaBusTime — Service Worker
 // Стратегія: cache-first для статики, network-first для даних розкладу.
 
-const CACHE_NAME = 'smilabus-v1';
+const CACHE_NAME = 'smilabus-v2';
 
 const SHELL_ASSETS = [
   './',

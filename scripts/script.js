@@ -136,6 +136,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Пошук
     setupSearch();
 
+    // 🆕 Бічне меню + планувальник поїздки
+    setupDrawer();
+    setupTripPlanner();
+
     // Кнопка Назад
     const backBtn = document.getElementById('back-btn');
     if (backBtn) {
@@ -155,6 +159,7 @@ function tickEveryMinute() {
 
     if (!mainHidden) {
         updateCardCountdowns();
+        refreshTripResults(); // 🆕 оновлюємо відлік у планувальнику
     }
     if (!scheduleHidden && currentBus) {
         refreshScheduleBadges();
@@ -201,6 +206,7 @@ function loadBusData() {
         .then(data => {
             allBusData = data;
             renderBusGrid(data);
+            buildStopIndex(data); // 🆕 індекс зупинок для планувальника поїздки
             // Якщо в URL був #bus=..., відкриваємо одразу
             handleHashRoute();
         })
@@ -1078,6 +1084,581 @@ function checkBusNotifications() {
                     }
                 });
             });
+        });
+    });
+}
+
+
+// ===========================================================
+// ☰ БІЧНЕ МЕНЮ (DRAWER)
+// ===========================================================
+function setupDrawer() {
+    const toggle   = document.getElementById('menu-toggle');
+    const drawer   = document.getElementById('side-drawer');
+    const overlay  = document.getElementById('drawer-overlay');
+    const closeBtn = document.getElementById('drawer-close');
+    const verEl    = document.getElementById('drawer-version');
+    if (!toggle || !drawer || !overlay) return;
+
+    if (verEl) verEl.textContent = `Оновлено: ${APP_UPDATED}`;
+
+    drawer.querySelectorAll('.drawer-link[data-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const action = btn.dataset.action;
+            closeDrawer();
+            handleDrawerAction(action);
+        });
+    });
+
+    toggle.addEventListener('click', openDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') { closeDrawer(); closeInfoModal(); }
+    });
+
+    // Модалка «Про…»
+    const modalClose = document.getElementById('app-modal-close');
+    const modalBack  = document.querySelector('#app-modal .app-modal__backdrop');
+    if (modalClose) modalClose.addEventListener('click', closeInfoModal);
+    if (modalBack)  modalBack.addEventListener('click', closeInfoModal);
+}
+
+function openDrawer() {
+    const drawer  = document.getElementById('side-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    const toggle  = document.getElementById('menu-toggle');
+    if (!drawer || !overlay) return;
+    overlay.hidden = false;
+    requestAnimationFrame(() => {
+        drawer.classList.add('open');
+        overlay.classList.add('show');
+    });
+    drawer.setAttribute('aria-hidden', 'false');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('no-scroll');
+}
+
+function closeDrawer() {
+    const drawer  = document.getElementById('side-drawer');
+    const overlay = document.getElementById('drawer-overlay');
+    const toggle  = document.getElementById('menu-toggle');
+    if (!drawer || !overlay) return;
+    drawer.classList.remove('open');
+    overlay.classList.remove('show');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('no-scroll');
+    setTimeout(() => { if (!overlay.classList.contains('show')) overlay.hidden = true; }, 300);
+}
+
+function handleDrawerAction(action) {
+    switch (action) {
+        case 'trip-planner': {
+            // якщо ми на екрані розкладу — повертаємось на головну
+            const onSchedule = !document.getElementById('schedule-view').classList.contains('hidden');
+            if (onSchedule) history.back();
+            setTimeout(() => {
+                const el = document.getElementById('trip-planner');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const from = document.getElementById('tp-from');
+                if (from) setTimeout(() => from.focus(), 350);
+            }, 60);
+            break;
+        }
+        case 'routes': {
+            const el = document.getElementById('urban-section');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            break;
+        }
+        case 'about-system': openInfoModal('system'); break;
+        case 'about-dev':    openInfoModal('dev');    break;
+    }
+}
+
+// ===========================================================
+// 💬 МОДАЛКА «ПРО…»
+// ===========================================================
+const INFO_CONTENT = {
+    system: `
+        <div class="modal-hero">
+            <span class="modal-hero-emoji">🚌</span>
+            <h3 id="app-modal-title">Про систему розкладу</h3>
+        </div>
+        <p><strong>SmilaBusTime</strong> — це зручний онлайн-розклад міських і приміських автобусів
+        міста Сміла. Мета проста: щоб кожен пасажир за кілька секунд бачив, коли й на чому їхати,
+        без пошуку по паперових табличках і групах у месенджерах.</p>
+
+        <h4>Що вміє застосунок</h4>
+        <ul class="modal-list">
+            <li><span>🧭</span> <b>Планувальник поїздки:</b> вводиш початкову й кінцеву зупинку — отримуєш час відправлення, прибуття та номер автобуса.</li>
+            <li><span>⏱️</span> <b>Зворотний відлік:</b> показує, скільки хвилин лишилось до найближчого рейсу.</li>
+            <li><span>⭐</span> <b>Обране:</b> закріплюй маршрути, якими їздиш щодня.</li>
+            <li><span>🔔</span> <b>Нагадування:</b> сповіщення за 15/10/5 хв до автобуса.</li>
+            <li><span>📴</span> <b>Офлайн-режим:</b> розклад працює навіть без інтернету (PWA).</li>
+            <li><span>🌙</span> <b>Світла й темна теми</b> та адаптація під телефон.</li>
+        </ul>
+
+        <h4>Звідки дані</h4>
+        <p>Розклад складено на основі відкритих даних перевізників і міської ради. Час у застосунку —
+        <b>плановий</b>: реальні автобуси можуть відхилятися на кілька хвилин через дорожню ситуацію.
+        Позначку «можливе запізнення» розраховано орієнтовно за годинами пік, а не за GPS.</p>
+
+        <div class="modal-fact">🛣️ Загальна протяжність маршрутної мережі Сміли — <b>445 км</b>.</div>
+
+        <p class="modal-note">Помітили неточність у розкладі? Напишіть — виправимо.</p>
+        <a class="modal-cta" href="https://t.me/flame4ost" target="_blank" rel="noopener">✍️ Повідомити про неточність</a>
+    `,
+    dev: `
+        <div class="modal-hero">
+            <span class="modal-hero-emoji">👨‍💻</span>
+            <h3 id="app-modal-title">Про розробника</h3>
+        </div>
+        <p>Застосунок створює та підтримує <b>Ярослав Гоголов</b> — з 2022 року й донині.
+        Це некомерційний проєкт, зроблений для смілян, щоб громадським транспортом було зручніше користуватися.</p>
+
+        <h4>Технології</h4>
+        <p>Чистий HTML, CSS та JavaScript у стилі «Liquid Glass», Progressive Web App з офлайн-кешуванням.
+        Жодних важких фреймворків — застосунок швидко відкривається навіть на слабкому інтернеті.</p>
+
+        <h4>Зв'язок</h4>
+        <ul class="modal-list">
+            <li><span>✍️</span> Пропозиції та правки: <a href="https://t.me/flame4ost" target="_blank" rel="noopener">Telegram @flame4ost</a></li>
+            <li><span>🤖</span> Бот розкладу: <a href="https://t.me/SmilaBusTime_bot" target="_blank" rel="noopener">@SmilaBusTime_bot</a></li>
+        </ul>
+
+        <p class="modal-note">Проєкт живе завдяки донатам. Якщо він вам корисний — підтримайте розвиток 💛</p>
+        <a class="modal-cta modal-cta--gold" href="https://googlove.netlify.app/donate/index.html" target="_blank" rel="noopener">💸 Підтримати проєкт</a>
+    `
+};
+
+function openInfoModal(key) {
+    const modal   = document.getElementById('app-modal');
+    const content = document.getElementById('app-modal-content');
+    if (!modal || !content) return;
+    content.innerHTML = INFO_CONTENT[key] || '';
+    modal.hidden = false;
+    requestAnimationFrame(() => modal.classList.add('show'));
+    document.body.classList.add('no-scroll');
+}
+
+function closeInfoModal() {
+    const modal = document.getElementById('app-modal');
+    if (!modal || modal.hidden) return;
+    modal.classList.remove('show');
+    document.body.classList.remove('no-scroll');
+    setTimeout(() => { modal.hidden = true; }, 250);
+}
+
+// ===========================================================
+// 🧭 ПЛАНУВАЛЬНИК ПОЇЗДКИ
+// ===========================================================
+let ALL_STOP_NAMES = []; // унікальні відображувані назви зупинок
+
+function normalizeStop(s) {
+    if (!s) return '';
+    let out = String(s).toLowerCase().trim();
+    out = out.replace(/[«»"'„“”]/g, '');
+    out = out.replace(/\s+/g, ' ');
+    return out;
+}
+
+// Будує список унікальних зупинок з обох структур даних
+function buildStopIndex(data) {
+    const map = new Map(); // norm -> display
+    const add = (name) => {
+        if (!name) return;
+        const n = normalizeStop(name);
+        if (!n) return;
+        if (!map.has(n)) map.set(n, String(name).trim());
+    };
+    (data || []).forEach(bus => {
+        const dr = bus.directionRoutes;
+        if (dr) {
+            ['forward', 'backward'].forEach(k => {
+                const d = dr[k];
+                if (d && Array.isArray(d.stops)) d.stops.forEach(s => add(s.name));
+            });
+        }
+        (bus.routes || []).forEach(r => (r.stops || []).forEach(s => add(s.name)));
+    });
+    ALL_STOP_NAMES = Array.from(map.values()).sort((a, b) => a.localeCompare(b, 'uk'));
+}
+
+// Зіставляє введений текст з реальною зупинкою (точний → починається з → містить)
+function resolveStopName(query) {
+    const q = normalizeStop(query);
+    if (!q) return null;
+    let exact = ALL_STOP_NAMES.find(s => normalizeStop(s) === q);
+    if (exact) return exact;
+    let starts = ALL_STOP_NAMES.find(s => normalizeStop(s).startsWith(q));
+    if (starts) return starts;
+    let incl = ALL_STOP_NAMES.find(s => normalizeStop(s).includes(q));
+    return incl || null;
+}
+
+// ---- Робота з днями тижня (пн-пт / сб-нд і т.п.) ----
+const DAY_ABBR = ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']; // getDay(): 0..6
+function extractDayNote(timeStr) {
+    const m = String(timeStr).match(/\(([^)]+)\)/);
+    return m ? m[1].trim() : '';
+}
+// Повертає true/false/null(невідомо) — чи їздить сьогодні
+function noteMatchesToday(note) {
+    if (!note) return null;
+    const today = DAY_ABBR[new Date().getDay()];
+    const n = note.toLowerCase();
+    // діапазони на кшталт "пн-пт", "сб-нд"
+    const range = n.match(/(нд|пн|вт|ср|чт|пт|сб)\s*[-–]\s*(нд|пн|вт|ср|чт|пт|сб)/);
+    if (range) {
+        const order = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'нд'];
+        let a = order.indexOf(range[1]), b = order.indexOf(range[2]);
+        let t = order.indexOf(today);
+        if (a === -1 || b === -1 || t === -1) return null;
+        if (a <= b) return t >= a && t <= b;
+        return t >= a || t <= b; // діапазон через кінець тижня
+    }
+    // перелік окремих днів
+    const found = DAY_ABBR.some(d => n.includes(d));
+    if (found) return n.includes(today);
+    return null;
+}
+
+// Орієнтовна оцінка запізнення (немає GPS — тільки евристика за годинами пік)
+function estimateDelay(boardMin) {
+    const morningPeak = boardMin >= 7 * 60 && boardMin <= 9 * 60;      // 07:00–09:00
+    const eveningPeak = boardMin >= 16 * 60 + 30 && boardMin <= 19 * 60; // 16:30–19:00
+    if (morningPeak || eveningPeak) {
+        return { label: 'Година пік — можливе запізнення +3–8 хв', cls: 'delay-high' };
+    }
+    return { label: 'Зазвичай вчасно (±0–3 хв)', cls: 'delay-low' };
+}
+
+function minToHHMM(min) {
+    if (min == null) return '—';
+    const m = ((min % 1440) + 1440) % 1440;
+    return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+}
+function formatRide(min) {
+    if (min == null) return '';
+    if (min < 60) return `${min} хв`;
+    const h = Math.floor(min / 60), m = min % 60;
+    return m === 0 ? `${h} год` : `${h} год ${m} хв`;
+}
+
+// Основний алгоритм пошуку поїздок
+function planTrip(fromName, toName) {
+    const nf = normalizeStop(fromName);
+    const nt = normalizeStop(toName);
+    const now = getCurrentMinutes();
+    const results = [];
+    const seen = new Set();
+
+    const pushResult = (r) => {
+        const key = `${r.busNumber}|${r.boardMin}|${normalizeStop(r.fromName)}|${normalizeStop(r.toName)}`;
+        if (seen.has(key)) return;
+        seen.add(key);
+        results.push(r);
+    };
+
+    (allBusData || []).forEach(bus => {
+        const urban = isUrbanRoute(bus.number.toString());
+        const rideCap = urban ? 55 : 160;
+
+        // 1) Точні дані з directionRoutes (offsetMin)
+        const dr = bus.directionRoutes;
+        if (dr) {
+            ['forward', 'backward'].forEach(dirKey => {
+                const d = dr[dirKey];
+                if (!d || !Array.isArray(d.stops)) return;
+                const names = d.stops.map(s => normalizeStop(s.name));
+                const fi = names.indexOf(nf);
+                const ti = names.indexOf(nt);
+                if (fi === -1 || ti === -1 || fi >= ti) return;
+                const fOff = d.stops[fi].offsetMin || 0;
+                const tOff = d.stops[ti].offsetMin || 0;
+                const ride = tOff - fOff;
+                (d.departureTimes || []).forEach(depStr => {
+                    const depMin = parseTimeStr(depStr);
+                    if (depMin === null) return;
+                    const note = extractDayNote(depStr);
+                    pushResult({
+                        busNumber: bus.number, busTitle: bus.title, color: bus.color, bus,
+                        dirName: d.name || '', urban,
+                        fromName: d.stops[fi].name, toName: d.stops[ti].name,
+                        boardMin: depMin + fOff, arriveMin: depMin + tOff, rideMin: ride,
+                        note, today: noteMatchesToday(note), precise: true
+                    });
+                });
+            });
+        }
+
+        // 2) Резерв: пари часів із routes[].stops (для зупинок без offset)
+        (bus.routes || []).forEach(route => {
+            const stops = route.stops || [];
+            const names = stops.map(s => normalizeStop(s.name));
+            const fi = names.indexOf(nf);
+            const ti = names.indexOf(nt);
+            if (fi === -1 || ti === -1 || fi >= ti) return;
+
+            const fRaw = stops[fi].times || [];
+            const tParsed = (stops[ti].times || [])
+                .map(t => ({ min: parseTimeStr(t), note: extractDayNote(t) }))
+                .filter(x => x.min !== null)
+                .sort((a, b) => a.min - b.min);
+            const equalLen = fRaw.length === (stops[ti].times || []).length;
+
+            fRaw.forEach((ft, i) => {
+                const bMin = parseTimeStr(ft);
+                if (bMin === null) return;
+                const note = extractDayNote(ft);
+                let aMin = null, ride = null;
+                if (equalLen) {
+                    // однакова кількість часів → зіставляємо за позицією (найточніше)
+                    const cand = parseTimeStr((stops[ti].times || [])[i]);
+                    if (cand !== null && cand >= bMin) { aMin = cand; ride = cand - bMin; }
+                }
+                if (aMin === null) {
+                    const cand = tParsed.find(x => x.min >= bMin);
+                    if (cand && (cand.min - bMin) <= rideCap) { aMin = cand.min; ride = cand.min - bMin; }
+                }
+                pushResult({
+                    busNumber: bus.number, busTitle: bus.title, color: bus.color, bus,
+                    dirName: route.direction || '', urban,
+                    fromName: stops[fi].name, toName: stops[ti].name,
+                    boardMin: bMin, arriveMin: aMin, rideMin: ride,
+                    note, today: noteMatchesToday(note), precise: false
+                });
+            });
+        });
+    });
+
+    // Позначаємо відлік і сортуємо: спершу «сьогодні + попереду», далі решта
+    results.forEach(r => { r.diff = r.boardMin - now; });
+    results.sort((a, b) => {
+        const aUp = a.diff >= 0 && a.today !== false;
+        const bUp = b.diff >= 0 && b.today !== false;
+        if (aUp !== bUp) return aUp ? -1 : 1;
+        if (aUp && bUp) return a.boardMin - b.boardMin;      // найближчі попереду
+        return a.boardMin - b.boardMin;
+    });
+    return results;
+}
+
+// ---- Рендер результатів ----
+let _tpLastResults = null;
+let _tpShowCount = 6;
+
+function renderTripResults(results, fromName, toName) {
+    const box = document.getElementById('tp-results');
+    if (!box) return;
+    _tpLastResults = { results, fromName, toName };
+
+    if (!results.length) {
+        box.innerHTML = `
+            <div class="tp-empty">
+                <span class="tp-empty-emoji">🤔</span>
+                <p class="tp-empty-title">Прямого рейсу не знайшлося</p>
+                <p class="tp-empty-sub">Схоже, між «${fromName}» та «${toName}» немає маршруту без пересадки.
+                Спробуйте сусідню зупинку або перевірте назви.</p>
+            </div>`;
+        return;
+    }
+
+    const now = getCurrentMinutes();
+    const upcoming = results.filter(r => r.diff >= 0 && r.today !== false);
+    const shown = results.slice(0, _tpShowCount);
+
+    let head = `<div class="tp-results-head">
+        <span class="tp-route-chip"><span class="tp-dot tp-dot--from">A</span>${fromName}</span>
+        <span class="tp-route-arrow">→</span>
+        <span class="tp-route-chip"><span class="tp-dot tp-dot--to">B</span>${toName}</span>
+    </div>`;
+
+    if (upcoming.length) {
+        const nxt = upcoming[0];
+        head += `<div class="tp-next">Найближчий — №${nxt.busNumber} о <b>${minToHHMM(nxt.boardMin)}</b> (${formatDiffMinutes(nxt.diff)})</div>`;
+    } else {
+        head += `<div class="tp-next tp-next--done">На сьогодні рейсів більше немає — показано весь розклад</div>`;
+    }
+
+    const cards = shown.map(r => {
+        const past = r.diff < 0;
+        const notToday = r.today === false;
+        const soon = !past && !notToday && r.diff <= 15;
+        const delay = estimateDelay(r.boardMin);
+
+        let countdown;
+        if (notToday) countdown = `<span class="tp-count tp-count--muted">не сьогодні</span>`;
+        else if (past) countdown = `<span class="tp-count tp-count--muted">${minToHHMM(r.boardMin)}</span>`;
+        else countdown = `<span class="tp-count ${soon ? 'tp-count--soon' : ''}">${formatDiffMinutes(r.diff)}</span>`;
+
+        const rideStr = r.rideMin != null
+            ? `<span class="tp-chip tp-chip--ride">🕒 у дорозі ${r.precise ? '' : '≈'}${formatRide(r.rideMin)}</span>`
+            : `<span class="tp-chip tp-chip--ride">🕒 час у дорозі уточнюйте</span>`;
+        const arriveStr = r.arriveMin != null ? minToHHMM(r.arriveMin) : '—';
+        const dayChip = r.note ? `<span class="tp-chip tp-chip--day ${notToday ? 'is-off' : ''}">📅 ${r.note}</span>` : '';
+
+        return `
+        <div class="tp-card ${past ? 'is-past' : ''} ${notToday ? 'is-off' : ''}" data-bus="${r.busNumber}" role="button" tabindex="0">
+            <div class="tp-card-badge" style="--bus-color:${r.color || 'var(--primary)'}">
+                <span class="tp-card-num">№${r.busNumber}</span>
+                <span class="tp-card-kind">${r.urban ? '🏙️' : '🌄'}</span>
+            </div>
+            <div class="tp-card-main">
+                <div class="tp-card-dir">${r.dirName || r.busTitle}</div>
+                <div class="tp-timeline">
+                    <span class="tp-t"><b>${minToHHMM(r.boardMin)}</b><small>${r.fromName}</small></span>
+                    <span class="tp-t-arrow">→</span>
+                    <span class="tp-t"><b>${arriveStr}</b><small>${r.toName}</small></span>
+                </div>
+                <div class="tp-chips">
+                    ${rideStr}
+                    ${dayChip}
+                    <span class="tp-chip ${delay.cls}">🚦 ${delay.label}</span>
+                </div>
+            </div>
+            <div class="tp-card-side">${countdown}<span class="tp-open">розклад ›</span></div>
+        </div>`;
+    }).join('');
+
+    let moreBtn = '';
+    if (results.length > _tpShowCount) {
+        moreBtn = `<button class="tp-more" id="tp-more" type="button">Показати ще (${results.length - _tpShowCount})</button>`;
+    }
+
+    const disclaimer = `<p class="tp-disclaimer">⚠️ Час — плановий. Позначку про запізнення розраховано орієнтовно за годинами пік, а не за GPS.</p>`;
+
+    box.innerHTML = head + `<div class="tp-cards">${cards}</div>` + moreBtn + disclaimer;
+
+    box.querySelectorAll('.tp-card').forEach(card => {
+        const open = () => {
+            const bus = allBusData.find(b => b.number.toString() === card.dataset.bus);
+            if (bus) openSchedule(bus, bus.number.toString());
+        };
+        card.addEventListener('click', open);
+        card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    });
+    const more = document.getElementById('tp-more');
+    if (more) more.addEventListener('click', () => { _tpShowCount += 6; renderTripResults(results, fromName, toName); });
+}
+
+// Оновлення відліків у результатах (кожну хвилину)
+function refreshTripResults() {
+    if (!_tpLastResults) return;
+    const box = document.getElementById('tp-results');
+    if (!box || !box.querySelector('.tp-cards')) return;
+    _tpLastResults.results.forEach(r => { r.diff = r.boardMin - getCurrentMinutes(); });
+    renderTripResults(_tpLastResults.results, _tpLastResults.fromName, _tpLastResults.toName);
+}
+
+// ---- Автопідказки ----
+function setupSuggest(inputId, listId) {
+    const input = document.getElementById(inputId);
+    const list  = document.getElementById(listId);
+    if (!input || !list) return;
+
+    const render = () => {
+        const q = normalizeStop(input.value);
+        if (!q) { list.classList.remove('open'); list.innerHTML = ''; return; }
+        const matches = ALL_STOP_NAMES
+            .filter(s => normalizeStop(s).includes(q))
+            .sort((a, b) => {
+                const an = normalizeStop(a).startsWith(q) ? 0 : 1;
+                const bn = normalizeStop(b).startsWith(q) ? 0 : 1;
+                return an - bn || a.localeCompare(b, 'uk');
+            })
+            .slice(0, 8);
+        if (!matches.length) { list.classList.remove('open'); list.innerHTML = ''; return; }
+        list.innerHTML = matches.map(s => `<button type="button" class="tp-suggest-item" role="option">🚏 ${s}</button>`).join('');
+        list.classList.add('open');
+        list.querySelectorAll('.tp-suggest-item').forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                input.value = matches[i];
+                list.classList.remove('open');
+                list.innerHTML = '';
+                const other = inputId === 'tp-from' ? document.getElementById('tp-to') : document.getElementById('tp-from');
+                if (other && !other.value) other.focus(); else runTripSearch();
+            });
+        });
+    };
+
+    input.addEventListener('input', render);
+    input.addEventListener('focus', render);
+    input.addEventListener('blur', () => setTimeout(() => list.classList.remove('open'), 150));
+}
+
+function runTripSearch() {
+    const fromEl = document.getElementById('tp-from');
+    const toEl   = document.getElementById('tp-to');
+    const box    = document.getElementById('tp-results');
+    if (!fromEl || !toEl || !box) return;
+
+    const rawFrom = fromEl.value.trim();
+    const rawTo   = toEl.value.trim();
+
+    if (!rawFrom || !rawTo) {
+        box.innerHTML = `<div class="tp-empty"><span class="tp-empty-emoji">✍️</span><p class="tp-empty-title">Заповніть обидві зупинки</p><p class="tp-empty-sub">Оберіть, звідки і куди ви їдете.</p></div>`;
+        return;
+    }
+    const from = resolveStopName(rawFrom);
+    const to   = resolveStopName(rawTo);
+    if (!from || !to) {
+        box.innerHTML = `<div class="tp-empty"><span class="tp-empty-emoji">🔎</span><p class="tp-empty-title">Не впізнав зупинку</p><p class="tp-empty-sub">Спробуйте вибрати назву зі списку підказок.</p></div>`;
+        return;
+    }
+    if (normalizeStop(from) === normalizeStop(to)) {
+        box.innerHTML = `<div class="tp-empty"><span class="tp-empty-emoji">🙂</span><p class="tp-empty-title">Це та сама зупинка</p><p class="tp-empty-sub">Оберіть різні початкову й кінцеву точки.</p></div>`;
+        return;
+    }
+    // Підставляємо канонічні назви назад в поля
+    fromEl.value = from;
+    toEl.value = to;
+
+    _tpShowCount = 6;
+    const results = planTrip(from, to);
+    renderTripResults(results, from, to);
+    document.getElementById('tp-results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function setupTripPlanner() {
+    setupSuggest('tp-from', 'tp-from-suggest');
+    setupSuggest('tp-to', 'tp-to-suggest');
+
+    const searchBtn = document.getElementById('tp-search');
+    if (searchBtn) searchBtn.addEventListener('click', runTripSearch);
+
+    const swap = document.getElementById('tp-swap');
+    if (swap) swap.addEventListener('click', () => {
+        const f = document.getElementById('tp-from');
+        const t = document.getElementById('tp-to');
+        if (!f || !t) return;
+        const tmp = f.value; f.value = t.value; t.value = tmp;
+        if (f.value && t.value) runTripSearch();
+    });
+
+    document.querySelectorAll('.tp-clear').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const el = document.getElementById(btn.dataset.target);
+            if (el) { el.value = ''; el.focus(); }
+        });
+    });
+
+    document.querySelectorAll('.tp-example').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const f = document.getElementById('tp-from');
+            const t = document.getElementById('tp-to');
+            if (f) f.value = btn.dataset.from || '';
+            if (t) t.value = btn.dataset.to || '';
+            runTripSearch();
+        });
+    });
+
+    // Enter у полях запускає пошук
+    ['tp-from', 'tp-to'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') { e.preventDefault(); runTripSearch(); }
         });
     });
 }
